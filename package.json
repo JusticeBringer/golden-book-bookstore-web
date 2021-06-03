@@ -1,0 +1,39 @@
+{
+  "name": "oastea-domnului-librarie",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@https://bitbucket.org/oasteadomnului/oasteadomnului-librarie.git"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "format": "prettier --check \"src/**/*.tsx\""
+  },
+  "dependencies": {
+    "@babel/core": "^7.13.14",
+    "@chakra-ui/icons": "^1.0.5",
+    "@chakra-ui/react": "^1.3.3",
+    "@chakra-ui/theme-tools": "1.0.4",
+    "@emotion/react": "^11.1.5",
+    "@emotion/styled": "^11.1.5",
+    "@types/react": "^17.0.3",
+    "@typescript-eslint/eslint-plugin": "^4.20.0",
+    "@typescript-eslint/parser": "^4.20.0",
+    "eslint": "^7.23.0",
+    "framer-motion": "^4.1.2",
+    "next": "latest",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-icons": "^4.2.0",
+    "stylis": "^3.5.4"
+  },
+  "devDependencies": {
+    "@types/styled-jsx": "^2.2.8",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "2.2.1",
+    "typescript": "^4.2.3"
+  },
+  "license": "MIT"
+}
