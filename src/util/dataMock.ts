@@ -15,7 +15,7 @@ export function getBooks(): Array<BookType> {
   ];
 
   const articlesImage: string[] = [
-    '/books/600_istorioare_Pr_Iosif_Trifa.jpg',
+    '/books/ceEsteOasteaDomnului_Pr_Iosif_Trifa.PNG',
     '/books/600_istorioare_Pr_Iosif_Trifa.jpg',
     '/books/600_istorioare_Pr_Iosif_Trifa.jpg',
     '/books/600_istorioare_Pr_Iosif_Trifa.jpg',
@@ -45,7 +45,9 @@ export function getBooks(): Array<BookType> {
       image: articlesImage[i],
       discount: 0,
       category: 'Literatura Oastei Domnului',
-      publishingYear: 2004
+      publishingYear: 2004,
+      rating: 4.6,
+      reviews: ['gjfidjgdjhug', 'ifsdff']
     };
 
     book.title = trimTitle(book.title);
@@ -101,7 +103,9 @@ export function getCds(): Array<CdType> {
       image: cdsImage[i],
       discount: 0,
       category: 'Să cântăm Domnului',
-      publishingYear: 2004
+      publishingYear: 2004,
+      rating: 4.0,
+      reviews: ['gjfidjgdjhug', 'ifsdff']
     };
 
     cd.title = trimTitle(cd.title);

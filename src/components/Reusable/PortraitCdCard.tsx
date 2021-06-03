@@ -30,7 +30,7 @@ export const PortraitCdCard: React.FC<PortraitCdCard> = (props: PortraitCdCard) 
         <Heading
           as='h2'
           fontSize={['14px', '18px', '21px']}
-          color={theme.colors.primaryBlue[10]}
+          color={theme.colors.primaryBlue[100]}
           zIndex='10'
         >
           {title}

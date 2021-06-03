@@ -53,18 +53,6 @@
   box-shadow: 1px 2px 4px 3px rgba(248, 248, 248, 0.2);
 }
 
-/* Apply inset shadow to see portrait article content */
-.emptyClass::after {
-  box-shadow: inset 0px -10vh 20px 0px rgba(0, 0, 0, 0.6);
-  content: '';
-  display: block;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  border-radius: 15px;
-  width: 100%;
-}
-
 /* Apply top spacing for every element in a flex container */
 .flexboxGap > * + * {
   margin-top: 10px;

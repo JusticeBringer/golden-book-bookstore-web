@@ -18,7 +18,15 @@ When theme is dark, color used is color[dark]
 const colors = {
   primaryYellow: {
     light: '#F4EE7C',
-    '100': '#F4EE7C'
+    '100': '#F4EE7C',
+    '200': '#F6F193',
+    '300': '#F2EB68',
+    '400': '#EFE63E',
+    '500': '#EBE014',
+    '600': '#BCB410',
+    '700': '#8D870C',
+    '800': '#5E5A08',
+    '900': '#2F2D04'
   },
   primaryGreen: {
     light: '#ABF5A3',
