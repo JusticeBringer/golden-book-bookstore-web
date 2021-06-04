@@ -59,15 +59,17 @@ export function getBooks(): Array<BookType> {
 
 export function getCds(): Array<CdType> {
   const cdsTitle: string[] = [
-    'Ce este Oastea Domnului',
-    'Alcoolul - duhul diavolului',
-    'Trăim vremuri biblice',
-    'Fiul cel pierdut',
-    'Zaheu',
-    '600 istorioare religioase',
-    'Corabia lui Noe',
-    'Mai lângă Domnul meu',
-    'Ascultarea'
+    'Au înflorit măslinii',
+    'Au înflorit măslinii',
+    'Au înflorit măslinii',
+    'Au înflorit măslinii',
+    'Au înflorit măslinii',
+    'Au înflorit măslinii',
+    'Au înflorit măslinii',
+    'Au înflorit măslinii',
+    'Au înflorit măslinii',
+    'Au înflorit măslinii',
+    'Au înflorit măslinii'
   ];
 
   const cdsImage: string[] = [

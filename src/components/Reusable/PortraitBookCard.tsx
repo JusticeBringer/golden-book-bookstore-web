@@ -58,6 +58,7 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
                     alignItems='center'
                     borderBottom={[`3px solid ${theme.colors.primaryGreen[100]}`]}
                     fontSize={['18px']}
+                    mr={['6px']}
                   >
                     {price}
                     &nbsp;lei

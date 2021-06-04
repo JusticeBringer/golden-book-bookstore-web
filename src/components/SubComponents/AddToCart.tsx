@@ -5,7 +5,6 @@ import { FaShoppingCart } from 'react-icons/fa';
 export const AddToCart: React.FC = () => {
   return (
     <Button
-      ml={['6px']}
       py={['10px']}
       px='0px'
       bg={theme.colors.primaryGreen[100]}
