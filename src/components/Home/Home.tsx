@@ -12,19 +12,18 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
 
   return (
     <Flex justifyContent='left' alignItems='left' flexDirection='column' className='flexboxGap'>
-      <Heading as='h1' fontSize='6vw' color={theme.colors.primaryBlue[100]}>
+      <Heading as='h1' fontSize='6vw' color={theme.colors.primaryBlack[900]}>
+        Cărți landscape
+      </Heading>
+      <LandscapeBooksGroup books={books} />
+      <Heading as='h1' fontSize='6vw' color={theme.colors.primaryBlack[900]}>
         Cărți portret
       </Heading>
       <Flex maxW='100vw'>
         <PortraitBooksGroup books={books} />
       </Flex>
 
-      <Heading as='h1' fontSize='6vw' color={theme.colors.primaryBlue[100]}>
-        Cărți landscape
-      </Heading>
-      <LandscapeBooksGroup books={books} />
-
-      <Heading as='h1' fontSize='6vw' color={theme.colors.primaryBlue[100]}>
+      <Heading as='h1' fontSize='6vw' color={theme.colors.primaryBlack[900]}>
         Cd-uri portret
       </Heading>
       <Flex maxW='100vw'>

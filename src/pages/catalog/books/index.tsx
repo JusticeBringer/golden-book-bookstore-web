@@ -30,7 +30,7 @@ const Index: React.FC<BooksPageType> = React.memo((props: BooksPageType) => {
       <Header />
       <DesktopFooter />
 
-      <Flex width={'100%'} direction='column' pl='10vw' mt='2vw'>
+      <Flex width={'100%'} direction='column' pl='15vw' mt='2vw'>
         <Books books={books} />
         <TopSpacer spacing='80px' />
       </Flex>

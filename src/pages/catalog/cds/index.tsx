@@ -29,7 +29,7 @@ const Index: React.FC<CdsPageType> = (props: CdsPageType) => {
       <Header />
       <DesktopFooter />
 
-      <Flex width={'100%'} direction='column' pl='10vw' mt='2vw'>
+      <Flex width={'100%'} direction='column' pl='15vw' mt='2vw'>
         <Cds cds={cds} />
         <TopSpacer spacing='80px' />
       </Flex>

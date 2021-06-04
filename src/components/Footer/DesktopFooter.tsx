@@ -30,7 +30,7 @@ const DesktopNav = () => {
     <Box
       borderLeft={'4px solid'}
       ml={3}
-      borderLeftColor={theme.colors.primaryBlue[100]}
+      borderLeftColor={theme.colors.primaryBlue[900]}
       transition={'width 2s'}
     >
       {FOOTER_ITEMS.map(navItem => (
@@ -50,10 +50,10 @@ const DesktopNav = () => {
                 as={navItem.icon}
                 color={
                   shouldBeActive(navItem.href)
-                    ? theme.colors.primaryBlue[100]
-                    : theme.colors.primaryBlack[100]
+                    ? theme.colors.primaryBlue[500]
+                    : theme.colors.primaryBlack[900]
                 }
-                bg={theme.colors.primaryYellow[100]}
+                bg={theme.colors.primaryYellow[400]}
                 borderTopRightRadius={10}
                 borderBottomRightRadius={10}
                 w={['', '', '60px', '70px']}

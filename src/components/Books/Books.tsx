@@ -12,14 +12,14 @@ export const Books: React.FC<BooksPageType> = React.memo((props: BooksPageType) 
 
   return (
     <Flex justifyContent='left' alignItems='left' flexDirection='column' className='flexboxGap'>
-      <Heading as='h1' fontSize='6vw' color={theme.colors.primaryBlue[100]}>
+      <Heading as='h1' fontSize='6vw' color={theme.colors.primaryBlack[700]}>
         Cărți portret
       </Heading>
       <Flex maxW='100vw'>
         <PortraitBooksGroup books={books} />
       </Flex>
 
-      <Heading as='h1' fontSize='6vw' color={theme.colors.primaryBlue[100]}>
+      <Heading as='h1' fontSize='6vw' color={theme.colors.primaryBlack[700]}>
         Cărți landscape
       </Heading>
       <LandscapeBooksGroup books={books} />

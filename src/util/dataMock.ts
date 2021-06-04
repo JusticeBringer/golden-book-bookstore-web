@@ -38,7 +38,8 @@ export function getBooks(): Array<BookType> {
       author: 'Pr. Iosif Trifa',
       publisher: 'Editura „Oastea Domnului”',
       price: 15,
-      description: 'Carte de căpătâi a Oastei Domnului',
+      description:
+        ' ... simţindu-se tot mai mult lipsa acestei cărţi de îndrumare pentru  cei din Oaste  şi pentru cei ce intră în Oaste, am tipărit-o din nou.',
       state: 'Nou',
       quantity: 45,
       soldQuantity: 200,

@@ -15,7 +15,14 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
   return (
     <Flex className='draw-border-container' borderRadius='10px'>
       <section>
-        <Flex flexDir='row' maxW={[280]} py={['15px']} px={['5px']} justifyContent='space-between'>
+        <Flex
+          flexDir='row'
+          maxW={[280]}
+          py={['15px']}
+          px={['5px']}
+          justifyContent='space-between'
+          alignContent='center'
+        >
           <Flex ml={['5px']}>
             <Image src={image} width={[160]} height={[160]} alt='nimic' borderRadius='15px' />
           </Flex>
@@ -39,7 +46,7 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
               <ReactStars
                 size={20}
                 activeColor={`${theme.colors.primaryYellow[500]}`}
-                color={`${theme.colors.primaryBlack[100]}`}
+                color={`${theme.colors.primaryBlack[900]}`}
                 value={rating}
                 edit={false}
                 isHalf={true}
@@ -56,7 +63,7 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
                     borderRadius={['5px']}
                     display='flex'
                     alignItems='center'
-                    borderBottom={[`3px solid ${theme.colors.primaryGreen[100]}`]}
+                    borderBottom={[`3px solid ${theme.colors.primaryGreen[500]}`]}
                     fontSize={['18px']}
                     mr={['6px']}
                   >
