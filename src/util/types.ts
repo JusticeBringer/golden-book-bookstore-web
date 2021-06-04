@@ -12,6 +12,8 @@ export type BookType = {
   discount: number;
   category: string;
   publishingYear: number;
+  rating: number;
+  reviews: string[];
 };
 
 export type BookArrayType = {
@@ -32,6 +34,8 @@ export type CdType = {
   discount: number;
   category: string;
   publishingYear: number;
+  rating: number;
+  reviews: string[];
 };
 
 export type CdArrayType = {

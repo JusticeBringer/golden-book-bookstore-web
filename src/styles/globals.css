@@ -59,36 +59,3 @@
 }
 
 /* Apply nice hover for add to cart button*/
-.hover-cart-button {
-  transition: color 0.25s;
-}
-
-.hover-cart-button:hover {
-  border: 1px solid green;
-}
-
-.hover-cart-button ::before,
-.hover-cart-button ::after {
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  transform-origin: center;
-}
-.hover-cart-button ::before {
-  border-top: 2px solid green;
-  border-bottom: 2px solid green;
-  transform: scale3d(0, 1, 1);
-}
-
-.hover-cart-button ::after {
-  border-left: 2px solid green;
-  border-right: 2px solid green;
-  transform: scale3d(1, 0, 1);
-}
-
-.hover-cart-button:hover::before,
-.hover-cart-button:hover::after {
-  transform: scale3d(1, 1, 1);
-  transition: transform 0.5s;
-}
