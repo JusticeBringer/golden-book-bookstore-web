@@ -20,7 +20,7 @@ export const MobileFooter: React.FC = () => {
         justifyContent={'space-evenly'}
         boxShadow={'0px 0px 5px #888, 0px 0px 2px #888;'}
         visibility={['visible', 'visible', 'hidden']}
-        background={theme.colors.primaryYellow[100]}
+        background={theme.colors.primaryYellow[300]}
         zIndex='100'
         borderTopRightRadius={['20px', '25px', '30px']}
         borderTopLeftRadius={['20px', '25px', '30px']}
@@ -41,8 +41,8 @@ const FooterNav = () => {
               as={navItem.icon}
               color={
                 shouldBeActive(navItem.href)
-                  ? theme.colors.primaryBlue[100]
-                  : theme.colors.primaryBlack[100]
+                  ? theme.colors.primaryBlue[400]
+                  : theme.colors.primaryBlack[700]
               }
               w={['10', '12']}
               h={['10', '12']}

@@ -124,13 +124,36 @@
 }
 
 .draw-border {
-  @include btn-border-drawing($primaryYellow, $primaryGreen, 4px, right, bottom);
+  @include btn-border-drawing($primaryYellow, $primaryBlue, 4px, right, bottom);
 }
 
 .draw-border-blue-green {
-  @include btn-border-drawing($primaryBlue100, $primaryGreen, 4px, right, bottom);
+  @include btn-border-drawing($primaryGreen100, $primaryGreen, 4px, right, bottom);
 }
 
 .draw-border-container {
   @include btn-border-drawing($primaryYellow, $primaryGreen, 4px, right, bottom);
+}
+
+.show-detail {
+  opacity: 0;
+  -webkit-transition: all 500ms ease-in-out;
+  -moz-transition: all 500ms ease-in-out;
+  -ms-transition: all 500ms ease-in-out;
+  -o-transition: all 500ms ease-in-out;
+  transition: all 500ms ease-in-out;
+}
+
+.parent-show-detail:hover .show-detail {
+  opacity: 1;
+}
+
+a p {
+  :link,
+  :visited,
+  :hover,
+  :active {
+    text-decoration: none;
+    color: inherit;
+  }
 }

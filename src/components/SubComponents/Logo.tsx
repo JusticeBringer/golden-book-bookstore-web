@@ -1,7 +1,29 @@
 import { Image } from '@chakra-ui/react';
 
-export const Logo: React.FC = () => {
-  return <Image ml='15px' display={['flex']} src='/logoOD.png' w={['35px']} h={['35px']} />;
+type LogoProps = {
+  marginLeft: string;
+  position?: any;
+  left?: string[];
+  top?: string[];
+  width?: string[];
+  height?: string[];
+};
+
+export const Logo: React.FC<LogoProps> = (props: LogoProps) => {
+  const { marginLeft, position, top, left, width, height } = props;
+
+  return (
+    <Image
+      ml={marginLeft}
+      display={['flex']}
+      position={position ?? 'fixed'}
+      top={top ?? '0px'}
+      left={left ?? '0px'}
+      src='/logoSite.png'
+      w={width ?? ['35px']}
+      h={height ?? ['35px']}
+    />
+  );
 };
 
 export default Logo;

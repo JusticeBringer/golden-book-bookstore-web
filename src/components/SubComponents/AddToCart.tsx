@@ -7,9 +7,10 @@ export const AddToCart: React.FC = () => {
     <Button
       py={['10px']}
       px='0px'
-      bg={theme.colors.primaryGreen[100]}
+      bg={theme.colors.primaryBlue[100]}
       className='draw-border'
-      _hover={{ bg: theme.colors.primaryGreen[100] }}
+      _hover={{ bg: theme.colors.primaryBlue[100] }}
+      width='fit-content'
     >
       <Text display='flex' alignItems='center' px={['5px']}>
         Adaugă

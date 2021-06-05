@@ -46,7 +46,7 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
               <ReactStars
                 size={20}
                 activeColor={`${theme.colors.primaryYellow[500]}`}
-                color={`${theme.colors.primaryBlack[900]}`}
+                color={`${theme.colors.primaryBlack[400]}`}
                 value={rating}
                 edit={false}
                 isHalf={true}
@@ -63,7 +63,7 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
                     borderRadius={['5px']}
                     display='flex'
                     alignItems='center'
-                    borderBottom={[`3px solid ${theme.colors.primaryGreen[500]}`]}
+                    borderBottom={[`3px solid ${theme.colors.primaryBlue[100]}`]}
                     fontSize={['18px']}
                     mr={['6px']}
                   >

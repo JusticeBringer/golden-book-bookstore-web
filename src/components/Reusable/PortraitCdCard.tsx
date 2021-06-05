@@ -36,7 +36,7 @@ export const PortraitCdCard: React.FC<PortraitCdCard> = (props: PortraitCdCard) 
               <ReactStars
                 size={20}
                 activeColor={`${theme.colors.primaryYellow[500]}`}
-                color={`${theme.colors.primaryBlack[100]}`}
+                color={`${theme.colors.primaryBlack[400]}`}
                 value={rating}
                 edit={false}
                 isHalf={true}
