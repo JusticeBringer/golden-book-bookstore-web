@@ -1,7 +1,7 @@
 import { Image } from '@chakra-ui/react';
 
 type LogoProps = {
-  marginLeft: string;
+  marginLeft: string[];
   position?: any;
   left?: string[];
   top?: string[];

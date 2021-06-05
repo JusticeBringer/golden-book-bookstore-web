@@ -7,29 +7,18 @@ import { theme } from '../../styles/theme';
 
 export function Header(): JSX.Element {
   return (
-    <Box w={'100%'} pb={4}>
-      <Flex
-        color={theme.colors.primaryBlue[100]}
-        py={{ base: 2 }}
-        px={{ base: 4 }}
-        align={'center'}
-      >
-        <Stack
-          flex={[1]}
-          justify={'flex-start'}
-          justifyContent='space-between'
-          direction={'row'}
-          justifyItems={'right'}
-        >
-          <Flex>
-            <Hamburger />
-          </Flex>
-          <Flex>
-            <SearchBar />
-          </Flex>
-        </Stack>
-      </Flex>
-    </Box>
+    <Flex
+      w={'97%'}
+      pb={4}
+      pl={['15vw', '15vw']}
+      mt='20px'
+      alignItems='center'
+      justifyContent='space-between'
+      flexDir='row'
+    >
+      <Hamburger />
+      <SearchBar />
+    </Flex>
   );
 }
 

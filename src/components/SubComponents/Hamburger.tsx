@@ -41,8 +41,7 @@ export const Hamburger: React.FC = () => {
         }
         variant={'ghost'}
         aria-label={'Toggle Navigation'}
-        ml={['20px', '30px']}
-        color={theme.colors.primaryBlue[100]}
+        color={theme.colors.primaryBlack[800]}
       />
 
       <Drawer placement='left' isOpen={isOpen} onClose={onToggle} size='full'>
@@ -55,7 +54,7 @@ export const Hamburger: React.FC = () => {
               color={theme.colors.primaryBlue[100]}
             >
               <Flex>
-                <Logo />
+                <Logo marginLeft={['14px']} />
                 <Text ml='10px'> Cartea de Aur </Text>
               </Flex>
               <Flex>
