@@ -5,6 +5,7 @@ import { theme } from '../../styles/theme';
 import { BookType } from '../../util/types';
 
 import { AddToCart } from '../SubComponents/AddToCart';
+import Price from '../SubComponents/Price';
 type PortraitBookCard = {
   book: BookType;
 };
@@ -58,19 +59,7 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
                 alignContent='center'
                 alignItems='flex-end'
               >
-                <Flex>
-                  <Text
-                    borderRadius={['5px']}
-                    display='flex'
-                    alignItems='center'
-                    borderBottom={[`3px solid ${theme.colors.primaryBlue[100]}`]}
-                    fontSize={['18px']}
-                    mr={['6px']}
-                  >
-                    {price}
-                    &nbsp;lei
-                  </Text>
-                </Flex>
+                <Price price={price} />
                 <Flex justifyContent='center' justifyItems='center'>
                   <AddToCart />
                 </Flex>

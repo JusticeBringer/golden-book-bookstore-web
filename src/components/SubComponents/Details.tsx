@@ -1,18 +1,98 @@
-import { Text, Button } from '@chakra-ui/react';
+import { Text, Button, Flex, Heading } from '@chakra-ui/react';
 import { theme } from '../../styles/theme';
+import { ButtonDetails } from '../SubComponents/ButtonDetails';
 
-export const Details: React.FC = () => {
+import ReactStars from 'react-rating-stars-component';
+
+import { BookType } from '../../util/types';
+
+type DetailsProp = {
+  book: BookType;
+  sizeFontBtDet?: string[];
+  sizeFontHdDet?: string[];
+  rating: number;
+  showNrRec?: boolean;
+  showAuthor?: boolean;
+  showPublishYear?: boolean;
+  showNrPages?: boolean;
+  showStock?: boolean;
+};
+
+export const Details: React.FC<DetailsProp> = (props: DetailsProp) => {
+  const {
+    book,
+    sizeFontBtDet,
+    sizeFontHdDet,
+    rating,
+    showNrRec = true,
+    showAuthor = true,
+    showNrPages = true,
+    showPublishYear = true,
+    showStock = true
+  } = props;
+  const { reviews, pages, quantity, publishingYear, author } = book;
+
   return (
-    <Button
-      bg={theme.colors.primaryGreen[100]}
-      _hover={{ bg: theme.colors.primaryGreen[100] }}
-      width='fit-content'
-      p={['7px']}
-      borderRadius={['10px']}
-      className='draw-border-blue-green'
-    >
-      <Text color={theme.colors.primaryBlack[900]}> Vezi mai mult </Text>
-    </Button>
+    <>
+      <Heading as='h3' fontSize={sizeFontHdDet ?? ['20px']}>
+        Detalii
+      </Heading>
+      <Flex flexDir='row' alignItems='center'>
+        <ReactStars
+          size={20}
+          activeColor={`${theme.colors.primaryYellow[500]}`}
+          color={`${theme.colors.primaryBlack[900]}`}
+          value={rating}
+          edit={false}
+          isHalf={true}
+        />
+        <Flex>
+          <Text ml={['5px']} fontWeight={[600]}>
+            {reviews.length}
+          </Text>
+          {showNrRec && (
+            <Text ml={['5px']} fontWeight={[600]}>
+              recenzii
+            </Text>
+          )}
+        </Flex>
+      </Flex>
+      <Flex>
+        <Text ml={['5px']} fontWeight={[400]}>
+          Autor:
+        </Text>
+        <Text ml={['5px']} fontWeight={[600]}>
+          {author}
+        </Text>
+      </Flex>
+      <Flex>
+        <Text ml={['5px']} fontWeight={[400]}>
+          An apariție:
+        </Text>
+        <Text ml={['5px']} fontWeight={[600]}>
+          {publishingYear}
+        </Text>
+      </Flex>
+      {pages && (
+        <Flex>
+          <Text ml={['5px']} fontWeight={[400]}>
+            Nr. pagini:
+          </Text>
+          <Text ml={['5px']} fontWeight={[600]}>
+            {pages}
+          </Text>
+        </Flex>
+      )}
+      <Flex>
+        <Text ml={['5px']} fontWeight={[400]}>
+          În stoc:
+        </Text>
+        <Text ml={['5px']} fontWeight={[600]}>
+          {quantity}
+        </Text>
+      </Flex>
+      <ButtonDetails sizeFontBtDet={sizeFontBtDet} />
+    </>
   );
 };
 

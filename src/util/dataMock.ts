@@ -38,6 +38,7 @@ export function getBooks(): Array<BookType> {
       author: 'Pr. Iosif Trifa',
       publisher: 'Editura „Oastea Domnului”',
       price: 15,
+      pages: 220,
       description:
         ' ... simţindu-se tot mai mult lipsa acestei cărţi de îndrumare pentru  cei din Oaste  şi pentru cei ce intră în Oaste, am tipărit-o din nou.',
       state: 'Nou',
@@ -99,6 +100,9 @@ export function getCds(): Array<CdType> {
       artists: ['Pr. Marian Mărcuș'],
       publisher: 'Studio „Cântări Nemuritoare”',
       price: 15,
+      tracks: [
+        "01. Un Prieten bun, 02. A mea iubire, 03. Preasfântă Maică și Fecioară, 04. Cât de frumoase sunt a' Tale"
+      ],
       description: 'Carte de căpătâi a Oastei Domnului',
       state: 'Nou',
       quantity: 45,

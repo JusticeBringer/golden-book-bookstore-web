@@ -4,6 +4,7 @@ export type BookType = {
   author: string;
   publisher: string;
   price: number;
+  pages?: number;
   description: string;
   state: string;
   quantity: number;
@@ -26,6 +27,7 @@ export type CdType = {
   artists: string[];
   publisher: string;
   price: number;
+  tracks: string[];
   description: string;
   state: string;
   quantity: number;
