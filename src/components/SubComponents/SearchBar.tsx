@@ -6,7 +6,7 @@ export const SearchBar: React.FC = () => {
   return (
     <Flex
       boxShadow={['1px 0px 2px 2px rgba(239,230,62)']}
-      minWidth={['70vw', '70vw', '82vw']}
+      minWidth={['70vw', '70vw', '70vw', '82vw']}
       justifyContent='space-between'
       borderRadius={['10px']}
       alignItems='center'

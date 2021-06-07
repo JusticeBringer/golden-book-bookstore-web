@@ -7,6 +7,7 @@ import { Details } from '../SubComponents/Details';
 import { ButtonDetails } from '../SubComponents/ButtonDetails';
 import { AddToCart } from '../SubComponents/AddToCart';
 
+import { useWindowDimensions } from '../../util/helpers';
 import { THEME_BREAKPOINTS } from '../../util/constants';
 import { BookType } from '../../util/types';
 import { theme } from '../../styles/theme';
@@ -17,15 +18,12 @@ type LandscapeBookCard = {
 
 export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeBookCard) => {
   const { title, author, image, description, rating, price } = props.book;
-  const [userWidth, setUserWidth] = useState(0);
+  const { height, width } = useWindowDimensions();
 
-  useEffect(() => {
-    setUserWidth(window.innerWidth);
-  }, []);
   return (
     <Flex p={['20px']} width={['80vw']} className='draw-border-container' borderRadius='10px'>
       <section>
-        {userWidth < THEME_BREAKPOINTS.md && (
+        {width < THEME_BREAKPOINTS.md && (
           <Flex width='100%'>
             <Flex maxWidth={['60%', '50%']} maxHeight={['50%']} alignItems='center'>
               <Flex ml={['5px']}>
@@ -53,7 +51,7 @@ export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeB
             </Flex>
           </Flex>
         )}
-        {userWidth >= THEME_BREAKPOINTS.md && userWidth < THEME_BREAKPOINTS.md2 && (
+        {width >= THEME_BREAKPOINTS.md && width < THEME_BREAKPOINTS.md2 && (
           <Flex>
             <Flex alignItems='center' maxWidth={['30%']} maxHeight={['30%']}>
               <Flex ml={['5px']}>
@@ -91,7 +89,7 @@ export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeB
             </Flex>
           </Flex>
         )}
-        {userWidth >= THEME_BREAKPOINTS.md2 && userWidth < THEME_BREAKPOINTS.lg && (
+        {width >= THEME_BREAKPOINTS.md2 && width < THEME_BREAKPOINTS.lg && (
           <Flex>
             <Flex alignItems='center' maxWidth={['30%']}>
               <Image
@@ -130,7 +128,7 @@ export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeB
           </Flex>
         )}
 
-        {userWidth >= THEME_BREAKPOINTS.lg && (
+        {width >= THEME_BREAKPOINTS.lg && (
           <Flex>
             <Flex alignItems='center' maxWidth={['20%']}>
               <Image

@@ -4,19 +4,16 @@ import { useState, useEffect } from 'react';
 import { PortraitBookCard } from '../Reusable/PortraitBookCard';
 
 import { BookArrayType } from '../../util/types';
+import { useWindowDimensions } from '../../util/helpers';
 
 export const PortraitBooksGroup: React.FC<BookArrayType> = (props: BookArrayType) => {
   const { books } = props;
-  const [userWidth, setUserWidth] = useState(0);
-
-  useEffect(() => {
-    setUserWidth(window.innerWidth);
-  }, []);
+  const { height, width } = useWindowDimensions();
 
   return (
     <section
       className={
-        userWidth < 480 ? 'scrolling-wrapper-flexbox hideScrollBar' : 'scrolling-wrapper-flexbox'
+        width < 480 ? 'scrolling-wrapper-flexbox hideScrollBar' : 'scrolling-wrapper-flexbox'
       }
     >
       {/* Show scrolling bar only for devices with width > 480 px */}

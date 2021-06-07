@@ -25,18 +25,15 @@ import { Logo } from './Logo';
 import { theme } from '../../styles/theme';
 import HEADER_NAV_ITEMS, { NavItem } from '../Header/HeaderItems';
 import { THEME_BREAKPOINTS } from '../../util/constants';
+import { useWindowDimensions } from '../../util/helpers';
 
 export const Hamburger: React.FC = () => {
   const { isOpen, onToggle } = useDisclosure();
-  const [userWidth, setUserWidth] = useState(0);
-
-  useEffect(() => {
-    setUserWidth(window.innerWidth);
-  }, []);
+  const { height, width } = useWindowDimensions();
 
   return (
     <aside>
-      {userWidth < THEME_BREAKPOINTS.md2 && (
+      {width < THEME_BREAKPOINTS.md2 && (
         <Flex>
           <IconButton
             onClick={onToggle}

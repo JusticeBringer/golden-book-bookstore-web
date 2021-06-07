@@ -7,17 +7,14 @@ import { FOOTER_ITEMS } from './FooterItems';
 import { theme } from '../../styles/theme';
 import { shouldBeActive } from '../../util/helpers';
 import { THEME_BREAKPOINTS } from '../../util/constants';
+import { useWindowDimensions } from '../../util/helpers';
 
 export const MobileFooter: React.FC = () => {
-  const [userWidth, setUserWidth] = useState(0);
-
-  useEffect(() => {
-    setUserWidth(window.innerWidth);
-  }, []);
+  const { height, width } = useWindowDimensions();
 
   return (
     <footer>
-      {userWidth < THEME_BREAKPOINTS.md2 && (
+      {width < THEME_BREAKPOINTS.md2 && (
         <Flex
           flexDirection='row'
           position='fixed'
