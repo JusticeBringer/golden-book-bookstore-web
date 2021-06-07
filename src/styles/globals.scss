@@ -123,16 +123,16 @@
   }
 }
 
-.draw-border {
-  @include btn-border-drawing($primaryYellow, $primaryBlue, 4px, right, bottom);
+.draw-border-yellow-green {
+  @include btn-border-drawing($primaryYellow, $primaryGreen, 4px, right, bottom);
 }
 
-.draw-border-blue-green {
+.draw-border-green-green {
   @include btn-border-drawing($primaryGreen100, $primaryGreen, 4px, right, bottom);
 }
 
-.draw-border-container {
-  @include btn-border-drawing($primaryYellow, $primaryGreen, 4px, right, bottom);
+.draw-border-yellow-blue {
+  @include btn-border-drawing($primaryYellow, $primaryBlue, 4px, right, bottom);
 }
 
 .show-detail {

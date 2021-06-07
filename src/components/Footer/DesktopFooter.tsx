@@ -1,5 +1,4 @@
 import NextLink from 'next/link';
-import { useEffect, useState } from 'react';
 import { Link as ChakraLink, Flex, Icon, Box, Text } from '@chakra-ui/react';
 
 import { Logo } from '../SubComponents/Logo';
@@ -38,7 +37,7 @@ const DesktopNav = () => {
       borderTopRightRadius={['30px']}
       borderBottomRightRadius={['30px']}
       height='100vh'
-      width='12vw'
+      width={['', '', '', '12vw', '12vw', '10vw']}
       justifyContent='center'
       borderRight={[`4px solid ${theme.colors.primaryBlue[200]}`]}
       className='parent-show-detail'
@@ -71,20 +70,28 @@ const DesktopNav = () => {
                 <Flex
                   flexDir='column'
                   alignItems='center'
-                  _hover={{ color: theme.colors.primaryBlue[400] }}
+                  _hover={{
+                    color: shouldBeActive(navItem.href)
+                      ? theme.colors.primaryBlack[800]
+                      : theme.colors.primaryBlue[500]
+                  }}
                 >
-                  <Icon
-                    as={navItem.icon}
-                    color={
+                  <Box
+                    bg={
                       shouldBeActive(navItem.href)
-                        ? theme.colors.primaryBlue[400]
-                        : theme.colors.primaryBlack[800]
+                        ? theme.colors.primaryBlue[300]
+                        : theme.colors.primaryYellow[200]
                     }
-                    w={['', '', '40px', '50px']}
-                    h={['', '', '40px', '50px']}
-                    _hover={{ color: theme.colors.primaryBlue[400] }}
                     mt={['24px']}
-                  />
+                    p={['5px']}
+                    borderRadius={['15px']}
+                  >
+                    <Icon
+                      as={navItem.icon}
+                      w={['', '', '30px', '40px', '50px']}
+                      h={['', '', '30px', '40px', '50px']}
+                    />
+                  </Box>
                   <Text className='show-detail'> {navItem.label}</Text>
                 </Flex>
               </ChakraLink>

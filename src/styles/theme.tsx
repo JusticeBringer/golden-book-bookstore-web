@@ -8,7 +8,10 @@ const breakpoints = createBreakpoints({
   md: '480px',
   md2: '580px',
   lg: '768px',
-  xl: '1024px'
+  xl: '1024px',
+  xl2: '1200px',
+  xl3: '1500px',
+  xl4: '1920px'
 });
 
 /*

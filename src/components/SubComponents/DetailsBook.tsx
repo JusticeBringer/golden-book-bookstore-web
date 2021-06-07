@@ -8,6 +8,8 @@ import { BookType } from '../../util/types';
 
 type DetailsProp = {
   book: BookType;
+  bgClr?: string;
+  nameCssClass?: string;
   sizeFontBtDet?: string[];
   sizeFontHdDet?: string[];
   rating: number;
@@ -18,12 +20,14 @@ type DetailsProp = {
   showStock?: boolean;
 };
 
-export const Details: React.FC<DetailsProp> = (props: DetailsProp) => {
+export const DetailsBook: React.FC<DetailsProp> = (props: DetailsProp) => {
   const {
     book,
     sizeFontBtDet,
     sizeFontHdDet,
     rating,
+    bgClr = theme.colors.primaryGreen[100],
+    nameCssClass = 'draw-border-yellow-blue',
     showNrRec = true,
     showAuthor = true,
     showNrPages = true,
@@ -91,9 +95,9 @@ export const Details: React.FC<DetailsProp> = (props: DetailsProp) => {
           {quantity}
         </Text>
       </Flex>
-      <ButtonDetails sizeFontBtDet={sizeFontBtDet} />
+      <ButtonDetails sizeFontBtDet={sizeFontBtDet} bgClr={bgClr} nameCssClass={nameCssClass} />
     </>
   );
 };
 
-export default Details;
+export default DetailsBook;

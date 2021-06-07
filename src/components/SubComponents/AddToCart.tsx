@@ -3,19 +3,21 @@ import { theme } from '../../styles/theme';
 import { FaShoppingCart } from 'react-icons/fa';
 
 type AddToCartProps = {
+  bgClr?: string;
+  nameCssClass?: string;
   sizeFontText?: string[];
 };
 
 export const AddToCart: React.FC<AddToCartProps> = (props: AddToCartProps) => {
-  const { sizeFontText } = props;
+  const { sizeFontText, nameCssClass, bgClr } = props;
 
   return (
     <Button
       py={['10px']}
       px='0px'
-      bg={theme.colors.primaryBlue[100]}
-      className='draw-border'
-      _hover={{ bg: theme.colors.primaryBlue[100] }}
+      bg={bgClr ?? theme.colors.primaryGreen[100]}
+      className={nameCssClass ?? 'draw-border-yellow-green'}
+      _hover={{ bg: bgClr ?? theme.colors.primaryGreen[100] }}
       width='fit-content'
     >
       <Text display='flex' alignItems='center' fontSize={sizeFontText ?? ['15px']} px={['5px']}>

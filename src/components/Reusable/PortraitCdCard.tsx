@@ -19,7 +19,7 @@ export const PortraitCdCard: React.FC<PortraitCdCard> = (props: PortraitCdCard) 
   }, []);
 
   return (
-    <Flex className='draw-border-container' borderRadius='10px'>
+    <Flex className='draw-border-yellow-green' borderRadius='10px'>
       <section>
         <Flex
           flexDir='row'

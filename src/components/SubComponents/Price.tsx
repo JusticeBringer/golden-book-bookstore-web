@@ -17,7 +17,7 @@ export const Price: React.FC<PriceProps> = (props: PriceProps) => {
       borderRadius={['5px']}
       display='flex'
       alignItems={itemAlign ?? 'center'}
-      borderBottom={bottomBorder ?? [`3px solid ${theme.colors.primaryBlue[100]}`]}
+      borderBottom={bottomBorder ?? [`3px solid ${theme.colors.primaryGreen[200]}`]}
       fontSize={sizeFont ?? ['14px', '16px', '16px', '18px']}
       mr={rightMargin ?? ['6px']}
       width='fit-content'

@@ -1,6 +1,5 @@
 import NextLink from 'next/link';
-import { useEffect, useState } from 'react';
-import { Link as ChakraLink, Flex, Icon } from '@chakra-ui/react';
+import { Link as ChakraLink, Flex, Icon, Box } from '@chakra-ui/react';
 
 import { FOOTER_ITEMS } from './FooterItems';
 
@@ -23,8 +22,8 @@ export const MobileFooter: React.FC = () => {
           py={4}
           color={theme.colors.primaryBlue[100]}
           justifyContent={'space-evenly'}
-          boxShadow={'0px 0px 5px #888, 0px 0px 2px #888;'}
-          background={theme.colors.primaryYellow[300]}
+          boxShadow={'0px -2px 5px #888, 0px 0px 2px #888;'}
+          background={theme.colors.primaryYellow[100]}
           zIndex='100'
           borderTopRightRadius={['20px', '25px', '30px']}
           borderTopLeftRadius={['20px', '25px', '30px']}
@@ -42,16 +41,22 @@ const FooterNav = () => {
       {FOOTER_ITEMS.map(navItem => (
         <NextLink href={navItem.href} key={navItem.label} passHref>
           <ChakraLink textAlign={'center'}>
-            <Icon
-              as={navItem.icon}
-              color={
+            <Box
+              bg={
                 shouldBeActive(navItem.href)
-                  ? theme.colors.primaryBlue[400]
-                  : theme.colors.primaryBlack[700]
+                  ? theme.colors.primaryBlue[200]
+                  : theme.colors.primaryYellow[100]
               }
-              w={['28px', '36px']}
-              h={['28px', '36px']}
-            />
+              p={['5px']}
+              borderRadius={['15px']}
+            >
+              <Icon
+                as={navItem.icon}
+                w={['28px', '36px']}
+                h={['28px', '36px']}
+                color={theme.colors.primaryBlack[800]}
+              />
+            </Box>
           </ChakraLink>
         </NextLink>
       ))}

@@ -101,9 +101,12 @@ export function getCds(): Array<CdType> {
       publisher: 'Studio „Cântări Nemuritoare”',
       price: 15,
       tracks: [
-        "01. Un Prieten bun, 02. A mea iubire, 03. Preasfântă Maică și Fecioară, 04. Cât de frumoase sunt a' Tale"
+        '01. Un Prieten bun',
+        '02. A mea iubire',
+        '03. Preasfântă Maică și Fecioară',
+        "04. Cât de frumoase sunt a' Tale"
       ],
-      description: 'Carte de căpătâi a Oastei Domnului',
+      description: 'Un album de ascultat pentru liniște, pace în suflet',
       state: 'Nou',
       quantity: 45,
       soldQuantity: 200,
