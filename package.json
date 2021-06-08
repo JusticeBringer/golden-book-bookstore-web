@@ -9,7 +9,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "format": "prettier --check \"src/**/*.tsx\""
+    "format": "prettier --check \"src/**/*.tsx\"",
+    "export": "next export"
   },
   "dependencies": {
     "@babel/core": "^7.13.14",
