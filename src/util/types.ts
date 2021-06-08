@@ -4,6 +4,7 @@ export type BookType = {
   author: string;
   publisher: string;
   price: number;
+  pages?: number;
   description: string;
   state: string;
   quantity: number;
@@ -12,6 +13,8 @@ export type BookType = {
   discount: number;
   category: string;
   publishingYear: number;
+  rating: number;
+  reviews: string[];
 };
 
 export type BookArrayType = {
@@ -24,6 +27,7 @@ export type CdType = {
   artists: string[];
   publisher: string;
   price: number;
+  tracks: string[];
   description: string;
   state: string;
   quantity: number;
@@ -32,6 +36,8 @@ export type CdType = {
   discount: number;
   category: string;
   publishingYear: number;
+  rating: number;
+  reviews: string[];
 };
 
 export type CdArrayType = {

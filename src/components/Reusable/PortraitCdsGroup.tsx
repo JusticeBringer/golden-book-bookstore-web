@@ -4,19 +4,16 @@ import { useState, useEffect } from 'react';
 import { PortraitCdCard } from '../Reusable/PortraitCdCard';
 
 import { CdsArrayType } from '../../util/types';
+import { useWindowDimensions } from '../../util/helpers';
 
 export const PortraitCdsGroup: React.FC<CdsArrayType> = (props: CdsArrayType) => {
   const { cds } = props;
-  const [userWidth, setUserWidth] = useState(0);
-
-  useEffect(() => {
-    setUserWidth(window.innerWidth);
-  }, []);
+  const { height, width } = useWindowDimensions();
 
   return (
     <section
       className={
-        userWidth < 480 ? 'scrolling-wrapper-flexbox hideScrollBar' : 'scrolling-wrapper-flexbox'
+        width < 480 ? 'scrolling-wrapper-flexbox hideScrollBar' : 'scrolling-wrapper-flexbox'
       }
     >
       {/* Show scrolling bar only for devices with width > 480 px */}

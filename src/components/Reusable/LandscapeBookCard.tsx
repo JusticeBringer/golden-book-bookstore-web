@@ -1,58 +1,183 @@
-import { Heading, Image, Flex } from '@chakra-ui/react';
-import { TimeIcon } from '@chakra-ui/icons';
-import { FaUserCircle } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import { Heading, Image, Flex, Text, Stack, Box } from '@chakra-ui/react';
+import ReactStars from 'react-rating-stars-component';
 
-import { theme } from '../../styles/theme';
+import { Price } from '../SubComponents/Price';
+import { DetailsBook } from '../SubComponents/DetailsBook';
+import { ButtonDetails } from '../SubComponents/ButtonDetails';
+import { AddToCart } from '../SubComponents/AddToCart';
+import { MiddleTextBook } from '../SubComponents/MiddleTextBook';
+import { LandscapeImageBook } from '../SubComponents/LandscapeImageBook';
+import { RatingStarsBook } from '../SubComponents/RatingStarsBook';
+
+import { useWindowDimensions } from '../../util/helpers';
+import { THEME_BREAKPOINTS } from '../../util/constants';
 import { BookType } from '../../util/types';
+import { theme } from '../../styles/theme';
 
 type LandscapeBookCard = {
   book: BookType;
 };
 
 export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeBookCard) => {
-  const { title, author, image } = props.book;
+  const { title, author, image, description, rating, price } = props.book;
+  const { height, width } = useWindowDimensions();
 
   return (
-    <Flex p='8px' minWidth={['80vw', '25vw', '25vw']}>
-      <Flex justifyContent='left' alignItems='center'>
-        <Image src={image} width={75} height={70} minWidth={75} alt='nimic' borderRadius='15px' />
-      </Flex>
-      <Flex flexDirection='column' ml='20px' pt='10px'>
-        <Flex>
-          <Heading
-            as='h2'
-            fontSize={['14px', '18px', '21px']}
-            color={theme.colors.primaryBlue[100]}
-          >
-            {title}
-          </Heading>
-        </Flex>
-        <Flex flexDirection='row' mt='20px' justifyContent='space-between'>
-          <Flex justifyContent='left' alignItems='center'>
-            <FaUserCircle size='14px' />
-            <Heading
-              as='h3'
-              ml='3px'
-              fontSize={['12px', '14px', '18px']}
-              color={theme.colors.primaryBlue[100]}
-            >
-              {author}
-            </Heading>
+    <Flex
+      p={['20px']}
+      minWidth={['80vw', '80vw', '80vw', '80vw', '80vw', '80vw', '70vw', '40vw']}
+      maxWidth={['80vw', '80vw', '80vw', '80vw', '80vw', '80vw', '70vw', '40vw']}
+      className='draw-border-yellow-blue'
+      borderRadius='10px'
+    >
+      <section>
+        {width < THEME_BREAKPOINTS.md && (
+          <Flex width='100%'>
+            <Flex maxWidth={['60%', '50%']} maxHeight={['50%']} alignItems='center'>
+              <Flex ml={['5px']}>
+                <LandscapeImageBook image={image} />
+              </Flex>
+            </Flex>
+            <Flex ml={['10px']} maxWidth={['100%']}>
+              <Flex flexDir='column' justifyContent='space-between'>
+                <Flex flexDir='column'>
+                  <MiddleTextBook
+                    title={title}
+                    author={author}
+                    showAuthor={true}
+                    showDescription={false}
+                  />
+                </Flex>
+                <ButtonDetails
+                  sizeFontBtDet={['12px']}
+                  bgClr={theme.colors.primaryBlue[100]}
+                  nameCssClass='draw-border-yellow-blue'
+                />
+              </Flex>
+            </Flex>
           </Flex>
+        )}
+        {width >= THEME_BREAKPOINTS.md && width < THEME_BREAKPOINTS.md2 && (
+          <Flex>
+            <Flex alignItems='center' maxWidth={['30%']} maxHeight={['30%']}>
+              <Flex ml={['5px']}>
+                <LandscapeImageBook image={image} />
+              </Flex>
+            </Flex>
+            <Flex ml={['10px']} width={['60%']}>
+              <Flex flexDir='column' justifyContent='space-between'>
+                <Flex flexDir='column'>
+                  <MiddleTextBook title={title} author={author} showAuthor={true} />
+                </Flex>
+                <Flex flexDir='column'>
+                  <RatingStarsBook rating={rating} />
+                  <ButtonDetails
+                    sizeFontBtDet={['15px']}
+                    bgClr={theme.colors.primaryBlue[100]}
+                    nameCssClass='draw-border-yellow-blue'
+                  />
+                </Flex>
+              </Flex>
+            </Flex>
+          </Flex>
+        )}
+        {width >= THEME_BREAKPOINTS.md2 && width < THEME_BREAKPOINTS.lg && (
+          <Flex>
+            <Flex alignItems='center' maxWidth={['30%']}>
+              <LandscapeImageBook image={image} />
+            </Flex>
+            <Flex flexDirection='column' ml='20px' width={['30%']} justifyContent='space-between'>
+              <Flex flexDir='column'>
+                <MiddleTextBook title={title} />
+              </Flex>
+              <Flex flexDir='row'>
+                <Price
+                  price={price}
+                  sizeFont={['16px']}
+                  bottomBorder={[`3px solid ${theme.colors.primaryBlue[200]}`]}
+                />
+                <AddToCart
+                  sizeFontText={['14px']}
+                  bgClr={theme.colors.primaryBlue[100]}
+                  nameCssClass='draw-border-yellow-blue'
+                />
+              </Flex>
+            </Flex>
+            <Flex width={['40%']} ml={['20px']} flexDir='column' justifyContent='space-between'>
+              <DetailsBook
+                sizeFontBtDet={['15px']}
+                book={props.book}
+                rating={rating}
+                showNrRec={false}
+                bgClr={theme.colors.primaryBlue[100]}
+                nameCssClass='draw-border-yellow-blue'
+              />
+            </Flex>
+          </Flex>
+        )}
 
-          <Flex ml='10px' justifyContent='right' alignItems='center'>
-            <TimeIcon w={3} h={3} />
-            <Heading
-              as='h3'
-              fontSize={['10px', '14px', '18px']}
-              color={theme.colors.primaryBlue[100]}
-              ml='2px'
-            >
-              10 min
-            </Heading>
+        {width >= THEME_BREAKPOINTS.lg && width < THEME_BREAKPOINTS.xl3 && (
+          <Flex>
+            <Flex alignItems='center' maxWidth={['20%']}>
+              <LandscapeImageBook image={image} />
+            </Flex>
+            <Flex flexDirection='column' ml='20px' width={['50%']} justifyContent='space-between'>
+              <Flex flexDir='column'>
+                <MiddleTextBook title={title} description={description} showDescription={true} />
+              </Flex>
+              <Flex flexDir='row'>
+                <Price
+                  price={price}
+                  bottomBorder={[`3px solid ${theme.colors.primaryBlue[200]}`]}
+                />
+                <AddToCart
+                  bgClr={theme.colors.primaryBlue[100]}
+                  nameCssClass='draw-border-yellow-blue'
+                />
+              </Flex>
+            </Flex>
+            <Flex width={['30%']} ml={['20px']} flexDir='column' justifyContent='space-between'>
+              <DetailsBook
+                book={props.book}
+                rating={rating}
+                sizeFontBtDet={['15px']}
+                bgClr={theme.colors.primaryBlue[100]}
+              />
+            </Flex>
           </Flex>
-        </Flex>
-      </Flex>
+        )}
+        {width >= THEME_BREAKPOINTS.xl3 && (
+          <Flex>
+            <Flex alignItems='center' maxWidth={['20%']}>
+              <LandscapeImageBook image={image} />
+            </Flex>
+            <Flex flexDirection='column' ml='20px' width={['50%']} justifyContent='space-between'>
+              <Flex flexDir='column'>
+                <MiddleTextBook title={title} description={description} showDescription={true} />
+              </Flex>
+              <Flex flexDir='row'>
+                <Price
+                  price={price}
+                  bottomBorder={[`3px solid ${theme.colors.primaryBlue[200]}`]}
+                />
+                <AddToCart
+                  bgClr={theme.colors.primaryBlue[100]}
+                  nameCssClass='draw-border-yellow-blue'
+                />
+              </Flex>
+            </Flex>
+            <Flex width={['30%']} ml={['20px']} flexDir='column' justifyContent='space-between'>
+              <DetailsBook
+                book={props.book}
+                rating={rating}
+                sizeFontBtDet={['15px']}
+                bgClr={theme.colors.primaryBlue[100]}
+              />
+            </Flex>
+          </Flex>
+        )}
+      </section>
     </Flex>
   );
 };

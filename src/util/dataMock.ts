@@ -15,7 +15,7 @@ export function getBooks(): Array<BookType> {
   ];
 
   const articlesImage: string[] = [
-    '/books/600_istorioare_Pr_Iosif_Trifa.jpg',
+    '/books/ceEsteOasteaDomnului_Pr_Iosif_Trifa.PNG',
     '/books/600_istorioare_Pr_Iosif_Trifa.jpg',
     '/books/600_istorioare_Pr_Iosif_Trifa.jpg',
     '/books/600_istorioare_Pr_Iosif_Trifa.jpg',
@@ -38,14 +38,18 @@ export function getBooks(): Array<BookType> {
       author: 'Pr. Iosif Trifa',
       publisher: 'Editura „Oastea Domnului”',
       price: 15,
-      description: 'Carte de căpătâi a Oastei Domnului',
+      pages: 220,
+      description:
+        ' ... simţindu-se tot mai mult lipsa acestei cărţi de îndrumare pentru  cei din Oaste  şi pentru cei ce intră în Oaste, am tipărit-o din nou.',
       state: 'Nou',
       quantity: 45,
       soldQuantity: 200,
       image: articlesImage[i],
       discount: 0,
       category: 'Literatura Oastei Domnului',
-      publishingYear: 2004
+      publishingYear: 2004,
+      rating: 4.6,
+      reviews: ['gjfidjgdjhug', 'ifsdff']
     };
 
     book.title = trimTitle(book.title);
@@ -57,15 +61,17 @@ export function getBooks(): Array<BookType> {
 
 export function getCds(): Array<CdType> {
   const cdsTitle: string[] = [
-    'Ce este Oastea Domnului',
-    'Alcoolul - duhul diavolului',
-    'Trăim vremuri biblice',
-    'Fiul cel pierdut',
-    'Zaheu',
-    '600 istorioare religioase',
-    'Corabia lui Noe',
-    'Mai lângă Domnul meu',
-    'Ascultarea'
+    'Au înflorit măslinii',
+    'Au înflorit măslinii',
+    'Au înflorit măslinii',
+    'Au înflorit măslinii',
+    'Au înflorit măslinii',
+    'Au înflorit măslinii',
+    'Au înflorit măslinii',
+    'Au înflorit măslinii',
+    'Au înflorit măslinii',
+    'Au înflorit măslinii',
+    'Au înflorit măslinii'
   ];
 
   const cdsImage: string[] = [
@@ -94,14 +100,22 @@ export function getCds(): Array<CdType> {
       artists: ['Pr. Marian Mărcuș'],
       publisher: 'Studio „Cântări Nemuritoare”',
       price: 15,
-      description: 'Carte de căpătâi a Oastei Domnului',
+      tracks: [
+        '01. Un Prieten bun',
+        '02. A mea iubire',
+        '03. Preasfântă Maică și Fecioară',
+        "04. Cât de frumoase sunt a' Tale"
+      ],
+      description: 'Un album de ascultat pentru liniște, pace în suflet',
       state: 'Nou',
       quantity: 45,
       soldQuantity: 200,
       image: cdsImage[i],
       discount: 0,
       category: 'Să cântăm Domnului',
-      publishingYear: 2004
+      publishingYear: 2004,
+      rating: 4.0,
+      reviews: ['gjfidjgdjhug', 'ifsdff']
     };
 
     cd.title = trimTitle(cd.title);

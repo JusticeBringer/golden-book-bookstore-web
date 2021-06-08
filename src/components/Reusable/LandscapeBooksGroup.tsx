@@ -10,7 +10,7 @@ export const LandscapeBooksGroup: React.FC<BookArrayType> = (props: BookArrayTyp
   return (
     <Flex flexDirection={['column', 'row', 'row']} flexWrap='wrap'>
       {books.map(book => (
-        <Flex key={book.id} className='card' mr='10px' pr='10px'>
+        <Flex key={book.id} className='card' pr={['', '', '', '', '', '', '', '20px']}>
           <Flex
             position='relative'
             text-align='center'

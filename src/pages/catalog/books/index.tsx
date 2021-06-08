@@ -1,5 +1,6 @@
+import React from 'react';
 import { GetStaticProps } from 'next';
-import { Box, Flex } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 
 import { MobileFooter } from '../../../components/Footer/MobileFooter';
 import { DesktopFooter } from '../../../components/Footer/DesktopFooter';
@@ -21,7 +22,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const Index: React.FC<BooksPageType> = (props: BooksPageType) => {
+const Index: React.FC<BooksPageType> = React.memo((props: BooksPageType) => {
   const { books } = props;
 
   return (
@@ -29,17 +30,14 @@ const Index: React.FC<BooksPageType> = (props: BooksPageType) => {
       <Header />
       <DesktopFooter />
 
-      <Flex width={'100%'} direction='column' alignItems='center'>
-        <Box pl='10vw' mt='2vw'>
-          <Books books={books} />
-        </Box>
-
+      <Flex width={'100%'} direction='column' pl='15vw' mt='2vw'>
+        <Books books={books} />
         <TopSpacer spacing='80px' />
       </Flex>
 
       <MobileFooter />
     </>
   );
-};
+});
 
 export default Index;

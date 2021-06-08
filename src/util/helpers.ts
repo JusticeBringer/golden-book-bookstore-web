@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { ColorMode, useColorMode } from '@chakra-ui/react';
 
@@ -46,10 +47,36 @@ export const trimTitle = (title: string): string => {
   return newTitle;
 };
 
+type windowDimensions = {
+  width: number | undefined;
+  height: number | undefined;
+};
+
+export const useWindowDimensions = (): windowDimensions => {
+  const [windowDimensions, setWindowDimensions] = useState<windowDimensions>({
+    width: undefined,
+    height: undefined
+  });
+  useEffect(() => {
+    function handleResize(): void {
+      setWindowDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    }
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return (): void => window.removeEventListener('resize', handleResize);
+  }, []); // Empty array ensures that effect is only run on mount
+
+  return windowDimensions;
+};
+
 export default {
   currentMode,
   reversedMode,
   isLightMode,
   shouldBeActive,
-  trimTitle
+  trimTitle,
+  useWindowDimensions
 };
