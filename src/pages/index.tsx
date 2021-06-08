@@ -31,7 +31,10 @@ export const getStaticProps: GetStaticProps = async () => {
   } else {
     // TODO send actual data
     return {
-      props: {}
+      props: {
+        books,
+        cds
+      }
     };
   }
 };
