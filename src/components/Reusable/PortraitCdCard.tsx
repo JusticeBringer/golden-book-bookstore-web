@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import ReactStars from 'react-rating-stars-component';
 
-import { Heading, Stack, Flex, Image, Text } from '@chakra-ui/react';
+import { Stack, Flex, Image, Text } from '@chakra-ui/react';
 import { AddToCart } from '../SubComponents/AddToCart';
+import { RatingStarsCd } from '../SubComponents/RatingStarsCd';
+import { MiddleTextCd } from '../SubComponents/MiddleTextCd';
 
 import { theme } from '../../styles/theme';
 import { CdType } from '../../util/types';
@@ -33,14 +34,7 @@ export const PortraitCdCard: React.FC<PortraitCdCard> = (props: PortraitCdCard) 
             <Image src={image} width={[160]} height={[140]} alt='nimic' borderRadius='15px' />
 
             <Flex alignItems='center' alignContent='center' flexDirection='column'>
-              <ReactStars
-                size={20}
-                activeColor={`${theme.colors.primaryYellow[500]}`}
-                color={`${theme.colors.primaryBlack[400]}`}
-                value={rating}
-                edit={false}
-                isHalf={true}
-              />
+              <RatingStarsCd rating={rating} />
               <Text
                 borderRadius={['5px']}
                 display='flex'
@@ -58,20 +52,8 @@ export const PortraitCdCard: React.FC<PortraitCdCard> = (props: PortraitCdCard) 
           <Flex ml={['10px']} width='50%'>
             <Stack dir='vertical' justifyContent='space-between'>
               <Flex flexDir='column'>
-                <Heading
-                  as='h3'
-                  fontSize={['20px']}
-                  lineHeight={['20px']}
-                  fontWeight={['500']}
-                  mb={['7px']}
-                >
-                  {title}
-                </Heading>
-                <Heading as='h4' fontSize={['16px']} lineHeight={['20px']} fontWeight={['300']}>
-                  {artists}
-                </Heading>
+                <MiddleTextCd title={title} artists={artists} showArtists={true} />
               </Flex>
-              <Flex></Flex>
               <Flex
                 flexDir='row'
                 justifyContent='space-between'

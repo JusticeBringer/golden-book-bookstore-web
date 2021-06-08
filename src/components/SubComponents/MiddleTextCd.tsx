@@ -4,31 +4,31 @@ import { ButtonDetails } from '../SubComponents/ButtonDetails';
 
 import ReactStars from 'react-rating-stars-component';
 
-import { BookType } from '../../util/types';
+import { CdType } from '../../util/types';
 
 type DetailsProp = {
   title: string;
-  author?: string;
-  showAuthor?: boolean;
+  artists?: string[];
+  showArtists?: boolean;
   description?: string;
   showDescription?: boolean;
 };
 
-export const MiddleTextBook: React.FC<DetailsProp> = (props: DetailsProp) => {
-  const { title, description, author, showAuthor = false, showDescription = false } = props;
+export const MiddleTextCd: React.FC<DetailsProp> = (props: DetailsProp) => {
+  const { title, description, artists, showArtists = false, showDescription = false } = props;
 
   return (
     <>
       <Heading as='h2' fontSize={['14px', '18px', '21px']} color={theme.colors.primaryBlack[900]}>
         {title}
       </Heading>
-      {showAuthor && (
+      {showArtists && (
         <Text
           mt={['10px']}
           fontSize={['12px', '14px', '18px']}
           color={theme.colors.primaryBlack[800]}
         >
-          {author}
+          {artists}
         </Text>
       )}
       {showDescription && (
@@ -44,4 +44,4 @@ export const MiddleTextBook: React.FC<DetailsProp> = (props: DetailsProp) => {
   );
 };
 
-export default MiddleTextBook;
+export default MiddleTextCd;

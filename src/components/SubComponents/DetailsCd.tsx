@@ -1,8 +1,6 @@
-import { Text, Button, Flex, Heading } from '@chakra-ui/react';
-import { theme } from '../../styles/theme';
+import { Text, Flex, Heading } from '@chakra-ui/react';
 import { ButtonDetails } from '../SubComponents/ButtonDetails';
-
-import ReactStars from 'react-rating-stars-component';
+import { RatingStarsCd } from '../SubComponents/RatingStarsCd';
 
 import { CdType } from '../../util/types';
 
@@ -12,9 +10,9 @@ type DetailsProp = {
   sizeFontHdDet?: string[];
   rating: number;
   showNrRec?: boolean;
-  showAuthor?: boolean;
+  showArtists?: boolean;
   showPublishYear?: boolean;
-  showNrPages?: boolean;
+  showNrTracks?: boolean;
   showStock?: boolean;
 };
 
@@ -25,8 +23,8 @@ export const DetailsCd: React.FC<DetailsProp> = (props: DetailsProp) => {
     sizeFontHdDet,
     rating,
     showNrRec = true,
-    showAuthor = true,
-    showNrPages = true,
+    showArtists = true,
+    showNrTracks = true,
     showPublishYear = true,
     showStock = true
   } = props;
@@ -38,14 +36,7 @@ export const DetailsCd: React.FC<DetailsProp> = (props: DetailsProp) => {
         Detalii
       </Heading>
       <Flex flexDir='row' alignItems='center'>
-        <ReactStars
-          size={20}
-          activeColor={`${theme.colors.primaryYellow[500]}`}
-          color={`${theme.colors.primaryBlack[900]}`}
-          value={rating}
-          edit={false}
-          isHalf={true}
-        />
+        <RatingStarsCd rating={rating} />
         <Flex>
           <Text ml={['5px']} fontWeight={[600]}>
             {reviews.length}

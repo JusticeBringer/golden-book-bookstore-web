@@ -8,6 +8,7 @@ import { ButtonDetails } from '../SubComponents/ButtonDetails';
 import { AddToCart } from '../SubComponents/AddToCart';
 import { MiddleTextBook } from '../SubComponents/MiddleTextBook';
 import { LandscapeImageBook } from '../SubComponents/LandscapeImageBook';
+import { RatingStarsBook } from '../SubComponents/RatingStarsBook';
 
 import { useWindowDimensions } from '../../util/helpers';
 import { THEME_BREAKPOINTS } from '../../util/constants';
@@ -25,6 +26,7 @@ export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeB
   return (
     <Flex
       p={['20px']}
+      minWidth={['80vw', '80vw', '80vw', '80vw', '80vw', '80vw', '70vw', '40vw']}
       maxWidth={['80vw', '80vw', '80vw', '80vw', '80vw', '80vw', '70vw', '40vw']}
       className='draw-border-yellow-blue'
       borderRadius='10px'
@@ -69,14 +71,7 @@ export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeB
                   <MiddleTextBook title={title} author={author} showAuthor={true} />
                 </Flex>
                 <Flex flexDir='column'>
-                  <ReactStars
-                    size={20}
-                    activeColor={`${theme.colors.primaryYellow[500]}`}
-                    color={`${theme.colors.primaryBlack[900]}`}
-                    value={rating}
-                    edit={false}
-                    isHalf={true}
-                  />
+                  <RatingStarsBook rating={rating} />
                   <ButtonDetails
                     sizeFontBtDet={['15px']}
                     bgClr={theme.colors.primaryBlue[100]}

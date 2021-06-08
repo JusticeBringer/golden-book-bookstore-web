@@ -1,11 +1,13 @@
 import { Heading, Flex, Image } from '@chakra-ui/react';
-import ReactStars from 'react-rating-stars-component';
 
 import { theme } from '../../styles/theme';
 import { BookType } from '../../util/types';
 
 import { AddToCart } from '../SubComponents/AddToCart';
+import { RatingStarsBook } from '../SubComponents/RatingStarsBook';
+import { MiddleTextBook } from '../SubComponents/MiddleTextBook';
 import Price from '../SubComponents/Price';
+
 type PortraitBookCard = {
   book: BookType;
 };
@@ -29,28 +31,10 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
           </Flex>
           <Flex ml={['10px']} flexDir='column' justifyContent='space-between'>
             <Flex flexDir='column'>
-              <Heading
-                as='h3'
-                fontSize={['20px']}
-                lineHeight={['20px']}
-                fontWeight={['500']}
-                mb={['7px']}
-              >
-                {title}
-              </Heading>
-              <Heading as='h4' fontSize={['16px']} lineHeight={['20px']} fontWeight={['300']}>
-                {author}
-              </Heading>
+              <MiddleTextBook title={title} author={author} showAuthor={true} />
             </Flex>
 
-            <ReactStars
-              size={20}
-              activeColor={`${theme.colors.primaryYellow[500]}`}
-              color={`${theme.colors.primaryBlack[400]}`}
-              value={rating}
-              edit={false}
-              isHalf={true}
-            />
+            <RatingStarsBook rating={rating} />
             <Flex
               flexDir='row'
               justifyContent='space-between'

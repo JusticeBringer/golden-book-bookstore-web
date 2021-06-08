@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
-import { Heading, Image, Flex, Text, Stack, Box } from '@chakra-ui/react';
-import ReactStars from 'react-rating-stars-component';
+import { Flex } from '@chakra-ui/react';
 
 import { Price } from '../SubComponents/Price';
 import { DetailsCd } from '../SubComponents/DetailsCd';
 import { ButtonDetails } from '../SubComponents/ButtonDetails';
 import { AddToCart } from '../SubComponents/AddToCart';
+import { LandscapeImageCd } from '../SubComponents/LandscapeImageCd';
+import { MiddleTextCd } from '../SubComponents/MiddleTextCd';
+import { RatingStarsCd } from '../SubComponents/RatingStarsCd';
 
 import { useWindowDimensions } from '../../util/helpers';
 import { THEME_BREAKPOINTS } from '../../util/constants';
 import { CdType } from '../../util/types';
-import { theme } from '../../styles/theme';
 
 type LandscapeCdCardProps = {
   cd: CdType;
@@ -23,6 +23,7 @@ export const LandscapeCdCard: React.FC<LandscapeCdCardProps> = (props: Landscape
   return (
     <Flex
       p={['15px']}
+      minWidth={['80vw', '80vw', '80vw', '80vw', '80vw', '80vw', '70vw', '40vw']}
       maxWidth={['80vw', '80vw', '80vw', '80vw', '80vw', '80vw', '70vw', '40vw']}
       className='draw-border-yellow-green'
       borderRadius='10px'
@@ -30,26 +31,13 @@ export const LandscapeCdCard: React.FC<LandscapeCdCardProps> = (props: Landscape
       <section>
         {width < THEME_BREAKPOINTS.md && (
           <Flex width='100%'>
-            <Flex maxWidth={['60%', '50%']} maxHeight={['50%']} alignItems='center'>
-              <Flex ml={['5px']}>
-                <Image src={image} width={[100]} height={[110]} alt='nimic' borderRadius='10px' />
-              </Flex>
+            <Flex maxWidth={['60%', '50%']} maxHeight={['50%']} alignItems='center' ml={['5px']}>
+              <LandscapeImageCd image={image} />
             </Flex>
             <Flex ml={['10px']} maxWidth={['100%']}>
               <Flex flexDir='column' justifyContent='space-between'>
                 <Flex flexDir='column'>
-                  <Heading
-                    as='h3'
-                    fontSize={['16px']}
-                    lineHeight={['20px']}
-                    fontWeight={['500']}
-                    mb={['7px']}
-                  >
-                    {title}
-                  </Heading>
-                  <Text fontSize={['14px']} lineHeight={['20px']} fontWeight={['300']}>
-                    {artists}
-                  </Text>
+                  <MiddleTextCd title={title} artists={artists} showArtists={true} />
                 </Flex>
                 <ButtonDetails sizeFontBtDet={['12px']} />
               </Flex>
@@ -58,36 +46,16 @@ export const LandscapeCdCard: React.FC<LandscapeCdCardProps> = (props: Landscape
         )}
         {width >= THEME_BREAKPOINTS.md && width < THEME_BREAKPOINTS.md2 && (
           <Flex>
-            <Flex alignItems='center' maxWidth={['60%']} maxHeight={['50%']}>
-              <Flex ml={['5px']}>
-                <Image src={image} width={[150]} height={[160]} alt='nimic' borderRadius='10px' />
-              </Flex>
+            <Flex alignItems='center' maxWidth={['60%']} maxHeight={['50%']} ml={['5px']}>
+              <LandscapeImageCd image={image} />
             </Flex>
             <Flex ml={['10px']} maxWidth={['60%']}>
               <Flex flexDir='column' justifyContent='space-between'>
                 <Flex flexDir='column'>
-                  <Heading
-                    as='h3'
-                    fontSize={['20px']}
-                    lineHeight={['20px']}
-                    fontWeight={['500']}
-                    mb={['7px']}
-                  >
-                    {title}
-                  </Heading>
-                  <Text fontSize={['16px']} lineHeight={['20px']} fontWeight={['300']}>
-                    {artists}
-                  </Text>
+                  <MiddleTextCd title={title} artists={artists} showArtists={true} />
                 </Flex>
                 <Flex flexDir='column'>
-                  <ReactStars
-                    size={20}
-                    activeColor={`${theme.colors.primaryYellow[500]}`}
-                    color={`${theme.colors.primaryBlack[900]}`}
-                    value={rating}
-                    edit={false}
-                    isHalf={true}
-                  />
+                  <RatingStarsCd rating={rating} />
                   <ButtonDetails sizeFontBtDet={['15px']} />
                 </Flex>
               </Flex>
@@ -102,27 +70,13 @@ export const LandscapeCdCard: React.FC<LandscapeCdCardProps> = (props: Landscape
               flexDir='column'
               justifyContent='space-between'
             >
-              <Image
-                src={image}
-                width={160}
-                height={160}
-                minWidth={75}
-                minHeight={75}
-                alt='nimic'
-                borderRadius='15px'
-              />
+              <LandscapeImageCd image={image} />
               <Flex flexDir='row' mt={['15px']}>
                 <Price price={price} sizeFont={['16px']} />
               </Flex>
             </Flex>
             <Flex flexDirection='column' ml='20px' width={['20%']} justifyContent='space-between'>
-              <Heading
-                as='h2'
-                fontSize={['14px', '18px', '21px']}
-                color={theme.colors.primaryBlack[900]}
-              >
-                {title}
-              </Heading>
+              <MiddleTextCd title={title} />
               <AddToCart sizeFontText={['14px']} />
             </Flex>
             <Flex maxWidth={['70%']} ml={['10px']} flexDir='column' justifyContent='space-between'>
@@ -135,39 +89,22 @@ export const LandscapeCdCard: React.FC<LandscapeCdCardProps> = (props: Landscape
           <Flex>
             <Flex
               alignItems='center'
-              maxWidth={['60%']}
+              maxWidth={['20%']}
               flexDir='column'
               justifyContent='space-between'
             >
-              <Image
-                src={image}
-                width={160}
-                height={160}
-                minWidth={75}
-                minHeight={75}
-                alt='nimic'
-                borderRadius='15px'
-              />
+              <LandscapeImageCd image={image} />
               <Flex flexDir='row' mt={['15px']}>
                 <Price price={price} sizeFont={['16px']} />
               </Flex>
             </Flex>
-            <Flex flexDirection='column' ml='20px' width={['20%']} justifyContent='space-between'>
+            <Flex flexDirection='column' ml='20px' width={['35%']} justifyContent='space-between'>
               <Flex flexDir='column'>
-                <Heading
-                  as='h2'
-                  fontSize={['14px', '18px', '21px']}
-                  color={theme.colors.primaryBlack[900]}
-                >
-                  {title}
-                </Heading>
-                <Text mt={['', '', '', '4px']} fontSize={['', '', '', '14px']} fontWeight={[500]}>
-                  {description}
-                </Text>
+                <MiddleTextCd title={title} description={description} showDescription={true} />
               </Flex>
               <AddToCart sizeFontText={['14px']} />
             </Flex>
-            <Flex maxWidth={['70%']} ml={['10px']} flexDir='column' justifyContent='space-between'>
+            <Flex maxWidth={['45%']} ml={['20px']} flexDir='column' justifyContent='space-between'>
               <DetailsCd sizeFontBtDet={['15px']} cd={props.cd} rating={rating} showNrRec={false} />
             </Flex>
           </Flex>
@@ -176,39 +113,22 @@ export const LandscapeCdCard: React.FC<LandscapeCdCardProps> = (props: Landscape
           <Flex>
             <Flex
               alignItems='center'
-              maxWidth={['60%']}
+              maxWidth={['30%']}
               flexDir='column'
               justifyContent='space-between'
             >
-              <Image
-                src={image}
-                width={160}
-                height={160}
-                minWidth={75}
-                minHeight={75}
-                alt='nimic'
-                borderRadius='15px'
-              />
+              <LandscapeImageCd image={image} />
               <Flex flexDir='row' mt={['15px']}>
                 <Price price={price} sizeFont={['16px']} />
               </Flex>
             </Flex>
-            <Flex flexDirection='column' ml='20px' width={['20%']} justifyContent='space-between'>
+            <Flex flexDirection='column' ml='20px' width={['40%']} justifyContent='space-between'>
               <Flex flexDir='column'>
-                <Heading
-                  as='h2'
-                  fontSize={['14px', '18px', '21px', '24px']}
-                  color={theme.colors.primaryBlack[900]}
-                >
-                  {title}
-                </Heading>
-                <Text mt={['', '', '', '4px']} fontSize={['', '', '', '14px']} fontWeight={[500]}>
-                  {description}
-                </Text>
+                <MiddleTextCd title={title} description={description} showDescription={true} />
               </Flex>
               <AddToCart sizeFontText={['14px']} />
             </Flex>
-            <Flex maxWidth={['70%']} ml={['10px']} flexDir='column' justifyContent='space-between'>
+            <Flex maxWidth={['40%']} ml={['10px']} flexDir='column' justifyContent='space-between'>
               <DetailsCd sizeFontBtDet={['15px']} cd={props.cd} rating={rating} showNrRec={false} />
             </Flex>
           </Flex>

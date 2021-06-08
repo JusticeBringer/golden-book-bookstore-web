@@ -1,8 +1,7 @@
 import { Text, Button, Flex, Heading } from '@chakra-ui/react';
 import { theme } from '../../styles/theme';
 import { ButtonDetails } from '../SubComponents/ButtonDetails';
-
-import ReactStars from 'react-rating-stars-component';
+import { RatingStarsBook } from '../SubComponents/RatingStarsBook';
 
 import { BookType } from '../../util/types';
 
@@ -42,14 +41,7 @@ export const DetailsBook: React.FC<DetailsProp> = (props: DetailsProp) => {
         Detalii
       </Heading>
       <Flex flexDir='row' alignItems='center'>
-        <ReactStars
-          size={20}
-          activeColor={`${theme.colors.primaryYellow[500]}`}
-          color={`${theme.colors.primaryBlack[900]}`}
-          value={rating}
-          edit={false}
-          isHalf={true}
-        />
+        <RatingStarsBook rating={rating} />
         <Flex>
           <Text ml={['5px']} fontWeight={[600]}>
             {reviews.length}
