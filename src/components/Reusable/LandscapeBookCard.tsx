@@ -26,7 +26,6 @@ export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeB
   return (
     <Flex
       p={['20px']}
-      minWidth={['80vw', '80vw', '80vw', '80vw', '80vw', '80vw', '70vw', '40vw']}
       maxWidth={['80vw', '80vw', '80vw', '80vw', '80vw', '80vw', '70vw', '40vw']}
       className='draw-border-yellow-blue'
       borderRadius='10px'

@@ -1,5 +1,6 @@
 @use 'sass:math';
 @import './themeColors.scss';
+@import './home.scss';
 
 /* Draw border for cart */
 
@@ -161,19 +162,4 @@ a p {
 /* Prevent overflow*/
 main {
   min-width: 0;
-}
-
-.home-container {
-  @media only screen and (max-width: 700px) {
-    grid-template-areas:
-      'a'
-      'b'
-      'c'
-      'd';
-  }
-  @media only screen and (min-width: 701px) {
-    grid-template-areas:
-      'a a a b'
-      'c c d b';
-  }
 }

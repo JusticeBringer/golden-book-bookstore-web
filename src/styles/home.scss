@@ -1,0 +1,36 @@
+.home-container {
+  @media only screen and (min-width: 0px) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'recBooks'
+      'recCds'
+      'favBooks'
+      'athBooks';
+  }
+  @media only screen and (min-width: 650px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+      'recBooks recBooks recBooks recCds'
+      'recBooks recBooks recBooks recCds'
+      'favBooks favBooks favBooks favBooks'
+      'athBooks athBooks athBooks athBooks';
+  }
+  @media only screen and (min-width: 1300px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+      'recBooks recBooks recBooks recCds'
+      'favBooks favBooks athBooks recCds'
+      'favBooks favBooks athBooks recCds';
+  }
+}
+
+.cd-rec-container {
+  grid-template-areas:
+    'playDescBt'
+    'horizCds'
+    'titleCd'
+    'artists'
+    'player'
+    'tracks'
+    'buy';
+}
