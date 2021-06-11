@@ -87,32 +87,71 @@ export function getBooks(): Array<BookType> {
 
 export function getCds(): Array<CdType> {
   const cdsTitle: string[] = [
-    'Au înflorit măslinii',
-    'Au înflorit măslinii',
-    'Au înflorit măslinii',
-    'Au înflorit măslinii',
-    'Au înflorit măslinii',
-    'Au înflorit măslinii',
-    'Au înflorit măslinii',
-    'Au înflorit măslinii',
-    'Au înflorit măslinii',
-    'Au înflorit măslinii',
-    'Au înflorit măslinii'
+    'Căutând mereu',
+    'Au înflorit măslinii2',
+    'Au înflorit măslinii3',
+    'Au înflorit măslinii4',
+    'Au înflorit măslinii5',
+    'Au înflorit măslinii6'
+  ];
+
+  const cdsArtists: string[][] = [
+    ['Corul Oastei Domnului'],
+    ['Pr. Marian Mărcuș'],
+    ['Pr. Marian Mărcuș'],
+    ['Pr. Marian Mărcuș'],
+    ['Pr. Marian Mărcuș'],
+    ['Pr. Marian Mărcuș']
   ];
 
   const cdsImage: string[] = [
-    '/cds/au-inflorit-maslinii_cd.jpg',
-    '/cds/au-inflorit-maslinii_cd.jpg',
-    '/cds/au-inflorit-maslinii_cd.jpg',
-    '/cds/au-inflorit-maslinii_cd.jpg',
-    '/cds/au-inflorit-maslinii_cd.jpg',
-    '/cds/au-inflorit-maslinii_cd.jpg',
-    '/cds/au-inflorit-maslinii_cd.jpg',
+    '/cds/cautand_mereu.jpg',
     '/cds/au-inflorit-maslinii_cd.jpg',
     '/cds/au-inflorit-maslinii_cd.jpg',
     '/cds/au-inflorit-maslinii_cd.jpg',
     '/cds/au-inflorit-maslinii_cd.jpg',
     '/cds/au-inflorit-maslinii_cd.jpg'
+  ];
+
+  const cdsTracks: string[][] = [
+    [
+      'De mult mă lupt',
+      'Tu ai făcut spre sete apa',
+      'O, Dragoste-a lui Dumnezeu',
+      'Maică pururea fecioară',
+      'Te caut',
+      'Căutând mereu'
+    ],
+    [
+      '01. Un Prieten bun',
+      '02. A mea iubire',
+      '03. Preasfântă Maică și Fecioară',
+      "04. Cât de frumoase sunt a' Tale"
+    ],
+    [
+      '01. Un Prieten bun',
+      '02. A mea iubire',
+      '03. Preasfântă Maică și Fecioară',
+      "04. Cât de frumoase sunt a' Tale"
+    ],
+    [
+      '01. Un Prieten bun',
+      '02. A mea iubire',
+      '03. Preasfântă Maică și Fecioară',
+      "04. Cât de frumoase sunt a' Tale"
+    ],
+    [
+      '01. Un Prieten bun',
+      '02. A mea iubire',
+      '03. Preasfântă Maică și Fecioară',
+      "04. Cât de frumoase sunt a' Tale"
+    ],
+    [
+      '01. Un Prieten bun',
+      '02. A mea iubire',
+      '03. Preasfântă Maică și Fecioară',
+      "04. Cât de frumoase sunt a' Tale"
+    ]
   ];
 
   // initializeaza cd-urile
@@ -123,15 +162,10 @@ export function getCds(): Array<CdType> {
     const cd: CdType = {
       id: i,
       title: cdsTitle[i],
-      artists: ['Pr. Marian Mărcuș'],
+      artists: cdsArtists[i],
       publisher: 'Studio „Cântări Nemuritoare”',
       price: 15,
-      tracks: [
-        '01. Un Prieten bun',
-        '02. A mea iubire',
-        '03. Preasfântă Maică și Fecioară',
-        "04. Cât de frumoase sunt a' Tale"
-      ],
+      tracks: cdsTracks[i],
       description: 'Un album de ascultat pentru liniște, pace în suflet',
       state: 'Nou',
       quantity: 45,
@@ -141,7 +175,8 @@ export function getCds(): Array<CdType> {
       category: 'Să cântăm Domnului',
       publishingYear: 2004,
       rating: 4.0,
-      reviews: ['gjfidjgdjhug', 'ifsdff']
+      reviews: ['gjfidjgdjhug', 'ifsdff'],
+      audio: ['/audio/cautand_mereu.mp3']
     };
 
     cd.title = trimTitle(cd.title);

@@ -8,7 +8,6 @@ import { theme } from '../../styles/theme';
 
 import { authors } from '../../util/dataMock';
 import { BooksArrayType } from '../../util/types';
-import { PortraitBookCard } from '../Reusable/PortraitBookCard';
 
 type AuthorsProps = {
   books: BooksArrayType;
@@ -61,7 +60,7 @@ export const Authors: React.FC<AuthorsProps> = (props: AuthorsProps) => {
         ))}
       </Horizontal>
       <Flex className='flexboxGap' justifyContent='left' alignItems='left'>
-        <Flex maxW='60vw'>
+        <Flex maxW='80vw'>
           <PortraitBooksGroup books={activeBooks} />
         </Flex>
       </Flex>

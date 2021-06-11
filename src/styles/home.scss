@@ -7,7 +7,7 @@
       'favBooks'
       'athBooks';
   }
-  @media only screen and (min-width: 650px) {
+  @media only screen and (min-width: 900px) {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
       'recBooks recBooks recCds'
@@ -16,7 +16,7 @@
       'athBooks athBooks athBooks';
   }
   @media only screen and (min-width: 1300px) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
       'recBooks recBooks recCds'
       'favBooks favBooks recCds'

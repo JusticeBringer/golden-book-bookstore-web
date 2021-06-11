@@ -34,6 +34,7 @@ export type CdType = {
   publishingYear: number;
   rating: number;
   reviews: string[];
+  audio?: string[];
 };
 
 export type AuthorType = {

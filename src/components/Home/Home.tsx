@@ -69,13 +69,9 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
           </Flex>
         </Box>
       </Grid>
-      <Grid alignItems='flex-start' gridArea='recCds' justifyContent={'stretch'}>
-        <Box>
-          <GenericHeading text='Cd-uri recomandate' textAs='h1' />
-          <Grid pr={['10px']}>
-            <ListenCds cds={cds} />
-          </Grid>
-        </Box>
+      <Grid alignItems='start' gridArea='recCds' pr='20px' justifyContent='start'>
+        <GenericHeading text='Cd-uri recomandate' textAs='h1' />
+        <ListenCds cds={cds} />
       </Grid>
       <Grid gridArea='favBooks'>
         <GenericHeading text='Cele mai apreciate' textAs='h1' />
