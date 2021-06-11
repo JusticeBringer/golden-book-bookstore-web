@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
-import { Heading, Image, Flex, Text, Stack, Box } from '@chakra-ui/react';
-import ReactStars from 'react-rating-stars-component';
+import { Flex } from '@chakra-ui/react';
 
 import { Price } from '../SubComponents/Price';
 import { DetailsBook } from '../SubComponents/DetailsBook';
@@ -27,7 +25,7 @@ export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeB
     <Flex
       p={['20px']}
       maxWidth={['80vw', '80vw', '80vw', '80vw', '80vw', '80vw', '70vw', '40vw']}
-      className='draw-border-yellow-blue'
+      className='draw-bottom-border-yellow-blue'
       borderRadius='10px'
     >
       <section>

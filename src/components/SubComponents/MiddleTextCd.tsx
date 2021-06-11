@@ -1,12 +1,7 @@
-import { Text, Button, Flex, Heading } from '@chakra-ui/react';
+import { Text, Heading } from '@chakra-ui/react';
 import { theme } from '../../styles/theme';
-import { ButtonDetails } from '../SubComponents/ButtonDetails';
 
-import ReactStars from 'react-rating-stars-component';
-
-import { CdType } from '../../util/types';
-
-type DetailsProp = {
+type MiddleTextCdProps = {
   title: string;
   artists?: string[];
   showArtists?: boolean;
@@ -14,7 +9,7 @@ type DetailsProp = {
   showDescription?: boolean;
 };
 
-export const MiddleTextCd: React.FC<DetailsProp> = (props: DetailsProp) => {
+export const MiddleTextCd: React.FC<MiddleTextCdProps> = (props: MiddleTextCdProps) => {
   const { title, description, artists, showArtists = false, showDescription = false } = props;
 
   return (

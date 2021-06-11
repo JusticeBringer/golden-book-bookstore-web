@@ -1,11 +1,11 @@
 import ReactStars from 'react-rating-stars-component';
 import { theme } from '../../styles/theme';
 
-type RatingStarsCdProps = {
+type RatingStarsBookProps = {
   rating: number;
 };
 
-export const RatingStarsBook: React.FC<RatingStarsCdProps> = (props: RatingStarsCdProps) => {
+export const RatingStarsBook: React.FC<RatingStarsBookProps> = (props: RatingStarsBookProps) => {
   const { rating } = props;
 
   return (

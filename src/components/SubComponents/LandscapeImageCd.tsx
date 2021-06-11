@@ -1,9 +1,10 @@
 import { Image } from '@chakra-ui/react';
-type DetailsProp = {
+
+type LandscapeImageCdProps = {
   image: string;
 };
 
-export const LandscapeImageCd: React.FC<DetailsProp> = (props: DetailsProp) => {
+export const LandscapeImageCd: React.FC<LandscapeImageCdProps> = (props: LandscapeImageCdProps) => {
   const { image } = props;
 
   return (

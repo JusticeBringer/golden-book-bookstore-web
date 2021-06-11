@@ -1,13 +1,13 @@
 import { Heading } from '@chakra-ui/react';
 import { theme } from '../../styles/theme';
 
-type DetailsProp = {
+type GenericHeadingProps = {
   text: string;
   textAs?: any;
   color?: string;
 };
 
-export const GenericHeading: React.FC<DetailsProp> = (props: DetailsProp) => {
+export const GenericHeading: React.FC<GenericHeadingProps> = (props: GenericHeadingProps) => {
   const { textAs, text, color } = props;
 
   return (

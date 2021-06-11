@@ -4,7 +4,11 @@ import { LandscapeCdCard } from '../Reusable/LandscapeCdCard';
 
 import { CdsArrayType } from '../../util/types';
 
-export const LandscapeCdsGroup: React.FC<CdsArrayType> = (props: CdsArrayType) => {
+type LandscapeCdsProps = {
+  cds: CdsArrayType;
+};
+
+export const LandscapeCdsGroup: React.FC<LandscapeCdsProps> = (props: LandscapeCdsProps) => {
   const { cds } = props;
 
   return (

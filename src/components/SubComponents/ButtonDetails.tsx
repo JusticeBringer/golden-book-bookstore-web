@@ -1,13 +1,13 @@
 import { Text, Button } from '@chakra-ui/react';
 import { theme } from '../../styles/theme';
 
-type DetailsProp = {
+type ButtonDetailsProps = {
   bgClr?: string;
   nameCssClass?: string;
   sizeFontBtDet?: string[];
 };
 
-export const ButtonDetails: React.FC<DetailsProp> = (props: DetailsProp) => {
+export const ButtonDetails: React.FC<ButtonDetailsProps> = (props: ButtonDetailsProps) => {
   const { sizeFontBtDet, nameCssClass, bgClr } = props;
 
   return (

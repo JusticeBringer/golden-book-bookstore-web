@@ -1,11 +1,15 @@
 import { Flex, Image } from '@chakra-ui/react';
 
-import { PortraitCdCard } from '../Reusable/PortraitCdCard';
-
 import { CdsArrayType } from '../../util/types';
 import { useWindowDimensions } from '../../util/helpers';
 
-export const PortraitImageCdsGroup: React.FC<CdsArrayType> = (props: CdsArrayType) => {
+type PortraitImageCdsGroupProps = {
+  cds: CdsArrayType;
+};
+
+export const PortraitImageCdsGroup: React.FC<PortraitImageCdsGroupProps> = (
+  props: PortraitImageCdsGroupProps
+) => {
   const { cds } = props;
   const { height, width } = useWindowDimensions();
 

@@ -1,15 +1,11 @@
 import { useState } from 'react';
 import { slice, concat } from 'lodash';
 
-import { Flex, Heading, Grid, Box, Text, Button } from '@chakra-ui/react';
+import { Flex, Grid, Box, Text, Button } from '@chakra-ui/react';
 import { RepeatIcon } from '@chakra-ui/icons';
 
-import { PortraitBooksGroup } from '../Reusable/PortraitBooksGroup';
 import { PortraitBookCard } from '../Reusable/PortraitBookCard';
 import { LandscapeBooksGroup } from '../Reusable/LandscapeBooksGroup';
-import { PortraitCdCard } from '../Reusable/PortraitCdCard';
-import { PortraitCdsGroup } from '../Reusable/PortraitCdsGroup';
-import { LandscapeCdsGroup } from '../Reusable/LandscapeCdsGroup';
 import { ListenCds } from '../SubComponents/ListenCds';
 import { GenericHeading } from '../SubComponents/GenericHeading';
 import { Authors } from '../SubComponents/Authors';
@@ -37,7 +33,7 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
   };
 
   return (
-    <Grid className='home-container'>
+    <Grid className='home-container' gap={['10px']}>
       <Grid
         gridTemplateColumns={['repeat(auto-fit, minmax(0px, 2fr)']}
         gap={['20px']}
@@ -87,7 +83,7 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
       </Grid>
       <Grid gridArea='athBooks'>
         <GenericHeading text='După autor' textAs='h1' />
-        <Authors />
+        <Authors books={books} />
       </Grid>
     </Grid>
   );

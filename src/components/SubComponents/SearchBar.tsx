@@ -1,4 +1,4 @@
-import { Flex, Text, IconButton, InputGroup, InputRightElement, Input } from '@chakra-ui/react';
+import { IconButton, InputGroup, InputRightElement, Input } from '@chakra-ui/react';
 import { theme } from '../../styles/theme';
 import { FaSearch } from 'react-icons/fa';
 
@@ -6,8 +6,9 @@ export const SearchBar: React.FC = () => {
   return (
     <InputGroup
       boxShadow={['1px 0px 2px 2px rgba(239,230,62)']}
-      maxWidth={['60vw', '60vw', '60vw', '80vw']}
+      maxWidth={['60vw', '60vw', '60vw', '60vw']}
       justifyContent='space-between'
+      alignItems='center'
       borderRadius={['10px']}
     >
       <Input

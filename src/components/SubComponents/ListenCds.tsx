@@ -1,26 +1,28 @@
-import { Image, Grid, Text, Flex, Box, Icon } from '@chakra-ui/react';
+import { useState } from 'react';
+import { Grid, Flex, Box, Icon } from '@chakra-ui/react';
 import { FaVolumeUp, FaAlignLeft } from 'react-icons/fa';
 
-import { PortraitImageCdsGroup } from '../Reusable/PortraitImageCdsGroup';
-
-import { theme } from '../../styles/theme';
-import { CdType } from '../../util/types';
-import { useState } from 'react';
 import Price from './Price';
+import { PortraitImageCdsGroup } from '../Reusable/PortraitImageCdsGroup';
 import ButtonDetails from './ButtonDetails';
 
+import { theme } from '../../styles/theme';
+import { CdsArrayType } from '../../util/types';
+import AddToCart from './AddToCart';
+
 type ListenCdsProps = {
-  cds: Array<CdType>;
+  cds: CdsArrayType;
 };
 
 export const ListenCds: React.FC<ListenCdsProps> = (props: ListenCdsProps) => {
   const { cds } = props;
-  const [activeTab, setActiveTab] = useState('play');
 
   const tabNames = {
     firstTab: 'play',
     secondTab: 'description'
   };
+
+  const [activeTab, setActiveTab] = useState(tabNames.firstTab);
 
   function changeActiveTab(newTab: string) {
     if (newTab === tabNames.firstTab) {
@@ -80,10 +82,16 @@ export const ListenCds: React.FC<ListenCdsProps> = (props: ListenCdsProps) => {
       </Flex>
       <Box gridArea='horizCds'>
         <PortraitImageCdsGroup cds={cds} />
-        <PortraitImageCdsGroup cds={cds} />
       </Box>
-      <Grid gridArea='buy' gridAutoFlow={'column'} justifyContent='center' gap={['10px']}>
+      <Grid
+        gridArea='buy'
+        gridAutoFlow={'column'}
+        justifyContent='center'
+        gap={['10px']}
+        mt={'20px'}
+      >
         <Price price={15} />
+        <AddToCart />
         <ButtonDetails sizeFontBtDet={['16px']} />
       </Grid>
     </Grid>

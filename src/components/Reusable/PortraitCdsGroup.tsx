@@ -5,7 +5,11 @@ import { PortraitCdCard } from '../Reusable/PortraitCdCard';
 import { CdsArrayType } from '../../util/types';
 import { useWindowDimensions } from '../../util/helpers';
 
-export const PortraitCdsGroup: React.FC<CdsArrayType> = (props: CdsArrayType) => {
+type PortraitCdsGroupProps = {
+  cds: CdsArrayType;
+};
+
+export const PortraitCdsGroup: React.FC<PortraitCdsGroupProps> = (props: PortraitCdsGroupProps) => {
   const { cds } = props;
   const { height, width } = useWindowDimensions();
 

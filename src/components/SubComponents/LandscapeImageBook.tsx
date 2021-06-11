@@ -1,9 +1,12 @@
 import { Image } from '@chakra-ui/react';
-type DetailsProp = {
+
+type LandscapeImageBookProps = {
   image: string;
 };
 
-export const LandscapeImageBook: React.FC<DetailsProp> = (props: DetailsProp) => {
+export const LandscapeImageBook: React.FC<LandscapeImageBookProps> = (
+  props: LandscapeImageBookProps
+) => {
   const { image } = props;
 
   return (
