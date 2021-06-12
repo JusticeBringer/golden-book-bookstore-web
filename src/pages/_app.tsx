@@ -1,13 +1,22 @@
+import { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
-import '../styles/globals.scss';
+
+import { createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { Provider } from 'react-redux';
+import allReducers from '../redux/reducers';
 
 import theme from '../styles/theme';
-import { AppProps } from 'next/app';
+import '../styles/globals.scss';
+
+const store = createStore(allReducers, composeWithDevTools());
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <ChakraProvider resetCSS theme={theme}>
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
     </ChakraProvider>
   );
 }
