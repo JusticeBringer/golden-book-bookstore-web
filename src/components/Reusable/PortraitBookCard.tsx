@@ -1,4 +1,4 @@
-import { Heading, Flex, Image } from '@chakra-ui/react';
+import { Flex, Image } from '@chakra-ui/react';
 
 import { theme } from '../../styles/theme';
 import { BookType } from '../../util/types';
@@ -16,7 +16,7 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
   const { title, author, image, rating, price } = props.book;
 
   return (
-    <Flex className='draw-border-yellow-blue' borderRadius='10px'>
+    <Flex className='draw-bottom-border-yellow-blue' borderRadius='10px'>
       <section>
         <Flex
           flexDir='row'
@@ -27,7 +27,15 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
           alignContent='center'
         >
           <Flex ml={['5px']}>
-            <Image src={image} width={[160]} height={[160]} alt='nimic' borderRadius='15px' />
+            <Image
+              src={image}
+              width={[100, 120, 140, 160]}
+              height={[120, 140, 160, 180]}
+              minWidth={75}
+              minHeight={75}
+              alt='nimic'
+              borderRadius='15px'
+            />
           </Flex>
           <Flex ml={['10px']} flexDir='column' justifyContent='space-between'>
             <Flex flexDir='column'>

@@ -13,12 +13,8 @@ export type BookType = {
   discount: number;
   category: string;
   publishingYear: number;
-  rating: number;
+  rating?: number;
   reviews: string[];
-};
-
-export type BookArrayType = {
-  books: Array<BookType>;
 };
 
 export type CdType = {
@@ -36,27 +32,29 @@ export type CdType = {
   discount: number;
   category: string;
   publishingYear: number;
-  rating: number;
+  rating?: number;
   reviews: string[];
+  samples?: string[];
 };
 
-export type CdArrayType = {
-  cds: Array<CdType>;
+export type AuthorType = {
+  name: string;
+  photo: string;
 };
 
-export type CdsArrayType = {
-  cds: Array<CdType>;
-};
+export type BooksArrayType = Array<BookType>;
+export type CdsArrayType = Array<CdType>;
+export type AuthorsArrayType = Array<AuthorType>;
 
 export type HomePageType = {
-  books: Array<BookType>;
-  cds: Array<CdType>;
+  books: BooksArrayType;
+  cds: CdsArrayType;
 };
 
 export type BooksPageType = {
-  books: Array<BookType>;
+  books: BooksArrayType;
 };
 
 export type CdsPageType = {
-  cds: Array<CdType>;
+  cds: CdsArrayType;
 };

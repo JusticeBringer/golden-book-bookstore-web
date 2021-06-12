@@ -3,10 +3,16 @@ import { useState, useEffect } from 'react';
 
 import { PortraitBookCard } from '../Reusable/PortraitBookCard';
 
-import { BookArrayType } from '../../util/types';
+import { BooksArrayType } from '../../util/types';
 import { useWindowDimensions } from '../../util/helpers';
 
-export const PortraitBooksGroup: React.FC<BookArrayType> = (props: BookArrayType) => {
+type PortraitBooksGroupProps = {
+  books: BooksArrayType;
+};
+
+export const PortraitBooksGroup: React.FC<PortraitBooksGroupProps> = (
+  props: PortraitBooksGroupProps
+) => {
   const { books } = props;
   const { height, width } = useWindowDimensions();
 

@@ -1,12 +1,7 @@
-import { Text, Button, Flex, Heading } from '@chakra-ui/react';
+import { Text, Heading } from '@chakra-ui/react';
 import { theme } from '../../styles/theme';
-import { ButtonDetails } from '../SubComponents/ButtonDetails';
 
-import ReactStars from 'react-rating-stars-component';
-
-import { BookType } from '../../util/types';
-
-type DetailsProp = {
+type MiddleTextBookProps = {
   title: string;
   author?: string;
   showAuthor?: boolean;
@@ -14,7 +9,7 @@ type DetailsProp = {
   showDescription?: boolean;
 };
 
-export const MiddleTextBook: React.FC<DetailsProp> = (props: DetailsProp) => {
+export const MiddleTextBook: React.FC<MiddleTextBookProps> = (props: MiddleTextBookProps) => {
   const { title, description, author, showAuthor = false, showDescription = false } = props;
 
   return (

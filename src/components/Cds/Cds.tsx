@@ -4,9 +4,13 @@ import { PortraitCdsGroup } from '../Reusable/PortraitCdsGroup';
 import { LandscapeCdsGroup } from '../Reusable/LandscapeCdsGroup';
 
 import { theme } from '../../styles/theme';
-import { CdsPageType } from '../../util/types';
+import { CdsArrayType } from '../../util/types';
 
-export const Cds: React.FC<CdsPageType> = (props: CdsPageType) => {
+type CdsProps = {
+  cds: CdsArrayType;
+};
+
+export const Cds: React.FC<CdsProps> = (props: CdsProps) => {
   const { cds } = props;
 
   return (

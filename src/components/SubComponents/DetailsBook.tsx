@@ -1,11 +1,11 @@
-import { Text, Button, Flex, Heading } from '@chakra-ui/react';
+import { Text, Flex, Heading } from '@chakra-ui/react';
 import { theme } from '../../styles/theme';
 import { ButtonDetails } from '../SubComponents/ButtonDetails';
 import { RatingStarsBook } from '../SubComponents/RatingStarsBook';
 
 import { BookType } from '../../util/types';
 
-type DetailsProp = {
+type DetailsBookProps = {
   book: BookType;
   bgClr?: string;
   nameCssClass?: string;
@@ -19,7 +19,7 @@ type DetailsProp = {
   showStock?: boolean;
 };
 
-export const DetailsBook: React.FC<DetailsProp> = (props: DetailsProp) => {
+export const DetailsBook: React.FC<DetailsBookProps> = (props: DetailsBookProps) => {
   const {
     book,
     sizeFontBtDet,

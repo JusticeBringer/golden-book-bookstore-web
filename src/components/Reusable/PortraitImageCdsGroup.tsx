@@ -1,15 +1,15 @@
-import { Flex } from '@chakra-ui/react';
-
-import { PortraitCdCard } from '../Reusable/PortraitCdCard';
+import { Flex, Image } from '@chakra-ui/react';
 
 import { CdsArrayType } from '../../util/types';
 import { useWindowDimensions } from '../../util/helpers';
 
-type PortraitCdsGroupProps = {
+type PortraitImageCdsGroupProps = {
   cds: CdsArrayType;
 };
 
-export const PortraitCdsGroup: React.FC<PortraitCdsGroupProps> = (props: PortraitCdsGroupProps) => {
+export const PortraitImageCdsGroup: React.FC<PortraitImageCdsGroupProps> = (
+  props: PortraitImageCdsGroupProps
+) => {
   const { cds } = props;
   const { height, width } = useWindowDimensions();
 
@@ -30,7 +30,12 @@ export const PortraitCdsGroup: React.FC<PortraitCdsGroupProps> = (props: Portrai
             borderRadius='15px'
             className={'emptyClass cardDarkShadow'}
           >
-            <PortraitCdCard cd={cd} />
+            <Image
+              src={cd.image}
+              alt={cd.title}
+              w={['180px', '180px', '180px', '180px', '200px', '220px', '240px', '260px']}
+              h={['180px', '180px', '180px', '180px', '200px', '220px', '240px', '260px']}
+            />
           </Flex>
         </Flex>
       ))}
@@ -38,4 +43,4 @@ export const PortraitCdsGroup: React.FC<PortraitCdsGroupProps> = (props: Portrai
   );
 };
 
-export default PortraitCdsGroup;
+export default PortraitImageCdsGroup;

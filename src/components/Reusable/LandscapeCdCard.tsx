@@ -25,7 +25,7 @@ export const LandscapeCdCard: React.FC<LandscapeCdCardProps> = (props: Landscape
       p={['15px']}
       minWidth={['80vw', '80vw', '80vw', '80vw', '80vw', '80vw', '70vw', '40vw']}
       maxWidth={['80vw', '80vw', '80vw', '80vw', '80vw', '80vw', '70vw', '40vw']}
-      className='draw-border-yellow-green'
+      className='draw-bottom-border-yellow-green'
       borderRadius='10px'
     >
       <section>

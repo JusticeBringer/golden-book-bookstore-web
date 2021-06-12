@@ -1,5 +1,6 @@
 @use 'sass:math';
 @import './themeColors.scss';
+@import './home.scss';
 
 /* Draw border for cart */
 
@@ -7,7 +8,7 @@
 
 /* Firefox */
 * {
-  scrollbar-width: auto;
+  scrollbar-width: thin;
   scrollbar-color: $primaryBlue #b8d3ee;
 }
 
@@ -123,6 +124,64 @@
   }
 }
 
+@mixin btn-bottom-border-drawing(
+  $color: #ccc,
+  $hover: black,
+  $width: 2px,
+  $vertical: top,
+  $horizontal: left,
+  $duration: 0.25s
+) {
+  box-shadow: inset 0 0 0 $width $color;
+  transition: color $duration math.div($duration, 3);
+  position: relative;
+
+  &::before,
+  &::after {
+    border: 0 solid transparent;
+    box-sizing: border-box;
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+
+    #{$vertical}: 0;
+    #{$horizontal}: 0;
+  }
+
+  &::after {
+    border-#{$horizontal}-width: $width;
+  }
+
+  &:hover {
+    &::before,
+    &::after {
+      border-radius: 7px;
+      border-color: $hover;
+      transition: border-color 0s, width $duration, height $duration;
+      width: 100%;
+      height: 100%;
+    }
+
+    &::before {
+      transition-delay: 0s, 0s, $duration;
+    }
+
+    &::after {
+      transition-delay: 0s, $duration, 0s;
+    }
+  }
+}
+
+.draw-bottom-border-yellow-green {
+  @include btn-bottom-border-drawing($primaryYellow, $primaryGreen, 4px, right, bottom);
+}
+
+.draw-bottom-border-yellow-blue {
+  @include btn-bottom-border-drawing($primaryYellow, $primaryBlue, 4px, right, bottom);
+}
+
 .draw-border-yellow-green {
   @include btn-border-drawing($primaryYellow, $primaryGreen, 4px, right, bottom);
 }
@@ -156,4 +215,9 @@ a p {
     text-decoration: none;
     color: inherit;
   }
+}
+
+/* Prevent overflow*/
+main {
+  min-width: 0;
 }

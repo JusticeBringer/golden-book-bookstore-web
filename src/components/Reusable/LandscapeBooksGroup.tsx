@@ -2,9 +2,15 @@ import { Flex } from '@chakra-ui/react';
 
 import { LandscapeBookCard } from '../Reusable/LandscapeBookCard';
 
-import { BookArrayType } from '../../util/types';
+import { BooksArrayType } from '../../util/types';
 
-export const LandscapeBooksGroup: React.FC<BookArrayType> = (props: BookArrayType) => {
+type LandscapeBooksGroupProps = {
+  books: BooksArrayType;
+};
+
+export const LandscapeBooksGroup: React.FC<LandscapeBooksGroupProps> = (
+  props: LandscapeBooksGroupProps
+) => {
   const { books } = props;
 
   return (

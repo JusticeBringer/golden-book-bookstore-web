@@ -4,7 +4,7 @@ import { RatingStarsCd } from '../SubComponents/RatingStarsCd';
 
 import { CdType } from '../../util/types';
 
-type DetailsProp = {
+type DetailsCdProps = {
   cd: CdType;
   sizeFontBtDet?: string[];
   sizeFontHdDet?: string[];
@@ -16,7 +16,7 @@ type DetailsProp = {
   showStock?: boolean;
 };
 
-export const DetailsCd: React.FC<DetailsProp> = (props: DetailsProp) => {
+export const DetailsCd: React.FC<DetailsCdProps> = (props: DetailsCdProps) => {
   const {
     cd,
     sizeFontBtDet,
