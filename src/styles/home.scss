@@ -19,8 +19,8 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
       'recBooks recBooks recCds'
-      'favBooks favBooks recCds'
-      'favBooks favBooks recCds'
+      'recBooks recBooks recCds'
+      'favBooks favBooks favBooks'
       'athBooks athBooks athBooks';
   }
 }

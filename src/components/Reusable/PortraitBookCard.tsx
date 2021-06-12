@@ -27,7 +27,15 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
           alignContent='center'
         >
           <Flex ml={['5px']}>
-            <Image src={image} width={[160]} height={[160]} alt='nimic' borderRadius='15px' />
+            <Image
+              src={image}
+              width={[100, 120, 140, 160]}
+              height={[120, 140, 160, 180]}
+              minWidth={75}
+              minHeight={75}
+              alt='nimic'
+              borderRadius='15px'
+            />
           </Flex>
           <Flex ml={['10px']} flexDir='column' justifyContent='space-between'>
             <Flex flexDir='column'>

@@ -60,7 +60,7 @@ export const Authors: React.FC<AuthorsProps> = (props: AuthorsProps) => {
         ))}
       </Horizontal>
       <Flex className='flexboxGap' justifyContent='left' alignItems='left'>
-        <Flex maxW='80vw'>
+        <Flex maxW='75vw'>
           <PortraitBooksGroup books={activeBooks} />
         </Flex>
       </Flex>

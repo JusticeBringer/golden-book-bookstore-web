@@ -86,72 +86,25 @@ export function getBooks(): Array<BookType> {
 }
 
 export function getCds(): Array<CdType> {
-  const cdsTitle: string[] = [
-    'Căutând mereu',
-    'Au înflorit măslinii2',
-    'Au înflorit măslinii3',
-    'Au înflorit măslinii4',
-    'Au înflorit măslinii5',
-    'Au înflorit măslinii6'
-  ];
+  const cdsTitle: string[] = ['Căutând mereu', 'Au înflorit măslinii'];
 
-  const cdsArtists: string[][] = [
-    ['Corul Oastei Domnului'],
-    ['Pr. Marian Mărcuș'],
-    ['Pr. Marian Mărcuș'],
-    ['Pr. Marian Mărcuș'],
-    ['Pr. Marian Mărcuș'],
-    ['Pr. Marian Mărcuș']
-  ];
+  const cdsArtists: string[][] = [['Corul Oastei Domnului'], ['Pr. Marian Mărcuș']];
 
-  const cdsImage: string[] = [
-    '/cds/cautand_mereu.jpg',
-    '/cds/au-inflorit-maslinii_cd.jpg',
-    '/cds/au-inflorit-maslinii_cd.jpg',
-    '/cds/au-inflorit-maslinii_cd.jpg',
-    '/cds/au-inflorit-maslinii_cd.jpg',
-    '/cds/au-inflorit-maslinii_cd.jpg'
-  ];
+  const cdsImage: string[] = ['/cds/cautand_mereu.jpg', '/cds/au-inflorit-maslinii_cd.jpg'];
 
   const cdsTracks: string[][] = [
-    [
-      'De mult mă lupt',
-      'Tu ai făcut spre sete apa',
-      'O, Dragoste-a lui Dumnezeu',
-      'Maică pururea fecioară',
-      'Te caut',
-      'Căutând mereu'
-    ],
-    [
-      '01. Un Prieten bun',
-      '02. A mea iubire',
-      '03. Preasfântă Maică și Fecioară',
-      "04. Cât de frumoase sunt a' Tale"
-    ],
-    [
-      '01. Un Prieten bun',
-      '02. A mea iubire',
-      '03. Preasfântă Maică și Fecioară',
-      "04. Cât de frumoase sunt a' Tale"
-    ],
-    [
-      '01. Un Prieten bun',
-      '02. A mea iubire',
-      '03. Preasfântă Maică și Fecioară',
-      "04. Cât de frumoase sunt a' Tale"
-    ],
-    [
-      '01. Un Prieten bun',
-      '02. A mea iubire',
-      '03. Preasfântă Maică și Fecioară',
-      "04. Cât de frumoase sunt a' Tale"
-    ],
+    ['Căutând mereu', 'Preasfântă Născătoare'],
     [
       '01. Un Prieten bun',
       '02. A mea iubire',
       '03. Preasfântă Maică și Fecioară',
       "04. Cât de frumoase sunt a' Tale"
     ]
+  ];
+
+  const cdsSamples: string[][] = [
+    ['/audio/cautand_mereu_sample.mp3', '/audio/Preasfanta_Nascatoare_sample.mp3'],
+    []
   ];
 
   // initializeaza cd-urile
@@ -176,7 +129,7 @@ export function getCds(): Array<CdType> {
       publishingYear: 2004,
       rating: 4.0,
       reviews: ['gjfidjgdjhug', 'ifsdff'],
-      audio: ['/audio/cautand_mereu.mp3']
+      samples: cdsSamples[i]
     };
 
     cd.title = trimTitle(cd.title);

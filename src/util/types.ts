@@ -13,7 +13,7 @@ export type BookType = {
   discount: number;
   category: string;
   publishingYear: number;
-  rating: number;
+  rating?: number;
   reviews: string[];
 };
 
@@ -32,9 +32,9 @@ export type CdType = {
   discount: number;
   category: string;
   publishingYear: number;
-  rating: number;
+  rating?: number;
   reviews: string[];
-  audio?: string[];
+  samples?: string[];
 };
 
 export type AuthorType = {
