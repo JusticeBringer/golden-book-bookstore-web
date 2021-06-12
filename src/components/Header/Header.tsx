@@ -1,9 +1,7 @@
-import { Box, Flex, Stack } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 
 import { SearchBar } from '../SubComponents/SearchBar';
 import { Hamburger } from '../SubComponents/Hamburger';
-
-import { theme } from '../../styles/theme';
 
 export function Header(): JSX.Element {
   return (

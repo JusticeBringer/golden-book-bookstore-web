@@ -10,11 +10,11 @@ export type BookType = {
   quantity: number;
   soldQuantity: number;
   image: string;
-  discount: number;
+  discount?: number;
   category: string;
   publishingYear: number;
   rating?: number;
-  reviews: string[];
+  reviews?: string[];
 };
 
 export type CdType = {
