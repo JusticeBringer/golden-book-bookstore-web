@@ -11,6 +11,8 @@ import { TopSpacer } from '../components/Reusable/TopSpacer';
 import { BookType, CdType, HomePageType } from '../util/types';
 import { getBooks, getCds } from '../util/dataMock';
 
+import { generateMockedData } from '../scripts/generateMockedData';
+
 export const getStaticProps: GetStaticProps = async () => {
   // books array
   const books: Array<BookType> = getBooks();
@@ -22,6 +24,10 @@ export const getStaticProps: GetStaticProps = async () => {
   // console.log(process.env);
 
   if (process.env.NODE_ENV !== 'production') {
+    if (process.env.RUN_DUMMY_DATA === 'true') {
+      generateMockedData();
+    }
+
     return {
       props: {
         books,

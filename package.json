@@ -10,7 +10,8 @@
     "build": "next build",
     "start": "next start",
     "format": "prettier --check \"src/**/*.tsx\"",
-    "export": "next export"
+    "export": "next export",
+    "script": "cd src/scripts && ts-node"
   },
   "dependencies": {
     "@babel/core": "^7.13.14",
@@ -19,6 +20,7 @@
     "@chakra-ui/theme-tools": "1.0.4",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.1.5",
+    "@types/node": "^15.12.2",
     "@types/react": "^17.0.3",
     "@typescript-eslint/eslint-plugin": "^4.20.0",
     "@typescript-eslint/parser": "^4.20.0",
@@ -35,6 +37,9 @@
     "stylis": "^3.5.4"
   },
   "devDependencies": {
+    "@types/express": "^4.17.12",
+    "@types/mongodb": "^3.6.18",
+    "@types/mongoose": "^5.11.97",
     "@types/styled-jsx": "^2.2.8",
     "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "2.2.1",

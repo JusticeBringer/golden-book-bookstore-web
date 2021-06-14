@@ -1,4 +1,5 @@
 import { BookType, CdType, AuthorsArrayType } from '../util/types';
+import { IUser } from '../database/users/users.types';
 import { trimTitle } from '../util/helpers';
 
 export function getBooks(): Array<BookType> {
@@ -156,6 +157,11 @@ export const authors: AuthorsArrayType = [
     name: 'Pr. Vasile Mihoc',
     photo: '/authors/pr_Vasile_Mihoc.jpg'
   }
+];
+
+export const getUsers: IUser[] = [
+  { email: 'first@gmail.com', isVerifiedEmail: true, password: 'randomHash' },
+  { email: 'second@gmail.com', isVerifiedEmail: false, password: 'randomHash2' }
 ];
 
 export default { getBooks, getCds };
