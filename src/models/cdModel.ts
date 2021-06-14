@@ -1,26 +1,26 @@
 import mongoose from 'mongoose';
 const mongooseSchema = mongoose.Schema;
 
-const bookSchema = new mongooseSchema(
+const cdSchema = new mongooseSchema(
   {
     title: {
       type: String,
       required: true
     },
-    author: {
-      type: String,
+    artists: {
+      type: [String],
       required: true
     },
     publisher: {
       type: String,
-      required: true
+      required: false
     },
     price: {
       type: Number,
       required: true
     },
-    pages: {
-      type: Number,
+    tracks: {
+      type: [String],
       required: false
     },
     description: {
@@ -34,11 +34,13 @@ const bookSchema = new mongooseSchema(
     },
     quantity: {
       type: Number,
-      required: true
+      required: true,
+      default: 0
     },
     soldQuantity: {
       type: Number,
-      required: true
+      required: true,
+      default: 0
     },
     image: {
       type: String,
@@ -46,9 +48,10 @@ const bookSchema = new mongooseSchema(
     },
     discount: {
       type: Number,
+      required: false,
       min: 0,
       max: 100,
-      required: false
+      default: 0
     },
     category: {
       type: String,
@@ -56,10 +59,6 @@ const bookSchema = new mongooseSchema(
     },
     publishingYear: {
       type: String,
-      required: false
-    },
-    rating: {
-      type: Number,
       required: false
     },
     reviews: {
@@ -71,10 +70,19 @@ const bookSchema = new mongooseSchema(
         }
       ],
       required: false
+    },
+    rating: {
+      type: Number,
+      required: false,
+      default: null
+    },
+    samples: {
+      type: [String],
+      required: false
     }
   },
   { timestamps: true }
 );
 
-export const BookModel = mongoose.model('Books', bookSchema);
-export default BookModel;
+export const cdModel = mongoose.model('Cds', cdSchema);
+export default cdModel;

@@ -1,27 +1,66 @@
 import mongoose from 'mongoose';
+const mongooseSchema = mongoose.Schema;
 
-const userSchema = new mongoose.Schema(
+const userSchema = new mongooseSchema(
   {
-    name: {
-      type: String,
-      required: true
-    },
     email: {
       type: String,
       required: true,
       unique: true
     },
+    isVerifiedEmail: {
+      type: Boolean,
+      required: true
+    },
     password: {
       type: String,
       required: true
     },
-    role: {
+    familyName: {
       type: String,
-      default: 'user'
+      required: false
     },
-    root: {
-      type: Boolean,
-      default: false
+    givenName: {
+      type: String,
+      required: false
+    },
+    phoneNumber: {
+      type: String,
+      required: false
+    },
+    firstShippingAddress: {
+      type: {
+        city: {
+          type: String,
+          required: true
+        },
+        locality: {
+          type: String,
+          required: true
+        },
+        zipCode: {
+          type: String,
+          required: true
+        }
+      },
+      required: false
+    },
+    secondShippingAddress: {
+      type: {
+        city: {
+          type: String,
+          required: true
+        },
+        locality: {
+          type: String,
+          required: true
+        },
+        zipCode: {
+          type: String,
+          required: true
+        }
+      },
+      required: false
     }
   },
   {
@@ -29,5 +68,5 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-export const UserModel = mongoose.model('UserModel', userSchema);
+export const UserModel = mongoose.model('Users', userSchema);
 export default UserModel;
