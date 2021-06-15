@@ -13,7 +13,7 @@ export const connect = () => {
   }
   Mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
-    useFindAndModify: true,
+    useFindAndModify: false,
     useUnifiedTopology: true,
     useCreateIndex: true
   });
@@ -30,5 +30,7 @@ export const disconnect = () => {
   if (!database) {
     return;
   }
+
+  console.log('Disonnected to database');
   Mongoose.disconnect();
 };

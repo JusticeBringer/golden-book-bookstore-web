@@ -9,7 +9,7 @@ import Books from '../../../components/Books/Books';
 import { TopSpacer } from '../../../components/Reusable/TopSpacer';
 
 import { BooksPageType, BookType } from '../../../util/types';
-import { getBooks } from '../../../util/dataMock';
+import { getBooks } from '../../../util/mockedData';
 
 export const getStaticProps: GetStaticProps = async () => {
   // initializeaza cartile

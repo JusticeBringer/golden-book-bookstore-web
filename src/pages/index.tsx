@@ -9,9 +9,9 @@ import { Header } from '../components/Header/Header';
 import { TopSpacer } from '../components/Reusable/TopSpacer';
 
 import { BookType, CdType, HomePageType } from '../util/types';
-import { getBooks, getCds } from '../util/dataMock';
+import { getBooks, getCds } from '../util/mockedData';
 
-import { generateMockedData } from '../scripts/generateMockedData';
+import { resetMockedData } from '../scripts/resetMockedData';
 
 export const getStaticProps: GetStaticProps = async () => {
   // books array
@@ -24,8 +24,10 @@ export const getStaticProps: GetStaticProps = async () => {
   // console.log(process.env);
 
   if (process.env.NODE_ENV !== 'production') {
-    if (process.env.RUN_DUMMY_DATA === 'true') {
-      generateMockedData();
+    if (process.env.RESET_MOCKED_DATA === 'true') {
+      resetMockedData();
+      // set back to false so no resets when reloading page
+      process.env.RESET_MOCKED_DATA = 'false';
     }
 
     return {

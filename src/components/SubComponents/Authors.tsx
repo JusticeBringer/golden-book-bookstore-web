@@ -6,7 +6,7 @@ import { Horizontal } from '../Reusable/Horizontal';
 
 import { theme } from '../../styles/theme';
 
-import { authors } from '../../util/dataMock';
+import { authors } from '../../util/mockedData';
 import { BooksArrayType } from '../../util/types';
 
 type AuthorsProps = {

@@ -8,7 +8,7 @@ import Cart from '../../components/Cart/Cart';
 const Index: React.FC = () => {
   return (
     <>
-      <Header />
+      <Header showSearchBar={false} />
       <DesktopFooter />
 
       <Flex width={'100%'} direction='column' alignItems='center'>

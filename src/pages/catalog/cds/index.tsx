@@ -8,7 +8,7 @@ import Cds from '../../../components/Cds/Cds';
 import { TopSpacer } from '../../../components/Reusable/TopSpacer';
 
 import { CdType, CdsPageType } from '../../../util/types';
-import { getCds } from '../../../util/dataMock';
+import { getCds } from '../../../util/mockedData';
 
 export const getStaticProps: GetStaticProps = async () => {
   // initializeaza cd-urile

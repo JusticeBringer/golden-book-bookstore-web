@@ -1,8 +1,6 @@
 import { Schema } from 'mongoose';
-import { findOneOrCreate } from './users.statics';
-import { setLastSeenAt, sameFamilyName } from './users.methods';
 
-const UserSchema = new Schema(
+export const UserSchema: Schema = new Schema(
   {
     email: {
       type: String,
@@ -74,9 +72,6 @@ const UserSchema = new Schema(
   }
 );
 
-UserSchema.statics.findOneOrCreate = findOneOrCreate;
-// UserSchema.statics.findByEmail = findByEmail;
-UserSchema.methods.setLastSeenAt = setLastSeenAt;
-UserSchema.methods.sameFamilyName = sameFamilyName;
+UserSchema.index({ email: 1 });
 
 export default UserSchema;
