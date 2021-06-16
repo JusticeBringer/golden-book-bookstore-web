@@ -1,9 +1,6 @@
 import { GetStaticProps } from 'next';
 import { Flex } from '@chakra-ui/react';
 
-import { MobileFooter } from '../../../components/Footer/MobileFooter';
-import { DesktopFooter } from '../../../components/Footer/DesktopFooter';
-import { Header } from '../../../components/Header/Header';
 import Cds from '../../../components/Cds/Cds';
 import { TopSpacer } from '../../../components/Reusable/TopSpacer';
 
@@ -26,15 +23,10 @@ const Index: React.FC<CdsPageType> = (props: CdsPageType) => {
 
   return (
     <>
-      <Header />
-      <DesktopFooter />
-
       <Flex width={'100%'} direction='column' pl='15vw' mt='2vw'>
         <Cds cds={cds} />
         <TopSpacer spacing='80px' />
       </Flex>
-
-      <MobileFooter />
     </>
   );
 };

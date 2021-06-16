@@ -2,9 +2,6 @@ import { GetStaticProps } from 'next';
 import { Box } from '@chakra-ui/react';
 
 import { Home } from '../components/Home/Home';
-import { MobileFooter } from '../components/Footer/MobileFooter';
-import { DesktopFooter } from '../components/Footer/DesktopFooter';
-import { Header } from '../components/Header/Header';
 
 import { TopSpacer } from '../components/Reusable/TopSpacer';
 
@@ -52,15 +49,10 @@ const Index: React.FC<HomePageType> = (props: HomePageType) => {
 
   return (
     <>
-      <Header />
-      <DesktopFooter />
-
       <Box width={'100%'} direction='column' pl={['10vw', '10vw', '10vw', '20vw']} mt='2vw'>
         <Home books={books} cds={cds} />
         <TopSpacer spacing='80px' />
       </Box>
-
-      <MobileFooter />
     </>
   );
 };

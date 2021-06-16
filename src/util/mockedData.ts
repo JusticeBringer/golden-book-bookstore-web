@@ -1,5 +1,5 @@
 import { BookType, CdType, AuthorsArrayType } from '../util/types';
-import { IUser } from '../database/models/users/user.interface';
+import { IUser } from '../database/models/user/user.interface';
 import { trimTitle } from '../util/helpers';
 
 export function getBooks(): Array<BookType> {

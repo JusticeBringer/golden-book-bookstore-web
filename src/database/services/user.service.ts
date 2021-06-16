@@ -1,6 +1,6 @@
 import { CreateQuery, FilterQuery, QueryFindBaseOptions } from 'mongoose';
-import { UserDocument, UserInput } from '../models/users/user.interface';
-import User from '../models/users/user.model';
+import { UserDocument, UserInput } from '../models/user/user.interface';
+import User from '../models/user/user.model';
 
 /**
  * @param  {CreateQuery<UserInput>} input

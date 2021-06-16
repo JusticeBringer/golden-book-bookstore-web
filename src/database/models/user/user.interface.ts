@@ -1,9 +1,9 @@
 import { Document } from 'mongoose';
 
-type shippingAddress = {
-  city: String;
-  locality: String;
-  zipCode: String;
+type shippingAddressType = {
+  city: string;
+  locality: string;
+  zipCode: string;
 };
 
 export interface IUser {
@@ -13,8 +13,8 @@ export interface IUser {
   familyName?: string;
   givenName?: string;
   phoneNumber?: string;
-  firstShippingAddress?: shippingAddress;
-  secondShippingAddress?: shippingAddress;
+  firstShippingAddress?: shippingAddressType;
+  secondShippingAddress?: shippingAddressType;
   lastSeenAt?: Date;
 }
 

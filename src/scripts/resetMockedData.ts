@@ -1,4 +1,4 @@
-import { UserModel } from '../database/models/users/user.model';
+import { UserModel } from '../database/models/user/user.model';
 import { connect, disconnect } from '../database/database';
 import { getUsers } from '../util/mockedData';
 

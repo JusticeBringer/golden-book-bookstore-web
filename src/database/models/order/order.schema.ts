@@ -1,19 +1,20 @@
-import mongoose from 'mongoose';
-const mongooseSchema = mongoose.Schema;
+import { Schema } from 'mongoose';
 
-const orderSchema = new mongooseSchema(
+export const OrderSchema = new Schema(
   {
     userId: {
       type: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Users'
+        type: Schema.Types.ObjectId,
+        ref: 'Users',
+        required: true
       },
       required: true
     },
     paymentId: {
       type: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Orders'
+        type: Schema.Types.ObjectId,
+        ref: 'Orders',
+        required: true
       },
       required: true
     },
@@ -27,8 +28,9 @@ const orderSchema = new mongooseSchema(
         type: {
           bookId: {
             type: {
-              type: mongoose.Schema.Types.ObjectId,
-              ref: 'Books'
+              type: Schema.Types.ObjectId,
+              ref: 'Books',
+              required: true
             },
             required: true
           },
@@ -63,5 +65,4 @@ const orderSchema = new mongooseSchema(
   }
 );
 
-export const orderModel = mongoose.model('Orders', orderSchema);
-export default orderModel;
+export default OrderSchema;

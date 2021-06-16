@@ -72,11 +72,28 @@ export const useWindowDimensions = (): windowDimensions => {
   return windowDimensions;
 };
 
+export const useFetch = (url: string) => {
+  const [state, setState] = useState({ data: {}, loading: true });
+
+  useEffect(() => {
+    setState(state => ({ data: state.data, loading: true }));
+
+    fetch(url)
+      .then(x => x)
+      .then(y => {
+        setState({ data: y, loading: false });
+      });
+  }, [url, setState]);
+
+  return state;
+};
+
 export default {
   currentMode,
   reversedMode,
   isLightMode,
   shouldBeActive,
   trimTitle,
-  useWindowDimensions
+  useWindowDimensions,
+  useFetch
 };
