@@ -73,17 +73,15 @@ export const useWindowDimensions = (): windowDimensions => {
   return windowDimensions;
 };
 
-export const useFetch = (url: string) => {
+export const useFetch = async (url: string) => {
   const [state, setState] = useState({ data: {}, loading: true });
 
   useEffect(() => {
     setState(state => ({ data: state.data, loading: true }));
 
-    fetch(url)
-      .then(x => x)
-      .then(y => {
-        setState({ data: y, loading: false });
-      });
+    fetch(url).then(y => {
+      setState({ data: y, loading: false });
+    });
   }, [url, setState]);
 
   return state;

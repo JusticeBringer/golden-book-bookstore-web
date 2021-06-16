@@ -60,7 +60,7 @@ export function getBooks(): Array<BookType> {
   // parcurge articolele demo
   for (let i = 0; i < booksTitle.length; i++) {
     const book: BookType = {
-      id: i,
+      _id: i,
       title: booksTitle[i],
       author: booksAuthors[i],
       publisher: 'Editura „Oastea Domnului”',

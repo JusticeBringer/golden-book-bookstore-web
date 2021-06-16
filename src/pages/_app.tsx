@@ -1,5 +1,5 @@
 import { AppProps } from 'next/app';
-import { wrapperStore } from '../redux/store';
+import { wrapperStore } from '../redux/store/configureStore';
 import { ChakraProvider } from '@chakra-ui/react';
 
 import { MobileFooter } from '../components/Footer/MobileFooter';
@@ -9,7 +9,7 @@ import { Header } from '../components/Header/Header';
 import theme from '../styles/theme';
 import '../styles/globals.scss';
 
-function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <ChakraProvider resetCSS theme={theme}>
       <Header />
@@ -18,6 +18,6 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
       <MobileFooter />
     </ChakraProvider>
   );
-}
+};
 
 export default wrapperStore.withRedux(MyApp);

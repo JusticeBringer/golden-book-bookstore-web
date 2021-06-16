@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { signIn, signOut } from '../../redux/actions/authentication';
+import { signIn, signOut } from '../../redux/actions/authentication.action';
 import { RootState } from '../../redux/reducers';
 
 import { Flex, Heading, Button } from '@chakra-ui/react';
@@ -8,7 +8,7 @@ import { theme } from '../../styles/theme';
 import SignInRegister from '../SubComponents/SignInRegister';
 
 export const Profile: React.FC = () => {
-  const isLogged = useSelector((state: RootState) => state.isLogged);
+  const isLogged = useSelector((state: RootState) => state.authentication);
   const dispatch = useDispatch();
 
   return (

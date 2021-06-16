@@ -2,13 +2,14 @@ import { createStore, applyMiddleware, AnyAction, Store } from 'redux';
 import { HYDRATE, createWrapper } from 'next-redux-wrapper';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
-import allReducers from '../redux/reducers';
+import allReducers from '../../redux/reducers';
+import { RootState } from '../reducers/index';
 
-export interface State {
-  tick: string;
-}
+const initialStateValues: RootState = {
+  authentication: false
+};
 
-const reducer = (state: any, action: AnyAction) => {
+const reducer = (state: RootState = initialStateValues, action: AnyAction) => {
   if (action.type === HYDRATE) {
     const nextState = {
       ...state, // use previous state
@@ -29,5 +30,6 @@ const bindMiddleware = (middleware: any) => {
 
 const makeStore = () => createStore(reducer, bindMiddleware([thunkMiddleware]));
 
-export const wrapperStore = createWrapper<Store<any>>(makeStore, { debug: true });
-export default wrapperStore;
+export const wrapperStoreDev = createWrapper<Store<any>>(makeStore, { debug: true });
+
+export default wrapperStoreDev;
