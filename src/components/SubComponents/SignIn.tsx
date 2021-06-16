@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 
 import { useDispatch } from 'react-redux';
-import { signIn } from '../../redux/actions';
+import { signIn } from '../../redux/actions/authentication';
 import SocialSignIn from './SocialSignIn';
 
 export function SignIn() {

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { signIn, signOut } from '../../redux/actions';
+import { signIn, signOut } from '../../redux/actions/authentication';
 import { RootState } from '../../redux/reducers';
 
 import { Flex, Heading, Button } from '@chakra-ui/react';

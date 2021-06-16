@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import jsCookie from 'js-cookie';
 import { ColorMode, useColorMode } from '@chakra-ui/react';
 
 import { MAX_TITLE_CHARACTERS } from '../util/constants';
@@ -88,6 +89,22 @@ export const useFetch = (url: string) => {
   return state;
 };
 
+export function getCookie(key: string) {
+  let result: any[] = [];
+  if (key) {
+    const localData = jsCookie.get(key);
+    if (localData && localData.length > 0) {
+      result = JSON.parse(localData);
+    }
+  }
+
+  return result;
+}
+
+export function setCookie(key: string, value: any) {
+  jsCookie.set(key, JSON.stringify(value));
+}
+
 export default {
   currentMode,
   reversedMode,
@@ -95,5 +112,7 @@ export default {
   shouldBeActive,
   trimTitle,
   useWindowDimensions,
-  useFetch
+  useFetch,
+  getCookie,
+  setCookie
 };

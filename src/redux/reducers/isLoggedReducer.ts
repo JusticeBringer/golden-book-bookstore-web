@@ -1,8 +1,15 @@
-const isLoggedReducer = (state = false, action) => {
+import { AnyAction } from 'redux';
+import { actionTypes } from '../actions/index';
+
+const initialLoginState = {
+  isLoggedIn: false
+};
+
+const isLoggedReducer = (state = initialLoginState.isLoggedIn, action: AnyAction) => {
   switch (action.type) {
-    case 'SIGN_IN':
+    case actionTypes.signIn:
       return true;
-    case 'SIGN_OUT':
+    case actionTypes.signOut:
       return false;
 
     default:
