@@ -3,7 +3,13 @@ import { Flex } from '@chakra-ui/react';
 import { SearchBar } from '../SubComponents/SearchBar';
 import { Hamburger } from '../SubComponents/Hamburger';
 
-export function Header(): JSX.Element {
+type HeaderProps = {
+  showSearchBar?: boolean;
+};
+
+export const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
+  const { showSearchBar = true } = props;
+
   return (
     <Flex
       w={['90%', '90%', '90%', '80%']}
@@ -15,9 +21,9 @@ export function Header(): JSX.Element {
       flexDir='row'
     >
       <Hamburger />
-      <SearchBar />
+      {showSearchBar && <SearchBar />}
     </Flex>
   );
-}
+};
 
 export default Header;

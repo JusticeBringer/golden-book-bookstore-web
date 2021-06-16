@@ -2,14 +2,13 @@ import { GetStaticProps } from 'next';
 import { Box } from '@chakra-ui/react';
 
 import { Home } from '../components/Home/Home';
-import { MobileFooter } from '../components/Footer/MobileFooter';
-import { DesktopFooter } from '../components/Footer/DesktopFooter';
-import { Header } from '../components/Header/Header';
 
 import { TopSpacer } from '../components/Reusable/TopSpacer';
 
 import { BookType, CdType, HomePageType } from '../util/types';
-import { getBooks, getCds } from '../util/dataMock';
+import { getBooks, getCds } from '../util/mockedData';
+
+import { resetMockedData } from '../scripts/resetMockedData';
 
 export const getStaticProps: GetStaticProps = async () => {
   // books array
@@ -22,6 +21,12 @@ export const getStaticProps: GetStaticProps = async () => {
   // console.log(process.env);
 
   if (process.env.NODE_ENV !== 'production') {
+    if (process.env.RESET_MOCKED_DATA === 'true') {
+      resetMockedData();
+      // set back to false so no resets when reloading page
+      process.env.RESET_MOCKED_DATA = 'false';
+    }
+
     return {
       props: {
         books,
@@ -44,15 +49,10 @@ const Index: React.FC<HomePageType> = (props: HomePageType) => {
 
   return (
     <>
-      <Header />
-      <DesktopFooter />
-
       <Box width={'100%'} direction='column' pl={['10vw', '10vw', '10vw', '20vw']} mt='2vw'>
         <Home books={books} cds={cds} />
         <TopSpacer spacing='80px' />
       </Box>
-
-      <MobileFooter />
     </>
   );
 };

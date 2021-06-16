@@ -1,7 +1,6 @@
-import mongoose from 'mongoose';
-const mongooseSchema = mongoose.Schema;
+import { Schema } from 'mongoose';
 
-const userSchema = new mongooseSchema(
+export const UserSchema: Schema = new Schema(
   {
     email: {
       type: String,
@@ -61,6 +60,11 @@ const userSchema = new mongooseSchema(
         }
       },
       required: false
+    },
+    lastSeenAt: {
+      type: Date,
+      default: new Date(),
+      required: false
     }
   },
   {
@@ -68,5 +72,6 @@ const userSchema = new mongooseSchema(
   }
 );
 
-export const UserModel = mongoose.model('Users', userSchema);
-export default UserModel;
+UserSchema.index({ email: 1 });
+
+export default UserSchema;

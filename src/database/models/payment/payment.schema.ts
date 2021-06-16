@@ -1,12 +1,12 @@
-import mongoose from 'mongoose';
-const mongooseSchema = mongoose.Schema;
+import { Schema } from 'mongoose';
 
-const paymentSchema = new mongooseSchema(
+export const PaymentSchema = new Schema(
   {
     userId: {
       type: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Users'
+        type: Schema.Types.ObjectId,
+        ref: 'Users',
+        required: true
       },
       required: true
     },
@@ -55,5 +55,4 @@ const paymentSchema = new mongooseSchema(
   }
 );
 
-export const paymentModel = mongoose.model('Payments', paymentSchema);
-export default paymentModel;
+export default PaymentSchema;

@@ -1,7 +1,6 @@
-import mongoose from 'mongoose';
-const mongooseSchema = mongoose.Schema;
+import { Schema } from 'mongoose';
 
-const cdSchema = new mongooseSchema(
+export const CdSchema = new Schema(
   {
     title: {
       type: String,
@@ -64,7 +63,7 @@ const cdSchema = new mongooseSchema(
     reviews: {
       type: [
         {
-          type: mongoose.Schema.Types.ObjectId,
+          type: Schema.Types.ObjectId,
           ref: 'Reviews',
           required: true
         }
@@ -84,5 +83,4 @@ const cdSchema = new mongooseSchema(
   { timestamps: true }
 );
 
-export const cdModel = mongoose.model('Cds', cdSchema);
-export default cdModel;
+export default CdSchema;

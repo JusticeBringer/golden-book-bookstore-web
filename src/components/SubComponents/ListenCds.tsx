@@ -205,7 +205,14 @@ export const ListenCds: React.FC<ListenCdsProps> = (props: ListenCdsProps) => {
               px={['2px', '3px', '5px']}
             >
               <Flex>
-                <input type='range' min='1' max='100' value='50' id='myRange' />
+                <input
+                  type='range'
+                  min='1'
+                  max='100'
+                  value='50'
+                  id='myRange'
+                  onChange={() => alert()}
+                />
               </Flex>
               <Flex flexDir='row'>
                 <Box w='30%' />
@@ -254,7 +261,12 @@ export const ListenCds: React.FC<ListenCdsProps> = (props: ListenCdsProps) => {
                     />
 
                     {activeCd.samples.map(audio => (
-                      <Flex flexDir='row' justifyContent='space-around' alignItems='center'>
+                      <Flex
+                        flexDir='row'
+                        justifyContent='space-around'
+                        alignItems='center'
+                        key={audio.length}
+                      >
                         <Icon
                           as={audioActiveCd.playing ? FaPauseCircle : FaPlayCircle}
                           boxSize={['6px', '8px', '10px', '12px', '14px', '16px']}

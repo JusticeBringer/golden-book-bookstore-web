@@ -1,7 +1,6 @@
-import mongoose from 'mongoose';
-const mongooseSchema = mongoose.Schema;
+import { Schema } from 'mongoose';
 
-const adminSchema = new mongooseSchema(
+export const AdminSchema: Schema = new Schema(
   {
     email: {
       type: String,
@@ -35,5 +34,6 @@ const adminSchema = new mongooseSchema(
   }
 );
 
-export const adminModel = mongoose.model('Admins', adminSchema);
-export default adminModel;
+AdminSchema.index({ email: 1 });
+
+export default AdminSchema;
