@@ -1,19 +1,19 @@
-import { CreateQuery, FilterQuery, QueryFindBaseOptions } from 'mongoose';
+import { CreateQuery, FilterQuery, QueryOptions } from 'mongoose';
 import { UserDocument, UserInput } from '../models/user/user.interface';
-import User from '../models/user/user.model';
+import Users from '../models/user/user.model';
 
 /**
  * @param  {CreateQuery<UserInput>} input
  */
 export async function createUser(input: CreateQuery<UserInput>) {
-  return User.create<UserInput>(input);
+  return Users.create<UserInput>(input);
 }
 
 export async function findUser(
   query: FilterQuery<UserDocument>,
-  options: QueryFindBaseOptions = { lean: true }
+  options: QueryOptions = { lean: true }
 ) {
-  return User.findOne(query, null, options);
+  return Users.findOne(query, null, options);
 }
 
 export async function loginUser({
@@ -33,5 +33,5 @@ export async function loginUser({
 }
 
 export async function deleteAllUsers() {
-  return User.deleteMany({});
+  return Users.deleteMany({});
 }

@@ -6,11 +6,11 @@ import { Logo } from '../SubComponents/Logo';
 import { FOOTER_ITEMS } from './FooterItems';
 import { theme } from '../../styles/theme';
 import { shouldBeActive } from '../../util/helpers';
-import { THEME_BREAKPOINTS } from '../../util/constants';
+import { THEME_BREAKPOINTS } from '../../util/constants/constants.other';
 import { useWindowDimensions } from '../../util/helpers';
 
 export const DesktopFooter: React.FC = () => {
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   return (
     <aside>

@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 
 import { PortraitBookCard } from '../Reusable/PortraitBookCard';
 
-import { BooksArrayType } from '../../util/types';
+import { BookDocument } from '../../database/models/book/book.interface';
 import { useWindowDimensions } from '../../util/helpers';
 
 type PortraitBooksGroupProps = {
-  books: BooksArrayType;
+  books: BookDocument[];
 };
 
 export const PortraitBooksGroup: React.FC<PortraitBooksGroupProps> = (
@@ -24,7 +24,7 @@ export const PortraitBooksGroup: React.FC<PortraitBooksGroupProps> = (
     >
       {/* Show scrolling bar only for devices with width > 480 px */}
       {books.map(book => (
-        <Flex key={book.id} className='card' mr='10px' pr='10px'>
+        <Flex key={book._id} className='card' mr='10px' pr='10px'>
           <Flex
             position='relative'
             text-align='center'

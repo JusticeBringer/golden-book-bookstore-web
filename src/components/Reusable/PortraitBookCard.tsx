@@ -1,7 +1,7 @@
 import { Flex, Image } from '@chakra-ui/react';
 
 import { theme } from '../../styles/theme';
-import { BookType } from '../../util/types';
+import { BookDocument } from '../../database/models/book/book.interface';
 
 import { AddToCart } from '../SubComponents/AddToCart';
 import { RatingStarsBook } from '../SubComponents/RatingStarsBook';
@@ -9,11 +9,11 @@ import { MiddleTextBook } from '../SubComponents/MiddleTextBook';
 import Price from '../SubComponents/Price';
 
 type PortraitBookCard = {
-  book: BookType;
+  book: BookDocument;
 };
 
 export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBookCard) => {
-  const { title, author, image, rating, price } = props.book;
+  const { title, author, image, rating, price, _id } = props.book;
 
   return (
     <Flex className='draw-bottom-border-yellow-blue' borderRadius='10px'>
@@ -56,6 +56,7 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
                   sizeFontText={['14px']}
                   bgClr={theme.colors.primaryBlue[100]}
                   nameCssClass='draw-border-yellow-blue'
+                  _id={_id}
                 />
               </Flex>
             </Flex>

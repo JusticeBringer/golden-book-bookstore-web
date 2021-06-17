@@ -9,7 +9,7 @@ import { LandscapeImageBook } from '../SubComponents/LandscapeImageBook';
 import { RatingStarsBook } from '../SubComponents/RatingStarsBook';
 
 import { useWindowDimensions } from '../../util/helpers';
-import { THEME_BREAKPOINTS } from '../../util/constants';
+import { THEME_BREAKPOINTS } from '../../util/constants/constants.other';
 import { BookType } from '../../util/types';
 import { theme } from '../../styles/theme';
 
@@ -19,7 +19,7 @@ type LandscapeBookCard = {
 
 export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeBookCard) => {
   const { title, author, image, description, rating, price } = props.book;
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   return (
     <Flex

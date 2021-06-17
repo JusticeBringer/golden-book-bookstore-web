@@ -9,7 +9,7 @@ import { MiddleTextCd } from '../SubComponents/MiddleTextCd';
 import { RatingStarsCd } from '../SubComponents/RatingStarsCd';
 
 import { useWindowDimensions } from '../../util/helpers';
-import { THEME_BREAKPOINTS } from '../../util/constants';
+import { THEME_BREAKPOINTS } from '../../util/constants/constants.other';
 import { CdType } from '../../util/types';
 
 type LandscapeCdCardProps = {
@@ -18,7 +18,7 @@ type LandscapeCdCardProps = {
 
 export const LandscapeCdCard: React.FC<LandscapeCdCardProps> = (props: LandscapeCdCardProps) => {
   const { title, artists, image, description, rating, price } = props.cd;
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   return (
     <Flex

@@ -1,6 +1,6 @@
 import * as Mongoose from 'mongoose';
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI as string;
 
 if (!MONGODB_URI) {
   throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
@@ -13,7 +13,7 @@ export const connect = () => {
   }
   Mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
-    useFindAndModify: false,
+    useFindAndModify: true,
     useUnifiedTopology: true,
     useCreateIndex: true
   });
@@ -28,6 +28,7 @@ export const connect = () => {
 
 export const disconnect = () => {
   if (!database) {
+    console.log('Database was not connected. Disconnecting nothing.');
     return;
   }
 

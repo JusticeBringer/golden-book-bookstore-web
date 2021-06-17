@@ -47,7 +47,7 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
             pr={['10px']}
           >
             {list.map(book => (
-              <PortraitBookCard key={book.id} book={book} />
+              <PortraitBookCard key={book._id} book={book} />
             ))}
           </Grid>
           <Flex justifyContent={['flex-start']} alignItems={['center']}>
@@ -69,18 +69,18 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
           </Flex>
         </Box>
       </Grid>
-      <Grid alignItems='start' gridArea='recCds' pr='20px' justifyContent='start'>
+      {/* <Grid alignItems='start' gridArea='recCds' pr='20px' justifyContent='start'>
         <GenericHeading text='Cd-uri recomandate' textAs='h1' />
         <ListenCds cds={cds} />
-      </Grid>
-      <Grid gridArea='favBooks'>
+      </Grid> */}
+      {/* <Grid gridArea='favBooks'>
         <GenericHeading text='Cele mai apreciate' textAs='h1' />
         <LandscapeBooksGroup books={books.slice(0, 3)} />
       </Grid>
       <Grid gridArea='athBooks'>
         <GenericHeading text='După autor' textAs='h1' />
         <Authors books={books} />
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };

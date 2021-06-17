@@ -23,12 +23,12 @@ import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 import { Logo } from './Logo';
 import { theme } from '../../styles/theme';
 import HEADER_NAV_ITEMS, { NavItem } from '../Header/HeaderItems';
-import { THEME_BREAKPOINTS } from '../../util/constants';
+import { THEME_BREAKPOINTS } from '../../util/constants/constants.other';
 import { useWindowDimensions } from '../../util/helpers';
 
 export const Hamburger: React.FC = () => {
   const { isOpen, onToggle } = useDisclosure();
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   return (
     <aside>

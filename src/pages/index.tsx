@@ -1,24 +1,35 @@
 import { GetStaticProps } from 'next';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Box } from '@chakra-ui/react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { fetchAllBooks } from '../redux/actions/books.action';
+import { RootState } from '../redux/reducers';
 
 import { Home } from '../components/Home/Home';
 import { TopSpacer } from '../components/Reusable/TopSpacer';
-import { BookType, CdType, HomePageType } from '../util/types';
+import { IBook } from '../database/models/book/book.interface';
+import { CdType, HomePageType } from '../util/types';
 import { getBooks, getCds } from '../util/mockedData';
-
 import { resetMockedData } from '../scripts/resetMockedData';
-import { getAllBooks } from '../redux/actions/books.action';
 
 export const getStaticProps: GetStaticProps = async () => {
   // For debugging purposes
   // console.log(process.env);
+  const booksApi = process.env.DOMAIN_URL_API + 'catalog/books?key=' + process.env.API_KEY;
 
   if (process.env.NODE_ENV !== 'production') {
-    // books array
+    console.log('Books api URL: ', booksApi);
 
-    const books: Array<BookType> = getBooks();
+    // books array
+    const books: Array<IBook> = await axios
+      .get<IBook[]>(booksApi)
+      .then(response => response.data)
+      .catch(error => {
+        console.log(error);
+        throw new Error(error);
+      });
 
     // cds array
     const cds: Array<CdType> = getCds();
@@ -33,12 +44,13 @@ export const getStaticProps: GetStaticProps = async () => {
       props: {
         books,
         cds
-      }
+      },
+      revalidate: 60 // 60 seconds = 1 minute
     };
   } else {
     // TODO send actual data
     // books array
-    const books: Array<BookType> = getBooks();
+    const books: Array<IBook> = getBooks();
 
     // cds array
     const cds: Array<CdType> = getCds();
@@ -47,19 +59,14 @@ export const getStaticProps: GetStaticProps = async () => {
       props: {
         books,
         cds
-      }
+      },
+      revalidate: 300 // 60 seconds = 1 minute
     };
   }
 };
 
 const Index: React.FC<HomePageType> = (props: HomePageType) => {
   const { books, cds } = props;
-
-  const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(getAllBooks());
-  // }, []);
 
   return (
     <>

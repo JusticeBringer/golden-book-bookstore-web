@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import jsCookie from 'js-cookie';
 import { ColorMode, useColorMode } from '@chakra-ui/react';
 
-import { MAX_TITLE_CHARACTERS } from '../util/constants';
+import { MAX_TITLE_CHARACTERS } from '../util/constants/constants.other';
 
 // Return current color mode ("light" | "dark")
 export const currentMode = (): ColorMode => useColorMode().colorMode;
@@ -117,6 +117,23 @@ export function setCookie(
 
 export const isServer = typeof window === 'undefined';
 
+const isValidApiKey = (givenKey: string) => process.env.API_KEY === givenKey;
+
+export const isValidApiCall = (givenUrl: string) => {
+  // TODO strengthen validation
+
+  /*
+    Assume that givenUrl = 'api/catalog/books?key=cheiesigura'
+    Then: keyAndApiKey = 'key=cheiesigura'
+    And: onlyApiKey= 'cheiesigura'
+  */
+
+  const keyAndApiKey = givenUrl.split('?')[1];
+  const onlyApiKey = keyAndApiKey.split('=')[1];
+
+  return isValidApiKey(onlyApiKey);
+};
+
 export default {
   currentMode,
   reversedMode,
@@ -127,5 +144,6 @@ export default {
   useFetch,
   getCookie,
   setCookie,
-  isServer
+  isServer,
+  isValidApiCall
 };

@@ -1,14 +1,15 @@
 import { AnyAction } from 'redux';
-import { ADD_TO_CART, REMOVE_FROM_CART } from '../actions/actions.types';
+import { ADD_TO_CART, REMOVE_FROM_CART } from '../../util/constants/constants.redux';
 import { shoppingCartInitialStateType } from './reducers.types';
+import { Schema } from 'mongoose';
 
 export const shoppingCartInitialState: shoppingCartInitialStateType = {
   // getCookies first or database call if authenticated
   books: {
-    ids: ['0'],
+    ids: [],
     qtys: [
       {
-        id: '0',
+        id: '',
         qty: 0
       }
     ]
@@ -18,12 +19,47 @@ export const shoppingCartInitialState: shoppingCartInitialStateType = {
 export const shoppingCartReducer = (state: any = shoppingCartInitialState, action: AnyAction) => {
   switch (action.type) {
     case ADD_TO_CART:
+      const itemId: Schema.Types.ObjectId = action.payload.id;
+      // check if item is already in cart
+      let updatedCartBooks = {};
+      const currentBooks = state.books.ids;
+      const currentBooksQty = state.books.qtys;
+
+      // if we have items in cart
+      if (currentBooks.length > 0) {
+        // if item is already in cart
+        if (currentBooks[currentBooks.indexOf(itemId)]) {
+          // get crt qty and add qty to it
+          updatedCartBooks = {
+            ids: [...currentBooks],
+            qtys: currentBooksQty.map(item =>
+              item.id === itemId ? { id: item.id, qty: item.qty + 1 } : item
+            )
+          };
+        } else {
+          // item is not in cart -> put item in cart
+          updatedCartBooks = {
+            ids: [...currentBooks, itemId],
+            qtys: [
+              ...currentBooksQty,
+              {
+                id: itemId,
+                qty: 1
+              }
+            ]
+          };
+        }
+
+        // if not, then add item to cart and put 1 qty
+      } else {
+        updatedCartBooks = {
+          ids: [itemId],
+          qtys: [{ id: itemId, qty: 1 }]
+        };
+      }
       return {
         ...state,
-        books: {
-          ids: ['1'],
-          qtys: [{ id: '0', qty: 0 }]
-        }
+        books: updatedCartBooks
       };
 
     case REMOVE_FROM_CART:

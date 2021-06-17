@@ -6,10 +6,12 @@ import allReducers from '../../redux/reducers';
 import { RootState } from '../reducers/index';
 import { authenticationInitialState } from '../reducers/authentication.reducer';
 import { shoppingCartInitialState } from '../reducers/shoppingCart.reducer';
+import { booksInititalState } from '../reducers/books.reducer';
 
 const initialStateValues: RootState = {
   authenticated: authenticationInitialState,
-  shoppingCart: shoppingCartInitialState
+  shoppingCart: shoppingCartInitialState,
+  books: booksInititalState
 };
 
 const reducer = (state: RootState = initialStateValues, action: AnyAction) => {
@@ -31,4 +33,5 @@ const bindMiddleware = (middleware: Middleware[]) => {
 const makeStore = () => createStore(reducer, bindMiddleware([thunkMiddleware]));
 
 export const wrapperStoreDev = createWrapper<Store<RootState>>(makeStore, { debug: true });
+
 export default wrapperStoreDev;
