@@ -17,8 +17,17 @@ import { useDispatch } from 'react-redux';
 import { signIn } from '../../redux/actions/authentication.action';
 import SocialSignIn from './SocialSignIn';
 
+import { setCookie } from '../../util/helpers';
+
 export function SignIn() {
   const dispatch = useDispatch();
+
+  const handleOnClick = () => {
+    // TODO Validation
+
+    dispatch(signIn());
+    setCookie('authenticated', 'true');
+  };
 
   return (
     <Flex
@@ -66,7 +75,7 @@ export function SignIn() {
                 _hover={{
                   bg: 'blue.500'
                 }}
-                onClick={() => dispatch(signIn())}
+                onClick={() => handleOnClick()}
               >
                 Autentificare
               </Button>

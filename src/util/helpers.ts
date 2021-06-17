@@ -99,9 +99,23 @@ export function getCookie(key: string) {
   return result;
 }
 
-export function setCookie(key: string, value: any) {
-  jsCookie.set(key, JSON.stringify(value));
+export function setCookie(
+  key: string,
+  value: string | object,
+  days: number = 30,
+  sameSite: 'Lax' | 'strict' | 'Strict' | 'lax' | 'none' | 'None' | undefined = 'Lax'
+) {
+  let expires: number | Date | undefined;
+  if (days) {
+    let date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    expires = date;
+  }
+
+  jsCookie.set(key, JSON.stringify(value), { expires: expires, sameSite: sameSite });
 }
+
+export const isServer = typeof window === 'undefined';
 
 export default {
   currentMode,
@@ -112,5 +126,6 @@ export default {
   useWindowDimensions,
   useFetch,
   getCookie,
-  setCookie
+  setCookie,
+  isServer
 };

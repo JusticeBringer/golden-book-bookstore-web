@@ -1,12 +1,15 @@
-import { createStore, applyMiddleware, AnyAction, Store } from 'redux';
+import { createStore, applyMiddleware, AnyAction, Store, Middleware } from 'redux';
 import { HYDRATE, createWrapper } from 'next-redux-wrapper';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
 import allReducers from '../../redux/reducers';
 import { RootState } from '../reducers/index';
+import { authenticationInitialState } from '../reducers/authentication.reducer';
+import { shoppingCartInitialState } from '../reducers/shoppingCart.reducer';
 
 const initialStateValues: RootState = {
-  authentication: false
+  authenticated: authenticationInitialState,
+  shoppingCart: shoppingCartInitialState
 };
 
 const reducer = (state: RootState = initialStateValues, action: AnyAction) => {
@@ -21,15 +24,11 @@ const reducer = (state: RootState = initialStateValues, action: AnyAction) => {
   }
 };
 
-const bindMiddleware = (middleware: any) => {
-  if (process.env.NODE_ENV !== 'production') {
-    return composeWithDevTools(applyMiddleware(...middleware));
-  }
-  return applyMiddleware(...middleware);
+const bindMiddleware = (middleware: Middleware[]) => {
+  return composeWithDevTools(applyMiddleware(...middleware));
 };
 
 const makeStore = () => createStore(reducer, bindMiddleware([thunkMiddleware]));
 
-export const wrapperStoreDev = createWrapper<Store<any>>(makeStore, { debug: true });
-
+export const wrapperStoreDev = createWrapper<Store<RootState>>(makeStore, { debug: true });
 export default wrapperStoreDev;

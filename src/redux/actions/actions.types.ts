@@ -1,8 +1,9 @@
 export const SIGN_OUT = 'SIGN_OUT';
 export const SIGN_IN = 'SIGN_IN';
 export const RECEIVE_BOOKS = 'RECEIVE_PRODUCTS';
-
 export const ADD_TO_CART = 'ADD_TO_CART';
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+
 export const CHECKOUT_REQUEST = 'CHECKOUT_REQUEST';
 export const CHECKOUT_SUCCESS = 'CHECKOUT_SUCCESS';
 export const CHECKOUT_FAILURE = 'CHECKOUT_FAILURE';

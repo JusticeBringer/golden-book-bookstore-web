@@ -57,9 +57,9 @@ const Index: React.FC<HomePageType> = (props: HomePageType) => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllBooks());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getAllBooks());
+  // }, []);
 
   return (
     <>

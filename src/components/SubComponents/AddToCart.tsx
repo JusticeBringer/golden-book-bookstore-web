@@ -1,16 +1,20 @@
+import { useDispatch } from 'react-redux';
 import { Icon, Button, Text, Flex } from '@chakra-ui/react';
 import { theme } from '../../styles/theme';
 import { FaShoppingCart } from 'react-icons/fa';
+import { addToCart } from '../../redux/actions/shoppingCart.action';
 
 type AddToCartProps = {
+  _id?: string;
   bgClr?: string;
   nameCssClass?: string;
   sizeFontText?: string[];
 };
 
 export const AddToCart: React.FC<AddToCartProps> = (props: AddToCartProps) => {
-  const { sizeFontText, nameCssClass, bgClr } = props;
+  const { sizeFontText, nameCssClass, bgClr, _id } = props;
 
+  const dispatch = useDispatch();
   return (
     <Button
       py={['10px']}
@@ -19,6 +23,7 @@ export const AddToCart: React.FC<AddToCartProps> = (props: AddToCartProps) => {
       className={nameCssClass ?? 'draw-border-yellow-green'}
       _hover={{ bg: bgClr ?? theme.colors.primaryGreen[100] }}
       width='fit-content'
+      onClick={() => dispatch(addToCart(_id))}
     >
       <Text display='flex' alignItems='center' fontSize={sizeFontText ?? ['15px']} px={['5px']}>
         Adaugă

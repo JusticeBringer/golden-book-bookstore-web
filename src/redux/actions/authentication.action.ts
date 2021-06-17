@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_OUT } from './index';
+import { SIGN_IN, SIGN_OUT } from './actions.types';
 
 export const signIn = () => {
   return {
