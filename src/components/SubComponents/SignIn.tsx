@@ -9,7 +9,6 @@ import {
   Link,
   Button,
   Heading,
-  Text,
   useColorModeValue
 } from '@chakra-ui/react';
 
@@ -18,6 +17,7 @@ import { signIn } from '../../redux/actions/authentication.action';
 import SocialSignIn from './SocialSignIn';
 
 import { setCookie } from '../../util/helpers';
+import { authenticated } from '../../util/constants/constants.cookies';
 
 export function SignIn() {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ export function SignIn() {
     // TODO Validation
 
     dispatch(signIn());
-    setCookie('authenticated', 'true');
+    setCookie(authenticated, 'true');
   };
 
   return (

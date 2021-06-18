@@ -12,10 +12,10 @@ type CartProps = {
 export const getStaticProps: GetStaticProps = async () => {
   // For debugging purposes
   // console.log(process.env);
-  const booksApi = process.env.DOMAIN_URL_API + 'catalog/books?key=' + process.env.API_KEY;
+  const booksApi = process.env.DOMAIN_URL_API_BOOKS;
 
   if (process.env.NODE_ENV !== 'production') {
-    // console.log('Books api URL called from cart page: ', booksApi);
+    // console.log('Books api URL called from Cart page: ', booksApi);
 
     // books array
     let books: BookDocument[] = [];

@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducers';
 import { BookDocument, IBook } from '../../database/models/book/book.interface';
+import { Loading } from '../Reusable/Loading';
 
 type CartProps = {
   books: BookDocument[];
@@ -60,7 +61,7 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
       <Heading fontSize='5vw' color={theme.colors.primaryBlack[800]}>
         Coșul meu
       </Heading>
-      {loading ? '' : <PortraitBooksGroup books={booksInCart} />}
+      {loading ? <Loading /> : <PortraitBooksGroup books={booksInCart} />}
     </Flex>
   );
 };

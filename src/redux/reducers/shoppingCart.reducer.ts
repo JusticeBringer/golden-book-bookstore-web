@@ -1,19 +1,13 @@
 import { AnyAction } from 'redux';
+import { Schema } from 'mongoose';
 import { ADD_TO_CART, REMOVE_FROM_CART } from '../../util/constants/constants.redux';
 import { shoppingCartInitialStateType } from './reducers.types';
-import { Schema } from 'mongoose';
+import { shoppingCartBooks } from '../../util/constants/constants.cookies';
+import { getCookie } from '../../util/helpers';
 
 export const shoppingCartInitialState: shoppingCartInitialStateType = {
   // getCookies first or database call if authenticated
-  books: {
-    ids: [],
-    qtys: [
-      {
-        id: '',
-        qty: 0
-      }
-    ]
-  }
+  books: JSON.parse(JSON.stringify(getCookie(shoppingCartBooks)))
 };
 
 export const shoppingCartReducer = (state: any = shoppingCartInitialState, action: AnyAction) => {

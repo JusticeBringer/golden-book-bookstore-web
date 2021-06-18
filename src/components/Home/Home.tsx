@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { slice, concat } from 'lodash';
 
 import { Flex, Grid, Box, Text, Button } from '@chakra-ui/react';
@@ -9,12 +9,19 @@ import { LandscapeBooksGroup } from '../Reusable/LandscapeBooksGroup';
 import { ListenCds } from '../SubComponents/ListenCds';
 import { GenericHeading } from '../SubComponents/GenericHeading';
 import { Authors } from '../SubComponents/Authors';
+import { Loading } from '../Reusable/Loading';
 
 import { theme } from '../../styles/theme';
 import { HomePageType } from '../../util/types';
 
 export const Home: React.FC<HomePageType> = (props: HomePageType) => {
   const { books, cds } = props;
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  }, [books]);
 
   const LENGTH = books.length;
   const LIMIT = 4;
@@ -41,14 +48,20 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
       >
         <Box>
           <GenericHeading text='Cărți recomandate' textAs='h1' />
-          <Grid
-            gridTemplateColumns={['repeat(auto-fit, minmax(240px, 1fr))']}
-            gap={['20px']}
-            pr={['10px']}
-          >
-            {list.map(book => (
-              <PortraitBookCard key={book._id} book={book} />
-            ))}
+          <Grid>
+            {loading ? (
+              <Loading />
+            ) : (
+              <Grid
+                gridTemplateColumns={['repeat(auto-fit, minmax(240px, 1fr))']}
+                gap={['20px']}
+                pr={['10px']}
+              >
+                {list.map(book => (
+                  <PortraitBookCard key={book._id} book={book} />
+                ))}
+              </Grid>
+            )}
           </Grid>
           <Flex justifyContent={['flex-start']} alignItems={['center']}>
             {showMore && (

@@ -221,3 +221,13 @@ a p {
 main {
   min-width: 0;
 }
+
+/* Loading component */
+@keyframes loaderSpinning {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

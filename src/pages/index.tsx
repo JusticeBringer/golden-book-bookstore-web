@@ -16,7 +16,7 @@ import { resetMockedData } from '../scripts/resetMockedData';
 export const getStaticProps: GetStaticProps = async () => {
   // For debugging purposes
   // console.log(process.env);
-  const booksApi = process.env.DOMAIN_URL_API + 'catalog/books?key=' + process.env.API_KEY;
+  const booksApi = process.env.DOMAIN_URL_API_BOOKS;
 
   if (process.env.NODE_ENV !== 'production') {
     if (process.env.RESET_MOCKED_DATA === 'true') {
@@ -26,7 +26,7 @@ export const getStaticProps: GetStaticProps = async () => {
       // set back to false so no resets when reloading page
       process.env.RESET_MOCKED_DATA = 'false';
     }
-    // console.log('Books api URL called from homepage: ', booksApi);
+    // console.log('Books api URL called from Home page: ', booksApi);
 
     // books array
     const books: BookDocument[] | void = await axios
