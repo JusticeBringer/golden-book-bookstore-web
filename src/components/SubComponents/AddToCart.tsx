@@ -27,7 +27,7 @@ export const AddToCart: React.FC<AddToCartProps> = (props: AddToCartProps) => {
   };
 
   useEffect(() => {
-    setCookie(shoppingCartBooks, booksIdsStore);
+    setCookie(shoppingCartBooks, booksIdsStore, 180);
   }, [booksIdsStore]);
 
   return (

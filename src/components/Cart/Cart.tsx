@@ -1,7 +1,7 @@
 import { Flex, Heading, Box, Grid, Text } from '@chakra-ui/react';
 import { PortraitProductCartBooks } from '../Reusable/PortraitProductCartBooks';
 import { theme } from '../../styles/theme';
-import { idsAndQtysType } from '../../redux/reducers/reducers.types';
+import { qtysType, idsAndQtysType } from '../../redux/reducers/reducers.types';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducers';
@@ -19,15 +19,21 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
   const booksIdsStore = useSelector((state: RootState) => state.shoppingCart.books);
   const [booksIdsState, setBooksIdsState] = useState<idsAndQtysType>({
     ids: [],
-    qtys: [
-      {
-        id: '',
-        qty: 0
-      }
-    ]
+    qtys: []
   });
 
+  const updatingStore = useSelector((state: RootState) => state.updatingStore);
+
+  useEffect(() => {
+    if (updatingStore === true) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [updatingStore]);
+
   const [booksInCart, setbooksInCart] = useState<BookDocument[]>([]);
+  const [booksQtys, setBooksQtys] = useState<qtysType[]>([]);
 
   useEffect(() => {
     setBooksIdsState(booksIdsStore);
@@ -38,8 +44,15 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
   }, [booksIdsState]);
 
   useEffect(() => {
-    console.log('Component Cart received props:', books);
-  }, [books]);
+    let booksQtysInCart: qtysType[] = [];
+
+    booksIdsState.qtys.map(item => {
+      booksQtysInCart.push(item);
+    });
+
+    setBooksQtys(booksQtysInCart);
+    setLoading(false);
+  }, [booksIdsState]);
 
   const mapIdsToProducts = (): BookDocument[] => {
     let booksInCart: BookDocument[] = [];
@@ -49,8 +62,6 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
         book._id === id ? booksInCart.push(book) : '';
       });
     });
-
-    setLoading(false);
     return booksInCart;
   };
 
@@ -75,7 +86,7 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
             >
               {booksInCart.length} elemente
             </Text>
-            <PortraitProductCartBooks books={booksInCart} />
+            <PortraitProductCartBooks books={booksInCart} booksQtys={booksQtys} />
           </Grid>
         )}
       </Box>

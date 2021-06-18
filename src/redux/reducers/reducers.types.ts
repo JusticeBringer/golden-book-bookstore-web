@@ -6,14 +6,14 @@ export type booksInititalStateType = {
   error: string;
 };
 
+export type qtysType = {
+  id: '';
+  qty: 0;
+};
+
 export type idsAndQtysType = {
   ids: string[];
-  qtys: [
-    {
-      id: string;
-      qty: number;
-    }
-  ];
+  qtys: qtysType[];
 };
 
 export type shoppingCartInitialStateType = {
