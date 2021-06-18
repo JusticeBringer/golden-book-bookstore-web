@@ -23,14 +23,14 @@ export const PortraitBooksGroup: React.FC<PortraitBooksGroupProps> = (
     >
       {/* Show scrolling bar only for devices with width > 480 px */}
       {books.map(book => (
-        <Flex key={book._id} className='card' mr='10px' pr='10px'>
+        <Flex key={book._id} className='card' mr={['10px', '20px']} pr={['10px', '20px']}>
           <Flex
             position='relative'
             text-align='center'
             mb='20px'
             mt='10px'
             borderRadius='15px'
-            className={'emptyClass cardDarkShadow'}
+            className={'cardDarkShadow'}
           >
             <PortraitBookCard book={book} />
           </Flex>

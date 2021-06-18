@@ -28,7 +28,7 @@ export const PortraitImageCdsGroup: React.FC<PortraitImageCdsGroupProps> = (
             mb='20px'
             mt='10px'
             borderRadius='15px'
-            className={'emptyClass cardDarkShadow'}
+            className={'cardDarkShadow'}
           >
             <Image
               src={cd.image}

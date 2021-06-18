@@ -89,14 +89,27 @@ export const useFetch = async (url: string) => {
   return state;
 };
 
-export function getCookie(key: string) {
-  let result: any[] = [];
-  if (key) {
-    const localData = jsCookie.get(key);
-    if (localData && localData.length > 0) {
-      result = JSON.parse(localData);
-    }
+export const isCookieExisting = (cookieName: string) => {
+  if (!cookieName) {
+    return false;
   }
+
+  const localData = jsCookie.get(cookieName);
+  if (localData && localData.length > 0) {
+    return true;
+  }
+  return false;
+};
+
+export function getCookie(key: string) {
+  let result: any = {};
+
+  if (!isCookieExisting(key)) {
+    return result;
+  }
+
+  const localData = jsCookie.get(key) as string;
+  result = JSON.parse(localData);
 
   return result;
 }
@@ -167,17 +180,3 @@ export const isValidApiCall = (givenUrl: string) => {
 //   // else error
 //   return [];
 // };
-
-export default {
-  currentMode,
-  reversedMode,
-  isLightMode,
-  shouldBeActive,
-  trimTitle,
-  useWindowDimensions,
-  useFetch,
-  getCookie,
-  setCookie,
-  isServer,
-  isValidApiCall
-};

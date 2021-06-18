@@ -42,7 +42,7 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
   return (
     <Grid className='home-container' gap={['10px']}>
       <Grid
-        gridTemplateColumns={['repeat(auto-fit, minmax(0px, 2fr)']}
+        gridTemplateColumns={['repeat(auto-fit, minmax(0px, 1fr)']}
         gap={['20px']}
         gridArea='recBooks'
       >
@@ -54,11 +54,20 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
             ) : (
               <Grid
                 gridTemplateColumns={['repeat(auto-fit, minmax(240px, 1fr))']}
-                gap={['20px']}
-                pr={['10px']}
+                gridColumnGap={['20px', '80px']}
+                gridRowGap={['10px']}
               >
                 {list.map(book => (
-                  <PortraitBookCard key={book._id} book={book} />
+                  <Flex key={book._id} className='card'>
+                    <Flex
+                      text-align='center'
+                      mt='10px'
+                      borderRadius='15px'
+                      className={'cardDarkShadow'}
+                    >
+                      <PortraitBookCard key={book._id} book={book} />
+                    </Flex>
+                  </Flex>
                 ))}
               </Grid>
             )}
@@ -86,11 +95,11 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
         <GenericHeading text='Cd-uri recomandate' textAs='h1' />
         <ListenCds cds={cds} />
       </Grid> */}
-      {/* <Grid gridArea='favBooks'>
+      <Grid gridArea='favBooks'>
         <GenericHeading text='Cele mai apreciate' textAs='h1' />
-        <LandscapeBooksGroup books={books.slice(0, 3)} />
+        {loading ? <Loading /> : <LandscapeBooksGroup books={books.slice(0, 3)} />}
       </Grid>
-      <Grid gridArea='athBooks'>
+      {/* <Grid gridArea='athBooks'>
         <GenericHeading text='După autor' textAs='h1' />
         <Authors books={books} />
       </Grid> */}

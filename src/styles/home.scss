@@ -1,4 +1,5 @@
 .home-container {
+  padding-right: 6vw;
   @media only screen and (min-width: 0px) {
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -19,8 +20,8 @@
   @media only screen and (min-width: 1300px) {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
-      'recBooks recBooks recBooks'
-      'recBooks recBooks recBooks'
+      'recBooks recBooks .'
+      'recBooks recBooks .'
       'recCds recCds recCds'
       'favBooks favBooks favBooks'
       'athBooks athBooks athBooks';

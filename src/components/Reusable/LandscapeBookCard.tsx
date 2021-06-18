@@ -10,28 +10,28 @@ import { RatingStarsBook } from '../SubComponents/RatingStarsBook';
 
 import { useWindowDimensions } from '../../util/helpers';
 import { THEME_BREAKPOINTS } from '../../util/constants/constants.other';
-import { BookType } from '../../util/types';
 import { theme } from '../../styles/theme';
+import BookDocument from '../../database/models/book/book.interface';
 
 type LandscapeBookCard = {
-  book: BookType;
+  book: BookDocument;
 };
 
 export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeBookCard) => {
-  const { title, author, image, description, rating, price } = props.book;
+  const { title, author, image, description, rating, price, _id } = props.book;
   const { width } = useWindowDimensions();
 
   return (
     <Flex
       p={['20px']}
       maxWidth={['80vw', '80vw', '80vw', '80vw', '80vw', '80vw', '70vw', '40vw']}
-      className='draw-bottom-border-yellow-blue'
+      className='draw-bottom-border-white-blue'
       borderRadius='10px'
     >
       <section>
         {width < THEME_BREAKPOINTS.md && (
           <Flex width='100%'>
-            <Flex maxWidth={['60%', '50%']} maxHeight={['50%']} alignItems='center'>
+            <Flex maxWidth={['60%', '50%']} alignItems='center'>
               <Flex ml={['5px']}>
                 <LandscapeImageBook image={image} />
               </Flex>
@@ -57,12 +57,12 @@ export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeB
         )}
         {width >= THEME_BREAKPOINTS.md && width < THEME_BREAKPOINTS.md2 && (
           <Flex>
-            <Flex alignItems='center' maxWidth={['30%']} maxHeight={['30%']}>
+            <Flex alignItems='center'>
               <Flex ml={['5px']}>
                 <LandscapeImageBook image={image} />
               </Flex>
             </Flex>
-            <Flex ml={['10px']} width={['60%']}>
+            <Flex ml={['10px']}>
               <Flex flexDir='column' justifyContent='space-between'>
                 <Flex flexDir='column'>
                   <MiddleTextBook title={title} author={author} showAuthor={true} />
@@ -98,6 +98,7 @@ export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeB
                   sizeFontText={['14px']}
                   bgClr={theme.colors.primaryBlue[100]}
                   nameCssClass='draw-border-yellow-blue'
+                  _id={_id}
                 />
               </Flex>
             </Flex>
@@ -131,6 +132,7 @@ export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeB
                 <AddToCart
                   bgClr={theme.colors.primaryBlue[100]}
                   nameCssClass='draw-border-yellow-blue'
+                  _id={_id}
                 />
               </Flex>
             </Flex>
@@ -161,6 +163,7 @@ export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeB
                 <AddToCart
                   bgClr={theme.colors.primaryBlue[100]}
                   nameCssClass='draw-border-yellow-blue'
+                  _id={_id}
                 />
               </Flex>
             </Flex>

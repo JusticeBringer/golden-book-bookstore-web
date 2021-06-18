@@ -3,11 +3,21 @@ import { Schema } from 'mongoose';
 import { ADD_TO_CART, REMOVE_FROM_CART } from '../../util/constants/constants.redux';
 import { shoppingCartInitialStateType } from './reducers.types';
 import { shoppingCartBooks } from '../../util/constants/constants.cookies';
-import { getCookie } from '../../util/helpers';
+import { getCookie, isCookieExisting } from '../../util/helpers';
 
 export const shoppingCartInitialState: shoppingCartInitialStateType = {
   // getCookies first or database call if authenticated
-  books: JSON.parse(JSON.stringify(getCookie(shoppingCartBooks)))
+  books: isCookieExisting(shoppingCartBooks)
+    ? JSON.parse(JSON.stringify(getCookie(shoppingCartBooks)))
+    : {
+        ids: [],
+        qtys: [
+          {
+            id: '',
+            qty: 0
+          }
+        ]
+      }
 };
 
 export const shoppingCartReducer = (state: any = shoppingCartInitialState, action: AnyAction) => {

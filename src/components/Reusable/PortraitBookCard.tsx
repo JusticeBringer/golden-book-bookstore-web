@@ -16,21 +16,24 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
   const { title, author, image, rating, price, _id } = props.book;
 
   return (
-    <Flex className='draw-bottom-border-yellow-blue' borderRadius='10px'>
+    <Flex
+      className='draw-bottom-border-white-blue'
+      borderRadius='10px'
+      px={['5px', '5px', '5px', '15px']}
+    >
       <section>
         <Flex
           flexDir='row'
-          maxW={[280]}
+          maxW={['300px', '400px', '500px', '600px']}
           py={['15px']}
-          px={['5px']}
           justifyContent='space-between'
           alignContent='center'
         >
-          <Flex ml={['5px']}>
+          <Flex pl={['5px']}>
             <Image
               src={image}
-              width={[100, 120, 140, 160]}
-              height={[120, 140, 160, 180]}
+              maxWidth={['100px', '120px', '140px', '160px', '180px', '210px']}
+              maxHeight={['100px', '120px', '140px', '160px', '190px', '210px']}
               minWidth={75}
               minHeight={75}
               alt='nimic'

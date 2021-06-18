@@ -4,6 +4,7 @@ import Cart from '../../components/Cart/Cart';
 import axios from 'axios';
 import { BookDocument } from '../../database/models/book/book.interface';
 import { useEffect, useState } from 'react';
+import TopSpacer from '../../components/Reusable/TopSpacer';
 
 type CartProps = {
   books: BookDocument[];
@@ -57,6 +58,7 @@ const Index: React.FC<CartProps> = (props: CartProps) => {
     <>
       <Flex width={'100%'} direction='column' alignItems='center'>
         <Box width={'70%'}>{loading ? '' : <Cart books={books} />}</Box>
+        <TopSpacer spacing='100px' />
       </Flex>
     </>
   );
