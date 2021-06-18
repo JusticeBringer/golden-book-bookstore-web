@@ -34,6 +34,7 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
 
   const [booksInCart, setbooksInCart] = useState<BookDocument[]>([]);
   const [booksQtys, setBooksQtys] = useState<qtysType[]>([]);
+  const [booksTotalQty, setbooksTotalQty] = useState(0);
 
   useEffect(() => {
     setBooksIdsState(booksIdsStore);
@@ -53,6 +54,14 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
     setBooksQtys(booksQtysInCart);
     setLoading(false);
   }, [booksIdsState]);
+
+  useEffect(() => {
+    let sum: number = 0;
+    booksQtys.forEach(item => {
+      sum += item.qty;
+    });
+    setbooksTotalQty(sum);
+  }, [booksQtys]);
 
   const mapIdsToProducts = (): BookDocument[] => {
     let booksInCart: BookDocument[] = [];
@@ -84,7 +93,18 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
               fontSize={['10px', '14px', '16px', '20px']}
               mb={['10px']}
             >
-              {booksInCart.length} elemente
+              Aveți
+              {booksIdsState.ids.length === 0
+                ? ' 0 cărți '
+                : booksIdsState.ids.length === 1
+                ? ' 1 carte '
+                : ` ${booksIdsState.ids.length} cărți `}
+              cu o cantitate de{' '}
+              {booksTotalQty === 0
+                ? '0 bucăți'
+                : booksTotalQty === 1
+                ? '1 bucată'
+                : `${booksTotalQty} bucăți`}
             </Text>
             <PortraitProductCartBooks books={booksInCart} booksQtys={booksQtys} />
           </Grid>

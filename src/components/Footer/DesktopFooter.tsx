@@ -1,5 +1,5 @@
 import NextLink from 'next/link';
-import { Link as ChakraLink, Flex, Icon, Box, Text } from '@chakra-ui/react';
+import { Link as ChakraLink, Flex, Icon, Box, Text, Tooltip, WrapItem } from '@chakra-ui/react';
 
 import { Logo } from '../SubComponents/Logo';
 
@@ -8,9 +8,24 @@ import { theme } from '../../styles/theme';
 import { shouldBeActive } from '../../util/helpers';
 import { THEME_BREAKPOINTS } from '../../util/constants/constants.other';
 import { useWindowDimensions } from '../../util/helpers';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/reducers';
+import { useEffect, useState } from 'react';
 
 export const DesktopFooter: React.FC = () => {
   const { width } = useWindowDimensions();
+
+  const booksFromStore = useSelector((state: RootState) => state.shoppingCart.books?.qtys);
+  const [booksNumberFromStore, setbooksNumberFromStore] = useState(10);
+
+  useEffect(() => {
+    let sum: number = 0;
+    booksFromStore.forEach(element => {
+      sum += element.qty;
+    });
+
+    setbooksNumberFromStore(sum);
+  }, [booksFromStore]);
 
   return (
     <aside>
@@ -23,14 +38,20 @@ export const DesktopFooter: React.FC = () => {
           justifyContent={'space-evenly'}
           visibility={['hidden', 'hidden', 'visible']}
         >
-          <DesktopNav />
+          <DesktopNav booksNumberFromStore={booksNumberFromStore} />
         </Flex>
       )}
     </aside>
   );
 };
 
-const DesktopNav = () => {
+type DesktopNavProps = {
+  booksNumberFromStore: number;
+};
+
+const DesktopNav = (props: DesktopNavProps) => {
+  const { booksNumberFromStore } = props;
+
   return (
     <Flex
       bg={theme.colors.primaryYellow[200]}
@@ -91,6 +112,20 @@ const DesktopNav = () => {
                       w={['', '', '30px', '40px', '50px']}
                       h={['', '', '30px', '40px', '50px']}
                     />
+                    {navItem.href === '/cart' ? (
+                      <WrapItem>
+                        <Tooltip
+                          label={booksNumberFromStore.toString()}
+                          placement='right'
+                          isOpen
+                          ml={['10px', '15px', '20px', '25px', '30px']}
+                        >
+                          <Text></Text>
+                        </Tooltip>
+                      </WrapItem>
+                    ) : (
+                      ''
+                    )}
                   </Box>
                   <Text className='show-detail'> {navItem.label}</Text>
                 </Flex>

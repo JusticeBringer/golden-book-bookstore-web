@@ -2,7 +2,8 @@ import { AnyAction } from 'redux';
 import {
   ADD_TO_CART,
   SUBSTRACT_FROM_CART,
-  REMOVE_FROM_CART
+  REMOVE_FROM_CART,
+  SET_EXACT_VALUE
 } from '../../util/constants/constants.redux';
 import { shoppingCartInitialStateType } from './reducers.types';
 import { shoppingCartBooks } from '../../util/constants/constants.cookies';
@@ -67,6 +68,22 @@ export const shoppingCartReducer = (state: any = shoppingCartInitialState, actio
         books: updatedCartBooksAdd
       };
 
+    case SET_EXACT_VALUE:
+      const itemIdExact: string = action.payload.id as string;
+      const currentBooksExact = state.books.ids;
+      const currentBooksExactQty = state.books.qtys;
+      const exactQty = action.payload.amount;
+      let updatedCartBooksExact = {
+        ids: [...currentBooksExact],
+        qtys: currentBooksExactQty.map(item =>
+          item.id === itemIdExact ? { id: item.id, qty: exactQty > 0 ? exactQty : item.qty } : item
+        )
+      };
+      return {
+        ...state,
+        books: updatedCartBooksExact
+      };
+
     case SUBSTRACT_FROM_CART:
       const itemIdSubstract: string = action.payload.id as string;
       const currentBooksSubstract = state.books.ids;
@@ -74,7 +91,12 @@ export const shoppingCartReducer = (state: any = shoppingCartInitialState, actio
       let updatedCartBooksSubstract = {
         ids: [...currentBooksSubstract],
         qtys: currentBooksSubstractQty.map(item =>
-          item.id === itemIdSubstract ? { id: item.id, qty: item.qty - 1 } : item
+          item.id === itemIdSubstract
+            ? {
+                id: item.id,
+                qty: item.qty - 1 > 0 ? item.qty - 1 : item.qty
+              }
+            : item
         )
       };
       return {
