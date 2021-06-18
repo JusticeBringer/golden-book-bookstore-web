@@ -1,5 +1,4 @@
 import { CreateQuery, FilterQuery, QueryOptions } from 'mongoose';
-import { connect } from '../database';
 import { BookDocument, BookInput } from '../models/book/book.interface';
 import Books from '../models/book/book.model';
 
@@ -22,13 +21,12 @@ export async function deleteAllBooks() {
 }
 
 export async function getAllBooks() {
-  connect();
-  const result = await Books.find()
+  let errorRet: string = '';
+  const result: BookDocument[] | void = await Books.find()
     .exec()
     .then()
     .catch(error => {
-      console.log(error);
+      errorRet = error;
     });
-  console.log({ result });
-  return result;
+  return { result, errorRet };
 }

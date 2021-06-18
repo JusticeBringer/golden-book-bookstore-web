@@ -4,19 +4,38 @@ import { Flex } from '@chakra-ui/react';
 
 import Books from '../../../components/Books/Books';
 import { TopSpacer } from '../../../components/Reusable/TopSpacer';
-
-import { BooksPageType, BookType } from '../../../util/types';
-import { getBooks } from '../../../util/mockedData';
+import { BookDocument } from '../../../database/models/book/book.interface';
+import axios from 'axios';
+import { BooksPageType } from '../../../util/types';
 
 export const getStaticProps: GetStaticProps = async () => {
-  // initializeaza cartile
-  const books: Array<BookType> = getBooks();
+  // For debugging purposes
+  // console.log(process.env);
+  const booksApi = process.env.DOMAIN_URL_API + 'catalog/books?key=' + process.env.API_KEY;
 
-  return {
-    props: {
-      books
-    }
-  };
+  if (process.env.NODE_ENV !== 'production') {
+    // console.log('Books api URL called from books page: ', booksApi);
+
+    // books array
+    let books: BookDocument[] = [];
+    await axios
+      .get<BookDocument[]>(booksApi)
+      .then(response => (books = response.data))
+      .catch(error => {
+        console.log(error);
+        throw new Error(error);
+      });
+
+    // console.log('books cart is: ', books);
+
+    return {
+      props: {
+        books
+      },
+      revalidate: 60 // 60 seconds = 1 minute
+    };
+  } else {
+  }
 };
 
 const Index: React.FC<BooksPageType> = React.memo((props: BooksPageType) => {

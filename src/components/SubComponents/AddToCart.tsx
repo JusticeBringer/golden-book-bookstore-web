@@ -3,10 +3,9 @@ import { Icon, Button, Text, Flex } from '@chakra-ui/react';
 import { theme } from '../../styles/theme';
 import { FaShoppingCart } from 'react-icons/fa';
 import { addToCart } from '../../redux/actions/shoppingCart.action';
-import { Schema } from 'mongoose';
 
 type AddToCartProps = {
-  _id: Schema.Types.ObjectId;
+  _id: string;
   bgClr?: string;
   nameCssClass?: string;
   sizeFontText?: string[];

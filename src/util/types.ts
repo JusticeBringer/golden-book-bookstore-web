@@ -1,21 +1,4 @@
-export type BookType = {
-  _id: number;
-  title: string;
-  author: string;
-  publisher: string;
-  price: number;
-  pages?: number;
-  description: string;
-  state: string;
-  quantity: number;
-  soldQuantity: number;
-  image: string;
-  discount?: number;
-  category: string;
-  publishingYear: number;
-  rating?: number;
-  reviews?: string[];
-};
+import { BookDocument } from '../database/models/book/book.interface';
 
 export type CdType = {
   id: number;
@@ -42,17 +25,18 @@ export type AuthorType = {
   photo: string;
 };
 
-export type BooksArrayType = Array<BookType>;
+export type BooksArrayType = Array<BookDocument>;
+
 export type CdsArrayType = Array<CdType>;
 export type AuthorsArrayType = Array<AuthorType>;
 
 export type HomePageType = {
-  books: BooksArrayType;
+  books: BookDocument[];
   cds: CdsArrayType;
 };
 
 export type BooksPageType = {
-  books: BooksArrayType;
+  books: BookDocument[];
 };
 
 export type CdsPageType = {

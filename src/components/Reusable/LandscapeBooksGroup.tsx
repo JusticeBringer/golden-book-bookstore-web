@@ -16,7 +16,7 @@ export const LandscapeBooksGroup: React.FC<LandscapeBooksGroupProps> = (
   return (
     <Flex flexDirection={['column', 'row', 'row']} flexWrap='wrap'>
       {books.map(book => (
-        <Flex key={book.id} className='card' pr={['', '', '', '', '', '', '', '20px']}>
+        <Flex key={book._id} className='card' pr={['', '', '', '', '', '', '', '20px']}>
           <Flex
             position='relative'
             text-align='center'

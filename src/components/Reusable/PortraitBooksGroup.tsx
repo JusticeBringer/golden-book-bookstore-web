@@ -1,5 +1,4 @@
 import { Flex } from '@chakra-ui/react';
-import { useState, useEffect } from 'react';
 
 import { PortraitBookCard } from '../Reusable/PortraitBookCard';
 
@@ -14,7 +13,7 @@ export const PortraitBooksGroup: React.FC<PortraitBooksGroupProps> = (
   props: PortraitBooksGroupProps
 ) => {
   const { books } = props;
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   return (
     <section

@@ -1,17 +1,16 @@
-import { GetStaticProps } from 'next';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Box } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { fetchAllBooks } from '../redux/actions/books.action';
 import { RootState } from '../redux/reducers';
 
+import { GetStaticProps } from 'next';
+import axios from 'axios';
+import { Box } from '@chakra-ui/react';
 import { Home } from '../components/Home/Home';
 import { TopSpacer } from '../components/Reusable/TopSpacer';
-import { IBook } from '../database/models/book/book.interface';
+import { BookDocument } from '../database/models/book/book.interface';
 import { CdType, HomePageType } from '../util/types';
-import { getBooks, getCds } from '../util/mockedData';
+import { getCds } from '../util/mockedData';
 import { resetMockedData } from '../scripts/resetMockedData';
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -20,11 +19,18 @@ export const getStaticProps: GetStaticProps = async () => {
   const booksApi = process.env.DOMAIN_URL_API + 'catalog/books?key=' + process.env.API_KEY;
 
   if (process.env.NODE_ENV !== 'production') {
-    console.log('Books api URL: ', booksApi);
+    if (process.env.RESET_MOCKED_DATA === 'true') {
+      console.log('Resetting mocked data...');
+      await resetMockedData();
+      console.log('Mocked data resetted');
+      // set back to false so no resets when reloading page
+      process.env.RESET_MOCKED_DATA = 'false';
+    }
+    // console.log('Books api URL called from homepage: ', booksApi);
 
     // books array
-    const books: Array<IBook> = await axios
-      .get<IBook[]>(booksApi)
+    const books: BookDocument[] | void = await axios
+      .get<BookDocument[] | void>(booksApi)
       .then(response => response.data)
       .catch(error => {
         console.log(error);
@@ -33,12 +39,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
     // cds array
     const cds: Array<CdType> = getCds();
-
-    if (process.env.RESET_MOCKED_DATA === 'true') {
-      resetMockedData();
-      // set back to false so no resets when reloading page
-      process.env.RESET_MOCKED_DATA = 'false';
-    }
 
     return {
       props: {
@@ -50,18 +50,16 @@ export const getStaticProps: GetStaticProps = async () => {
   } else {
     // TODO send actual data
     // books array
-    const books: Array<IBook> = getBooks();
-
-    // cds array
-    const cds: Array<CdType> = getCds();
-
-    return {
-      props: {
-        books,
-        cds
-      },
-      revalidate: 300 // 60 seconds = 1 minute
-    };
+    // const books: Array<IBook> = getBooks();
+    // // cds array
+    // const cds: Array<CdType> = getCds();
+    // return {
+    //   props: {
+    //     books,
+    //     cds
+    //   },
+    //   revalidate: 300 // 60 seconds = 1 minute
+    // };
   }
 };
 

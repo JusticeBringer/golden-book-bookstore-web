@@ -1,91 +1,7 @@
-import { BookType, CdType, AuthorsArrayType } from '../util/types';
+import { CdType, AuthorsArrayType } from '../util/types';
 import { IUser } from '../database/models/user/user.interface';
 import { trimTitle } from '../util/helpers';
 import { IBook } from '../database/models/book/book.interface';
-
-export function getBooks(): Array<BookType> {
-  const booksTitle: string[] = [
-    'Ce este Oastea Domnului',
-    'Alcoolul - duhul diavolului',
-    'Trăim vremuri biblice',
-    'Fiul cel pierdut',
-    'Zaheu',
-    '600 istorioare religioase',
-    'Corabia lui Noe',
-    'Mai lângă Domnul meu',
-    'Ascultarea',
-    'Hristos - Mărturia mea',
-    'Minune și taină',
-    'Gânduri creștine',
-    'Hrană pentru familia creștină',
-    'Șapte tâlcuiri biblice despre Maica Domnului'
-  ];
-
-  const booksAuthors: string[] = [
-    'Pr. Iosif Trifa',
-    'Pr. Iosif Trifa',
-    'Pr. Iosif Trifa',
-    'Pr. Iosif Trifa',
-    'Pr. Iosif Trifa',
-    'Pr. Iosif Trifa',
-    'Pr. Iosif Trifa',
-    'Pr. Iosif Trifa',
-    'Pr. Iosif Trifa',
-    'Traian Dorz',
-    'Traian Dorz',
-    'Ioan Marini',
-    'Ioan Marini',
-    'Pr. Vasile Mihoc'
-  ];
-
-  const booksImages: string[] = [
-    '/books/ceEsteOasteaDomnului_Pr_Iosif_Trifa.PNG',
-    '/books/600_istorioare_Pr_Iosif_Trifa.jpg',
-    '/books/600_istorioare_Pr_Iosif_Trifa.jpg',
-    '/books/600_istorioare_Pr_Iosif_Trifa.jpg',
-    '/books/600_istorioare_Pr_Iosif_Trifa.jpg',
-    '/books/600_istorioare_Pr_Iosif_Trifa.jpg',
-    '/books/600_istorioare_Pr_Iosif_Trifa.jpg',
-    '/books/600_istorioare_Pr_Iosif_Trifa.jpg',
-    '/books/600_istorioare_Pr_Iosif_Trifa.jpg',
-    '/books/Hristos_marturia_mea.jpg',
-    '/books/minune_si_taina.png',
-    '/books/ganduri_crestine.jpg',
-    '/books/hrana_pentru_familia_crestina.jpg',
-    '/books/sapte_talcuiri_biblice_despre_Maica_Domnului.jpg'
-  ];
-
-  // initializeaza articolele zilei
-  const books: Array<BookType> = [];
-
-  // parcurge articolele demo
-  for (let i = 0; i < booksTitle.length; i++) {
-    const book: BookType = {
-      _id: i,
-      title: booksTitle[i],
-      author: booksAuthors[i],
-      publisher: 'Editura „Oastea Domnului”',
-      price: 15,
-      pages: 220,
-      description:
-        ' ... simţindu-se tot mai mult lipsa acestei cărţi de îndrumare pentru  cei din Oaste  şi pentru cei ce intră în Oaste, am tipărit-o din nou.',
-      state: 'Nou',
-      quantity: 45,
-      soldQuantity: 200,
-      image: booksImages[i],
-      discount: 0,
-      category: 'Literatura Oastei Domnului',
-      publishingYear: 2004,
-      rating: 4.6,
-      reviews: ['gjfidjgdjhug', 'ifsdff']
-    };
-
-    book.title = trimTitle(book.title);
-    books.push(book);
-  }
-
-  return books;
-}
 
 export function getCds(): Array<CdType> {
   const cdsTitle: string[] = ['Căutând mereu', 'Au înflorit măslinii'];
@@ -248,5 +164,3 @@ export const getBooksNew: IBook[] = [
     reviews: ['41224d776a326fb40f000005', '41224d776a326fb40f000006']
   }
 ];
-
-export default { getBooks, getCds };

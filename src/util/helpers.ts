@@ -4,6 +4,8 @@ import jsCookie from 'js-cookie';
 import { ColorMode, useColorMode } from '@chakra-ui/react';
 
 import { MAX_TITLE_CHARACTERS } from '../util/constants/constants.other';
+// import { BookDocument } from '../database/models/book/book.interface';
+// import { CdDocument } from '../database/models/cd/cd.interface';
 
 // Return current color mode ("light" | "dark")
 export const currentMode = (): ColorMode => useColorMode().colorMode;
@@ -133,6 +135,38 @@ export const isValidApiCall = (givenUrl: string) => {
 
   return isValidApiKey(onlyApiKey);
 };
+
+/*
+  Unused function, but may be used later
+*/
+// const documentToBook = (doc: BookDocument) => {
+//   let book: BookDocument = {} as BookDocument;
+
+//   book._id = doc._id;
+//   book.author = doc.author;
+//   book.title = doc.title;
+//   book.price = doc.price;
+//   book.image = doc.image;
+
+//   return book;
+// };
+
+// export const documentToInterface = (
+//   docArr: BookDocument[] | CdDocument[] | void
+// ): BookDocument[] | CdDocument[] => {
+//   let books: BookDocument[] = [];
+//   if (typeof docArr === typeof books) {
+//     docArr = docArr as BookDocument[];
+//     docArr.map(doc => {
+//       books.push(documentToBook(doc));
+//     });
+
+//     return books;
+//   }
+
+//   // else error
+//   return [];
+// };
 
 export default {
   currentMode,
