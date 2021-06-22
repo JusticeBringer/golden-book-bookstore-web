@@ -8,14 +8,16 @@ import { theme } from '../../styles/theme';
 
 import { authors } from '../../util/mockedData';
 import { BooksArrayType } from '../../util/types';
+import { qtysType } from '../../redux/reducers/reducers.types';
 
 type AuthorsProps = {
   books: BooksArrayType;
+  booksQtys: qtysType[];
   sizeFontBtDet?: string;
 };
 
 export const Authors: React.FC<AuthorsProps> = (props: AuthorsProps) => {
-  const { books, sizeFontBtDet } = props;
+  const { books, sizeFontBtDet, booksQtys } = props;
 
   const [activeAuthor, setActiveAuthor] = useState('Pr. Iosif Trifa');
   const [activeBooks, setActiveBooks] = useState(
@@ -28,7 +30,7 @@ export const Authors: React.FC<AuthorsProps> = (props: AuthorsProps) => {
   }
 
   return (
-    <Flex borderRadius={['10px']} flexDir={'column'} width={'100%'}>
+    <Flex borderRadius={['10px']} flexDir={'column'}>
       <Horizontal>
         {authors.map(author => (
           <Flex
@@ -59,10 +61,8 @@ export const Authors: React.FC<AuthorsProps> = (props: AuthorsProps) => {
           </Flex>
         ))}
       </Horizontal>
-      <Flex className='flexboxGap' justifyContent='left' alignItems='left'>
-        <Flex maxW='75vw'>
-          <PortraitBooksGroup books={activeBooks} />
-        </Flex>
+      <Flex maxW={['100vw', '100vw', '80vw']}>
+        <PortraitBooksGroup books={activeBooks} booksQtys={booksQtys} />
       </Flex>
     </Flex>
   );

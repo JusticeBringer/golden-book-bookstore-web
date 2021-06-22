@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { slice, concat } from 'lodash';
 
 import { Flex, Grid, Box, Text, Button } from '@chakra-ui/react';
@@ -9,12 +9,24 @@ import { LandscapeBooksGroup } from '../Reusable/LandscapeBooksGroup';
 import { ListenCds } from '../SubComponents/ListenCds';
 import { GenericHeading } from '../SubComponents/GenericHeading';
 import { Authors } from '../SubComponents/Authors';
+import { Loading } from '../Reusable/Loading';
 
 import { theme } from '../../styles/theme';
 import { HomePageType } from '../../util/types';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/reducers';
+import { idsAndQtysType, qtysType } from '../../redux/reducers/reducers.types';
+import { BookDocument } from '../../database/models/book/book.interface';
+import { getUserQty } from '../../util/helpers';
 
 export const Home: React.FC<HomePageType> = (props: HomePageType) => {
   const { books, cds } = props;
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  }, [books]);
 
   const LENGTH = books.length;
   const LIMIT = 4;
@@ -32,23 +44,61 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
     setShowMore(newShowMore);
   };
 
+  const updatingStore = useSelector((state: RootState) => state.updatingStore);
+
+  useEffect(() => {
+    if (updatingStore === true) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [updatingStore]);
+
+  const booksQtysCartStore: qtysType[] = useSelector(
+    (state: RootState) => state.shoppingCart.books?.qtys
+  );
+  const [booksQtysCartState, setbooksQtysCartState] = useState<qtysType[]>([]);
+
+  useEffect(() => {
+    setbooksQtysCartState(booksQtysCartStore);
+  }, [booksQtysCartStore]);
+
   return (
     <Grid className='home-container' gap={['10px']}>
       <Grid
-        gridTemplateColumns={['repeat(auto-fit, minmax(0px, 2fr)']}
+        gridTemplateColumns={['repeat(auto-fit, minmax(0px, 1fr)']}
         gap={['20px']}
         gridArea='recBooks'
       >
         <Box>
           <GenericHeading text='Cărți recomandate' textAs='h1' />
-          <Grid
-            gridTemplateColumns={['repeat(auto-fit, minmax(240px, 1fr))']}
-            gap={['20px']}
-            pr={['10px']}
-          >
-            {list.map(book => (
-              <PortraitBookCard key={book.id} book={book} />
-            ))}
+          <Grid>
+            {loading ? (
+              <Loading />
+            ) : (
+              <Grid
+                gridTemplateColumns={['repeat(auto-fit, minmax(240px, 1fr))']}
+                gridColumnGap={['20px', '100px', '120px']}
+                gridRowGap={['10px']}
+              >
+                {list.map(book => (
+                  <Flex key={book._id} className='card'>
+                    <Flex
+                      text-align='center'
+                      mt='10px'
+                      borderRadius='15px'
+                      className={'cardDarkShadow'}
+                    >
+                      <PortraitBookCard
+                        key={book._id}
+                        book={book}
+                        userQty={getUserQty(book._id, booksQtysCartState)}
+                      />
+                    </Flex>
+                  </Flex>
+                ))}
+              </Grid>
+            )}
           </Grid>
           <Flex justifyContent={['flex-start']} alignItems={['center']}>
             {showMore && (
@@ -69,17 +119,21 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
           </Flex>
         </Box>
       </Grid>
-      <Grid alignItems='start' gridArea='recCds' pr='20px' justifyContent='start'>
+      {/* <Grid alignItems='start' gridArea='recCds' pr='20px' justifyContent='start'>
         <GenericHeading text='Cd-uri recomandate' textAs='h1' />
         <ListenCds cds={cds} />
-      </Grid>
+      </Grid> */}
       <Grid gridArea='favBooks'>
         <GenericHeading text='Cele mai apreciate' textAs='h1' />
-        <LandscapeBooksGroup books={books.slice(0, 3)} />
+        {loading ? (
+          <Loading />
+        ) : (
+          <LandscapeBooksGroup books={books.slice(0, 3)} booksQtys={booksQtysCartState} />
+        )}
       </Grid>
       <Grid gridArea='athBooks'>
         <GenericHeading text='După autor' textAs='h1' />
-        <Authors books={books} />
+        <Authors books={books} booksQtys={booksQtysCartState} />
       </Grid>
     </Grid>
   );

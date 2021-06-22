@@ -1,20 +1,20 @@
 import { Flex } from '@chakra-ui/react';
-import { useState, useEffect } from 'react';
 
 import { PortraitBookCard } from '../Reusable/PortraitBookCard';
-
-import { BooksArrayType } from '../../util/types';
-import { useWindowDimensions } from '../../util/helpers';
+import { BookDocument } from '../../database/models/book/book.interface';
+import { getUserQty, useWindowDimensions } from '../../util/helpers';
+import { qtysType } from '../../redux/reducers/reducers.types';
 
 type PortraitBooksGroupProps = {
-  books: BooksArrayType;
+  books: BookDocument[];
+  booksQtys: qtysType[];
 };
 
 export const PortraitBooksGroup: React.FC<PortraitBooksGroupProps> = (
   props: PortraitBooksGroupProps
 ) => {
-  const { books } = props;
-  const { height, width } = useWindowDimensions();
+  const { books, booksQtys } = props;
+  const { width } = useWindowDimensions();
 
   return (
     <section
@@ -24,17 +24,17 @@ export const PortraitBooksGroup: React.FC<PortraitBooksGroupProps> = (
     >
       {/* Show scrolling bar only for devices with width > 480 px */}
       {books.map(book => (
-        <Flex key={book.id} className='card' mr='10px' pr='10px'>
-          <Flex
-            position='relative'
-            text-align='center'
-            mb='20px'
-            mt='10px'
-            borderRadius='15px'
-            className={'emptyClass cardDarkShadow'}
-          >
-            <PortraitBookCard book={book} />
-          </Flex>
+        <Flex
+          key={book._id}
+          position='relative'
+          text-align='center'
+          mb='20px'
+          mt='10px'
+          mr={['10px', '20px', '30px']}
+          borderRadius='15px'
+          className='cardDarkShadow card'
+        >
+          <PortraitBookCard book={book} userQty={getUserQty(book._id, booksQtys)} />
         </Flex>
       ))}
     </section>

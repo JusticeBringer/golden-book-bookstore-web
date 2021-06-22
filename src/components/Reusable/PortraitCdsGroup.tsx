@@ -28,7 +28,7 @@ export const PortraitCdsGroup: React.FC<PortraitCdsGroupProps> = (props: Portrai
             mb='20px'
             mt='10px'
             borderRadius='15px'
-            className={'emptyClass cardDarkShadow'}
+            className={'cardDarkShadow'}
           >
             <PortraitCdCard cd={cd} />
           </Flex>

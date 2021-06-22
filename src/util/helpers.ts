@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import jsCookie from 'js-cookie';
 import { ColorMode, useColorMode } from '@chakra-ui/react';
 
-import { MAX_TITLE_CHARACTERS } from '../util/constants';
+import { MAX_TITLE_CHARACTERS } from '../util/constants/constants.other';
+import { qtysType } from '../redux/reducers/reducers.types';
+// import { BookDocument } from '../database/models/book/book.interface';
+// import { CdDocument } from '../database/models/cd/cd.interface';
 
 // Return current color mode ("light" | "dark")
 export const currentMode = (): ColorMode => useColorMode().colorMode;
@@ -72,28 +76,120 @@ export const useWindowDimensions = (): windowDimensions => {
   return windowDimensions;
 };
 
-export const useFetch = (url: string) => {
+export const useFetch = async (url: string) => {
   const [state, setState] = useState({ data: {}, loading: true });
 
   useEffect(() => {
     setState(state => ({ data: state.data, loading: true }));
 
-    fetch(url)
-      .then(x => x)
-      .then(y => {
-        setState({ data: y, loading: false });
-      });
+    fetch(url).then(y => {
+      setState({ data: y, loading: false });
+    });
   }, [url, setState]);
 
   return state;
 };
 
-export default {
-  currentMode,
-  reversedMode,
-  isLightMode,
-  shouldBeActive,
-  trimTitle,
-  useWindowDimensions,
-  useFetch
+export const isCookieExisting = (cookieName: string) => {
+  if (!cookieName) {
+    return false;
+  }
+
+  const localData = jsCookie.get(cookieName);
+  if (localData && localData.length > 0) {
+    return true;
+  }
+  return false;
+};
+
+export function getCookie(key: string) {
+  let result: any = {};
+
+  if (!isCookieExisting(key)) {
+    return result;
+  }
+
+  const localData = jsCookie.get(key) as string;
+  result = JSON.parse(localData);
+
+  return result;
+}
+
+export function setCookie(
+  key: string,
+  value: string | object,
+  days: number = 30,
+  sameSite: 'Lax' | 'strict' | 'Strict' | 'lax' | 'none' | 'None' | undefined = 'Lax'
+) {
+  let expires: number | Date | undefined;
+  if (days) {
+    let date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    expires = date;
+  }
+
+  jsCookie.set(key, JSON.stringify(value), { expires: expires, sameSite: sameSite });
+}
+
+export const isServer = typeof window === 'undefined';
+
+const isValidApiKey = (givenKey: string) => process.env.API_KEY === givenKey;
+
+export const isValidApiCall = (givenUrl: string) => {
+  // TODO strengthen validation
+
+  /*
+    Assume that givenUrl = 'api/catalog/books?key=cheiesigura'
+    Then: keyAndApiKey = 'key=cheiesigura'
+    And: onlyApiKey= 'cheiesigura'
+  */
+
+  const keyAndApiKey = givenUrl.split('?')[1];
+  const onlyApiKey = keyAndApiKey.split('=')[1];
+
+  return isValidApiKey(onlyApiKey);
+};
+
+/*
+  Unused function, but may be used later
+*/
+// const documentToBook = (doc: BookDocument) => {
+//   let book: BookDocument = {} as BookDocument;
+
+//   book._id = doc._id;
+//   book.author = doc.author;
+//   book.title = doc.title;
+//   book.price = doc.price;
+//   book.image = doc.image;
+
+//   return book;
+// };
+
+// export const documentToInterface = (
+//   docArr: BookDocument[] | CdDocument[] | void
+// ): BookDocument[] | CdDocument[] => {
+//   let books: BookDocument[] = [];
+//   if (typeof docArr === typeof books) {
+//     docArr = docArr as BookDocument[];
+//     docArr.map(doc => {
+//       books.push(documentToBook(doc));
+//     });
+
+//     return books;
+//   }
+
+//   // else error
+//   return [];
+// };
+
+// get user qty from redux shopping cart
+
+export const getUserQty = (itemId: string, booksQtys: qtysType[]) => {
+  let qty: number = 1;
+  booksQtys.map(item => {
+    if (item.id === itemId) {
+      qty = item.qty;
+    }
+  });
+  return qty;
 };

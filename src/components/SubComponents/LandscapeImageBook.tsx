@@ -12,8 +12,8 @@ export const LandscapeImageBook: React.FC<LandscapeImageBookProps> = (
   return (
     <Image
       src={image}
-      width={[100, 140, 160, 150]}
-      height={[140, 180, 215, 220]}
+      maxWidth={['100px', '120px', '140px', '160px', '180px', '210px']}
+      maxHeight={['100px', '120px', '140px', '160px', '190px', '240px']}
       minWidth={75}
       minHeight={75}
       alt='nimic'

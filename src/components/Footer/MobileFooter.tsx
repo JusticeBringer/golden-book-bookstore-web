@@ -1,15 +1,31 @@
 import NextLink from 'next/link';
-import { Link as ChakraLink, Flex, Icon, Box } from '@chakra-ui/react';
+import { Link as ChakraLink, Flex, Icon, Box, Tooltip, WrapItem, Text } from '@chakra-ui/react';
 
 import { FOOTER_ITEMS } from './FooterItems';
 
 import { theme } from '../../styles/theme';
 import { shouldBeActive } from '../../util/helpers';
-import { THEME_BREAKPOINTS } from '../../util/constants';
+import { THEME_BREAKPOINTS } from '../../util/constants/constants.other';
 import { useWindowDimensions } from '../../util/helpers';
 
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/reducers';
+import { useEffect, useState } from 'react';
+
 export const MobileFooter: React.FC = () => {
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
+
+  const booksFromStore = useSelector((state: RootState) => state.shoppingCart.books?.qtys);
+  const [booksNumberFromStore, setbooksNumberFromStore] = useState(10);
+
+  useEffect(() => {
+    let sum: number = 0;
+    booksFromStore.forEach(element => {
+      sum += element.qty;
+    });
+
+    setbooksNumberFromStore(sum);
+  }, [booksFromStore]);
 
   return (
     <footer>
@@ -28,14 +44,19 @@ export const MobileFooter: React.FC = () => {
           borderTopRightRadius={['20px', '25px', '30px']}
           borderTopLeftRadius={['20px', '25px', '30px']}
         >
-          <FooterNav />
+          <FooterNav booksNumberFromStore={booksNumberFromStore} />
         </Flex>
       )}
     </footer>
   );
 };
 
-const FooterNav = () => {
+type FooterNavProps = {
+  booksNumberFromStore: number;
+};
+
+const FooterNav = (props: FooterNavProps) => {
+  const { booksNumberFromStore } = props;
   return (
     <>
       {FOOTER_ITEMS.map(navItem => (
@@ -56,6 +77,21 @@ const FooterNav = () => {
                 h={['28px', '36px']}
                 color={theme.colors.primaryBlack[800]}
               />
+              {navItem.href === '/cart' ? (
+                <WrapItem>
+                  <Tooltip
+                    label={booksNumberFromStore.toString()}
+                    placement='right'
+                    isOpen
+                    ml={['20px', '25px', '27px']}
+                    fontSize={['12px', '14px', '15px']}
+                  >
+                    <Text></Text>
+                  </Tooltip>
+                </WrapItem>
+              ) : (
+                ''
+              )}
             </Box>
           </ChakraLink>
         </NextLink>

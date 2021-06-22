@@ -1,16 +1,34 @@
 import NextLink from 'next/link';
-import { Link as ChakraLink, Flex, Icon, Box, Text } from '@chakra-ui/react';
+import { Link as ChakraLink, Flex, Icon, Box, Text, Tooltip, WrapItem } from '@chakra-ui/react';
 
 import { Logo } from '../SubComponents/Logo';
 
 import { FOOTER_ITEMS } from './FooterItems';
 import { theme } from '../../styles/theme';
 import { shouldBeActive } from '../../util/helpers';
-import { THEME_BREAKPOINTS } from '../../util/constants';
+import { THEME_BREAKPOINTS } from '../../util/constants/constants.other';
 import { useWindowDimensions } from '../../util/helpers';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { RootState } from '../../redux/reducers';
+import { qtysType } from '../../redux/reducers/reducers.types';
 
 export const DesktopFooter: React.FC = () => {
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
+
+  const booksFromStore: qtysType[] = useSelector(
+    (state: RootState) => state.shoppingCart.books?.qtys
+  );
+  const [booksNumberFromStore, setbooksNumberFromStore] = useState(10);
+
+  useEffect(() => {
+    let sum: number = 0;
+    booksFromStore.forEach(element => {
+      sum += element.qty;
+    });
+
+    setbooksNumberFromStore(sum);
+  }, [booksFromStore]);
 
   return (
     <aside>
@@ -23,14 +41,20 @@ export const DesktopFooter: React.FC = () => {
           justifyContent={'space-evenly'}
           visibility={['hidden', 'hidden', 'visible']}
         >
-          <DesktopNav />
+          <DesktopNav booksNumberFromStore={booksNumberFromStore} />
         </Flex>
       )}
     </aside>
   );
 };
 
-const DesktopNav = () => {
+type DesktopNavProps = {
+  booksNumberFromStore: number;
+};
+
+const DesktopNav = (props: DesktopNavProps) => {
+  const { booksNumberFromStore } = props;
+
   return (
     <Flex
       bg={theme.colors.primaryYellow[200]}
@@ -57,7 +81,13 @@ const DesktopNav = () => {
             height={['', '', '40px', '50px']}
           />
         </Flex>
-        <Flex flexDir='column' height='60%' justifyContent='flex-start' alignItems='center'>
+        <Flex
+          flexDir='column'
+          height='60%'
+          justifyContent='flex-start'
+          alignItems='center'
+          outline='none'
+        >
           {FOOTER_ITEMS.map(navItem => (
             <NextLink href={navItem.href} key={navItem.label} passHref>
               <ChakraLink
@@ -66,6 +96,7 @@ const DesktopNav = () => {
                 textAlign={'center'}
                 transitionTimingFunction={'ease-in-out'}
                 textDecor='none !important'
+                _focus={{ outline: 0 }}
               >
                 <Flex
                   flexDir='column'
@@ -91,6 +122,20 @@ const DesktopNav = () => {
                       w={['', '', '30px', '40px', '50px']}
                       h={['', '', '30px', '40px', '50px']}
                     />
+                    {navItem.href === '/cart' ? (
+                      <WrapItem>
+                        <Tooltip
+                          label={booksNumberFromStore.toString()}
+                          placement='right'
+                          isOpen
+                          ml={['', '', '', '20px', '25px', '30px', '35px']}
+                        >
+                          <Text></Text>
+                        </Tooltip>
+                      </WrapItem>
+                    ) : (
+                      ''
+                    )}
                   </Box>
                   <Text className='show-detail'> {navItem.label}</Text>
                 </Flex>

@@ -1,6 +1,8 @@
 @use 'sass:math';
 @import './themeColors.scss';
 @import './home.scss';
+@import './cart.scss';
+@import './snackbar.scss';
 
 /* Draw border for cart */
 
@@ -32,10 +34,10 @@
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
-}
 
-.scrolling-wrapper-flexbox .card {
-  flex: 0 0 auto;
+  .card {
+    flex: 0 0 auto;
+  }
 }
 
 .hideScrollBar ::-webkit-scrollbar {
@@ -51,7 +53,7 @@
 /* Apply dark shadow to a card */
 .cardDarkShadow {
   /* offset-x | offset-y | blur-radius | spread-radius | color */
-  box-shadow: 1px 2px 4px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 1px 1px rgb(255, 255, 0.3);
 }
 
 /* Apply light shadow to a card */
@@ -182,6 +184,10 @@
   @include btn-bottom-border-drawing($primaryYellow, $primaryBlue, 4px, right, bottom);
 }
 
+.draw-bottom-border-white-blue {
+  @include btn-bottom-border-drawing($primaryWhite, $primaryBlue, 4px, right, bottom);
+}
+
 .draw-border-yellow-green {
   @include btn-border-drawing($primaryYellow, $primaryGreen, 4px, right, bottom);
 }
@@ -220,4 +226,14 @@ a p {
 /* Prevent overflow*/
 main {
   min-width: 0;
+}
+
+/* Loading component */
+@keyframes loaderSpinning {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

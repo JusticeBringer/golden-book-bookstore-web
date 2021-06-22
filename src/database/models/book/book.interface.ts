@@ -18,19 +18,24 @@ export interface IBook {
   reviews?: string[];
 }
 
+// interface IBookInput {
+//   title: IBook['title'];
+//   author: IBook['author'];
+//   publisher: IBook['publisher'];
+//   price: IBook['price'];
+//   pages?: IBook['pages'] | number | undefined;
+//   description: IBook['description'];
+//   state: IBook['state'];
+//   quantity: IBook['quantity'];
+//   image: IBook['image'];
+//   discount?: IBook['discount'];
+//   category: IBook['category'];
+//   publishingYear: IBook['publishingYear'];
+// }
+
 interface IBookInput {
   title: IBook['title'];
   author: IBook['author'];
-  publisher: IBook['publisher'];
-  price: IBook['price'];
-  pages?: IBook['pages'];
-  description: IBook['description'];
-  state: IBook['state'];
-  quantity: IBook['quantity'];
-  image: IBook['image'];
-  discount?: IBook['discount'];
-  category: IBook['category'];
-  publishingYear: IBook['publishingYear'];
 }
 
 export interface BookInput extends IBookInput {}

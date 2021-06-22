@@ -1,4 +1,5 @@
 .home-container {
+  padding-right: 6vw;
   @media only screen and (min-width: 0px) {
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -7,21 +8,32 @@
       'favBooks'
       'athBooks';
   }
-  @media only screen and (min-width: 900px) {
-    grid-template-columns: 1fr 1fr 1fr;
+  @media only screen and (min-width: 700px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas:
-      'recBooks recBooks recCds'
-      'recBooks recBooks recCds'
-      'favBooks favBooks favBooks'
-      'athBooks athBooks athBooks';
+      'recBooks recBooks recBooks.'
+      'recBooks recBooks recBooks .'
+      'recCds recCds recCds .'
+      'favBooks favBooks favBooks favBooks'
+      'athBooks athBooks athBooks .';
+  }
+  @media only screen and (min-width: 900px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+      'recBooks recBooks recBooks recBooks .'
+      'recBooks recBooks recBooks recBooks .'
+      'recCds recCds recCds recCds .'
+      'favBooks favBooks favBooks favBooks .'
+      'athBooks athBooks athBooks . .';
   }
   @media only screen and (min-width: 1300px) {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas:
-      'recBooks recBooks recCds'
-      'recBooks recBooks recCds'
-      'favBooks favBooks favBooks'
-      'athBooks athBooks athBooks';
+      'recBooks recBooks recBooks .'
+      'recBooks recBooks recBooks .'
+      'recCds recCds recCds .'
+      'favBooks favBooks favBooks .'
+      'athBooks athBooks athBooks .';
   }
 }
 
