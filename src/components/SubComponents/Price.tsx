@@ -7,10 +7,11 @@ type PriceProps = {
   bottomBorder?: string[];
   sizeFont?: string[];
   rightMargin?: string[];
+  bottomMargin?: string[];
 };
 
 export const Price: React.FC<PriceProps> = (props: PriceProps) => {
-  const { price, itemAlign, bottomBorder, sizeFont, rightMargin } = props;
+  const { price, itemAlign, bottomBorder, sizeFont, rightMargin, bottomMargin } = props;
 
   return (
     <Text
@@ -21,6 +22,7 @@ export const Price: React.FC<PriceProps> = (props: PriceProps) => {
       fontSize={sizeFont ?? ['14px', '16px', '16px', '18px']}
       mr={rightMargin ?? ['6px']}
       width='fit-content'
+      mb={bottomMargin ?? ['0px']}
     >
       {price}
       &nbsp;lei

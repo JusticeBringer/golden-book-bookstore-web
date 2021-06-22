@@ -162,5 +162,77 @@ export const getBooksNew: IBook[] = [
     publishingYear: 2013,
     rating: 4.5,
     reviews: ['41224d776a326fb40f000005', '41224d776a326fb40f000006']
+  },
+  {
+    title: 'Alcoolul - duhul diavolului',
+    author: PR_IOSIF_TRIFA,
+    publisher: EDITURA_OASTEA_DOMNULUI,
+    price: 12,
+    pages: 56,
+    description:
+      ' ... simţindu-se tot mai mult lipsa acestei cărţi de îndrumare pentru  cei din Oaste  şi pentru cei ce intră în Oaste, am tipărit-o din nou.',
+    state: STARE_NOUA,
+    quantity: 25,
+    soldQuantity: 35,
+    image: '/books/alcoolul_duhul_diavolului_Pr_Iosif_Trifa.jpg',
+    discount: 0,
+    category: LITERATURA_OASTEI_DOMNULUI,
+    publishingYear: 2015,
+    rating: 4.5,
+    reviews: ['41224d776a326fb40f000007', '41224d776a326fb40f000009']
+  },
+  {
+    title: 'Minune și taină',
+    author: TRAIAN_DORZ,
+    publisher: EDITURA_OASTEA_DOMNULUI,
+    price: 35,
+    pages: 86,
+    description:
+      ' ... simţindu-se tot mai mult lipsa acestei cărţi de îndrumare pentru  cei din Oaste  şi pentru cei ce intră în Oaste, am tipărit-o din nou.',
+    state: STARE_NOUA,
+    quantity: 45,
+    soldQuantity: 45,
+    image: '/books/minune_si_taina.jpg',
+    discount: 10,
+    category: LITERATURA_OASTEI_DOMNULUI,
+    publishingYear: 2000,
+    rating: 4.5,
+    reviews: ['41224d776a326fb40f000001', '41224d776a326fb40f000002']
+  },
+  {
+    title: 'Hrană pentru familia creștină',
+    author: IOAN_MARINI,
+    publisher: EDITURA_OASTEA_DOMNULUI,
+    price: 15,
+    pages: 36,
+    description:
+      ' ... simţindu-se tot mai mult lipsa acestei cărţi de îndrumare pentru  cei din Oaste  şi pentru cei ce intră în Oaste, am tipărit-o din nou.',
+    state: STARE_NOUA,
+    quantity: 35,
+    soldQuantity: 15,
+    image: '/books/hrana_pentru_familia_crestina.jpg',
+    discount: 0,
+    category: LITERATURA_OASTEI_DOMNULUI,
+    publishingYear: 1993,
+    rating: 4.5,
+    reviews: ['41224d776a326fb40f000011', '41224d776a326fb40f000012']
+  },
+  {
+    title: '600 istorioare religioase',
+    author: PR_IOSIF_TRIFA,
+    publisher: EDITURA_OASTEA_DOMNULUI,
+    price: 20,
+    pages: 430,
+    description:
+      ' ... simţindu-se tot mai mult lipsa acestei cărţi de îndrumare pentru  cei din Oaste  şi pentru cei ce intră în Oaste, am tipărit-o din nou.',
+    state: STARE_NOUA,
+    quantity: 25,
+    soldQuantity: 45,
+    image: '/books/600_istorioare_Pr_Iosif_Trifa.jpg',
+    discount: 0,
+    category: LITERATURA_OASTEI_DOMNULUI,
+    publishingYear: 1997,
+    rating: 4.5,
+    reviews: ['41224d776a326fb40f000013', '41224d776a326fb40f000014']
   }
 ];

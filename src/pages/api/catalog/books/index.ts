@@ -5,10 +5,11 @@ import { connect } from '../../../../database/database';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (isValidApiCall(req.url as string)) {
+    connect();
+
     if (process.env.NODE_ENV !== 'production') {
       // console.log({ req });
       // console.log(req.url);
-      connect();
 
       if (req.method === 'POST') {
         // Process a POST request
@@ -29,7 +30,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (req.method === 'POST') {
         // Process a POST request
       } else if (req.method === 'GET') {
-        res.status(200).json(await getAllBooks());
+        const { result, errorRet } = await getAllBooks();
+        if (!errorRet) {
+          // console.log('result: ', result);
+          res.status(200).json(result);
+        } else {
+          // console.log('error is: ', errorRet);
+          res.status(500).json({ message: errorRet });
+        }
       } else {
         // do smth
       }

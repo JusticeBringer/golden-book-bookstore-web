@@ -37,6 +37,21 @@ export const getStaticProps: GetStaticProps = async () => {
       revalidate: 60 // 60 seconds = 1 minute
     };
   } else {
+    let books: BookDocument[] = [];
+    await axios
+      .get<BookDocument[]>(booksApi)
+      .then(response => (books = response.data))
+      .catch(error => {
+        console.log(error);
+        throw new Error(error);
+      });
+
+    return {
+      props: {
+        books
+      },
+      revalidate: 60 // 60 seconds = 1 minute
+    };
   }
 };
 
@@ -55,12 +70,15 @@ const Index: React.FC<CartProps> = (props: CartProps) => {
   }, [books]);
 
   return (
-    <>
-      <Flex width={'100%'} direction='column' alignItems='center'>
-        <Box width={'70%'}>{loading ? '' : <Cart books={books} />}</Box>
-        <TopSpacer spacing='100px' />
-      </Flex>
-    </>
+    <Flex
+      width={'100%'}
+      direction='column'
+      alignItems='center'
+      pl={['3vw', '10vw', '10vw', '20vw']}
+    >
+      <Box>{loading ? '' : <Cart books={books} />}</Box>
+      <TopSpacer spacing='100px' />
+    </Flex>
   );
 };
 

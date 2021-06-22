@@ -42,7 +42,11 @@ export const ProductCartBook: React.FC<ProductCartBookProps> = (props: ProductCa
       {loading ? (
         <Loading />
       ) : (
-        <Flex className='draw-bottom-border-white-blue' borderRadius='10px' maxW={['500px']}>
+        <Flex
+          className='draw-bottom-border-white-blue'
+          borderRadius='10px'
+          w={['260px', '290px', '350px', '400px']}
+        >
           <section>
             <Flex
               flexDir='row'
@@ -53,8 +57,8 @@ export const ProductCartBook: React.FC<ProductCartBookProps> = (props: ProductCa
             >
               <Image
                 src={image}
-                maxWidth={['160px', '180px', '210px', '260px']}
-                maxHeight={['140px', '160px', '190px', '240px']}
+                maxWidth={['160px', '180px', '210px']}
+                maxHeight={['140px', '160px', '190px']}
                 minWidth={75}
                 minHeight={75}
                 alt='nimic'

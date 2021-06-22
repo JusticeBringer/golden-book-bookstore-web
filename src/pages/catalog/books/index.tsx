@@ -35,6 +35,26 @@ export const getStaticProps: GetStaticProps = async () => {
       revalidate: 60 // 60 seconds = 1 minute
     };
   } else {
+    // TODO modify
+
+    // books array
+    let books: BookDocument[] = [];
+    await axios
+      .get<BookDocument[]>(booksApi)
+      .then(response => (books = response.data))
+      .catch(error => {
+        console.log(error);
+        throw new Error(error);
+      });
+
+    // console.log('books cart is: ', books);
+
+    return {
+      props: {
+        books
+      },
+      revalidate: 60 // 60 seconds = 1 minute
+    };
   }
 };
 

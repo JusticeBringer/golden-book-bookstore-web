@@ -6,7 +6,8 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
   useDisclosure,
-  IconButton
+  IconButton,
+  Flex
 } from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
 
@@ -22,6 +23,7 @@ import {
   setExactValueToCart,
   substractFromCart
 } from '../../redux/actions/shoppingCart.action';
+import { qtysType } from '../../redux/reducers/reducers.types';
 
 type AddRemoveFromCartProps = {
   _id: string;
@@ -48,8 +50,23 @@ export const AddRemoveFromCart: React.FC<AddRemoveFromCartProps> = (
     setCookie(shoppingCartBooks, booksCartStore, 180);
   }, [booksCartStore]);
 
+  const booksQtysStore: qtysType[] = useSelector(
+    (state: RootState) => state.shoppingCart.books?.qtys
+  );
+  const [userQtyState, setUserQtyState] = useState(-1);
+
+  useEffect(() => {
+    let qty: number = 0;
+    booksQtysStore.forEach(item => {
+      if (item.id === _id) {
+        qty = item.qty;
+      }
+    });
+    setUserQtyState(qty);
+  }, [booksQtysStore]);
+
   const dispatch = useDispatch();
-  const [itemQtySelectedInStore, setitemQtySelectedInStore] = useState(1);
+  const [itemQtySelectedInStore, setitemQtySelectedInStore] = useState(-1);
 
   const handleQtyChange = (val: string) => {
     let inputQty = parseInt(val);
@@ -101,15 +118,15 @@ export const AddRemoveFromCart: React.FC<AddRemoveFromCartProps> = (
   };
 
   return (
-    <>
+    <Flex>
       <NumberInput
-        defaultValue={userQty}
+        value={userQtyState !== -1 ? userQtyState : userQty}
         max={bookMaxQty}
         min={1}
         keepWithinRange={true}
         clampValueOnBlur={true}
         w={['60px', '65px']}
-        mr={['5px']}
+        mr={['5px', '5px', '5px', '10px']}
         onChange={val => handleQtyChange(val)}
         onClick={e => e.stopPropagation()}
       >
@@ -127,7 +144,7 @@ export const AddRemoveFromCart: React.FC<AddRemoveFromCartProps> = (
         onClick={() => handleRemove()}
       />
       <ModalProductDelete _id={_id} isOpen={isOpen} onClose={onClose} />{' '}
-    </>
+    </Flex>
   );
 };
 

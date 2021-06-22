@@ -16,9 +16,10 @@ import { resetMockedData } from '../scripts/resetMockedData';
 export const getStaticProps: GetStaticProps = async () => {
   // For debugging purposes
   // console.log(process.env);
-  const booksApi = process.env.DOMAIN_URL_API_BOOKS;
 
   if (process.env.NODE_ENV !== 'production') {
+    const booksApi = process.env.DOMAIN_URL_API_BOOKS;
+
     if (process.env.RESET_MOCKED_DATA === 'true') {
       console.log('Resetting mocked data...');
       await resetMockedData();
@@ -29,9 +30,10 @@ export const getStaticProps: GetStaticProps = async () => {
     // console.log('Books api URL called from Home page: ', booksApi);
 
     // books array
-    const books: BookDocument[] | void = await axios
-      .get<BookDocument[] | void>(booksApi)
-      .then(response => response.data)
+    let books: BookDocument[] = [];
+    await axios
+      .get<BookDocument[]>(booksApi)
+      .then(response => (books = response.data))
       .catch(error => {
         console.log(error);
         throw new Error(error);
@@ -48,18 +50,33 @@ export const getStaticProps: GetStaticProps = async () => {
       revalidate: 60 // 60 seconds = 1 minute
     };
   } else {
+    if (process.env.RESET_MOCKED_DATA === 'true') {
+      console.log('Resetting mocked data...');
+      await resetMockedData();
+      console.log('Mocked data resetted');
+      // set back to false so no resets when reloading page
+      process.env.RESET_MOCKED_DATA = 'false';
+    }
+    const booksApi = process.env.DOMAIN_URL_API_BOOKS;
     // TODO send actual data
     // books array
-    // const books: Array<IBook> = getBooks();
-    // // cds array
-    // const cds: Array<CdType> = getCds();
-    // return {
-    //   props: {
-    //     books,
-    //     cds
-    //   },
-    //   revalidate: 300 // 60 seconds = 1 minute
-    // };
+    let books: BookDocument[] = [];
+    await axios
+      .get<BookDocument[]>(booksApi)
+      .then(response => (books = response.data))
+      .catch(error => {
+        console.log(error);
+        throw new Error(error);
+      });
+    // cds array
+    const cds: Array<CdType> = getCds();
+    return {
+      props: {
+        books,
+        cds
+      },
+      revalidate: 300 // 60 seconds = 1 minute
+    };
   }
 };
 

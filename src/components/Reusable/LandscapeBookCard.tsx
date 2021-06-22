@@ -1,3 +1,6 @@
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/reducers';
+import { useEffect, useState } from 'react';
 import { Flex } from '@chakra-ui/react';
 
 import { Price } from '../SubComponents/Price';
@@ -7,6 +10,7 @@ import { AddToCart } from '../SubComponents/AddToCart';
 import { MiddleTextBook } from '../SubComponents/MiddleTextBook';
 import { LandscapeImageBook } from '../SubComponents/LandscapeImageBook';
 import { RatingStarsBook } from '../SubComponents/RatingStarsBook';
+import { AddRemoveFromCart } from '../SubComponents/AddRemoveFromCart';
 
 import { useWindowDimensions } from '../../util/helpers';
 import { THEME_BREAKPOINTS } from '../../util/constants/constants.other';
@@ -15,11 +19,38 @@ import BookDocument from '../../database/models/book/book.interface';
 
 type LandscapeBookCard = {
   book: BookDocument;
+  userQty: number;
 };
 
 export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeBookCard) => {
-  const { title, author, image, description, rating, price, _id } = props.book;
+  const { userQty } = props;
+  const { title, author, image, description, rating, price, _id, quantity } = props.book;
   const { width } = useWindowDimensions();
+
+  // if item qty is >= 1 -> show increment
+  const booksIdsStore: string[] = useSelector((state: RootState) => state.shoppingCart.books?.ids);
+  const [isInCart, setIsInCart] = useState(false);
+
+  useEffect(() => {
+    // if no items in cart
+    if (booksIdsStore.length === 0) {
+      setIsInCart(false);
+      return;
+    }
+
+    // get item position
+    let i: number;
+    for (i = 0; i < booksIdsStore.length; i++) {
+      if (booksIdsStore[i] === _id) {
+        setIsInCart(true);
+        return;
+      }
+    }
+
+    // item is not in cart, set to false
+    setIsInCart(false);
+    return;
+  }, [booksIdsStore]);
 
   return (
     <Flex
@@ -88,18 +119,23 @@ export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeB
               <Flex flexDir='column'>
                 <MiddleTextBook title={title} />
               </Flex>
-              <Flex flexDir='row'>
+              <Flex flexDir='column'>
                 <Price
                   price={price}
                   sizeFont={['16px']}
                   bottomBorder={[`3px solid ${theme.colors.primaryBlue[200]}`]}
+                  bottomMargin={['20px']}
                 />
-                <AddToCart
-                  sizeFontText={['14px']}
-                  bgClr={theme.colors.primaryBlue[100]}
-                  nameCssClass='draw-border-yellow-blue'
-                  _id={_id}
-                />
+                {isInCart ? (
+                  <AddRemoveFromCart _id={_id} bookMaxQty={quantity} userQty={userQty} />
+                ) : (
+                  <AddToCart
+                    sizeFontText={['14px']}
+                    bgClr={theme.colors.primaryBlue[100]}
+                    nameCssClass='draw-border-yellow-blue'
+                    _id={_id}
+                  />
+                )}
               </Flex>
             </Flex>
             <Flex width={['40%']} ml={['20px']} flexDir='column' justifyContent='space-between'>
@@ -124,16 +160,21 @@ export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeB
               <Flex flexDir='column'>
                 <MiddleTextBook title={title} description={description} showDescription={true} />
               </Flex>
-              <Flex flexDir='row'>
+              <Flex flexDir='row' justifyContent='space-between'>
                 <Price
                   price={price}
                   bottomBorder={[`3px solid ${theme.colors.primaryBlue[200]}`]}
                 />
-                <AddToCart
-                  bgClr={theme.colors.primaryBlue[100]}
-                  nameCssClass='draw-border-yellow-blue'
-                  _id={_id}
-                />
+                {isInCart ? (
+                  <AddRemoveFromCart _id={_id} bookMaxQty={quantity} userQty={userQty} />
+                ) : (
+                  <AddToCart
+                    sizeFontText={['14px']}
+                    bgClr={theme.colors.primaryBlue[100]}
+                    nameCssClass='draw-border-yellow-blue'
+                    _id={_id}
+                  />
+                )}
               </Flex>
             </Flex>
             <Flex width={['30%']} ml={['20px']} flexDir='column' justifyContent='space-between'>
@@ -160,11 +201,16 @@ export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeB
                   price={price}
                   bottomBorder={[`3px solid ${theme.colors.primaryBlue[200]}`]}
                 />
-                <AddToCart
-                  bgClr={theme.colors.primaryBlue[100]}
-                  nameCssClass='draw-border-yellow-blue'
-                  _id={_id}
-                />
+                {isInCart ? (
+                  <AddRemoveFromCart _id={_id} bookMaxQty={quantity} userQty={userQty} />
+                ) : (
+                  <AddToCart
+                    sizeFontText={['14px']}
+                    bgClr={theme.colors.primaryBlue[100]}
+                    nameCssClass='draw-border-yellow-blue'
+                    _id={_id}
+                  />
+                )}
               </Flex>
             </Flex>
             <Flex width={['30%']} ml={['20px']} flexDir='column' justifyContent='space-between'>

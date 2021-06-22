@@ -9,13 +9,16 @@ import { shouldBeActive } from '../../util/helpers';
 import { THEME_BREAKPOINTS } from '../../util/constants/constants.other';
 import { useWindowDimensions } from '../../util/helpers';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/reducers';
 import { useEffect, useState } from 'react';
+import { RootState } from '../../redux/reducers';
+import { qtysType } from '../../redux/reducers/reducers.types';
 
 export const DesktopFooter: React.FC = () => {
   const { width } = useWindowDimensions();
 
-  const booksFromStore = useSelector((state: RootState) => state.shoppingCart.books?.qtys);
+  const booksFromStore: qtysType[] = useSelector(
+    (state: RootState) => state.shoppingCart.books?.qtys
+  );
   const [booksNumberFromStore, setbooksNumberFromStore] = useState(10);
 
   useEffect(() => {
@@ -93,6 +96,7 @@ const DesktopNav = (props: DesktopNavProps) => {
                 textAlign={'center'}
                 transitionTimingFunction={'ease-in-out'}
                 textDecor='none !important'
+                _focus={{ outline: 0 }}
               >
                 <Flex
                   flexDir='column'

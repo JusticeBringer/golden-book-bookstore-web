@@ -1,5 +1,5 @@
 import { IconType } from 'react-icons';
-import { FaHome, FaBookOpen, FaUserCircle, FaShoppingCart, FaCompactDisc } from 'react-icons/fa';
+import { FaHome, FaBookOpen, FaUserCircle, FaShoppingCart } from 'react-icons/fa';
 
 type FooterItem = {
   label: string;
@@ -18,11 +18,11 @@ export const FOOTER_ITEMS: Array<FooterItem> = [
     href: '/catalog/books',
     icon: FaBookOpen
   },
-  {
-    label: 'CD-uri',
-    href: '/catalog/cds',
-    icon: FaCompactDisc
-  },
+  // {
+  //   label: 'CD-uri',
+  //   href: '/catalog/cds',
+  //   icon: FaCompactDisc
+  // },
   {
     label: 'Coș',
     href: '/cart',

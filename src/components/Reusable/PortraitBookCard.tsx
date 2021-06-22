@@ -22,7 +22,7 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
   const { title, author, image, rating, price, _id, quantity } = props.book;
 
   // if item qty is >= 1 -> show increment
-  const booksIdsStore: string[] = useSelector((state: RootState) => state.shoppingCart.books.ids);
+  const booksIdsStore: string[] = useSelector((state: RootState) => state.shoppingCart.books?.ids);
   const [isInCart, setIsInCart] = useState(false);
 
   useEffect(() => {
@@ -49,7 +49,14 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
   return (
     <Flex className='draw-bottom-border-white-blue' borderRadius='10px' px={['5px', '5px', '5px']}>
       <section>
-        <Flex flexDir='row' py={['15px']} justifyContent='space-between' alignContent='center'>
+        <Flex
+          flexDir='row'
+          py={['15px']}
+          pl={['2px', '3px', '5px', '7px']}
+          pr={['2px', '3px', '5px', '7px', '10px']}
+          justifyContent='space-between'
+          alignContent='center'
+        >
           <Flex pl={['5px']}>
             <Image
               src={image}

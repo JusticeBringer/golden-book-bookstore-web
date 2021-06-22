@@ -44,12 +44,6 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
     setShowMore(newShowMore);
   };
 
-  const booksIdsStore = useSelector((state: RootState) => state.shoppingCart.books);
-  const [booksIdsState, setBooksIdsState] = useState<idsAndQtysType>({
-    ids: [],
-    qtys: []
-  });
-
   const updatingStore = useSelector((state: RootState) => state.updatingStore);
 
   useEffect(() => {
@@ -60,53 +54,14 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
     }
   }, [updatingStore]);
 
-  const [booksInCart, setbooksInCart] = useState<BookDocument[]>([]);
-
-  const [booksQtys, setBooksQtys] = useState<qtysType[]>([]);
-
-  const [booksTotalQty, setbooksTotalQty] = useState(0);
-
-  useEffect(() => {
-    setBooksIdsState(booksIdsStore);
-  }, [booksIdsStore]);
+  const booksQtysCartStore: qtysType[] = useSelector(
+    (state: RootState) => state.shoppingCart.books?.qtys
+  );
+  const [booksQtysCartState, setbooksQtysCartState] = useState<qtysType[]>([]);
 
   useEffect(() => {
-    setbooksInCart(mapIdsToProducts());
-  }, [booksIdsState]);
-
-  useEffect(() => {
-    let booksQtysInCart: qtysType[] = [];
-
-    booksIdsState.qtys.map(item => {
-      booksQtysInCart.push(item);
-    });
-
-    setBooksQtys(booksQtysInCart);
-
-    setLoading(false);
-  }, [booksIdsState]);
-
-  useEffect(() => {
-    let sum: number = 0;
-
-    booksQtys.forEach(item => {
-      sum += item.qty;
-    });
-
-    setbooksTotalQty(sum);
-  }, [booksQtys]);
-
-  const mapIdsToProducts = (): BookDocument[] => {
-    let booksInCart: BookDocument[] = [];
-
-    booksIdsState.ids.map(id => {
-      books.map(book => {
-        book._id === id ? booksInCart.push(book) : '';
-      });
-    });
-
-    return booksInCart;
-  };
+    setbooksQtysCartState(booksQtysCartStore);
+  }, [booksQtysCartStore]);
 
   return (
     <Grid className='home-container' gap={['10px']}>
@@ -123,7 +78,7 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
             ) : (
               <Grid
                 gridTemplateColumns={['repeat(auto-fit, minmax(240px, 1fr))']}
-                gridColumnGap={['20px', '80px']}
+                gridColumnGap={['20px', '100px', '120px']}
                 gridRowGap={['10px']}
               >
                 {list.map(book => (
@@ -137,7 +92,7 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
                       <PortraitBookCard
                         key={book._id}
                         book={book}
-                        userQty={getUserQty(book._id, booksQtys)}
+                        userQty={getUserQty(book._id, booksQtysCartState)}
                       />
                     </Flex>
                   </Flex>
@@ -170,12 +125,16 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
       </Grid> */}
       <Grid gridArea='favBooks'>
         <GenericHeading text='Cele mai apreciate' textAs='h1' />
-        {loading ? <Loading /> : <LandscapeBooksGroup books={books.slice(0, 3)} />}
+        {loading ? (
+          <Loading />
+        ) : (
+          <LandscapeBooksGroup books={books.slice(0, 3)} booksQtys={booksQtysCartState} />
+        )}
       </Grid>
-      {/* <Grid gridArea='athBooks'>
+      <Grid gridArea='athBooks'>
         <GenericHeading text='După autor' textAs='h1' />
-        <Authors books={books} />
-      </Grid> */}
+        <Authors books={books} booksQtys={booksQtysCartState} />
+      </Grid>
     </Grid>
   );
 };
