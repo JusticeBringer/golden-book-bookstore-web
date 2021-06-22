@@ -12,4 +12,4 @@ export const THEME_BREAKPOINTS = {
   xl4: 1920
 };
 
-export default { MAX_TITLE_CHARACTERS, THEME_BREAKPOINTS };
+export const SNACKBAR_TIMEOUT = 2500; // 2.5 seconds

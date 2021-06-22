@@ -7,11 +7,15 @@ import { RootState } from '../reducers/index';
 import { authenticationInitialState } from '../reducers/authentication.reducer';
 import { shoppingCartInitialState } from '../reducers/shoppingCart.reducer';
 import { booksInititalState } from '../reducers/books.reducer';
+import { updatingStoreInitialState } from '../reducers/updatingStore.reducer';
+import { snackbarInitialState } from '../reducers/snackbar.reducer';
 
 const initialStateValues: RootState = {
   authenticated: authenticationInitialState,
   shoppingCart: shoppingCartInitialState,
-  books: booksInititalState
+  books: booksInititalState,
+  updatingStore: updatingStoreInitialState,
+  snackbar: snackbarInitialState
 };
 
 const reducer = (state: RootState = initialStateValues, action: AnyAction) => {

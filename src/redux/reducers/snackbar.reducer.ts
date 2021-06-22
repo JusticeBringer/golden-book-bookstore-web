@@ -1,26 +1,28 @@
 import { AnyAction } from 'redux';
 import { TOGGLE_SNACKBAR_OPEN, TOGGLE_SNACKBAR_CLOSE } from '../../util/constants/constants.redux';
+import { snackbarInitialStateType } from './reducers.types';
 
-const initialState = {
+export const snackbarInitialState: snackbarInitialStateType = {
   toggleSnackbar: false,
-  snackbarMessage: null
+  type: '',
+  message: ''
 };
 
-export const snackbarReducer = (state = initialState, action: AnyAction) => {
+export const snackbarReducer = (state = snackbarInitialState, action: AnyAction) => {
   switch (action.type) {
     case TOGGLE_SNACKBAR_OPEN: {
       return {
         ...state,
         toggleSnackbar: true,
-        snackbarMessage: action.message
+        type: action.payload.type,
+        message: action.payload.message
       };
     }
 
     case TOGGLE_SNACKBAR_CLOSE: {
       return {
         ...state,
-        toggleSnackbar: false,
-        snackbarMessage: null
+        toggleSnackbar: false
       };
     }
 

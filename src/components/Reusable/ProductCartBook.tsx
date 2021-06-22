@@ -1,15 +1,4 @@
-import {
-  Flex,
-  Image,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-  IconButton,
-  useDisclosure
-} from '@chakra-ui/react';
-import { DeleteIcon } from '@chakra-ui/icons';
+import { Flex, Image, useDisclosure } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addToCart,
@@ -25,9 +14,8 @@ import { useEffect, useState } from 'react';
 import { RootState } from '../../redux/reducers';
 import { idsAndQtysType } from '../../redux/reducers/reducers.types';
 import { setCookie } from '../../util/helpers';
-import { shoppingCartBooks } from '../../util/constants/constants.cookies';
 import { Loading } from '../Reusable/Loading';
-import ModalProductDelete from './ModalProductDelete';
+import AddRemoveFromCart from '../SubComponents/AddRemoveFromCart';
 
 type ProductCartBookProps = {
   book: BookDocument;
@@ -36,13 +24,9 @@ type ProductCartBookProps = {
 
 export const ProductCartBook: React.FC<ProductCartBookProps> = (props: ProductCartBookProps) => {
   const { book, userQty } = props;
-
-  const booksIdsStore: idsAndQtysType = useSelector((state: RootState) => state.shoppingCart.books);
-  const isStoreUpdating = useSelector((state: RootState) => state.updatingStore);
-
   const { title, author, image, price, quantity, _id } = book;
-  const dispatch = useDispatch();
 
+  const isStoreUpdating = useSelector((state: RootState) => state.updatingStore);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -52,67 +36,6 @@ export const ProductCartBook: React.FC<ProductCartBookProps> = (props: ProductCa
       setLoading(false);
     }
   }, [isStoreUpdating]);
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const handleRemove = () => {
-    // display modal
-    onOpen();
-  };
-
-  useEffect(() => {
-    setCookie(shoppingCartBooks, booksIdsStore, 180);
-  }, [booksIdsStore]);
-
-  const [itemQtySelectedInStore, setitemQtySelectedInStore] = useState(userQty);
-
-  const handleQtyChange = (val: string) => {
-    let inputQty = parseInt(val);
-
-    // if user set a negative value
-    if (inputQty < 0) {
-      return;
-    }
-
-    // if user set the same input as before
-    if (inputQty === itemQtySelectedInStore) {
-      return;
-    }
-
-    // if user selected max value
-    if (inputQty > quantity) {
-      dispatch(setExactValueToCart(_id, quantity));
-      setitemQtySelectedInStore(quantity);
-      return;
-    }
-
-    // if user decremented
-    if (inputQty < itemQtySelectedInStore) {
-      // by 1
-      if (itemQtySelectedInStore - inputQty === 1) {
-        dispatch(substractFromCart(_id));
-        setitemQtySelectedInStore(inputQty);
-        return;
-      }
-
-      // by more
-      dispatch(setExactValueToCart(_id, inputQty));
-      setitemQtySelectedInStore(inputQty);
-      return;
-    }
-
-    // user incremented
-    if (inputQty - itemQtySelectedInStore === 1) {
-      // by 1
-      dispatch(addToCart(_id));
-      setitemQtySelectedInStore(inputQty);
-      return;
-    }
-
-    // by more
-    dispatch(setExactValueToCart(_id, inputQty));
-    setitemQtySelectedInStore(inputQty);
-    return;
-  };
 
   return (
     <>
@@ -146,33 +69,7 @@ export const ProductCartBook: React.FC<ProductCartBookProps> = (props: ProductCa
                     price={price}
                     bottomBorder={[`3px solid ${theme.colors.primaryBlue[200]}`]}
                   />
-                  <Flex>
-                    <NumberInput
-                      defaultValue={userQty}
-                      max={quantity}
-                      min={1}
-                      keepWithinRange={true}
-                      clampValueOnBlur={true}
-                      maxW={['40px', '60px', '80px']}
-                      mr={['5px']}
-                      onChange={val => handleQtyChange(val)}
-                      onClick={e => e.stopPropagation()}
-                    >
-                      <NumberInputField />
-                      <NumberInputStepper>
-                        <NumberIncrementStepper />
-                        <NumberDecrementStepper />
-                      </NumberInputStepper>
-                    </NumberInput>
-                    <IconButton
-                      bg='red.100'
-                      _hover={{ bg: 'red.300' }}
-                      icon={<DeleteIcon fontSize={['10px', '14px', '20px']} />}
-                      aria-label='Delete item'
-                      onClick={() => handleRemove()}
-                    />
-                    <ModalProductDelete _id={_id} isOpen={isOpen} onClose={onClose} />
-                  </Flex>
+                  <AddRemoveFromCart _id={_id} userQty={userQty} bookMaxQty={quantity} />
                 </Flex>
               </Flex>
             </Flex>

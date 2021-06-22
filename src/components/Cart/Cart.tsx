@@ -1,12 +1,12 @@
-import { Flex, Heading, Box, Grid, Text } from '@chakra-ui/react';
+import { Flex, Box, Grid, Text } from '@chakra-ui/react';
 import { PortraitProductCartBooks } from '../Reusable/PortraitProductCartBooks';
-import { theme } from '../../styles/theme';
 import { qtysType, idsAndQtysType } from '../../redux/reducers/reducers.types';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducers';
 import { BookDocument } from '../../database/models/book/book.interface';
 import { Loading } from '../Reusable/Loading';
+import { GenericHeading } from '../SubComponents/GenericHeading';
 
 type CartProps = {
   books: BookDocument[];
@@ -77,9 +77,7 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
   return (
     <Flex flexDirection='column'>
       <Flex justifyContent='flex-start' alignItems='flex-start'>
-        <Heading fontSize={['5vw']} color={theme.colors.primaryBlack[800]}>
-          Coșul meu{' '}
-        </Heading>
+        <GenericHeading text='Coșul meu' />
       </Flex>
       <Box>
         {loading ? (

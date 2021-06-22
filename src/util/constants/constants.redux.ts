@@ -20,3 +20,6 @@ export const NO_UPDATING_STORE = 'NO_UPDATING_STORE';
 // snackbar
 export const TOGGLE_SNACKBAR_OPEN = 'TOGGLE_SNACKBAR_OPEN';
 export const TOGGLE_SNACKBAR_CLOSE = 'TOGGLE_SNACKBAR_CLOSE';
+export const SNACKBAR_INFO = 'info' as string;
+export const SNACKBAR_WARNING = 'warning' as string;
+export const SNACKBAR_DANGER = 'danger' as string;

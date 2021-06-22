@@ -1,7 +1,10 @@
 import { AnyAction } from 'redux';
 import { UPDATING_STORE, NO_UPDATING_STORE } from '../../util/constants/constants.redux';
+import { updatingStoreInitialStateType } from './reducers.types';
 
-export const updatingStoreReducer = (state = false, action: AnyAction) => {
+export const updatingStoreInitialState: updatingStoreInitialStateType = false;
+
+export const updatingStoreReducer = (state = updatingStoreInitialState, action: AnyAction) => {
   switch (action.type) {
     case UPDATING_STORE:
       return true;

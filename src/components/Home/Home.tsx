@@ -13,6 +13,11 @@ import { Loading } from '../Reusable/Loading';
 
 import { theme } from '../../styles/theme';
 import { HomePageType } from '../../util/types';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/reducers';
+import { idsAndQtysType, qtysType } from '../../redux/reducers/reducers.types';
+import { BookDocument } from '../../database/models/book/book.interface';
+import { getUserQty } from '../../util/helpers';
 
 export const Home: React.FC<HomePageType> = (props: HomePageType) => {
   const { books, cds } = props;
@@ -37,6 +42,70 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
     setIndex(newIndex);
     setList(newList);
     setShowMore(newShowMore);
+  };
+
+  const booksIdsStore = useSelector((state: RootState) => state.shoppingCart.books);
+  const [booksIdsState, setBooksIdsState] = useState<idsAndQtysType>({
+    ids: [],
+    qtys: []
+  });
+
+  const updatingStore = useSelector((state: RootState) => state.updatingStore);
+
+  useEffect(() => {
+    if (updatingStore === true) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [updatingStore]);
+
+  const [booksInCart, setbooksInCart] = useState<BookDocument[]>([]);
+
+  const [booksQtys, setBooksQtys] = useState<qtysType[]>([]);
+
+  const [booksTotalQty, setbooksTotalQty] = useState(0);
+
+  useEffect(() => {
+    setBooksIdsState(booksIdsStore);
+  }, [booksIdsStore]);
+
+  useEffect(() => {
+    setbooksInCart(mapIdsToProducts());
+  }, [booksIdsState]);
+
+  useEffect(() => {
+    let booksQtysInCart: qtysType[] = [];
+
+    booksIdsState.qtys.map(item => {
+      booksQtysInCart.push(item);
+    });
+
+    setBooksQtys(booksQtysInCart);
+
+    setLoading(false);
+  }, [booksIdsState]);
+
+  useEffect(() => {
+    let sum: number = 0;
+
+    booksQtys.forEach(item => {
+      sum += item.qty;
+    });
+
+    setbooksTotalQty(sum);
+  }, [booksQtys]);
+
+  const mapIdsToProducts = (): BookDocument[] => {
+    let booksInCart: BookDocument[] = [];
+
+    booksIdsState.ids.map(id => {
+      books.map(book => {
+        book._id === id ? booksInCart.push(book) : '';
+      });
+    });
+
+    return booksInCart;
   };
 
   return (
@@ -65,7 +134,11 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
                       borderRadius='15px'
                       className={'cardDarkShadow'}
                     >
-                      <PortraitBookCard key={book._id} book={book} />
+                      <PortraitBookCard
+                        key={book._id}
+                        book={book}
+                        userQty={getUserQty(book._id, booksQtys)}
+                      />
                     </Flex>
                   </Flex>
                 ))}

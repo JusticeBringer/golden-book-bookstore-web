@@ -1,30 +1,47 @@
-import React, { useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
+import React, { useEffect, useState } from 'react';
+import { Box, Button } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSnackbarClose } from '../../redux/actions/snackbar.action';
-import { FiX } from 'react-icons/fi';
+import { CloseIcon } from '@chakra-ui/icons';
 import { RootState } from '../../redux/reducers';
+import { SNACKBAR_TIMEOUT } from '../../util/constants/constants.other';
+import {
+  SNACKBAR_INFO,
+  SNACKBAR_WARNING,
+  SNACKBAR_DANGER
+} from '../../util/constants/constants.redux';
 
-type SnackbarProps = {
-  timeout: number;
-};
-
-export const Snackbar: React.FC<SnackbarProps> = (props: SnackbarProps) => {
-  const { timeout } = props;
+import { theme } from '../../styles/theme';
+export const Snackbar: React.FC = () => {
   const dispatch = useDispatch();
 
   // select the UI states from the redux store
-  const SHOW = useSelector((state: RootState) => state.snackbar.toggleSnackbar);
-  const MESSAGE = useSelector((state: RootState) => state.snackbar.snackbarMessage);
+  const toggleSnackbarStore = useSelector((state: RootState) => state.snackbar.toggleSnackbar);
+  const [toggleSnackbarState, setToggleSnackbarState] = useState(false);
 
-  // convert the timeout prop to pass into the styled component
-  let TIME = (timeout - 500) / 1000 + 's';
+  useEffect(() => {
+    setToggleSnackbarState(toggleSnackbarStore);
+  }, [toggleSnackbarStore]);
 
-  let TIMER;
+  const messageSnackbarStore = useSelector((state: RootState) => state.snackbar.message);
+  const [messageSnackbarState, setMessageSnackbarState] = useState('');
+
+  useEffect(() => {
+    setMessageSnackbarState(messageSnackbarStore);
+  }, [messageSnackbarStore]);
+
+  const typeOfSnackbarStore = useSelector((state: RootState) => state.snackbar.type);
+  const [typeOfSnackbarState, setTypeOfSnackbarState] = useState(SNACKBAR_INFO);
+
+  useEffect(() => {
+    setTypeOfSnackbarState(typeOfSnackbarStore);
+  }, [typeOfSnackbarStore]);
+
+  let TIMER: NodeJS.Timeout;
   function handleTimeout() {
     TIMER = setTimeout(() => {
       dispatch(toggleSnackbarClose());
-    }, timeout);
+    }, SNACKBAR_TIMEOUT);
   }
 
   function handleClose() {
@@ -33,89 +50,34 @@ export const Snackbar: React.FC<SnackbarProps> = (props: SnackbarProps) => {
   }
 
   useEffect(() => {
-    if (SHOW) {
+    if (toggleSnackbarState) {
       handleTimeout();
     }
     return () => {
       clearTimeout(TIMER);
     };
-  }, [SHOW, TIMER]);
+  }, [toggleSnackbarState, TIMER]);
 
   return (
-    SHOW && (
-      <Container time={TIME}>
-        <p>{MESSAGE}</p>
-        <Button onClick={handleClose}>
-          <FiX />
+    toggleSnackbarState && (
+      <Box
+        className={
+          typeOfSnackbarState === SNACKBAR_INFO
+            ? 'snackbar-container snackbar-info'
+            : typeOfSnackbarState === SNACKBAR_WARNING
+            ? 'snackbar-container snackbar-warning'
+            : typeOfSnackbarState === SNACKBAR_DANGER
+            ? 'snackbar-container snackbar-danger'
+            : 'snackbar-container snackbar-info'
+        }
+      >
+        <p>{messageSnackbarState}</p>
+        <Button onClick={handleClose} className='snackbar-button'>
+          <CloseIcon color={theme.colors.primaryBlack[900]} />
         </Button>
-      </Container>
+      </Box>
     )
   );
 };
-
-const fadein = keyframes`
-    from {
-      bottom: 0;
-      opacity: 0;
-    }
-    to {
-      bottom: 1rem;
-      opacity: 1;
-    }
-`;
-
-const fadeout = keyframes`
-    from {
-      bottom: 1rem;
-      opacity: 1;
-    }
-    to {
-      bottom: 0;
-      opacity: 0;
-    }
-`;
-
-const Container = styled.div`
-  position: fixed;
-  z-index: 1000;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  height: auto;
-  padding: 0.625rem 1rem;
-  border-radius: 0.75rem;
-  border: transparent;
-  background-color: hsl(200, 100%, 65%);
-  color: white;
-  min-width: 30vw;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  animation: ${fadein} 0.5s, ${fadeout} 0.5s ${props => props.time};
-`;
-
-const Button = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 0.875rem;
-  padding: 0;
-  margin-left: 1rem;
-  height: 1.75rem;
-  width: 1.75rem;
-  text-align: center;
-  border: none;
-  border-radius: 50%;
-  background-color: transparent;
-  color: white;
-  cursor: pointer;
-
-  &:hover {
-    background-color: hsl(200, 100%, 60%);
-  }
-`;
 
 export default Snackbar;

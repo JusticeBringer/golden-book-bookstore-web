@@ -8,7 +8,7 @@ import { theme } from '../../styles/theme';
 import { shouldBeActive } from '../../util/helpers';
 import { THEME_BREAKPOINTS } from '../../util/constants/constants.other';
 import { useWindowDimensions } from '../../util/helpers';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducers';
 import { useEffect, useState } from 'react';
 
@@ -78,7 +78,13 @@ const DesktopNav = (props: DesktopNavProps) => {
             height={['', '', '40px', '50px']}
           />
         </Flex>
-        <Flex flexDir='column' height='60%' justifyContent='flex-start' alignItems='center'>
+        <Flex
+          flexDir='column'
+          height='60%'
+          justifyContent='flex-start'
+          alignItems='center'
+          outline='none'
+        >
           {FOOTER_ITEMS.map(navItem => (
             <NextLink href={navItem.href} key={navItem.label} passHref>
               <ChakraLink
@@ -118,7 +124,7 @@ const DesktopNav = (props: DesktopNavProps) => {
                           label={booksNumberFromStore.toString()}
                           placement='right'
                           isOpen
-                          ml={['10px', '15px', '20px', '25px', '30px']}
+                          ml={['', '', '', '20px', '25px', '30px', '35px']}
                         >
                           <Text></Text>
                         </Tooltip>

@@ -4,6 +4,7 @@ import jsCookie from 'js-cookie';
 import { ColorMode, useColorMode } from '@chakra-ui/react';
 
 import { MAX_TITLE_CHARACTERS } from '../util/constants/constants.other';
+import { qtysType } from '../redux/reducers/reducers.types';
 // import { BookDocument } from '../database/models/book/book.interface';
 // import { CdDocument } from '../database/models/cd/cd.interface';
 
@@ -180,3 +181,15 @@ export const isValidApiCall = (givenUrl: string) => {
 //   // else error
 //   return [];
 // };
+
+// get user qty from redux shopping cart
+
+export const getUserQty = (itemId: string, booksQtys: qtysType[]) => {
+  let qty: number = 1;
+  booksQtys.map(item => {
+    if (item.id === itemId) {
+      qty = item.qty;
+    }
+  });
+  return qty;
+};

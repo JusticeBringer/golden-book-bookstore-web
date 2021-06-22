@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Flex, Image } from '@chakra-ui/react';
 
 import { theme } from '../../styles/theme';
@@ -7,35 +8,55 @@ import { AddToCart } from '../SubComponents/AddToCart';
 import { RatingStarsBook } from '../SubComponents/RatingStarsBook';
 import { MiddleTextBook } from '../SubComponents/MiddleTextBook';
 import Price from '../SubComponents/Price';
+import { RootState } from '../../redux/reducers';
+import { useSelector } from 'react-redux';
+import { AddRemoveFromCart } from '../SubComponents/AddRemoveFromCart';
 
 type PortraitBookCard = {
   book: BookDocument;
+  userQty: number;
 };
 
 export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBookCard) => {
-  const { title, author, image, rating, price, _id } = props.book;
+  const { userQty } = props;
+  const { title, author, image, rating, price, _id, quantity } = props.book;
+
+  // if item qty is >= 1 -> show increment
+  const booksIdsStore: string[] = useSelector((state: RootState) => state.shoppingCart.books.ids);
+  const [isInCart, setIsInCart] = useState(false);
+
+  useEffect(() => {
+    // if no items in cart
+    if (booksIdsStore.length === 0) {
+      setIsInCart(false);
+      return;
+    }
+
+    // get item position
+    let i: number;
+    for (i = 0; i < booksIdsStore.length; i++) {
+      if (booksIdsStore[i] === _id) {
+        setIsInCart(true);
+        return;
+      }
+    }
+
+    // item is not in cart, set to false
+    setIsInCart(false);
+    return;
+  }, [booksIdsStore]);
 
   return (
-    <Flex
-      className='draw-bottom-border-white-blue'
-      borderRadius='10px'
-      px={['5px', '5px', '5px', '15px']}
-    >
+    <Flex className='draw-bottom-border-white-blue' borderRadius='10px' px={['5px', '5px', '5px']}>
       <section>
-        <Flex
-          flexDir='row'
-          maxW={['300px', '400px', '500px', '600px']}
-          py={['15px']}
-          justifyContent='space-between'
-          alignContent='center'
-        >
+        <Flex flexDir='row' py={['15px']} justifyContent='space-between' alignContent='center'>
           <Flex pl={['5px']}>
             <Image
               src={image}
               maxWidth={['100px', '120px', '140px', '160px', '180px', '210px']}
               maxHeight={['100px', '120px', '140px', '160px', '190px', '210px']}
-              minWidth={75}
-              minHeight={75}
+              minWidth={['50px']}
+              minHeight={['50px']}
               alt='nimic'
               borderRadius='15px'
             />
@@ -55,12 +76,16 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
             >
               <Price price={price} bottomBorder={[`3px solid ${theme.colors.primaryBlue[200]}`]} />
               <Flex justifyContent='center' justifyItems='center'>
-                <AddToCart
-                  sizeFontText={['14px']}
-                  bgClr={theme.colors.primaryBlue[100]}
-                  nameCssClass='draw-border-yellow-blue'
-                  _id={_id}
-                />
+                {isInCart ? (
+                  <AddRemoveFromCart _id={_id} bookMaxQty={quantity} userQty={userQty} />
+                ) : (
+                  <AddToCart
+                    sizeFontText={['14px']}
+                    bgClr={theme.colors.primaryBlue[100]}
+                    nameCssClass='draw-border-yellow-blue'
+                    _id={_id}
+                  />
+                )}
               </Flex>
             </Flex>
           </Flex>

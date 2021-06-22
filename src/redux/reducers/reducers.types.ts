@@ -19,3 +19,11 @@ export type idsAndQtysType = {
 export type shoppingCartInitialStateType = {
   books: idsAndQtysType;
 };
+
+export type updatingStoreInitialStateType = boolean;
+
+export type snackbarInitialStateType = {
+  toggleSnackbar: boolean;
+  type: string;
+  message: string;
+};

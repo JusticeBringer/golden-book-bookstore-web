@@ -13,7 +13,12 @@ import { useDispatch } from 'react-redux';
 
 import { toggleSnackbarOpen } from '../../redux/actions/snackbar.action';
 import { removeFromCart } from '../../redux/actions/shoppingCart.action';
-import Snackbar from './Snackbar';
+
+import {
+  SNACKBAR_INFO,
+  SNACKBAR_WARNING,
+  SNACKBAR_DANGER
+} from '../../util/constants/constants.redux';
 
 type ModalProductDeleteProps = {
   _id: string;
@@ -29,7 +34,9 @@ export const ModalProductDelete: React.FC<ModalProductDeleteProps> = (
 
   const handleConfirmRemove = () => {
     // modal successful
-    dispatch(toggleSnackbarOpen('Produsul a fost eliminat din coșul de cumpărături'));
+    dispatch(
+      toggleSnackbarOpen(SNACKBAR_INFO, 'Produsul a fost eliminat din coșul de cumpărături')
+    );
     dispatch(removeFromCart(_id));
   };
 
@@ -52,7 +59,6 @@ export const ModalProductDelete: React.FC<ModalProductDeleteProps> = (
           </ModalFooter>
         </ModalContent>
       </Modal>
-      <Snackbar timeout={3000} />
     </>
   );
 };
