@@ -70,12 +70,7 @@ const Index: React.FC<CartProps> = (props: CartProps) => {
   }, [books]);
 
   return (
-    <Flex
-      width={'100%'}
-      direction='column'
-      alignItems='center'
-      pl={['3vw', '10vw', '10vw', '20vw']}
-    >
+    <Flex width={'100%'} direction='column' pl={['3vw', '10vw', '10vw', '20vw']}>
       <Box>{loading ? '' : <Cart books={books} />}</Box>
       <TopSpacer spacing='100px' />
     </Flex>
