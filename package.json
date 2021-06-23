@@ -6,11 +6,10 @@
     "url": "git+ssh://git@https://bitbucket.org/oasteadomnului/oasteadomnului-librarie.git"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
     "format": "prettier --check \"src/**/*.tsx\"",
-    "export": "next export",
     "script": "cd src/scripts && ts-node",
     "test": "jest"
   },
@@ -30,7 +29,7 @@
     "eslint": "^7.23.0",
     "framer-motion": "^4.1.2",
     "js-cookie": "^2.2.1",
-    "mongoose": "^5.12.13",
+    "mongoose": "^5.12.14",
     "next": "latest",
     "next-redux-wrapper": "^7.0.2",
     "react": "^17.0.1",
@@ -56,7 +55,7 @@
     "react-rating-stars-component": "^2.2.0",
     "redux-devtools-extension": "^2.13.9",
     "ts-jest": "^27.0.3",
-    "typescript": "^4.3.2"
+    "typescript": "^4.3.4"
   },
   "license": "MIT"
 }

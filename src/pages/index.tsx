@@ -1,8 +1,3 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllBooks } from '../redux/actions/books.action';
-import { RootState } from '../redux/reducers';
-
 import { GetStaticProps } from 'next';
 import axios from 'axios';
 import { Box } from '@chakra-ui/react';
@@ -11,7 +6,6 @@ import { TopSpacer } from '../components/Reusable/TopSpacer';
 import { BookDocument } from '../database/models/book/book.interface';
 import { CdType, HomePageType } from '../util/types';
 import { getCds } from '../util/mockedData';
-import { resetMockedData } from '../scripts/resetMockedData';
 
 export const getStaticProps: GetStaticProps = async () => {
   // For debugging purposes
@@ -20,14 +14,7 @@ export const getStaticProps: GetStaticProps = async () => {
   if (process.env.NODE_ENV !== 'production') {
     const booksApi = process.env.DOMAIN_URL_API_BOOKS;
 
-    if (process.env.RESET_MOCKED_DATA === 'true') {
-      console.log('Resetting mocked data...');
-      await resetMockedData();
-      console.log('Mocked data resetted');
-      // set back to false so no resets when reloading page
-      process.env.RESET_MOCKED_DATA = 'false';
-    }
-    // console.log('Books api URL called from Home page: ', booksApi);
+    //console.log('Books api URL called from Home page: ', booksApi);
 
     // books array
     let books: BookDocument[] = [];
@@ -46,17 +33,9 @@ export const getStaticProps: GetStaticProps = async () => {
       props: {
         books,
         cds
-      },
-      revalidate: 60 // 60 seconds = 1 minute
+      }
     };
   } else {
-    if (process.env.RESET_MOCKED_DATA === 'true') {
-      console.log('Resetting mocked data...');
-      await resetMockedData();
-      console.log('Mocked data resetted');
-      // set back to false so no resets when reloading page
-      process.env.RESET_MOCKED_DATA = 'false';
-    }
     const booksApi = process.env.DOMAIN_URL_API_BOOKS;
     // TODO send actual data
     // books array
