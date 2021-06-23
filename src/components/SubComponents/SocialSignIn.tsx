@@ -8,15 +8,16 @@ import { theme } from '../../styles/theme';
 type SocialSignInProps = {
   my?: string;
   py?: string;
+  googleClientId: string;
 };
 
 export const SocialSignIn: React.FC<SocialSignInProps> = (props: SocialSignInProps) => {
-  const { my, py } = props;
+  const { my, py, googleClientId } = props;
 
   return (
     <Box my={my ?? ['0px']} py={py ?? ['0px', '8px']}>
       <Stack>
-        <GoogleButton />
+        <GoogleButton googleClientId={googleClientId} />
         <FacebookButton />
       </Stack>
       <Box>

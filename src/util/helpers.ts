@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import jsCookie from 'js-cookie';
 import { ColorMode, useColorMode } from '@chakra-ui/react';
 
@@ -192,4 +192,28 @@ export const getUserQty = (itemId: string, booksQtys: qtysType[]) => {
     }
   });
   return qty;
+};
+
+export const nextRedirectReplace = (context: any, target: string) => {
+  if (context && context.res) {
+    // server
+    // 303: "See other"
+    context.res.writeHead(303, { Location: target });
+    context.res.end();
+  } else {
+    // In the browser
+    Router.replace(target);
+  }
+};
+
+export const nextRedirectPush = (context: any, target: string) => {
+  if (context && context.res) {
+    // server
+    // 303: "See other"
+    context.res.writeHead(303, { Location: target });
+    context.res.end();
+  } else {
+    // In the browser
+    Router.push(target);
+  }
 };

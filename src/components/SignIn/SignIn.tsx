@@ -2,10 +2,15 @@ import { Flex } from '@chakra-ui/react';
 
 import { SignInComp } from '../SubComponents/SignInComp';
 
-export const SignIn: React.FC = () => {
+type SignInProps = {
+  googleClientId: string;
+};
+
+export const SignIn: React.FC<SignInProps> = (props: SignInProps) => {
+  const { googleClientId } = props;
   return (
     <Flex justifyContent='center' alignItems='center' flexDirection='column' mt={['10vh']}>
-      <SignInComp />
+      <SignInComp googleClientId={googleClientId} />
     </Flex>
   );
 };

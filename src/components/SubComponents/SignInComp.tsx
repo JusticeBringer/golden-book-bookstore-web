@@ -1,4 +1,3 @@
-import Router from 'next/router';
 import NextLink from 'next/link';
 import {
   Flex,
@@ -21,8 +20,15 @@ import SocialSignIn from './SocialSignIn';
 
 import { setCookie } from '../../util/helpers';
 import { authenticated } from '../../util/constants/constants.cookies';
+import { nextRedirectPush } from '../../util/helpers';
 
-export function SignInComp() {
+type SignInCompProps = {
+  googleClientId: string;
+};
+
+export const SignInComp: React.FC<SignInCompProps> = (props: SignInCompProps) => {
+  const { googleClientId } = props;
+
   const dispatch = useDispatch();
 
   const handleOnClick = () => {
@@ -30,7 +36,7 @@ export function SignInComp() {
 
     dispatch(signIn());
     setCookie(authenticated, 'true');
-    Router.push('/profile');
+    nextRedirectPush(null, '/profile');
   };
 
   return (
@@ -51,7 +57,7 @@ export function SignInComp() {
           boxShadow={'lg'}
           p={['5px', '32px']}
         >
-          <SocialSignIn />
+          <SocialSignIn googleClientId={googleClientId} />
           <Stack spacing={['8px', '16px']}>
             <FormControl id='email' mr={['10px', '64px']}>
               <FormLabel>Email</FormLabel>
@@ -99,6 +105,6 @@ export function SignInComp() {
       </Stack>
     </Flex>
   );
-}
+};
 
 export default SignInComp;

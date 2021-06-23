@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Router from 'next/router';
 import { Flex, Heading, Button } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -8,20 +7,27 @@ import { RootState } from '../../redux/reducers';
 
 import { theme } from '../../styles/theme';
 import { SignInComp } from '../SubComponents/SignInComp';
+import { nextRedirectPush } from '../../util/helpers';
 
-export const Profile: React.FC = () => {
+type ProfileProps = {
+  googleClientId: string;
+};
+
+export const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
+  const { googleClientId } = props;
+
   const isAuthenticatedStore = useSelector((state: RootState) => state.authenticated);
 
   // show sign in form in not authenticated
   useEffect(() => {
     if (isAuthenticatedStore === false) {
-      Router.push('/signin');
+      nextRedirectPush(null, '/signin');
     }
   }, []);
 
   useEffect(() => {
     if (isAuthenticatedStore === false) {
-      Router.push('/signin');
+      nextRedirectPush(null, '/signin');
     }
   }, [isAuthenticatedStore]);
 
@@ -48,7 +54,7 @@ export const Profile: React.FC = () => {
         </Flex>
       ) : (
         <Flex mt={['10vh']}>
-          <SignInComp />
+          <SignInComp googleClientId={googleClientId} />
         </Flex>
       )}
     </Flex>
