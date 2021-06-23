@@ -1,3 +1,5 @@
+import NextLink from 'next/link';
+
 import {
   Flex,
   Box,
@@ -6,10 +8,9 @@ import {
   Input,
   Checkbox,
   Stack,
-  Link,
+  Link as ChakraLink,
   Button,
   Heading,
-  Text,
   useColorModeValue
 } from '@chakra-ui/react';
 
@@ -19,7 +20,7 @@ import { useDispatch } from 'react-redux';
 
 import SocialSignIn from './SocialSignIn';
 
-export function Register() {
+export function RegisterComp() {
   const dispatch = useDispatch();
 
   return (
@@ -56,13 +57,14 @@ export function Register() {
             </FormControl>
             <Stack spacing={['10px', '24px']}>
               <Checkbox>
-                Sunt de acord cu <Link color={'blue.400'}>Termenii și condițiile de utilizare</Link>
+                Sunt de acord cu{' '}
+                <ChakraLink color={'blue.400'}>Termenii și condițiile de utilizare</ChakraLink>
               </Checkbox>
               <Checkbox>
                 Sunt de acord cu{' '}
-                <Link color={theme.colors.primaryBlue[300]}>
+                <ChakraLink color={theme.colors.primaryBlue[300]}>
                   Politica de confidențialitate a datelor
-                </Link>
+                </ChakraLink>
               </Checkbox>
               <Button
                 bg={theme.colors.primaryBlue[300]}
@@ -74,6 +76,11 @@ export function Register() {
               >
                 Înregistrare
               </Button>
+              <NextLink href='/signin'>
+                <ChakraLink color={'blue.400'} fontSize={['10px', '16px']}>
+                  Am deja un cont
+                </ChakraLink>
+              </NextLink>
             </Stack>
           </Stack>
         </Box>
@@ -82,4 +89,4 @@ export function Register() {
   );
 }
 
-export default Register;
+export default RegisterComp;

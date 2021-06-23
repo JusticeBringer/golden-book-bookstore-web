@@ -1,3 +1,5 @@
+import Router from 'next/router';
+import NextLink from 'next/link';
 import {
   Flex,
   Box,
@@ -6,10 +8,11 @@ import {
   Input,
   Checkbox,
   Stack,
-  Link,
+  Link as ChakraLink,
   Button,
   Heading,
-  useColorModeValue
+  useColorModeValue,
+  Text
 } from '@chakra-ui/react';
 
 import { useDispatch } from 'react-redux';
@@ -19,7 +22,7 @@ import SocialSignIn from './SocialSignIn';
 import { setCookie } from '../../util/helpers';
 import { authenticated } from '../../util/constants/constants.cookies';
 
-export function SignIn() {
+export function SignInComp() {
   const dispatch = useDispatch();
 
   const handleOnClick = () => {
@@ -27,6 +30,7 @@ export function SignIn() {
 
     dispatch(signIn());
     setCookie(authenticated, 'true');
+    Router.push('/profile');
   };
 
   return (
@@ -64,9 +68,11 @@ export function SignIn() {
                 justify={'space-between'}
               >
                 <Checkbox>Ține-mă minte</Checkbox>
-                <Link color={'blue.400'} fontSize={['10px', '16px']}>
-                  Ai uitat parola?
-                </Link>
+                <NextLink href={'#'}>
+                  <ChakraLink color={'blue.400'} fontSize={['10px', '16px']}>
+                    Ai uitat parola?
+                  </ChakraLink>
+                </NextLink>
               </Stack>
 
               <Button
@@ -79,6 +85,14 @@ export function SignIn() {
               >
                 Autentificare
               </Button>
+              <Flex justifyContent='space-between'>
+                <Text>Nu ai deja un cont?</Text>
+                <NextLink href='/register'>
+                  <ChakraLink color={'blue.400'} fontSize={['10px', '16px']}>
+                    Înscrie-te acum
+                  </ChakraLink>
+                </NextLink>
+              </Flex>
             </Stack>
           </Stack>
         </Box>
@@ -87,4 +101,4 @@ export function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignInComp;
