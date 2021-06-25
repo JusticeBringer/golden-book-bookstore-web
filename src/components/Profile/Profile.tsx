@@ -7,7 +7,7 @@ import { RootState } from '../../redux/reducers';
 
 import { theme } from '../../styles/theme';
 import { SignInComp } from '../SubComponents/SignInComp';
-import { nextRedirectPush } from '../../util/helpers';
+import { nextRedirectPushBrowser } from '../../util/helpers';
 
 type ProfileProps = {
   googleClientId: string;
@@ -21,23 +21,13 @@ export const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
   // show sign in form in not authenticated
   useEffect(() => {
     if (isAuthenticatedStore === false) {
-      nextRedirectPush(null, '/signin');
+      nextRedirectPushBrowser('/signin');
     }
   }, []);
 
   useEffect(() => {
     if (isAuthenticatedStore === false) {
-      nextRedirectPush(null, '/signin');
-    }
-  }, [isAuthenticatedStore]);
-
-  const [isAuthenticatedState, setIsAuthenticatedState] = useState(false);
-
-  useEffect(() => {
-    if (isAuthenticatedStore === true) {
-      setIsAuthenticatedState(true);
-    } else {
-      setIsAuthenticatedState(false);
+      nextRedirectPushBrowser('/signin');
     }
   }, [isAuthenticatedStore]);
 
@@ -45,7 +35,7 @@ export const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
 
   return (
     <Flex justifyContent='center' alignItems='center' flexDirection='column'>
-      {isAuthenticatedState ? (
+      {isAuthenticatedStore ? (
         <Flex flexDir='column'>
           <Heading fontSize='5vw' color={theme.colors.primaryBlack[800]}>
             Contul meu
@@ -53,9 +43,7 @@ export const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
           <Button onClick={() => dispatch(signOut())}>Deconectare</Button>
         </Flex>
       ) : (
-        <Flex mt={['10vh']}>
-          <SignInComp googleClientId={googleClientId} />
-        </Flex>
+        <></>
       )}
     </Flex>
   );

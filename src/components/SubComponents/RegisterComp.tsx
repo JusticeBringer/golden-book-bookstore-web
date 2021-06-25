@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import NextLink from 'next/link';
 
 import {
+  Text,
   Flex,
   Box,
   FormControl,
@@ -19,9 +21,99 @@ import { useDispatch } from 'react-redux';
 // import { Register } from '../../redux/actions';
 
 import SocialSignIn from './SocialSignIn';
+import ErrorFormText from '../Reusable/ErrorFormText';
+import { isValidEmail, isValidPassword } from '../../util/helpers';
 
-export function RegisterComp() {
+type RegisterCompProps = {
+  googleClientId: string;
+};
+
+export const RegisterComp: React.FC<RegisterCompProps> = (props: RegisterCompProps) => {
+  const { googleClientId } = props;
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState('');
+
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
+  const textMinEightCharacters = 'Parola trebuie să conțină cel puțin 8 caractere';
+  const [minEightCharactersError, setMinEightCharactersError] = useState('');
+
+  const textMinOneDigit = 'Parola trebuie să conțină cel puțin o cifră';
+  const [minOneDigitError, setMinOneDigitError] = useState('');
+
+  const textTermsAndConditionsError =
+    'Trebuie să fiți de acord cu Termenii și condițiile de utilizare.';
+  const [termsAndConditionsError, setTermsAndConditionsError] = useState('');
+
+  const [termsAndCondsCheck, setTermsAndCondsCheck] = useState(false);
+
+  const validateEmail = () => {
+    let emailValidationError = '';
+    if (!isValidEmail(email)) {
+      emailValidationError = 'Invalid email';
+    }
+
+    if (emailValidationError) {
+      setEmailError(emailValidationError);
+      return false;
+    }
+
+    // else, all good
+    setEmailError('');
+    return true;
+  };
+
+  /* 
+    Anything with less than eight characters 
+    OR anything with no numbers 
+    OR anything with no uppercase 
+    OR or anything with no lowercase 
+    OR anything with no special characters.
+  */
+  const validatePassword = () => {
+    if (password.length < 8) {
+      setMinEightCharactersError(textMinEightCharacters);
+    }
+
+    if (!isValidPassword(password)) {
+      setPasswordError('Parolă incorectă');
+      return false;
+    }
+
+    // else, all good
+    setPasswordError('');
+    return true;
+  };
+
+  const validateTerms = () => {
+    if (!termsAndCondsCheck) {
+      setTermsAndConditionsError(textTermsAndConditionsError);
+      return false;
+    }
+
+    // else, all good
+    setTermsAndConditionsError('');
+    return true;
+  };
+
   const dispatch = useDispatch();
+  const handleRegister = (event: any) => {
+    event.preventDefault();
+    console.log(email, password, repeatPassword);
+    console.log(emailError);
+
+    if (!validateEmail() && !validatePassword() && !validateTerms()) {
+      console.log('invalid data');
+    } else {
+      console.log('VALID data');
+    }
+
+    // else, everything is good
+    // make call to register user
+  };
 
   return (
     <Flex
@@ -41,25 +133,50 @@ export function RegisterComp() {
           boxShadow={'lg'}
           p={['5px', '32px']}
         >
-          <SocialSignIn />
+          <SocialSignIn googleClientId={googleClientId} />
           <Stack spacing={['8px', '16px']}>
             <FormControl id='email'>
               <FormLabel>Email</FormLabel>
-              <Input type='email' />
+              <Input
+                type='email'
+                placeholder='nume@email.com'
+                onChange={(event: any) => setEmail(event.target.value)}
+              />
+              {emailError && (
+                <Text mt='2px' fontSize={['10px', '12px', '14px']} color='red.700'>
+                  Adresă de email incorectă
+                </Text>
+              )}
             </FormControl>
             <FormControl id='password'>
               <FormLabel>Parolă</FormLabel>
-              <Input type='password' />
+              <Input
+                type='password'
+                placeholder='*********'
+                onChange={(event: any) => setPassword(event.target.value)}
+              />
+              {passwordError && (
+                <Stack direction='column' spacing={['2px', '5px']}>
+                  <ErrorFormText color={minEightCharactersError ? 'red.700' : 'green.700'}>
+                    {textMinEightCharacters}
+                  </ErrorFormText>
+                </Stack>
+              )}
             </FormControl>
-            <FormControl id='password'>
+            <FormControl id='repeat-password'>
               <FormLabel>Repetă parola</FormLabel>
-              <Input type='password' />
+              <Input
+                type='password'
+                placeholder='*********'
+                onChange={(event: any) => setRepeatPassword(event.target.value)}
+              />
             </FormControl>
             <Stack spacing={['10px', '24px']}>
-              <Checkbox>
+              <Checkbox onChange={(event: any) => setTermsAndCondsCheck(event.target.checked)}>
                 Sunt de acord cu{' '}
                 <ChakraLink color={'blue.400'}>Termenii și condițiile de utilizare</ChakraLink>
               </Checkbox>
+              {termsAndConditionsError && <ErrorFormText>{termsAndConditionsError}</ErrorFormText>}
               <Checkbox>
                 Sunt de acord cu{' '}
                 <ChakraLink color={theme.colors.primaryBlue[300]}>
@@ -72,7 +189,7 @@ export function RegisterComp() {
                 _hover={{
                   bg: theme.colors.primaryBlue[400]
                 }}
-                onClick={() => alert()}
+                onClick={(event: any) => handleRegister(event)}
               >
                 Înregistrare
               </Button>
@@ -87,6 +204,6 @@ export function RegisterComp() {
       </Stack>
     </Flex>
   );
-}
+};
 
 export default RegisterComp;

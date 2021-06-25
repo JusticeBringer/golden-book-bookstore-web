@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import NextLink from 'next/link';
 import {
   Flex,
@@ -14,13 +15,14 @@ import {
   Text
 } from '@chakra-ui/react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signIn } from '../../redux/actions/authentication.action';
-import SocialSignIn from './SocialSignIn';
+import { RootState } from '../../redux/reducers';
 
+import SocialSignIn from './SocialSignIn';
 import { setCookie } from '../../util/helpers';
+import { nextRedirectPushBrowser } from '../../util/helpers';
 import { authenticated } from '../../util/constants/constants.cookies';
-import { nextRedirectPush } from '../../util/helpers';
 
 type SignInCompProps = {
   googleClientId: string;
@@ -29,14 +31,28 @@ type SignInCompProps = {
 export const SignInComp: React.FC<SignInCompProps> = (props: SignInCompProps) => {
   const { googleClientId } = props;
 
+  const isAuthenticatedStore = useSelector((state: RootState) => state.authenticated);
+
+  // show profile if authenticated
+  useEffect(() => {
+    if (isAuthenticatedStore === true) {
+      nextRedirectPushBrowser('/profile');
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isAuthenticatedStore === true) {
+      nextRedirectPushBrowser('/profile');
+    }
+  }, [isAuthenticatedStore]);
+
   const dispatch = useDispatch();
 
   const handleOnClick = () => {
     // TODO Validation
 
-    dispatch(signIn());
     setCookie(authenticated, 'true');
-    nextRedirectPush(null, '/profile');
+    dispatch(signIn());
   };
 
   return (

@@ -11,15 +11,18 @@ export const getStaticProps: GetStaticProps = async () => {
   // For debugging purposes
   // console.log(process.env);
 
-  if (process.env.NODE_ENV !== 'production') {
-    const booksApi = process.env.DOMAIN_URL_API_BOOKS;
+  const booksApi = process.env.DOMAIN_URL_API_BOOKS;
+  const headers = {
+    authorization: process.env.SECRET_JWT_TOKEN
+  };
 
+  if (process.env.NODE_ENV !== 'production') {
     //console.log('Books api URL called from Home page: ', booksApi);
 
     // books array
     let books: BookDocument[] = [];
     await axios
-      .get<BookDocument[]>(booksApi)
+      .get<BookDocument[]>(booksApi, { headers })
       .then(response => (books = response.data))
       .catch(error => {
         console.log(error);
@@ -36,12 +39,11 @@ export const getStaticProps: GetStaticProps = async () => {
       }
     };
   } else {
-    const booksApi = process.env.DOMAIN_URL_API_BOOKS;
     // TODO send actual data
     // books array
     let books: BookDocument[] = [];
     await axios
-      .get<BookDocument[]>(booksApi)
+      .get<BookDocument[]>(booksApi, { headers })
       .then(response => (books = response.data))
       .catch(error => {
         console.log(error);

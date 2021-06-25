@@ -1,9 +1,7 @@
-import { FcGoogle } from 'react-icons/fc';
-import { Box, Center } from '@chakra-ui/react';
+import { Center } from '@chakra-ui/react';
 import GoogleLogin from 'react-google-login';
 import { useDispatch } from 'react-redux';
 import { signIn } from '../../redux/actions/authentication.action';
-import { nextRedirectPush } from '../../util/helpers';
 
 type GoogleButtonProps = {
   googleClientId: string;
@@ -16,8 +14,7 @@ export const GoogleButton: React.FC<GoogleButtonProps> = (props: GoogleButtonPro
 
   const handleSuccessGoogleSignIn = (response: any) => {
     console.log(response);
-    dispatch(signIn);
-    nextRedirectPush(null, '/profile');
+    dispatch(signIn());
   };
 
   return (
@@ -25,11 +22,7 @@ export const GoogleButton: React.FC<GoogleButtonProps> = (props: GoogleButtonPro
       <Center>
         <GoogleLogin
           clientId={googleClientId}
-          render={renderProps => (
-            <div onClick={renderProps.onClick} className='google-button'>
-              Conectare prin Google
-            </div>
-          )}
+          buttonText={'Conectare prin Google'}
           onSuccess={handleSuccessGoogleSignIn}
           onFailure={handleSuccessGoogleSignIn}
           cookiePolicy={'single_host_origin'}

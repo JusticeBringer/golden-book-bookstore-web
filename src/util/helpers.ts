@@ -206,7 +206,7 @@ export const nextRedirectReplace = (context: any, target: string) => {
   }
 };
 
-export const nextRedirectPush = (context: any, target: string) => {
+export const nextRedirectPushServer = (context: any, target: string) => {
   if (context && context.res) {
     // server
     // 303: "See other"
@@ -216,4 +216,34 @@ export const nextRedirectPush = (context: any, target: string) => {
     // In the browser
     Router.push(target);
   }
+};
+
+export const nextRedirectPushBrowser = (target: string) => {
+  // In the browser
+  Router.push(target);
+};
+
+export const isValidEmail = (email: string) => {
+  if (email.length < 1) {
+    return false;
+  }
+
+  const emailValidatorRegex = /\S+@\S+\.\S+/;
+  return emailValidatorRegex.test(email.toLowerCase());
+};
+
+export const isValidPassword = (password: string) => {
+  /* 
+    Anything with less than eight characters 
+    OR anything with no numbers 
+    OR anything with no uppercase 
+    OR or anything with no lowercase 
+    OR anything with no special characters.
+  */
+  if (password.length < 1) {
+    return false;
+  }
+
+  const passwordRegex = /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/;
+  return passwordRegex.test(password);
 };
