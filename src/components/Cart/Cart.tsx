@@ -45,7 +45,7 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
   }, [booksIdsState]);
 
   useEffect(() => {
-    let booksQtysInCart: qtysType[] = [];
+    const booksQtysInCart: qtysType[] = [];
 
     booksIdsState.qtys.map(item => {
       booksQtysInCart.push(item);
@@ -56,7 +56,7 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
   }, [booksIdsState]);
 
   useEffect(() => {
-    let sum: number = 0;
+    let sum = 0;
     booksQtys.forEach(item => {
       sum += item.qty;
     });
@@ -64,7 +64,7 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
   }, [booksQtys]);
 
   const mapIdsToProducts = (): BookDocument[] => {
-    let booksInCart: BookDocument[] = [];
+    const booksInCart: BookDocument[] = [];
 
     booksIdsState.ids.map(id => {
       books.map(book => {
