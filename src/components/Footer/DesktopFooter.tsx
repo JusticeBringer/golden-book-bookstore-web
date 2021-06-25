@@ -22,7 +22,7 @@ export const DesktopFooter: React.FC = () => {
   const [booksNumberFromStore, setbooksNumberFromStore] = useState(10);
 
   useEffect(() => {
-    let sum: number = 0;
+    let sum = 0;
     booksFromStore.forEach(element => {
       sum += element.qty;
     });

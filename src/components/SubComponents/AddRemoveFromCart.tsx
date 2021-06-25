@@ -56,7 +56,7 @@ export const AddRemoveFromCart: React.FC<AddRemoveFromCartProps> = (
   const [userQtyState, setUserQtyState] = useState(-1);
 
   useEffect(() => {
-    let qty: number = 0;
+    let qty = 0;
     booksQtysStore.forEach(item => {
       if (item.id === _id) {
         qty = item.qty;
@@ -69,7 +69,7 @@ export const AddRemoveFromCart: React.FC<AddRemoveFromCartProps> = (
   const [itemQtySelectedInStore, setitemQtySelectedInStore] = useState(-1);
 
   const handleQtyChange = (val: string) => {
-    let inputQty = parseInt(val);
+    const inputQty = parseInt(val);
 
     // if user set a negative value
     if (inputQty < 0) {
