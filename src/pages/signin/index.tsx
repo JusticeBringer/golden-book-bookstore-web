@@ -4,34 +4,39 @@ import { GetStaticProps } from 'next';
 import { SignIn } from '../../components/SignIn/SignIn';
 
 export const getStaticProps: GetStaticProps = async () => {
-  // For debugging purposes
-  // console.log(process.env);
+  const googleClientId = process.env.GOOGLE_CLIENT_ID;
+  const signInApiUrl = process.env.DOMAIN_URL_API + '/user/login';
 
   if (process.env.NODE_ENV !== 'production') {
-    const googleClientId = process.env.GOOGLE_CLIENT_ID;
-    // console.log('this is: ', googleClientId);
-
     return {
       props: {
-        googleClientId
+        googleClientId,
+        signInApiUrl
       }
     };
   } else {
+    return {
+      props: {
+        googleClientId,
+        signInApiUrl
+      }
+    };
   }
 };
 
 type SignInProps = {
   googleClientId: string;
+  signInApiUrl: string;
 };
 
 const Index: React.FC<SignInProps> = (props: SignInProps) => {
-  const { googleClientId } = props;
+  const { googleClientId, signInApiUrl } = props;
 
   return (
     <>
       <Flex width={'100%'} direction='column' alignItems='center'>
         <Box width={'70%'}>
-          <SignIn googleClientId={googleClientId} />
+          <SignIn googleClientId={googleClientId} signInApiUrl={signInApiUrl} />
         </Box>
       </Flex>
     </>

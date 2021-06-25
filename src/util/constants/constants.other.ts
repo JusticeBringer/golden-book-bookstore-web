@@ -13,3 +13,4 @@ export const THEME_BREAKPOINTS = {
 };
 
 export const SNACKBAR_TIMEOUT = 2500; // 2.5 seconds
+export const PASSWORD_MIN_LENGTH = 8;

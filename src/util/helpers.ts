@@ -224,7 +224,7 @@ export const nextRedirectPushBrowser = (target: string) => {
 };
 
 export const isValidEmail = (email: string) => {
-  if (email.length < 1) {
+  if (!email) {
     return false;
   }
 
@@ -232,18 +232,33 @@ export const isValidEmail = (email: string) => {
   return emailValidatorRegex.test(email.toLowerCase());
 };
 
+export const hasOneDigit = (text: string) => {
+  for (const x of text) {
+    if (x >= '0' && x <= '9') {
+      return true;
+    }
+  }
+  return false;
+};
+
+export const hasLength = (text: string) => {
+  if (text.length < 8) {
+    return false;
+  }
+  return true;
+};
+
 export const isValidPassword = (password: string) => {
   /* 
     Anything with less than eight characters 
     OR anything with no numbers 
-    OR anything with no uppercase 
-    OR or anything with no lowercase 
-    OR anything with no special characters.
+    TODO OR anything with no uppercase 
+    TODO OR or anything with no lowercase 
+    TODO OR anything with no special characters.
   */
-  if (password.length < 1) {
+
+  if (!hasLength(password) || !hasOneDigit(password)) {
     return false;
   }
-
-  const passwordRegex = /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/;
-  return passwordRegex.test(password);
+  return true;
 };
