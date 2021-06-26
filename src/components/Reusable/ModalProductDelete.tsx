@@ -42,7 +42,13 @@ export const ModalProductDelete: React.FC<ModalProductDeleteProps> = (
 
   return (
     <>
-      <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} isCentered={true}>
+      <Modal
+        size={'sm'}
+        closeOnOverlayClick={false}
+        isOpen={isOpen}
+        onClose={onClose}
+        isCentered={true}
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Ștergere produs</ModalHeader>
