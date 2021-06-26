@@ -30,14 +30,19 @@ import {
 } from '../../util/helpers';
 import { PASSWORD_MIN_LENGTH } from '../../util/constants/constants.other';
 import { SNACKBAR_INFO, SNACKBAR_DANGER } from '../../util/constants/constants.redux';
+import { Loading } from '../Reusable/Loading';
 
 type RegisterCompProps = {
   googleClientId: string;
   registerApiUrl: string;
+  googleRegistrationApiUrl: string;
+  isRegistration: boolean;
 };
 
 export const RegisterComp: React.FC<RegisterCompProps> = (props: RegisterCompProps) => {
-  const { googleClientId, registerApiUrl } = props;
+  const { googleClientId, registerApiUrl, googleRegistrationApiUrl, isRegistration } = props;
+
+  const [loading, setLoading] = useState(false);
 
   const textEmailError = 'Adresa de email este incorectă';
   const [email, setEmail] = useState('');
@@ -175,114 +180,138 @@ export const RegisterComp: React.FC<RegisterCompProps> = (props: RegisterCompPro
       password: password
     };
 
+    setLoading(true);
     await axios
       .post(registerApiUrl, { user })
       .then((response: any) => {
+        setLoading(false);
+
         const result = response.data;
         dispatch(toggleSnackbarOpen(SNACKBAR_INFO, 'Înregistrare reușită'));
 
         // redirect to validation
         nextRedirectPushBrowser('/emailVerify');
       })
-      .catch(error => {
-        const errorMessage = error.response.data as string;
+      .catch((error: any) => {
+        console.log(error);
+        const errorMessage =
+          'Email deja utilizat sau a fost deja trimis un email pentru confirmare. Pentru retrimiterea email-ului de confirmare încercați din nou peste 24 de ore.';
         dispatch(toggleSnackbarOpen(SNACKBAR_DANGER, errorMessage));
+        setLoading(false);
       });
   };
 
   return (
-    <Flex
-      align={'center'}
-      justify={'center'}
-      bg={useColorModeValue('gray.50', 'gray.800')}
-      minH='50vh'
-      p={['5px', '10px', '16px']}
-    >
-      <Stack px={['6px', '24px']}>
-        <Stack align={'center'}>
-          <Heading fontSize={['10px', '30px']}>Înregistrare</Heading>
-        </Stack>
-        <Box
-          rounded={'lg'}
-          bg={useColorModeValue('white', 'gray.700')}
-          boxShadow={'lg'}
-          p={['5px', '32px']}
+    <>
+      {loading ? (
+        <Flex align={'center'} justify={'center'} minH='50vh' p={['5px', '10px', '16px']}>
+          <Loading />
+        </Flex>
+      ) : (
+        <Flex
+          align={'center'}
+          justify={'center'}
+          bg={useColorModeValue('gray.50', 'gray.800')}
+          minH='50vh'
+          p={['5px', '10px', '16px']}
         >
-          <SocialSignIn googleClientId={googleClientId} />
-          <Stack spacing={['8px', '16px']}>
-            <FormControl id='email'>
-              <FormLabel>Email</FormLabel>
-              <Input
-                type='email'
-                placeholder='nume@email.com'
-                onChange={(event: any) => setEmail(event.target.value)}
-              />
-              {emailError && <ErrorFormText>{textEmailError}</ErrorFormText>}
-            </FormControl>
-            <FormControl id='password'>
-              <FormLabel>Parolă</FormLabel>
-              <Input
-                type='password'
-                placeholder='*********'
-                onChange={(event: any) => setPassword(event.target.value)}
-              />
-              {passwordError && (
-                <Stack direction='column' spacing={['2px', '5px']}>
-                  <ErrorFormText color={minEightCharactersError ? 'red.700' : 'green.700'}>
-                    {textMinEightCharactersError}
-                  </ErrorFormText>
-                  <ErrorFormText color={minOneDigitError ? 'red.700' : 'green.700'}>
-                    {textMinOneDigitError}
-                  </ErrorFormText>
-                </Stack>
-              )}
-            </FormControl>
-            <FormControl id='repeat-password'>
-              <FormLabel>Repetă parola</FormLabel>
-              <Input
-                type='password'
-                placeholder='*********'
-                onChange={(event: any) => setRepeatPassword(event.target.value)}
-              />
-              {repeatPasswordError && <ErrorFormText>{textRepeatPasswordError}</ErrorFormText>}
-            </FormControl>
-            <Stack spacing={['10px', '24px']}>
-              <Flex flexDir='column'>
-                <Checkbox onChange={(event: any) => setTermsAndCondsCheck(event.target.checked)}>
-                  Sunt de acord cu{' '}
-                  <ChakraLink color={'blue.400'}>Termenii și condițiile de utilizare</ChakraLink>
-                </Checkbox>
-                {!termsAndCondsCheck && <ErrorFormText>{termsAndConditionsError}</ErrorFormText>}
-              </Flex>
-              <Flex flexDir='column'>
-                <Checkbox onChange={(event: any) => setDataPolicyCheck(event.target.checked)}>
-                  Sunt de acord cu{' '}
-                  <ChakraLink color={theme.colors.primaryBlue[300]}>
-                    Politica de confidențialitate a datelor
-                  </ChakraLink>
-                </Checkbox>
-                {!dataPolicyCheck && <ErrorFormText>{dataPolicyError}</ErrorFormText>}
-              </Flex>
-              <Button
-                bg={theme.colors.primaryBlue[300]}
-                color={'white'}
-                _hover={{
-                  bg: theme.colors.primaryBlue[400]
-                }}
-                onClick={(event: any) => handleRegister(event)}
-              >
-                Înregistrare
-              </Button>
-              <NextLink href='/signin'>
-                <ChakraLink color={'blue.400'} fontSize={['10px', '16px']}>
-                  Am deja un cont
-                </ChakraLink>
-              </NextLink>
+          <Stack px={['6px', '24px']}>
+            <Stack align={'center'}>
+              <Heading fontSize={['10px', '30px']}>Înregistrare</Heading>
             </Stack>
+            <Box
+              rounded={'lg'}
+              bg={useColorModeValue('white', 'gray.700')}
+              boxShadow={'lg'}
+              p={['5px', '32px']}
+            >
+              <SocialSignIn
+                googleClientId={googleClientId}
+                googleRegistrationApiUrl={googleRegistrationApiUrl}
+                isRegistration={isRegistration}
+              />
+              <Stack spacing={['8px', '16px']}>
+                <FormControl id='email'>
+                  <FormLabel>Email</FormLabel>
+                  <Input
+                    type='email'
+                    placeholder='nume@email.com'
+                    onChange={(event: any) => setEmail(event.target.value)}
+                  />
+                  {emailError && <ErrorFormText>{textEmailError}</ErrorFormText>}
+                </FormControl>
+                <FormControl id='password'>
+                  <FormLabel>Parolă</FormLabel>
+                  <Input
+                    type='password'
+                    placeholder='*********'
+                    onChange={(event: any) => setPassword(event.target.value)}
+                  />
+                  {passwordError && (
+                    <Stack direction='column' spacing={['2px', '5px']}>
+                      <ErrorFormText color={minEightCharactersError ? 'red.700' : 'green.700'}>
+                        {textMinEightCharactersError}
+                      </ErrorFormText>
+                      <ErrorFormText color={minOneDigitError ? 'red.700' : 'green.700'}>
+                        {textMinOneDigitError}
+                      </ErrorFormText>
+                    </Stack>
+                  )}
+                </FormControl>
+                <FormControl id='repeat-password'>
+                  <FormLabel>Repetă parola</FormLabel>
+                  <Input
+                    type='password'
+                    placeholder='*********'
+                    onChange={(event: any) => setRepeatPassword(event.target.value)}
+                  />
+                  {repeatPasswordError && <ErrorFormText>{textRepeatPasswordError}</ErrorFormText>}
+                </FormControl>
+                <Stack spacing={['10px', '24px']}>
+                  <Flex flexDir='column'>
+                    <Checkbox
+                      onChange={(event: any) => setTermsAndCondsCheck(event.target.checked)}
+                    >
+                      Sunt de acord cu{' '}
+                      <ChakraLink color={'blue.400'}>
+                        Termenii și condițiile de utilizare
+                      </ChakraLink>
+                    </Checkbox>
+                    {!termsAndCondsCheck && (
+                      <ErrorFormText>{termsAndConditionsError}</ErrorFormText>
+                    )}
+                  </Flex>
+                  <Flex flexDir='column'>
+                    <Checkbox onChange={(event: any) => setDataPolicyCheck(event.target.checked)}>
+                      Sunt de acord cu{' '}
+                      <ChakraLink color={theme.colors.primaryBlue[300]}>
+                        Politica de confidențialitate a datelor
+                      </ChakraLink>
+                    </Checkbox>
+                    {!dataPolicyCheck && <ErrorFormText>{dataPolicyError}</ErrorFormText>}
+                  </Flex>
+                  <Button
+                    bg={theme.colors.primaryBlue[300]}
+                    color={'white'}
+                    _hover={{
+                      bg: theme.colors.primaryBlue[400]
+                    }}
+                    onClick={(event: any) => handleRegister(event)}
+                  >
+                    Înregistrare
+                  </Button>
+                  <NextLink href='/signin'>
+                    <ChakraLink color={'blue.400'} fontSize={['10px', '16px']}>
+                      Am deja un cont
+                    </ChakraLink>
+                  </NextLink>
+                </Stack>
+              </Stack>
+            </Box>
           </Stack>
-        </Box>
-      </Stack>
-    </Flex>
+        </Flex>
+      )}
+    </>
   );
 };
 

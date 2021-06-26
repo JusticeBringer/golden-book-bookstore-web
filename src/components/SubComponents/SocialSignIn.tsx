@@ -9,15 +9,33 @@ type SocialSignInProps = {
   my?: string;
   py?: string;
   googleClientId: string;
+  googleRegistrationApiUrl?: string;
+  googleAuthenticationApiUrl?: string;
+  isRegistration?: boolean;
+  isAuthentication?: boolean;
 };
 
 export const SocialSignIn: React.FC<SocialSignInProps> = (props: SocialSignInProps) => {
-  const { my, py, googleClientId } = props;
+  const {
+    my,
+    py,
+    googleClientId,
+    googleRegistrationApiUrl,
+    googleAuthenticationApiUrl,
+    isRegistration,
+    isAuthentication
+  } = props;
 
   return (
     <Box my={my ?? ['0px']} py={py ?? ['0px', '8px']}>
       <Stack>
-        <GoogleButton googleClientId={googleClientId} />
+        <GoogleButton
+          googleClientId={googleClientId}
+          googleRegistrationApiUrl={googleRegistrationApiUrl}
+          googleAuthenticationApiUrl={googleAuthenticationApiUrl}
+          isRegistration={isRegistration}
+          isAuthentication={isAuthentication}
+        />
         <FacebookButton />
       </Stack>
       <Box>
