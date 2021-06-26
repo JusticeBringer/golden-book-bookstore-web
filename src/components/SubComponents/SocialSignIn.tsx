@@ -3,7 +3,7 @@ import GoogleButton from './GoogleButton';
 import HorizontalLine from './HorizontalLine';
 
 import { Box, Stack } from '@chakra-ui/react';
-import { theme } from '../../styles/theme';
+import { useEffect } from 'react';
 
 type SocialSignInProps = {
   my?: string;
@@ -38,7 +38,7 @@ export const SocialSignIn: React.FC<SocialSignInProps> = (props: SocialSignInPro
           isRegistration={isRegistration}
           isAuthentication={isAuthentication}
         />
-        <FacebookButton facebookAppId={facebookAppId} />
+        {/* <FacebookButton facebookAppId={facebookAppId} /> */}
       </Stack>
       <Box>
         <HorizontalLine my={my} py={py} />
