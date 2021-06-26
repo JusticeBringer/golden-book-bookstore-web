@@ -43,7 +43,8 @@
     "redux": "^4.1.0",
     "redux-thunk": "^2.3.0",
     "sass": "^1.34.1",
-    "stylis": "^3.5.4"
+    "stylis": "^3.5.4",
+    "typescript": "^4.3.4"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
