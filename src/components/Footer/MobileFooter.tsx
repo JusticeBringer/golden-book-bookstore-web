@@ -82,6 +82,7 @@ const FooterNav = (props: FooterNavProps) => {
                   <Tooltip
                     label={booksNumberFromStore.toString()}
                     placement='right'
+                    position='fixed'
                     isOpen
                     ml={['20px', '25px', '27px']}
                     fontSize={['12px', '14px', '15px']}

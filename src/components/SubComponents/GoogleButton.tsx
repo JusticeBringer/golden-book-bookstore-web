@@ -111,7 +111,7 @@ export const GoogleButton: React.FC<GoogleButtonProps> = (props: GoogleButtonPro
           <Center>
             <GoogleLogin
               clientId={googleClientId}
-              buttonText={'Conectare prin Google'}
+              buttonText={isAuthentication ? 'Conectare prin Google' : 'Înregistrare prin Google'}
               onSuccess={response => handleSuccessGoogleSignIn(response)}
               onFailure={response => handleFailureGoogleSignIn(response)}
               cookiePolicy={'single_host_origin'}

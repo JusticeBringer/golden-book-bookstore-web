@@ -12,10 +12,12 @@ import {
   Stack,
   HStack,
   Button,
-  Link,
+  Link as ChakraLink,
   Icon,
   Collapse
 } from '@chakra-ui/react';
+import NextLink from 'next/link';
+
 import { HamburgerIcon, CloseIcon, ChevronDownIcon } from '@chakra-ui/icons';
 
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
@@ -140,7 +142,7 @@ const MobileNavItem = (props: NavItem) => {
     <Stack spacing={4} onClick={children && onToggle} color={theme.colors.primaryBlue[800]}>
       <Flex
         py={2}
-        as={Link}
+        as={ChakraLink}
         href={href ?? '#'}
         justify={'space-between'}
         align={'center'}
@@ -173,14 +175,11 @@ const MobileNavItem = (props: NavItem) => {
         >
           {children &&
             children.map(child => (
-              <Link
-                key={child.label}
-                py={2}
-                href={child.href}
-                color={theme.colors.primaryBlue[800]}
-              >
-                {child.label}
-              </Link>
+              <NextLink key={child.label} href={child.href} passHref>
+                <ChakraLink py={2} color={theme.colors.primaryBlue[800]}>
+                  {child.label}
+                </ChakraLink>
+              </NextLink>
             ))}
         </Stack>
       </Collapse>
