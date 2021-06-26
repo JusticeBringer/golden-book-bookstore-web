@@ -5,6 +5,7 @@ import { Register } from '../../components/Register/Register';
 
 type RegisterProps = {
   googleClientId: string;
+  facebookAppId: string;
   registerApiUrl: string;
   googleRegistrationApiUrl: string;
 };
@@ -13,11 +14,13 @@ export const getStaticProps: GetStaticProps = async () => {
   const googleClientId = process.env.GOOGLE_CLIENT_ID;
   const registerApiUrl = process.env.DOMAIN_URL_API + '/user/register/email';
   const googleRegistrationApiUrl = process.env.DOMAIN_URL_API + '/user/register/google';
+  const facebookAppId = process.env.FACEBOOK_APP_ID;
 
   if (process.env.NODE_ENV !== 'production') {
     return {
       props: {
         googleClientId,
+        facebookAppId,
         registerApiUrl,
         googleRegistrationApiUrl
       }
@@ -26,6 +29,7 @@ export const getStaticProps: GetStaticProps = async () => {
     return {
       props: {
         googleClientId,
+        facebookAppId,
         registerApiUrl,
         googleRegistrationApiUrl
       }
@@ -34,7 +38,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Index: React.FC<RegisterProps> = (props: RegisterProps) => {
-  const { googleClientId, registerApiUrl, googleRegistrationApiUrl } = props;
+  const { googleClientId, facebookAppId, registerApiUrl, googleRegistrationApiUrl } = props;
 
   return (
     <>
@@ -42,6 +46,7 @@ const Index: React.FC<RegisterProps> = (props: RegisterProps) => {
         <Box width={'70%'}>
           <Register
             googleClientId={googleClientId}
+            facebookAppId={facebookAppId}
             registerApiUrl={registerApiUrl}
             googleRegistrationApiUrl={googleRegistrationApiUrl}
             isRegistration={true}

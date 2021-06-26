@@ -9,6 +9,7 @@ type SocialSignInProps = {
   my?: string;
   py?: string;
   googleClientId: string;
+  facebookAppId: string;
   googleRegistrationApiUrl?: string;
   googleAuthenticationApiUrl?: string;
   isRegistration?: boolean;
@@ -20,6 +21,7 @@ export const SocialSignIn: React.FC<SocialSignInProps> = (props: SocialSignInPro
     my,
     py,
     googleClientId,
+    facebookAppId,
     googleRegistrationApiUrl,
     googleAuthenticationApiUrl,
     isRegistration,
@@ -36,7 +38,7 @@ export const SocialSignIn: React.FC<SocialSignInProps> = (props: SocialSignInPro
           isRegistration={isRegistration}
           isAuthentication={isAuthentication}
         />
-        <FacebookButton />
+        <FacebookButton facebookAppId={facebookAppId} />
       </Stack>
       <Box>
         <HorizontalLine my={my} py={py} />

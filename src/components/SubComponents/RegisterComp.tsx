@@ -34,13 +34,20 @@ import { Loading } from '../Reusable/Loading';
 
 type RegisterCompProps = {
   googleClientId: string;
+  facebookAppId: string;
   registerApiUrl: string;
   googleRegistrationApiUrl: string;
   isRegistration: boolean;
 };
 
 export const RegisterComp: React.FC<RegisterCompProps> = (props: RegisterCompProps) => {
-  const { googleClientId, registerApiUrl, googleRegistrationApiUrl, isRegistration } = props;
+  const {
+    googleClientId,
+    facebookAppId,
+    registerApiUrl,
+    googleRegistrationApiUrl,
+    isRegistration
+  } = props;
 
   const [loading, setLoading] = useState(false);
 
@@ -213,9 +220,10 @@ export const RegisterComp: React.FC<RegisterCompProps> = (props: RegisterCompPro
           justify={'center'}
           bg={useColorModeValue('gray.50', 'gray.800')}
           minH='50vh'
-          p={['5px', '10px', '16px']}
+          p={['2px', '5px', '5px', '7px', '16px']}
+          mb={['50px', '100px']}
         >
-          <Stack px={['6px', '24px']}>
+          <Stack px={['6px', '6px', '6px', '24px']}>
             <Stack align={'center'}>
               <Heading fontSize={['10px', '30px']}>Înregistrare</Heading>
             </Stack>
@@ -227,6 +235,7 @@ export const RegisterComp: React.FC<RegisterCompProps> = (props: RegisterCompPro
             >
               <SocialSignIn
                 googleClientId={googleClientId}
+                facebookAppId={facebookAppId}
                 googleRegistrationApiUrl={googleRegistrationApiUrl}
                 isRegistration={isRegistration}
               />

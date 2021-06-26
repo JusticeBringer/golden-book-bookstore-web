@@ -238,3 +238,22 @@ main {
     transform: rotate(360deg);
   }
 }
+
+.google-button {
+  border-radius: 5px !important;
+  padding: 5px !important;
+  color: $primaryBlack !important;
+}
+
+.facebook-button-class {
+  text-align: center;
+  display: inline;
+  background: $primaryBlue100;
+  padding: 10px;
+  min-width: 100%;
+  border-radius: 5px;
+}
+
+.fa {
+  margin-right: 10px;
+}

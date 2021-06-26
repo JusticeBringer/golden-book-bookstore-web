@@ -29,12 +29,13 @@ export const getStaticProps: GetStaticProps = async () => {
 
 type SignInProps = {
   googleClientId: string;
+  facebookAppId: string;
   signInApiUrl: string;
   googleAuthenticationApiUrl: string;
 };
 
 const Index: React.FC<SignInProps> = (props: SignInProps) => {
-  const { googleClientId, signInApiUrl, googleAuthenticationApiUrl } = props;
+  const { googleClientId, facebookAppId, signInApiUrl, googleAuthenticationApiUrl } = props;
 
   return (
     <>
@@ -42,6 +43,7 @@ const Index: React.FC<SignInProps> = (props: SignInProps) => {
         <Box width={'70%'}>
           <SignIn
             googleClientId={googleClientId}
+            facebookAppId={facebookAppId}
             signInApiUrl={signInApiUrl}
             googleAuthenticationApiUrl={googleAuthenticationApiUrl}
             isAuthentication={true}

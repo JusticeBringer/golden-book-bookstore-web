@@ -38,13 +38,20 @@ import { Loading } from '../Reusable/Loading';
 
 type SignInCompProps = {
   googleClientId: string;
+  facebookAppId: string;
   signInApiUrl: string;
   isAuthentication: boolean;
   googleAuthenticationApiUrl: string;
 };
 
 export const SignInComp: React.FC<SignInCompProps> = (props: SignInCompProps) => {
-  const { googleClientId, signInApiUrl, isAuthentication, googleAuthenticationApiUrl } = props;
+  const {
+    googleClientId,
+    facebookAppId,
+    signInApiUrl,
+    isAuthentication,
+    googleAuthenticationApiUrl
+  } = props;
 
   const isAuthenticatedStore = useSelector((state: RootState) => state.authenticated);
 
@@ -194,9 +201,10 @@ export const SignInComp: React.FC<SignInCompProps> = (props: SignInCompProps) =>
           justify={'center'}
           bg={useColorModeValue('gray.50', 'gray.800')}
           minH='50vh'
-          p={['5px', '10px', '16px']}
+          p={['2px', '5px', '5px', '7px', '16px']}
+          mb={['50px', '100px']}
         >
-          <Stack px={['6px', '24px']}>
+          <Stack px={['6px', '6px', '6px', '24px']}>
             <Stack align={'center'}>
               <Heading fontSize={['10px', '30px']}>Autentificare</Heading>
             </Stack>
@@ -210,6 +218,7 @@ export const SignInComp: React.FC<SignInCompProps> = (props: SignInCompProps) =>
                 googleClientId={googleClientId}
                 isAuthentication={isAuthentication}
                 googleAuthenticationApiUrl={googleAuthenticationApiUrl}
+                facebookAppId={facebookAppId}
               />
               <Stack spacing={['8px', '16px']}>
                 <FormControl id='email' mr={['10px', '64px']}>
@@ -265,7 +274,10 @@ export const SignInComp: React.FC<SignInCompProps> = (props: SignInCompProps) =>
                   >
                     Autentificare
                   </Button>
-                  <Flex justifyContent='space-between'>
+                  <Flex
+                    justifyContent='space-between'
+                    flexDir={['column', 'column', 'column', 'row']}
+                  >
                     <Text>Nu ai deja un cont?</Text>
                     <NextLink href='/register'>
                       <ChakraLink color={'blue.400'} fontSize={['10px', '16px']}>

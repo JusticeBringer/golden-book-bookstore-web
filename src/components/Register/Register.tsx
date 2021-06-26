@@ -8,13 +8,20 @@ import { RegisterComp } from '../SubComponents/RegisterComp';
 
 type RegisterProps = {
   googleClientId: string;
+  facebookAppId: string;
   registerApiUrl: string;
   googleRegistrationApiUrl: string;
   isRegistration: boolean;
 };
 
 export const Register: React.FC<RegisterProps> = (props: RegisterProps) => {
-  const { googleClientId, registerApiUrl, googleRegistrationApiUrl, isRegistration } = props;
+  const {
+    googleClientId,
+    facebookAppId,
+    registerApiUrl,
+    googleRegistrationApiUrl,
+    isRegistration
+  } = props;
 
   const isAuthenticatedStore = useSelector((state: RootState) => state.authenticated);
 
@@ -35,9 +42,15 @@ export const Register: React.FC<RegisterProps> = (props: RegisterProps) => {
     }
   }, [isAuthenticatedStore]);
   return (
-    <Flex justifyContent='center' alignItems='center' flexDirection='column' mt={['5vh']}>
+    <Flex
+      justifyContent='center'
+      alignItems='center'
+      flexDirection='column'
+      mt={['2vh', '2vh', '3vh', '4vh', '5vh']}
+    >
       <RegisterComp
         googleClientId={googleClientId}
+        facebookAppId={facebookAppId}
         registerApiUrl={registerApiUrl}
         googleRegistrationApiUrl={googleRegistrationApiUrl}
         isRegistration={isRegistration}
