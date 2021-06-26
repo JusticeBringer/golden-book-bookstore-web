@@ -9,6 +9,7 @@ import { theme } from '../../styles/theme';
 import { authors } from '../../util/mockedData';
 import { BooksArrayType } from '../../util/types';
 import { qtysType } from '../../redux/reducers/reducers.types';
+import { useWindowDimensions } from '../../util/helpers';
 
 type AuthorsProps = {
   books: BooksArrayType;
@@ -18,6 +19,7 @@ type AuthorsProps = {
 
 export const Authors: React.FC<AuthorsProps> = (props: AuthorsProps) => {
   const { books, sizeFontBtDet, booksQtys } = props;
+  const { width } = useWindowDimensions();
 
   const [activeAuthor, setActiveAuthor] = useState('Pr. Iosif Trifa');
   const [activeBooks, setActiveBooks] = useState(
@@ -31,7 +33,11 @@ export const Authors: React.FC<AuthorsProps> = (props: AuthorsProps) => {
 
   return (
     <Flex borderRadius={['10px']} flexDir={'column'}>
-      <Horizontal>
+      <section
+        className={
+          width < 480 ? 'scrolling-wrapper-flexbox hideScrollBar' : 'scrolling-wrapper-flexbox'
+        }
+      >
         {authors.map(author => (
           <Flex
             flexDir='column'
@@ -60,8 +66,8 @@ export const Authors: React.FC<AuthorsProps> = (props: AuthorsProps) => {
             </Text>
           </Flex>
         ))}
-      </Horizontal>
-      <Flex maxW={['100vw', '100vw', '80vw']}>
+      </section>
+      <Flex maxW={['90vw', '90vw', '85vw', '80vw']}>
         <PortraitBooksGroup books={activeBooks} booksQtys={booksQtys} />
       </Flex>
     </Flex>

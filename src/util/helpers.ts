@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import jsCookie from 'js-cookie';
 import { ColorMode, useColorMode } from '@chakra-ui/react';
 
@@ -192,4 +192,73 @@ export const getUserQty = (itemId: string, booksQtys: qtysType[]) => {
     }
   });
   return qty;
+};
+
+export const nextRedirectReplace = (context: any, target: string) => {
+  if (context && context.res) {
+    // server
+    // 303: "See other"
+    context.res.writeHead(303, { Location: target });
+    context.res.end();
+  } else {
+    // In the browser
+    Router.replace(target);
+  }
+};
+
+export const nextRedirectPushServer = (context: any, target: string) => {
+  if (context && context.res) {
+    // server
+    // 303: "See other"
+    context.res.writeHead(303, { Location: target });
+    context.res.end();
+  } else {
+    // In the browser
+    Router.push(target);
+  }
+};
+
+export const nextRedirectPushBrowser = (target: string) => {
+  // In the browser
+  Router.push(target);
+};
+
+export const isValidEmail = (email: string) => {
+  if (!email) {
+    return false;
+  }
+
+  const emailValidatorRegex = /\S+@\S+\.\S+/;
+  return emailValidatorRegex.test(email.toLowerCase());
+};
+
+export const hasOneDigit = (text: string) => {
+  for (const x of text) {
+    if (x >= '0' && x <= '9') {
+      return true;
+    }
+  }
+  return false;
+};
+
+export const hasLength = (text: string) => {
+  if (text.length < 8) {
+    return false;
+  }
+  return true;
+};
+
+export const isValidPassword = (password: string) => {
+  /* 
+    Anything with less than eight characters 
+    OR anything with no numbers 
+    TODO OR anything with no uppercase 
+    TODO OR or anything with no lowercase 
+    TODO OR anything with no special characters.
+  */
+
+  if (!hasLength(password) || !hasOneDigit(password)) {
+    return false;
+  }
+  return true;
 };

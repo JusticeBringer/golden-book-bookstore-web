@@ -77,8 +77,8 @@ const DesktopNav = (props: DesktopNavProps) => {
         >
           <Logo
             marginLeft={['0px']}
-            width={['', '', '40px', '50px']}
-            height={['', '', '40px', '50px']}
+            width={['', '', '70px', '80px', '90px']}
+            height={['', '', '70px', '80px', '90px']}
           />
         </Flex>
         <Flex

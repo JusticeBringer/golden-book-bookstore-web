@@ -8,29 +8,18 @@ export type NavItem = {
 export const HEADER_NAV_ITEMS: Array<NavItem> = [
   {
     label: 'Acasă',
-    children: [
-      {
-        label: 'Acasă1',
-        subLabel: 'Acasă1.1',
-        href: '#'
-      },
-      {
-        label: 'Acasă2',
-        subLabel: 'Acasă2.1',
-        href: '#'
-      }
-    ]
+    href: '/'
   },
   {
-    label: 'Blog',
+    label: 'Legal',
     children: [
       {
-        label: 'Prezentare1',
+        label: 'GDPR',
         subLabel: 'Prezentare1.1',
         href: '#'
       },
       {
-        label: 'Prezentare2',
+        label: 'Termeni și condiții',
         subLabel: 'Prezentare2.1',
         href: '#'
       }

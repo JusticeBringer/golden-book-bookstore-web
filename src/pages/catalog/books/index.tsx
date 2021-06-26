@@ -12,6 +12,9 @@ export const getStaticProps: GetStaticProps = async () => {
   // For debugging purposes
   // console.log(process.env);
   const booksApi = process.env.DOMAIN_URL_API_BOOKS;
+  const headers = {
+    authorization: process.env.SECRET_JWT_TOKEN
+  };
 
   if (process.env.NODE_ENV !== 'production') {
     // console.log('Books api URL called from Books page: ', booksApi);
@@ -19,7 +22,7 @@ export const getStaticProps: GetStaticProps = async () => {
     // books array
     let books: BookDocument[] = [];
     await axios
-      .get<BookDocument[]>(booksApi)
+      .get<BookDocument[]>(booksApi, { headers })
       .then(response => (books = response.data))
       .catch(error => {
         console.log(error);
@@ -40,7 +43,7 @@ export const getStaticProps: GetStaticProps = async () => {
     // books array
     let books: BookDocument[] = [];
     await axios
-      .get<BookDocument[]>(booksApi)
+      .get<BookDocument[]>(booksApi, { headers })
       .then(response => (books = response.data))
       .catch(error => {
         console.log(error);
@@ -63,7 +66,7 @@ const Index: React.FC<BooksPageType> = React.memo((props: BooksPageType) => {
 
   return (
     <>
-      <Flex width={'100%'} direction='column' pl='15vw' mt='2vw'>
+      <Flex width={'100%'} direction='column' pl={['10vw', '10vw', '10vw', '20vw']} mt='2vw'>
         <Books books={books} />
         <TopSpacer spacing='80px' />
       </Flex>
