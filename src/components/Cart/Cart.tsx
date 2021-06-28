@@ -1,4 +1,4 @@
-import { Flex, Box, Grid, Text } from '@chakra-ui/react';
+import { Flex, Box, Grid, Text, Button } from '@chakra-ui/react';
 import { PortraitProductCartBooks } from '../Reusable/PortraitProductCartBooks';
 import { qtysType, idsAndQtysType } from '../../redux/reducers/reducers.types';
 import { useEffect, useState } from 'react';
@@ -7,6 +7,8 @@ import { RootState } from '../../redux/reducers';
 import { BookDocument } from '../../database/models/book/book.interface';
 import { Loading } from '../Reusable/Loading';
 import { GenericHeading } from '../SubComponents/GenericHeading';
+import { mapIdsToProducts, nextRedirectPushBrowser } from '../../util/helpers';
+import { ArrowForwardIcon } from '@chakra-ui/icons';
 
 type CartProps = {
   books: BookDocument[];
@@ -16,7 +18,7 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
   const { books } = props;
 
   const [loading, setLoading] = useState(true);
-  const booksIdsStore = useSelector((state: RootState) => state.shoppingCart.books);
+  const booksIdsStore: idsAndQtysType = useSelector((state: RootState) => state.shoppingCart.books);
   const [booksIdsState, setBooksIdsState] = useState<idsAndQtysType>({
     ids: [],
     qtys: []
@@ -41,7 +43,7 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
   }, [booksIdsStore]);
 
   useEffect(() => {
-    setbooksInCart(mapIdsToProducts());
+    setbooksInCart(mapIdsToProducts(books, booksIdsState));
   }, [booksIdsState]);
 
   useEffect(() => {
@@ -63,21 +65,17 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
     setbooksTotalQty(sum);
   }, [booksQtys]);
 
-  const mapIdsToProducts = (): BookDocument[] => {
-    const booksInCart: BookDocument[] = [];
-
-    booksIdsState.ids.map(id => {
-      books.map(book => {
-        book._id === id ? booksInCart.push(book) : '';
-      });
-    });
-    return booksInCart;
-  };
-
   return (
-    <Flex flexDirection='column'>
-      <Flex justifyContent='flex-start' alignItems='flex-start'>
+    <Flex flexDirection='column' pr='10vw'>
+      <Flex justifyContent='space-between' alignItems='center'>
         <GenericHeading text='Coșul meu' />
+        <Button
+          fontSize={['14px', '16px', '16px', '18px', '20px']}
+          onClick={() => nextRedirectPushBrowser('/cart/checkout')}
+          rightIcon={<ArrowForwardIcon />}
+        >
+          Spre comandă
+        </Button>
       </Flex>
       <Box>
         {loading ? (
@@ -90,6 +88,7 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
               opacity='0.7'
               fontSize={['10px', '14px', '16px', '20px']}
               mb={['10px']}
+              mt={['20px']}
             >
               Aveți
               {booksIdsState.ids.length === 0

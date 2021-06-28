@@ -4,7 +4,9 @@ import jsCookie from 'js-cookie';
 import { ColorMode, useColorMode } from '@chakra-ui/react';
 
 import { MAX_TITLE_CHARACTERS } from '../util/constants/constants.other';
-import { qtysType } from '../redux/reducers/reducers.types';
+import { qtysType, idsAndQtysType } from '../redux/reducers/reducers.types';
+
+import { BookDocument } from '../database/models/book/book.interface';
 // import { BookDocument } from '../database/models/book/book.interface';
 // import { CdDocument } from '../database/models/cd/cd.interface';
 
@@ -261,4 +263,18 @@ export const isValidPassword = (password: string) => {
     return false;
   }
   return true;
+};
+
+export const mapIdsToProducts = (
+  books: BookDocument[],
+  booksIdsState: idsAndQtysType
+): BookDocument[] => {
+  const booksInCart: BookDocument[] = [];
+
+  booksIdsState.ids.map((id: string) => {
+    books.map(book => {
+      book._id === id ? booksInCart.push(book) : '';
+    });
+  });
+  return booksInCart;
 };

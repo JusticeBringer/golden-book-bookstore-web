@@ -32,7 +32,7 @@ export const Authors: React.FC<AuthorsProps> = (props: AuthorsProps) => {
   }
 
   return (
-    <Flex borderRadius={['10px']} flexDir={'column'}>
+    <Flex borderRadius={['10px']} flexDir={'column'} minH={['350px']}>
       <section
         className={
           width < 480 ? 'scrolling-wrapper-flexbox hideScrollBar' : 'scrolling-wrapper-flexbox'

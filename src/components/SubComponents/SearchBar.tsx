@@ -2,7 +2,13 @@ import { IconButton, InputGroup, InputRightElement, Input } from '@chakra-ui/rea
 import { theme } from '../../styles/theme';
 import { FaSearch } from 'react-icons/fa';
 
-export const SearchBar: React.FC = () => {
+type SearchBarProps = {
+  display?: string;
+};
+
+export const SearchBar: React.FC<SearchBarProps> = (props: SearchBarProps) => {
+  const { display } = props;
+
   return (
     <InputGroup
       boxShadow={['1px 0px 2px 2px rgba(239,230,62)']}
@@ -10,6 +16,7 @@ export const SearchBar: React.FC = () => {
       justifyContent='space-between'
       alignItems='center'
       borderRadius={['10px']}
+      display={display ?? 'inherit'}
     >
       <Input
         placeholder='Căutare...'

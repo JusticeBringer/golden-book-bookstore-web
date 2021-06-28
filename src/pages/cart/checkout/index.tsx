@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { GetStaticProps } from 'next';
 import { Box, Flex } from '@chakra-ui/react';
-import Cart from '../../components/Cart/Cart';
-import { BookDocument } from '../../database/models/book/book.interface';
+import Checkout from '../../../components/Checkout/Checkout';
+import { BookDocument } from '../../../database/models/book/book.interface';
 import { useEffect, useState } from 'react';
-import TopSpacer from '../../components/Reusable/TopSpacer';
+import TopSpacer from '../../../components/Reusable/TopSpacer';
 
-type CartProps = {
+type CheckoutProps = {
   books: BookDocument[];
 };
 
@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 };
 
-const Index: React.FC<CartProps> = (props: CartProps) => {
+const Index: React.FC<CheckoutProps> = (props: CheckoutProps) => {
   const booksProps = { props };
   const [loading, setLoading] = useState(true);
   const [books, setBooks] = useState<BookDocument[]>([]);
@@ -64,8 +64,8 @@ const Index: React.FC<CartProps> = (props: CartProps) => {
   }, [books]);
 
   return (
-    <Flex width={'100%'} direction='column' pl={['3vw', '10vw', '10vw', '20vw']}>
-      <Box>{loading ? '' : <Cart books={books} />}</Box>
+    <Flex width={'100%'} direction='column' px={['3vw', '10vw', '10vw', '20vw']}>
+      <Box>{loading ? '' : <Checkout books={books} />}</Box>
       <TopSpacer spacing='100px' />
     </Flex>
   );

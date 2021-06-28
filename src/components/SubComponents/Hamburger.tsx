@@ -28,14 +28,20 @@ import HEADER_NAV_ITEMS, { NavItem } from '../Header/HeaderItems';
 import { THEME_BREAKPOINTS } from '../../util/constants/constants.other';
 import { useWindowDimensions } from '../../util/helpers';
 
-export const Hamburger: React.FC = () => {
+type HamburgerProps = {
+  display?: string;
+};
+
+export const Hamburger: React.FC<HamburgerProps> = (props: HamburgerProps) => {
+  const { display } = props;
+
   const { isOpen, onToggle } = useDisclosure();
   const { width } = useWindowDimensions();
 
   return (
     <aside>
       {width < THEME_BREAKPOINTS.md2 && (
-        <Flex>
+        <Flex display={display ?? 'inherit'}>
           <IconButton
             onClick={onToggle}
             icon={
