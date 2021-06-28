@@ -2,7 +2,8 @@ import {
   ADD_TO_CART,
   SUBSTRACT_FROM_CART,
   REMOVE_FROM_CART,
-  SET_EXACT_VALUE
+  SET_EXACT_VALUE,
+  CLEAR_CART
 } from '../../util/constants/constants.redux';
 
 export const addToCart = (itemId: string) => {
@@ -39,5 +40,11 @@ export const removeFromCart = (itemId: string) => {
     payload: {
       id: itemId
     }
+  };
+};
+
+export const clearCart = () => {
+  return {
+    type: CLEAR_CART
   };
 };

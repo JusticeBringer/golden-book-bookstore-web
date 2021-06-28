@@ -24,11 +24,15 @@ export const ProductListItem: React.FC<ProductListItemProps> = (props: ProductLi
         borderBottom={[`2px solid ${theme.colors.primaryBlue[300]}`]}
         pb={['2px']}
       >
-        <Text fontWeight={['bold']}>x</Text>
-        <Text> {productQuantity} </Text>
+        <Text fontWeight={['bold']}>
+          x {''}
+          {productQuantity}
+        </Text>
         <Text fontWeight={['bold']}>=</Text>
-        <Text>{productPrice}</Text>
-        <Text>lei</Text>
+        <Text>
+          {productPrice}
+          {''} lei
+        </Text>
       </Flex>
     </Flex>
   );

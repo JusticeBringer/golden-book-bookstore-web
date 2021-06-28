@@ -22,6 +22,8 @@ import { RootState } from '../../redux/reducers';
 
 import SocialSignIn from './SocialSignIn';
 import { setCookie } from '../../util/helpers';
+import { user as UserCookie } from '../../util/constants/constants.cookies';
+
 import { authenticated } from '../../util/constants/constants.cookies';
 import ErrorFormText from '../Reusable/ErrorFormText';
 import {
@@ -35,6 +37,7 @@ import { toggleSnackbarOpen } from '../../redux/actions/snackbar.action';
 import { SNACKBAR_DANGER, SNACKBAR_INFO } from '../../util/constants/constants.redux';
 
 import { Loading } from '../Reusable/Loading';
+import { setUserId, setUserJwtToken } from '../../redux/actions/user.action';
 
 type SignInCompProps = {
   googleClientId: string;
@@ -174,10 +177,17 @@ export const SignInComp: React.FC<SignInCompProps> = (props: SignInCompProps) =>
     await axios
       .post(signInApiUrl, { user })
       .then(response => {
-        const resultToken = response.data;
-        console.log('token: ', resultToken);
+        const resultUserId = response.data.userId;
+        const resultToken = response.data.token;
+
+        dispatch(setUserId(resultUserId));
+        dispatch(setUserJwtToken(resultToken));
+
+        setCookie(UserCookie, { id: resultUserId, jwtToken: resultToken }, 1);
+
         dispatch(toggleSnackbarOpen(SNACKBAR_INFO, 'Autentificare reușită.'));
         setCookie(authenticated, 'true');
+
         dispatch(signIn());
         setLoading(false);
       })

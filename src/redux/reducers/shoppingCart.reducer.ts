@@ -3,7 +3,8 @@ import {
   ADD_TO_CART,
   SUBSTRACT_FROM_CART,
   REMOVE_FROM_CART,
-  SET_EXACT_VALUE
+  SET_EXACT_VALUE,
+  CLEAR_CART
 } from '../../util/constants/constants.redux';
 import { shoppingCartInitialStateType } from './reducers.types';
 import { shoppingCartBooks } from '../../util/constants/constants.cookies';
@@ -115,6 +116,19 @@ export const shoppingCartReducer = (state: any = shoppingCartInitialState, actio
       return {
         ...state,
         books: updatedCartBooksRemove
+      };
+
+    case CLEAR_CART:
+      return {
+        books: {
+          ids: [],
+          qtys: [
+            {
+              id: '',
+              qty: 0
+            }
+          ]
+        }
       };
 
     default:

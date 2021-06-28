@@ -27,3 +27,10 @@ export type snackbarInitialStateType = {
   type: string;
   message: string;
 };
+
+export type userInitialStateType = {
+  data: {
+    id: string;
+    jwtToken: string;
+  };
+};

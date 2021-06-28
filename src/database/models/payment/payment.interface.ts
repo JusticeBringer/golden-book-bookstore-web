@@ -11,7 +11,7 @@ export interface IPayment {
   userId: string;
   status: string;
   amount: number;
-  paymentMethod?: string;
+  paymentMethod: string;
   token: string;
   card?: cardType;
 }

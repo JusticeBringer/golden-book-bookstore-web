@@ -1,17 +1,23 @@
 import axios from 'axios';
 import { GetStaticProps } from 'next';
+import { useEffect, useState } from 'react';
 import { Box, Flex } from '@chakra-ui/react';
+
 import Checkout from '../../../components/Checkout/Checkout';
 import { BookDocument } from '../../../database/models/book/book.interface';
-import { useEffect, useState } from 'react';
 import TopSpacer from '../../../components/Reusable/TopSpacer';
 
 type CheckoutProps = {
   books: BookDocument[];
+  ordersApiUrl: string;
+  paymentsApiUrl: string;
 };
 
 export const getStaticProps: GetStaticProps = async () => {
   const booksApi = process.env.DOMAIN_URL_API_BOOKS;
+  const ordersApiUrl = process.env.DOMAIN_URL_API_ORDERS;
+  const paymentsApiUrl = process.env.DOMAIN_URL_API_PAYMENTS;
+
   const headers = {
     authorization: process.env.SECRET_JWT_TOKEN
   };
@@ -28,7 +34,9 @@ export const getStaticProps: GetStaticProps = async () => {
 
     return {
       props: {
-        books
+        books,
+        ordersApiUrl,
+        paymentsApiUrl
       }
     };
   } else {
@@ -43,7 +51,9 @@ export const getStaticProps: GetStaticProps = async () => {
 
     return {
       props: {
-        books
+        books,
+        ordersApiUrl,
+        paymentsApiUrl
       },
       revalidate: 60 // 60 seconds = 1 minute
     };
@@ -51,21 +61,26 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Index: React.FC<CheckoutProps> = (props: CheckoutProps) => {
-  const booksProps = { props };
   const [loading, setLoading] = useState(true);
-  const [books, setBooks] = useState<BookDocument[]>([]);
+  const { books, ordersApiUrl, paymentsApiUrl } = props;
 
   useEffect(() => {
-    setBooks(booksProps.props.books);
-  }, [booksProps]);
-
-  useEffect(() => {
-    setLoading(false);
+    if (books === []) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
   }, [books]);
 
   return (
-    <Flex width={'100%'} direction='column' px={['3vw', '10vw', '10vw', '20vw']}>
-      <Box>{loading ? '' : <Checkout books={books} />}</Box>
+    <Flex direction='column' px={['3vw', '10vw', '10vw', '20vw']}>
+      <Box>
+        {loading ? (
+          ''
+        ) : (
+          <Checkout books={books} ordersApiUrl={ordersApiUrl} paymentsApiUrl={paymentsApiUrl} />
+        )}
+      </Box>
       <TopSpacer spacing='100px' />
     </Flex>
   );

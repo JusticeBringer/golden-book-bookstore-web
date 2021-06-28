@@ -1,14 +1,29 @@
-import { Flex, Box, Grid, Text, Button } from '@chakra-ui/react';
-import { PortraitProductCartBooks } from '../Reusable/PortraitProductCartBooks';
-import { qtysType, idsAndQtysType } from '../../redux/reducers/reducers.types';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import {
+  Flex,
+  Box,
+  Grid,
+  Text,
+  Button,
+  useDisclosure,
+  ModalBody,
+  ModalCloseButton,
+  ModalHeader,
+  ModalContent,
+  ModalOverlay,
+  ModalFooter,
+  Modal
+} from '@chakra-ui/react';
+import { ArrowForwardIcon } from '@chakra-ui/icons';
+
+import { PortraitProductCartBooks } from '../Reusable/PortraitProductCartBooks';
+import { qtysType, idsAndQtysType } from '../../redux/reducers/reducers.types';
 import { RootState } from '../../redux/reducers';
 import { BookDocument } from '../../database/models/book/book.interface';
 import { Loading } from '../Reusable/Loading';
 import { GenericHeading } from '../SubComponents/GenericHeading';
 import { mapIdsToProducts, nextRedirectPushBrowser } from '../../util/helpers';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
 
 type CartProps = {
   books: BookDocument[];
@@ -16,6 +31,7 @@ type CartProps = {
 
 export const Cart: React.FC<CartProps> = (props: CartProps) => {
   const { books } = props;
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [loading, setLoading] = useState(true);
   const booksIdsStore: idsAndQtysType = useSelector((state: RootState) => state.shoppingCart.books);
@@ -33,6 +49,8 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
       setLoading(false);
     }
   }, [updatingStore]);
+
+  const authenticated = useSelector((state: RootState) => state.authenticated);
 
   const [booksInCart, setbooksInCart] = useState<BookDocument[]>([]);
   const [booksQtys, setBooksQtys] = useState<qtysType[]>([]);
@@ -65,17 +83,58 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
     setbooksTotalQty(sum);
   }, [booksQtys]);
 
+  const handleCheckoutClick = (event: any) => {
+    event.preventDefault();
+
+    if (authenticated) {
+      nextRedirectPushBrowser('/cart/checkout');
+    } else {
+      // popup
+      onOpen();
+    }
+  };
+
   return (
     <Flex flexDirection='column' pr='10vw'>
       <Flex justifyContent='space-between' alignItems='center'>
         <GenericHeading text='Coșul meu' />
-        <Button
-          fontSize={['14px', '16px', '16px', '18px', '20px']}
-          onClick={() => nextRedirectPushBrowser('/cart/checkout')}
-          rightIcon={<ArrowForwardIcon />}
-        >
-          Spre comandă
-        </Button>
+        {booksIdsState.ids.length > 0 ? (
+          <>
+            <Button
+              fontSize={['14px', '16px', '16px', '18px', '20px']}
+              onClick={e => handleCheckoutClick(e)}
+              rightIcon={<ArrowForwardIcon />}
+            >
+              Spre comandă
+            </Button>
+            <Modal isOpen={isOpen} onClose={onClose} isCentered>
+              <ModalOverlay />
+              <ModalContent>
+                <ModalHeader>Autentificare necesară</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                  Pentru a finaliza procesul de plată este necesar să vă autentificați.
+                </ModalBody>
+
+                <ModalFooter>
+                  <Button
+                    colorScheme='blue'
+                    mr={3}
+                    onClick={() => nextRedirectPushBrowser('/signin')}
+                  >
+                    Spre autentificare
+                  </Button>
+                  <Button variant='ghost' onClick={onClose}>
+                    {' '}
+                    Închide{' '}
+                  </Button>
+                </ModalFooter>
+              </ModalContent>
+            </Modal>
+          </>
+        ) : (
+          <></>
+        )}
       </Flex>
       <Box>
         {loading ? (
