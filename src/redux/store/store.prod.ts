@@ -1,5 +1,7 @@
 import { createStore, applyMiddleware, AnyAction, Store, Middleware } from 'redux';
 import { HYDRATE, createWrapper } from 'next-redux-wrapper';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
 import thunkMiddleware from 'redux-thunk';
 import allReducers from '../../redux/reducers';
 
@@ -16,7 +18,7 @@ const reducer = (state: any, action: AnyAction) => {
 };
 
 const bindMiddleware = (middleware: Middleware[]) => {
-  return applyMiddleware(...middleware);
+  return composeWithDevTools(applyMiddleware(...middleware));
 };
 
 const makeStore = () => createStore(reducer, bindMiddleware([thunkMiddleware]));
