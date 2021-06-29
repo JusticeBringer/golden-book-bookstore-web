@@ -353,7 +353,15 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
 
   const emptyCartFromCookiesAndStore = () => {
     // from cookies
-    setCookie(shoppingCartBooks, shoppingCartInitialState);
+    setCookie(shoppingCartBooks, {
+      ids: [],
+      qtys: [
+        {
+          id: '',
+          qty: 0
+        }
+      ]
+    });
 
     // from store
     dispatch(clearCart());

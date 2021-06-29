@@ -13,7 +13,10 @@ export default class Document extends NextDocument {
           <link rel='mask-icon' href='/favicons/safari-pinned-tab.svg' color='#5bbad5' />
           <meta name='msapplication-TileColor' content='#da532c' />
           <meta name='theme-color' content='#ffffff' />
-          <script src='https://paypal.com/sdk/js?client-id=AU3BVKBOgOinsp7aFAiODGCxyejVIevT-Cn381WTdHJhigq5oXkaepn9damehepmXHbJbRAYcyY1fZgx&currency=CAD'></script>
+          {/* <script
+            defer
+            src='https://paypal.com/sdk/js?client-id=AU3BVKBOgOinsp7aFAiODGCxyejVIevT-Cn381WTdHJhigq5oXkaepn9damehepmXHbJbRAYcyY1fZgx&currency=CAD'
+          ></script> */}
         </Head>
         <body>
           {/* Make Color mode to persists when you refresh the page. */}

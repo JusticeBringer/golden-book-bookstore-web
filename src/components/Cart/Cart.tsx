@@ -50,6 +50,14 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
     }
   }, [updatingStore]);
 
+  useEffect(() => {
+    if (!booksIdsStore) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [booksIdsStore]);
+
   const authenticated = useSelector((state: RootState) => state.authenticated);
 
   const [booksInCart, setbooksInCart] = useState<BookDocument[]>([]);
@@ -98,7 +106,7 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
     <Flex flexDirection='column' pr='10vw'>
       <Flex justifyContent='space-between' alignItems='center'>
         <GenericHeading text='Coșul meu' />
-        {booksIdsState.ids.length > 0 ? (
+        {!loading && booksIdsState !== undefined && booksIdsState?.ids?.length > 0 ? (
           <>
             <Button
               fontSize={['14px', '16px', '16px', '18px', '20px']}
@@ -150,11 +158,14 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
               mt={['20px']}
             >
               Aveți
-              {booksIdsState.ids.length === 0
+              {!loading &&
+              !booksIdsState &&
+              booksIdsState !== undefined &&
+              booksIdsState?.ids.length === 0
                 ? ' 0 cărți '
-                : booksIdsState.ids.length === 1
+                : booksIdsState?.ids.length === 1
                 ? ' 1 carte '
-                : ` ${booksIdsState.ids.length} cărți `}
+                : ` ${booksIdsState?.ids.length} cărți `}
               cu o cantitate de{' '}
               {booksTotalQty === 0
                 ? '0 bucăți'

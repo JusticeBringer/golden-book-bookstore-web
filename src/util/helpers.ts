@@ -188,6 +188,9 @@ export const isValidApiCall = (givenUrl: string) => {
 
 export const getUserQty = (itemId: string, booksQtys: qtysType[]) => {
   let qty: number = 1;
+  if (!booksQtys || booksQtys === []) {
+    return qty;
+  }
   booksQtys.map(item => {
     if (item.id === itemId) {
       qty = item.qty;
