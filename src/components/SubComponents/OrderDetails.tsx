@@ -29,7 +29,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = (props: OrderDetailsPro
   const [myBooks, setMyBooks] = useState<BookDocument[]>([]);
 
   useEffect(() => {
-    let myLetBooks: BookDocument[] = [];
+    const myLetBooks: BookDocument[] = [];
 
     books.map(book => {
       order.items.map(item => {

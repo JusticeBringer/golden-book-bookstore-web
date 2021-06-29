@@ -91,7 +91,7 @@ export const SignInComp: React.FC<SignInCompProps> = (props: SignInCompProps) =>
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    let interval = setInterval(() => {
+    const interval = setInterval(() => {
       if (emailRef.current) {
         setEmail(emailRef.current.value);
         clearInterval(interval);

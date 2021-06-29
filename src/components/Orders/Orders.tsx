@@ -31,7 +31,7 @@ export const Orders: React.FC<OrderProps> = (props: OrderProps) => {
 
   useEffect(() => {
     if (orders !== []) {
-      let myOrd: OrderDocument[] = [];
+      const myOrd: OrderDocument[] = [];
       orders.map(order => {
         if (order.userId === userStore.data.id) {
           myOrd.push(order);
