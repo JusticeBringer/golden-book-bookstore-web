@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Flex, Heading, Button } from '@chakra-ui/react';
+import { Flex, Heading, Button, Stack, Icon, Text } from '@chakra-ui/react';
+import { ChevronRightIcon } from '@chakra-ui/icons';
+import { FaCarSide } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { signOut } from '../../redux/actions/authentication.action';
@@ -45,14 +47,49 @@ export const Profile: React.FC = () => {
           <Loading />
         </Flex>
       ) : (
-        <Flex justifyContent='center' alignItems='center' flexDirection='column'>
+        <Flex flexDirection='column' justifyContent='flex-start'>
           {isAuthenticatedStore ? (
-            <Flex flexDir='column'>
-              <Heading fontSize='5vw' color={theme.colors.primaryBlack[800]}>
+            <>
+              <Heading fontSize='5vw' color={theme.colors.primaryBlack[800]} mb={['5vh']}>
                 Contul meu
               </Heading>
-              <Button onClick={(event: any) => handleLogout(event)}>Deconectare</Button>
-            </Flex>
+              <Stack
+                flexDir='column'
+                justifyContent='flex-start'
+                alignItems='flex-start'
+                width='fit-content'
+                spacing={['3vh']}
+              >
+                <Flex
+                  flexDir='row'
+                  justifyContent='space-between'
+                  alignItems='center'
+                  minW={['80vw', '70vw', '60vw', '50vw']}
+                >
+                  <Flex
+                    flexDir='row'
+                    justifyContent='space-between'
+                    alignItems='center'
+                    onClick={() => nextRedirectPushBrowser('/profile/orders')}
+                    cursor='pointer'
+                  >
+                    <Icon
+                      as={FaCarSide}
+                      boxSize={['40px', '45px', '50px', '60px', '70px']}
+                      mr={['10px']}
+                    />
+                    <Text fontSize={'3vw'}>Comenzile mele</Text>
+                  </Flex>
+                  <ChevronRightIcon
+                    boxSize={'40px'}
+                    onClick={() => nextRedirectPushBrowser('/profile/orders')}
+                    cursor='pointer'
+                  />
+                </Flex>
+
+                <Button onClick={(event: any) => handleLogout(event)}>Deconectare</Button>
+              </Stack>
+            </>
           ) : (
             <></>
           )}

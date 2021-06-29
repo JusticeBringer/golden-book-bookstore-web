@@ -6,8 +6,11 @@ import { Center } from '@chakra-ui/react';
 
 import { signIn } from '../../redux/actions/authentication.action';
 import { toggleSnackbarOpen } from '../../redux/actions/snackbar.action';
+import { setUserId, setUserJwtToken } from '../../redux/actions/user.action';
 import { SNACKBAR_DANGER, SNACKBAR_INFO } from '../../util/constants/constants.redux';
 import { setCookie } from '../../util/helpers';
+import { user as UserCookie } from '../../util/constants/constants.cookies';
+
 import { authenticated } from '../../util/constants/constants.cookies';
 import Loading from '../Reusable/Loading';
 
@@ -49,11 +52,18 @@ export const GoogleButton: React.FC<GoogleButtonProps> = (props: GoogleButtonPro
     await axios
       .post(googleRegistrationApiUrl, { user })
       .then(response => {
-        const resultToken = response.data;
-        console.log('token: ', resultToken);
+        const resultUserId = response.data.userId;
+        const resultToken = response.data.token;
+
+        dispatch(setUserId(resultUserId));
+        dispatch(setUserJwtToken(resultToken));
+        setCookie(UserCookie, { id: resultUserId, jwtToken: resultToken }, 1);
+
         dispatch(toggleSnackbarOpen(SNACKBAR_INFO, 'Înregistrare reușită.'));
+
         setCookie(authenticated, 'true');
         dispatch(signIn());
+
         setLoading(false);
       })
       .catch(() => {
@@ -74,11 +84,18 @@ export const GoogleButton: React.FC<GoogleButtonProps> = (props: GoogleButtonPro
     await axios
       .post(googleAuthenticationApiUrl, { user })
       .then(response => {
-        const resultToken = response.data;
-        console.log('token: ', resultToken);
+        const resultUserId = response.data.userId;
+        const resultToken = response.data.token;
+
+        dispatch(setUserId(resultUserId));
+        dispatch(setUserJwtToken(resultToken));
+        setCookie(UserCookie, { id: resultUserId, jwtToken: resultToken }, 1);
+
         dispatch(toggleSnackbarOpen(SNACKBAR_INFO, 'Autentificare reușită.'));
+
         setCookie(authenticated, 'true');
         dispatch(signIn());
+
         setLoading(false);
       })
       .catch(() => {

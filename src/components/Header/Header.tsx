@@ -1,14 +1,30 @@
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { Flex } from '@chakra-ui/react';
 
 import { SearchBar } from '../SubComponents/SearchBar';
 import { Hamburger } from '../SubComponents/Hamburger';
 
-type HeaderProps = {
-  showSearchBar?: boolean;
-};
+export const Header: React.FC = () => {
+  const [displayHamburger, setDisplayHamburger] = useState('block');
+  const [displaySearchBar, setDisplaySearchBar] = useState('block');
 
-export const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
-  const { showSearchBar = true } = props;
+  const router = useRouter();
+  useEffect(() => {
+    if (router.pathname.includes('cart')) {
+      if (router.pathname.includes('checkout')) {
+        setDisplayHamburger('none');
+      } else {
+        setDisplayHamburger('initial');
+      }
+      setDisplaySearchBar('none');
+    } else if (router.pathname.includes('profile')) {
+      setDisplaySearchBar('none');
+    } else {
+      setDisplayHamburger('block');
+      setDisplaySearchBar('block');
+    }
+  }, [router]);
 
   return (
     <Flex
@@ -20,8 +36,8 @@ export const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
       justifyContent='space-between'
       flexDir='row'
     >
-      <Hamburger />
-      {showSearchBar && <SearchBar />}
+      <Hamburger display={displayHamburger} />
+      {/* <SearchBar display={displaySearchBar} /> */}
     </Flex>
   );
 };

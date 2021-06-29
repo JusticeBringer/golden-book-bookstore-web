@@ -1,17 +1,25 @@
 import axios from 'axios';
 import { GetStaticProps } from 'next';
-import { Box, Flex } from '@chakra-ui/react';
-import Cart from '../../components/Cart/Cart';
-import { BookDocument } from '../../database/models/book/book.interface';
 import { useEffect, useState } from 'react';
-import TopSpacer from '../../components/Reusable/TopSpacer';
+import { Box, Flex } from '@chakra-ui/react';
 
-type CartProps = {
+import Checkout from '../../../components/Checkout/Checkout';
+import { BookDocument } from '../../../database/models/book/book.interface';
+import TopSpacer from '../../../components/Reusable/TopSpacer';
+
+type CheckoutProps = {
   books: BookDocument[];
+  ordersApiUrl: string;
+  paymentsApiUrl: string;
+  paypalClientId: string;
 };
 
 export const getStaticProps: GetStaticProps = async () => {
   const booksApi = process.env.DOMAIN_URL_API_BOOKS;
+  const ordersApiUrl = process.env.DOMAIN_URL_API_ORDERS;
+  const paymentsApiUrl = process.env.DOMAIN_URL_API_PAYMENTS;
+  const paypalClientId = process.env.PAYPAL_CLIENT_ID;
+
   const headers = {
     authorization: process.env.SECRET_JWT_TOKEN
   };
@@ -28,7 +36,10 @@ export const getStaticProps: GetStaticProps = async () => {
 
     return {
       props: {
-        books
+        books,
+        ordersApiUrl,
+        paymentsApiUrl,
+        paypalClientId
       }
     };
   } else {
@@ -43,29 +54,37 @@ export const getStaticProps: GetStaticProps = async () => {
 
     return {
       props: {
-        books
+        books,
+        ordersApiUrl,
+        paymentsApiUrl,
+        paypalClientId
       },
       revalidate: 60 // 60 seconds = 1 minute
     };
   }
 };
 
-const Index: React.FC<CartProps> = (props: CartProps) => {
-  const booksProps = { props };
+const Index: React.FC<CheckoutProps> = (props: CheckoutProps) => {
   const [loading, setLoading] = useState(true);
-  const [books, setBooks] = useState<BookDocument[]>([]);
+  const { books, ordersApiUrl, paymentsApiUrl, paypalClientId } = props;
 
   useEffect(() => {
-    setBooks(booksProps.props.books);
-  }, [booksProps]);
-
-  useEffect(() => {
-    setLoading(false);
+    if (books === []) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
   }, [books]);
 
   return (
-    <Flex direction='column' pl={['3vw', '10vw', '10vw', '20vw']}>
-      <Box>{loading ? '' : <Cart books={books} />}</Box>
+    <Flex direction='column' px={['3vw', '10vw', '10vw', '20vw']}>
+      <Box>
+        {loading ? (
+          ''
+        ) : (
+          <Checkout books={books} ordersApiUrl={ordersApiUrl} paymentsApiUrl={paymentsApiUrl} />
+        )}
+      </Box>
       <TopSpacer spacing='100px' />
     </Flex>
   );

@@ -27,14 +27,14 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
 
   useEffect(() => {
     // if no items in cart
-    if (booksIdsStore.length === 0) {
+    if (booksIdsStore && booksIdsStore?.length === 0) {
       setIsInCart(false);
       return;
     }
 
     // get item position
     let i: number;
-    for (i = 0; i < booksIdsStore.length; i++) {
+    for (i = 0; i < booksIdsStore?.length; i++) {
       if (booksIdsStore[i] === _id) {
         setIsInCart(true);
         return;
@@ -43,7 +43,6 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
 
     // item is not in cart, set to false
     setIsInCart(false);
-    return;
   }, [booksIdsStore]);
 
   return (

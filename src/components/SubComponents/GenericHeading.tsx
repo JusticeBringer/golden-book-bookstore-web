@@ -18,7 +18,7 @@ export const GenericHeading: React.FC<GenericHeadingProps> = (props: GenericHead
       as={textAs ?? 'h1'}
       fontSize={textFontSize ?? ['20px', '22px', '24px']}
       color={color ?? theme.colors.primaryBlack[900]}
-      mb={['10px']}
+      pb={['10px']}
       alignSelf={alignSelf ?? 'center'}
       display={display ?? 'inherit'}
     >

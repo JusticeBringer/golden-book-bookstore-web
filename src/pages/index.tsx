@@ -56,7 +56,7 @@ export const getStaticProps: GetStaticProps = async () => {
         books,
         cds
       },
-      revalidate: 300 // 60 seconds = 1 minute
+      revalidate: 60 // 60 seconds = 1 minute
     };
   }
 };
@@ -66,7 +66,7 @@ const Index: React.FC<HomePageType> = (props: HomePageType) => {
 
   return (
     <>
-      <Box width={'100%'} direction='column' pl={['10vw', '10vw', '10vw', '20vw']} mt='2vw'>
+      <Box direction='column' pl={['10vw', '10vw', '10vw', '20vw']} pr={['10vw']} mt='2vw'>
         <Home books={books} cds={cds} />
         <TopSpacer spacing='80px' />
       </Box>

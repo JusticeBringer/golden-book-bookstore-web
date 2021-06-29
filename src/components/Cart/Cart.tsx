@@ -1,12 +1,29 @@
-import { Flex, Box, Grid, Text } from '@chakra-ui/react';
-import { PortraitProductCartBooks } from '../Reusable/PortraitProductCartBooks';
-import { qtysType, idsAndQtysType } from '../../redux/reducers/reducers.types';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import {
+  Flex,
+  Box,
+  Grid,
+  Text,
+  Button,
+  useDisclosure,
+  ModalBody,
+  ModalCloseButton,
+  ModalHeader,
+  ModalContent,
+  ModalOverlay,
+  ModalFooter,
+  Modal
+} from '@chakra-ui/react';
+import { ArrowForwardIcon } from '@chakra-ui/icons';
+
+import { PortraitProductCartBooks } from '../Reusable/PortraitProductCartBooks';
+import { qtysType, idsAndQtysType } from '../../redux/reducers/reducers.types';
 import { RootState } from '../../redux/reducers';
 import { BookDocument } from '../../database/models/book/book.interface';
 import { Loading } from '../Reusable/Loading';
 import { GenericHeading } from '../SubComponents/GenericHeading';
+import { mapIdsToProducts, nextRedirectPushBrowser } from '../../util/helpers';
 
 type CartProps = {
   books: BookDocument[];
@@ -14,9 +31,10 @@ type CartProps = {
 
 export const Cart: React.FC<CartProps> = (props: CartProps) => {
   const { books } = props;
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [loading, setLoading] = useState(true);
-  const booksIdsStore = useSelector((state: RootState) => state.shoppingCart.books);
+  const booksIdsStore: idsAndQtysType = useSelector((state: RootState) => state.shoppingCart.books);
   const [booksIdsState, setBooksIdsState] = useState<idsAndQtysType>({
     ids: [],
     qtys: []
@@ -32,6 +50,8 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
     }
   }, [updatingStore]);
 
+  const authenticated = useSelector((state: RootState) => state.authenticated);
+
   const [booksInCart, setbooksInCart] = useState<BookDocument[]>([]);
   const [booksQtys, setBooksQtys] = useState<qtysType[]>([]);
   const [booksTotalQty, setbooksTotalQty] = useState(0);
@@ -41,7 +61,7 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
   }, [booksIdsStore]);
 
   useEffect(() => {
-    setbooksInCart(mapIdsToProducts());
+    setbooksInCart(mapIdsToProducts(books, booksIdsState));
   }, [booksIdsState]);
 
   useEffect(() => {
@@ -63,21 +83,58 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
     setbooksTotalQty(sum);
   }, [booksQtys]);
 
-  const mapIdsToProducts = (): BookDocument[] => {
-    const booksInCart: BookDocument[] = [];
+  const handleCheckoutClick = (event: any) => {
+    event.preventDefault();
 
-    booksIdsState.ids.map(id => {
-      books.map(book => {
-        book._id === id ? booksInCart.push(book) : '';
-      });
-    });
-    return booksInCart;
+    if (authenticated) {
+      nextRedirectPushBrowser('/cart/checkout');
+    } else {
+      // popup
+      onOpen();
+    }
   };
 
   return (
-    <Flex flexDirection='column'>
-      <Flex justifyContent='flex-start' alignItems='flex-start'>
+    <Flex flexDirection='column' pr='10vw'>
+      <Flex justifyContent='space-between' alignItems='center'>
         <GenericHeading text='Coșul meu' />
+        {booksIdsState.ids.length > 0 ? (
+          <>
+            <Button
+              fontSize={['14px', '16px', '16px', '18px', '20px']}
+              onClick={e => handleCheckoutClick(e)}
+              rightIcon={<ArrowForwardIcon />}
+            >
+              Spre comandă
+            </Button>
+            <Modal isOpen={isOpen} onClose={onClose} isCentered>
+              <ModalOverlay />
+              <ModalContent>
+                <ModalHeader>Autentificare necesară</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                  Pentru a finaliza procesul de plată este necesar să vă autentificați.
+                </ModalBody>
+
+                <ModalFooter>
+                  <Button
+                    colorScheme='blue'
+                    mr={3}
+                    onClick={() => nextRedirectPushBrowser('/signin')}
+                  >
+                    Spre autentificare
+                  </Button>
+                  <Button variant='ghost' onClick={onClose}>
+                    {' '}
+                    Închide{' '}
+                  </Button>
+                </ModalFooter>
+              </ModalContent>
+            </Modal>
+          </>
+        ) : (
+          <></>
+        )}
       </Flex>
       <Box>
         {loading ? (
@@ -90,6 +147,7 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
               opacity='0.7'
               fontSize={['10px', '14px', '16px', '20px']}
               mb={['10px']}
+              mt={['20px']}
             >
               Aveți
               {booksIdsState.ids.length === 0
