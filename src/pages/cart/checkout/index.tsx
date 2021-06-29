@@ -11,14 +11,12 @@ type CheckoutProps = {
   books: BookDocument[];
   ordersApiUrl: string;
   paymentsApiUrl: string;
-  paypalClientId: string;
 };
 
 export const getStaticProps: GetStaticProps = async () => {
   const booksApi = process.env.DOMAIN_URL_API_BOOKS;
   const ordersApiUrl = process.env.DOMAIN_URL_API_ORDERS;
   const paymentsApiUrl = process.env.DOMAIN_URL_API_PAYMENTS;
-  const paypalClientId = process.env.PAYPAL_CLIENT_ID;
 
   const headers = {
     authorization: process.env.SECRET_JWT_TOKEN
@@ -38,8 +36,7 @@ export const getStaticProps: GetStaticProps = async () => {
       props: {
         books,
         ordersApiUrl,
-        paymentsApiUrl,
-        paypalClientId
+        paymentsApiUrl
       }
     };
   } else {
@@ -56,8 +53,7 @@ export const getStaticProps: GetStaticProps = async () => {
       props: {
         books,
         ordersApiUrl,
-        paymentsApiUrl,
-        paypalClientId
+        paymentsApiUrl
       },
       revalidate: 60 // 60 seconds = 1 minute
     };
@@ -66,7 +62,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Index: React.FC<CheckoutProps> = (props: CheckoutProps) => {
   const [loading, setLoading] = useState(true);
-  const { books, ordersApiUrl, paymentsApiUrl, paypalClientId } = props;
+  const { books, ordersApiUrl, paymentsApiUrl } = props;
 
   useEffect(() => {
     if (books === []) {
