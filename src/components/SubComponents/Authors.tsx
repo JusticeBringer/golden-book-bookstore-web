@@ -32,7 +32,7 @@ export const Authors: React.FC<AuthorsProps> = (props: AuthorsProps) => {
   }
 
   return (
-    <Flex borderRadius={['10px']} flexDir={'column'} minH={['350px']}>
+    <Flex borderRadius={['10px']} flexDir={'column'} minH={['350px', '400px', '450px', '600px']}>
       <section
         className={
           width < 480 ? 'scrolling-wrapper-flexbox hideScrollBar' : 'scrolling-wrapper-flexbox'
@@ -67,7 +67,7 @@ export const Authors: React.FC<AuthorsProps> = (props: AuthorsProps) => {
           </Flex>
         ))}
       </section>
-      <Flex maxW={['90vw', '90vw', '85vw', '80vw']}>
+      <Flex maxW={['90vw', '90vw', '80vw', '75vw']}>
         <PortraitBooksGroup books={activeBooks} booksQtys={booksQtys} />
       </Flex>
     </Flex>

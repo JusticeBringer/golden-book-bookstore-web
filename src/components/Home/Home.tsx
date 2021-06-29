@@ -12,7 +12,7 @@ import { Authors } from '../SubComponents/Authors';
 import { Loading } from '../Reusable/Loading';
 
 import { theme } from '../../styles/theme';
-import { HomePageType } from '../../util/types';
+import { BooksArrayType, HomePageType } from '../../util/types';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducers';
 import { idsAndQtysType, qtysType } from '../../redux/reducers/reducers.types';
@@ -62,6 +62,13 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
   useEffect(() => {
     setbooksQtysCartState(booksQtysCartStore);
   }, [booksQtysCartStore]);
+
+  const [mostRatedBooks, setMostRatedBooks] = useState<BookDocument[]>([]);
+  useEffect(() => {
+    const toSortBooks = [...books];
+    toSortBooks.sort((a, b) => b.rating - a.rating);
+    setMostRatedBooks(toSortBooks);
+  }, [books]);
 
   return (
     <Grid className='home-container' gap={['10px']}>
@@ -128,7 +135,14 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
         {loading ? (
           <Loading />
         ) : (
-          <LandscapeBooksGroup books={books.slice(0, 3)} booksQtys={booksQtysCartState} />
+          <>
+            {booksQtysCartState && booksQtysCartState?.length && (
+              <LandscapeBooksGroup
+                books={mostRatedBooks.slice(0, 3)}
+                booksQtys={booksQtysCartState}
+              />
+            )}{' '}
+          </>
         )}
       </Grid>
       <Grid gridArea='athBooks'>

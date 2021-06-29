@@ -56,7 +56,7 @@ export const getStaticProps: GetStaticProps = async () => {
         books,
         cds
       },
-      revalidate: 300 // 60 seconds = 1 minute
+      revalidate: 60 // 60 seconds = 1 minute
     };
   }
 };

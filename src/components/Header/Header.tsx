@@ -6,8 +6,8 @@ import { SearchBar } from '../SubComponents/SearchBar';
 import { Hamburger } from '../SubComponents/Hamburger';
 
 export const Header: React.FC = () => {
-  const [displayHamburger, setDisplayHamburger] = useState('initial');
-  const [displaySearchBar, setDisplaySearchBar] = useState('initial');
+  const [displayHamburger, setDisplayHamburger] = useState('block');
+  const [displaySearchBar, setDisplaySearchBar] = useState('block');
 
   const router = useRouter();
   useEffect(() => {
@@ -18,9 +18,11 @@ export const Header: React.FC = () => {
         setDisplayHamburger('initial');
       }
       setDisplaySearchBar('none');
+    } else if (router.pathname.includes('profile')) {
+      setDisplaySearchBar('none');
     } else {
-      setDisplayHamburger('initial');
-      setDisplaySearchBar('initial');
+      setDisplayHamburger('block');
+      setDisplaySearchBar('block');
     }
   }, [router]);
 
@@ -35,7 +37,7 @@ export const Header: React.FC = () => {
       flexDir='row'
     >
       <Hamburger display={displayHamburger} />
-      <SearchBar display={displaySearchBar} />
+      {/* <SearchBar display={displaySearchBar} /> */}
     </Flex>
   );
 };

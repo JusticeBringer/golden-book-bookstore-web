@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import { Formik } from 'formik';
@@ -17,6 +17,7 @@ import { SNACKBAR_DANGER, SNACKBAR_INFO } from '../../util/constants/constants.r
 import { theme } from '../../styles/theme';
 
 import { qtysType, idsAndQtysType } from '../../redux/reducers/reducers.types';
+import { shoppingCartInitialState } from '../../redux/reducers/shoppingCart.reducer';
 import { RootState } from '../../redux/reducers';
 import { BookDocument } from '../../database/models/book/book.interface';
 import { GenericHeading } from '../SubComponents/GenericHeading';
@@ -34,6 +35,8 @@ import TopSpacer from '../Reusable/TopSpacer';
 
 import { IPayment } from '../../database/models/payment/payment.interface';
 import { shoppingCartBooks } from '../../util/constants/constants.cookies';
+
+import Paypal from '../SubComponents/Paypal';
 
 type stepOneFormType = {
   deliveryOption: string;
@@ -129,6 +132,8 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
   const { books, ordersApiUrl, paymentsApiUrl } = props;
 
   const updatingStore = useSelector((state: RootState) => state.updatingStore);
+
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (updatingStore === true) {
       setLoading(true);
@@ -147,6 +152,14 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
   });
   const [booksInCart, setbooksInCart] = useState<BookDocument[]>([]);
   const [commandDetails, setCommandDetails] = useState<BookDocument[]>([]);
+
+  useEffect(() => {
+    if (booksInCart === []) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [booksInCart]);
 
   useEffect(() => {
     setBooksIdsState(booksIdsStore);
@@ -310,8 +323,8 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
       .then(() => {
         dispatch(toggleSnackbarOpen(SNACKBAR_INFO, 'Comandă plasată cu succes'));
         emptyCartFromCookiesAndStore();
-        setLoading(false);
         setFormValues({ ...formValues, step: formValues.step + 1 });
+        setLoading(false);
       })
       .catch(() => {
         setLoading(false);
@@ -340,7 +353,7 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
 
   const emptyCartFromCookiesAndStore = () => {
     // from cookies
-    setCookie(shoppingCartBooks, {});
+    setCookie(shoppingCartBooks, shoppingCartInitialState);
 
     // from store
     dispatch(clearCart());
@@ -415,8 +428,6 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
       </>
     );
   };
-
-  const [loading, setLoading] = useState(true);
 
   return (
     <Flex flexDirection='column'>
@@ -634,12 +645,8 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
                             <Radio color={theme.colors.primaryBlue[300]} value='Poștă'>
                               Poștă
                             </Radio>
-                            <Radio color={theme.colors.primaryBlue[300]} value='Transfer bancar'>
-                              Transfer bancar
-                            </Radio>
-                            <Radio color={theme.colors.primaryBlue[300]} value='Card'>
-                              Card
-                            </Radio>
+
+                            <Paypal />
                           </Stack>
                         </RadioGroupControl>
                         <SubmitButton
