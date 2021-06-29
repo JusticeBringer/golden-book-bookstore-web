@@ -36,8 +36,6 @@ import TopSpacer from '../Reusable/TopSpacer';
 import { IPayment } from '../../database/models/payment/payment.interface';
 import { shoppingCartBooks } from '../../util/constants/constants.cookies';
 
-import Paypal from '../SubComponents/Paypal';
-
 type stepOneFormType = {
   deliveryOption: string;
 };
@@ -653,8 +651,9 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
                             <Radio color={theme.colors.primaryBlue[300]} value='Poștă'>
                               Poștă
                             </Radio>
-
-                            <Paypal />
+                            <Radio color={theme.colors.primaryBlue[300]} value='Paypal'>
+                              Paypal
+                            </Radio>
                           </Stack>
                         </RadioGroupControl>
                         <SubmitButton
