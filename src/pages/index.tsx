@@ -64,6 +64,8 @@ export const getStaticProps: GetStaticProps = async () => {
 const Index: React.FC<HomePageType> = (props: HomePageType) => {
   const { books, cds } = props;
 
+  // receive books and cds as props
+
   return (
     <>
       <Box direction='column' pl={['10vw', '10vw', '10vw', '20vw']} pr={['10vw']} mt='2vw'>
