@@ -1,6 +1,5 @@
 import { Text, Flex, Heading } from '@chakra-ui/react';
 import { theme } from '../../styles/theme';
-import { ButtonDetails } from '../SubComponents/ButtonDetails';
 import { RatingStarsBook } from '../SubComponents/RatingStarsBook';
 
 import { BookType } from '../../util/types';
@@ -87,7 +86,6 @@ export const DetailsBook: React.FC<DetailsBookProps> = (props: DetailsBookProps)
           {quantity}
         </Text>
       </Flex>
-      <ButtonDetails sizeFontBtDet={sizeFontBtDet} bgClr={bgClr} nameCssClass={nameCssClass} />
     </>
   );
 };
