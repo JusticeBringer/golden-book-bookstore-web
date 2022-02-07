@@ -71,3 +71,5 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
+
+out_*
