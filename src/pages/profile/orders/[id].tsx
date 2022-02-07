@@ -29,12 +29,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   if (process.env.NODE_ENV !== 'production') {
     return {
       paths,
-      fallback: false
+      fallback: 'blocking'
     };
   } else {
     return {
       paths,
-      fallback: false
+      fallback: 'blocking'
     };
   }
 };
@@ -75,7 +75,8 @@ export const getStaticProps: GetStaticProps = async context => {
     props: {
       order: res,
       books: books
-    }
+    },
+    revalidate: 1
   };
 };
 

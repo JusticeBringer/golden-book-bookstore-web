@@ -167,6 +167,7 @@ export const ListenCds: React.FC<ListenCdsProps> = (props: ListenCdsProps) => {
               >
                 <Flex flexDir='column'>
                   <Image
+                    loading='eager'
                     src={cd.image}
                     alt={cd.title}
                     borderRadius={['10px']}

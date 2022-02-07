@@ -31,6 +31,7 @@ export const PortraitImageCdsGroup: React.FC<PortraitImageCdsGroupProps> = (
             className={'cardDarkShadow'}
           >
             <Image
+              loading='eager'
               src={cd.image}
               alt={cd.title}
               w={['180px', '180px', '180px', '180px', '200px', '220px', '240px', '260px']}

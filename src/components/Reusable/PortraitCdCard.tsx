@@ -31,7 +31,14 @@ export const PortraitCdCard: React.FC<PortraitCdCard> = (props: PortraitCdCard) 
           alignContent='center'
         >
           <Flex ml={['5px']} flexDir='column' alignItems='center' width='50%'>
-            <Image src={image} width={[160]} height={[140]} alt='nimic' borderRadius='15px' />
+            <Image
+              loading='eager'
+              src={image}
+              width={[160]}
+              height={[140]}
+              alt='nimic'
+              borderRadius='15px'
+            />
 
             <Flex alignItems='center' alignContent='center' flexDirection='column'>
               <RatingStarsCd rating={rating} />

@@ -54,6 +54,7 @@ export const Authors: React.FC<AuthorsProps> = (props: AuthorsProps) => {
             onClick={() => markSelectedAuthor(author.name)}
           >
             <Image
+              loading='eager'
               src={author.photo}
               alt={author.photo}
               borderRadius={['10px']}

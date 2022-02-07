@@ -24,7 +24,10 @@ export const shoppingCartInitialState: shoppingCartInitialStateType = {
       }
 };
 
-export const shoppingCartReducer = (state: any = shoppingCartInitialState, action: AnyAction) => {
+export const shoppingCartReducer = (
+  state: RootState = shoppingCartInitialState,
+  action: AnyAction
+) => {
   switch (action.type) {
     case ADD_TO_CART:
       const itemIdAdd: string = action.payload.id as string;

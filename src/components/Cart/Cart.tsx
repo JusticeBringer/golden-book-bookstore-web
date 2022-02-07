@@ -121,14 +121,14 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
                 <ModalHeader>Autentificare necesară</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                  Pentru a finaliza procesul de plată este necesar să vă autentificați.
+                  Pentru a finaliza procesul de plată este necesar să vă înregistrați/autentificați.
                 </ModalBody>
 
                 <ModalFooter>
                   <Button
                     colorScheme='blue'
                     mr={3}
-                    onClick={() => nextRedirectPushBrowser('/signin')}
+                    onClick={() => nextRedirectPushBrowser('/register')}
                   >
                     Spre autentificare
                   </Button>

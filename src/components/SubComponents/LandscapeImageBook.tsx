@@ -11,6 +11,7 @@ export const LandscapeImageBook: React.FC<LandscapeImageBookProps> = (
 
   return (
     <Image
+      loading='eager'
       src={image}
       maxWidth={['100px', '120px', '140px', '160px', '180px', '210px']}
       maxHeight={['100px', '120px', '140px', '160px', '190px', '240px']}

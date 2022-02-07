@@ -2,7 +2,6 @@ import { Document } from 'mongoose';
 
 export interface IAdmin {
   email: string;
-  isVerifiedEmail: boolean;
   password: string;
   secondPassword: string;
   phoneNumber: string;

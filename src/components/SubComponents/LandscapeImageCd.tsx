@@ -9,6 +9,7 @@ export const LandscapeImageCd: React.FC<LandscapeImageCdProps> = (props: Landsca
 
   return (
     <Image
+      loading='eager'
       src={image}
       width={[100, 150, 160]}
       height={[110, 160, 160]}

@@ -58,12 +58,13 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
         >
           <Flex pl={['5px']}>
             <Image
+              loading='eager'
               src={image}
               maxWidth={['100px', '120px', '140px', '160px', '180px', '210px']}
               maxHeight={['100px', '120px', '140px', '160px', '190px', '210px']}
               minWidth={['50px']}
               minHeight={['50px']}
-              alt='nimic'
+              alt='image-picture'
               borderRadius='15px'
             />
           </Flex>

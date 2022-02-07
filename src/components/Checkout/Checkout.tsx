@@ -290,12 +290,11 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
     // get user id
     const userId = userStore.data.id;
 
-    // post
     const payment: IPayment = {
       userId: userId,
-      status: 'Unpaid',
+      status: 'unpaid',
       amount: getTotalPrice(),
-      paymentMethod: formValues.paymentOption,
+      paymentMethod: formValues.paymentOption.toLocaleLowerCase(),
       token: 'fwfwefwefe' + userId
     };
 
@@ -304,6 +303,7 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
     await axios
       .post(paymentsApiUrlOffline, { payment })
       .then((response: any) => {
+        console.log('response', response);
         paymentId = response.data.paymentId;
       })
       .catch(() => {
@@ -313,8 +313,15 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
       });
 
     // then post order
+    console.log('paymentId', paymentId);
 
-    const form = formValues;
+    const form: formValuesType = {
+      ...formValues,
+      paymentOption: formValues.paymentOption.toLocaleLowerCase(),
+      deliveryOption: formValues.deliveryOption.toLocaleLowerCase()
+    };
+
+    console.log('form', form);
 
     await axios
       .post(ordersApiUrl, { form, userId, paymentId })
@@ -512,10 +519,7 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
                               justifyContent='space-between'
                               alignItems='center'
                             >
-                              <Radio
-                                color={theme.colors.primaryBlue[300]}
-                                value='Ridicare sediu sau filială'
-                              >
+                              <Radio color={theme.colors.primaryBlue[300]} value='take'>
                                 Ridicare sediu sau filială
                               </Radio>
                               <Text borderBottom={[`2px solid ${theme.colors.primaryBlue[300]}`]}>
@@ -523,7 +527,7 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
                               </Text>
                             </Stack>
                             <Flex flexDir='row' justifyContent='space-between' alignItems='center'>
-                              <Radio color={theme.colors.primaryBlue[300]} value='Poșta Română'>
+                              <Radio color={theme.colors.primaryBlue[300]} value='post'>
                                 Poșta Română
                               </Radio>
                               <Text borderBottom={[`2px solid ${theme.colors.primaryBlue[300]}`]}>
@@ -531,7 +535,7 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
                               </Text>
                             </Flex>
                             <Flex flexDir='row' justifyContent='space-between' alignItems='center'>
-                              <Radio color={theme.colors.primaryBlue[300]} value='Fan Curier'>
+                              <Radio color={theme.colors.primaryBlue[300]} value='curier'>
                                 Fan Curier
                               </Radio>
                               <Text borderBottom={[`2px solid ${theme.colors.primaryBlue[300]}`]}>
@@ -645,14 +649,11 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
                       <Box as='form' onSubmit={handleSubmit as any}>
                         <RadioGroupControl name='paymentOption'>
                           <Stack spacing={['10px', '20px']} direction='column'>
-                            <Radio color={theme.colors.primaryBlue[300]} value='Ramburs'>
+                            <Radio color={theme.colors.primaryBlue[300]} value='ramburs'>
                               Ramburs
                             </Radio>
-                            <Radio color={theme.colors.primaryBlue[300]} value='Poștă'>
-                              Poștă
-                            </Radio>
-                            <Radio color={theme.colors.primaryBlue[300]} value='Paypal'>
-                              Paypal
+                            <Radio color={theme.colors.primaryBlue[300]} value='post'>
+                              Post
                             </Radio>
                           </Stack>
                         </RadioGroupControl>
@@ -675,7 +676,7 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
             )}
 
             {formValues.step === 5 &&
-              (formValues.paymentOption === 'Ramburs' || formValues.paymentOption === 'Poștă') && (
+              (formValues.paymentOption === 'ramburs' || formValues.paymentOption === 'post') && (
                 <>
                   <Heading as='h2' fontSize={['16px', '18px']} mb={['5vh']}>
                     Finalizare comandă
@@ -705,7 +706,7 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
               )}
 
             {formValues.step === 6 &&
-              (formValues.paymentOption === 'Ramburs' || formValues.paymentOption === 'Poștă') && (
+              (formValues.paymentOption === 'ramburs' || formValues.paymentOption === 'post') && (
                 <>
                   <Heading as='h2' fontSize={['16px', '18px']} mb={['5vh']}>
                     Comanda a fost plasată

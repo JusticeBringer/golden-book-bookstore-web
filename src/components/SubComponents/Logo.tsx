@@ -9,7 +9,7 @@ type LogoProps = {
 export const Logo: React.FC<LogoProps> = (props: LogoProps) => {
   const { marginLeft, width, height } = props;
 
-  return <Image src='/logoSite.png' w={width ?? ['35px']} h={height ?? ['35px']} />;
+  return <Image loading='eager' src='/logoSite.png' w={width ?? ['35px']} h={height ?? ['35px']} />;
 };
 
 export default Logo;

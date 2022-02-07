@@ -56,6 +56,7 @@ export const ProductCartBook: React.FC<ProductCartBookProps> = (props: ProductCa
               alignContent='center'
             >
               <Image
+                loading='eager'
                 src={image}
                 maxWidth={['160px', '180px', '210px']}
                 maxHeight={['140px', '160px', '190px']}
