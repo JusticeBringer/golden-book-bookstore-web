@@ -8,7 +8,6 @@
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
-    "postbuild": "next-on-netlify",
     "export": "next export",
     "start": "next start -p $PORT",
     "format": "prettier --check \"src/**/*.tsx\"",
