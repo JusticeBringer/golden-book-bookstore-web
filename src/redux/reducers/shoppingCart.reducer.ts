@@ -24,10 +24,7 @@ export const shoppingCartInitialState: shoppingCartInitialStateType = {
       }
 };
 
-export const shoppingCartReducer = (
-  state: RootState = shoppingCartInitialState,
-  action: AnyAction
-) => {
+export const shoppingCartReducer = (state = shoppingCartInitialState, action: AnyAction): any => {
   switch (action.type) {
     case ADD_TO_CART:
       const itemIdAdd: string = action.payload.id as string;
@@ -122,9 +119,10 @@ export const shoppingCartReducer = (
       };
 
     case CLEAR_CART:
+      const retNewIds: string[] = [];
       return {
         books: {
-          ids: [],
+          ids: retNewIds,
           qtys: [
             {
               id: '',

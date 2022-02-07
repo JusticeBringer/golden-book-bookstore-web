@@ -12,7 +12,7 @@ export const booksInititalState: booksInititalStateType = {
   error: ''
 };
 
-export const booksReducer = (state: RootState = booksInititalState, action: AnyAction) => {
+export const booksReducer = (state = booksInititalState, action: AnyAction) => {
   switch (action.type) {
     case FETCH_ALL_BOOKS_REQUEST:
       return {

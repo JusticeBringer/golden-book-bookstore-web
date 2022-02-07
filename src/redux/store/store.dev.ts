@@ -20,7 +20,7 @@ const initialStateValues: RootState = {
   user: userInitialState
 };
 
-const reducer = (state: RootState = initialStateValues, action: AnyAction) => {
+const reducer = (state = initialStateValues, action: AnyAction) => {
   if (action.type === HYDRATE) {
     const nextState = {
       ...state, // use previous state

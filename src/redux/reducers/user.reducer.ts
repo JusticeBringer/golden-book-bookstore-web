@@ -13,7 +13,7 @@ export const userInitialState: userInitialStateType = {
       }
 };
 
-export const userReducer = (state: RootState = userInitialState, action: AnyAction) => {
+export const userReducer = (state = userInitialState, action: AnyAction) => {
   switch (action.type) {
     case SET_USER_ID: {
       const newState = {
