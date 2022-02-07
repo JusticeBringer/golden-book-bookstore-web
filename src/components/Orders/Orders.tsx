@@ -22,7 +22,7 @@ export const Orders: React.FC<OrderProps> = (props: OrderProps) => {
   const [myOrders, setMyOrders] = useState<OrderDocument[]>([]);
 
   useEffect(() => {
-    if (orders === []) {
+    if (!orders) {
       setLoading(true);
     } else {
       setLoading(false);
@@ -42,8 +42,8 @@ export const Orders: React.FC<OrderProps> = (props: OrderProps) => {
   }, [orders]);
 
   const parseStatusDelivery = (status: string) => {
-    if (status === 'In store') {
-      return 'În magazin';
+    if (status === 'inStore') {
+      return 'In store';
     } else {
       return status;
     }
