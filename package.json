@@ -1,9 +1,9 @@
 {
-  "name": "oastea-domnului-librarie",
-  "version": "0.0.1",
+  "name": "golden-book-bookstore",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@https://bitbucket.org/oasteadomnului/oasteadomnului-librarie.git"
+    "url": "git+ssh://git@https://github.com/JusticeBringer/golden-book-bookstore-web.git"
   },
   "scripts": {
     "dev": "next dev -p 3001",
