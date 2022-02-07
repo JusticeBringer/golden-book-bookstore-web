@@ -1,4 +1,4 @@
-import { GetServerSideProps, GetStaticPaths } from 'next';
+import { GetStaticProps, GetStaticPaths } from 'next';
 import { Box, Flex } from '@chakra-ui/react';
 import { OrderDocument } from '../../../database/models/order/order.interface';
 import axios from 'axios';
@@ -44,8 +44,7 @@ type DetailsProps = {
   books: BookDocument[];
 };
 
-// Modify to getStaticPaths on supported hosting providers
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getStaticProps: GetStaticProps = async context => {
   const id = context.params.id;
 
   const orderDetailsApiUrl = process.env.DOMAIN_URL_API_ORDERS + '/' + id.toString();
