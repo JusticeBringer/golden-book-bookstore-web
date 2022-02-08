@@ -59,7 +59,7 @@ export const GoogleButton: React.FC<GoogleButtonProps> = (props: GoogleButtonPro
         dispatch(setUserJwtToken(resultToken));
         setCookie(UserCookie, { id: resultUserId, jwtToken: resultToken }, 1);
 
-        dispatch(toggleSnackbarOpen(SNACKBAR_INFO, 'Înregistrare reușită.'));
+        dispatch(toggleSnackbarOpen(SNACKBAR_INFO, 'Registration successful.'));
 
         setCookie(authenticated, 'true');
         dispatch(signIn());
@@ -69,7 +69,7 @@ export const GoogleButton: React.FC<GoogleButtonProps> = (props: GoogleButtonPro
       .catch(() => {
         setLoading(false);
         const errorMessage =
-          'Email-ul sau parola sunt incorecte sau contul este inexistent sau email-ul nu a fost confirmat.';
+          'Email or password are not valid or account was not found or email has not been confirmed!';
         dispatch(toggleSnackbarOpen(SNACKBAR_DANGER, errorMessage));
       });
   };
@@ -91,7 +91,7 @@ export const GoogleButton: React.FC<GoogleButtonProps> = (props: GoogleButtonPro
         dispatch(setUserJwtToken(resultToken));
         setCookie(UserCookie, { id: resultUserId, jwtToken: resultToken }, 1);
 
-        dispatch(toggleSnackbarOpen(SNACKBAR_INFO, 'Autentificare reușită.'));
+        dispatch(toggleSnackbarOpen(SNACKBAR_INFO, 'Login successful.'));
 
         setCookie(authenticated, 'true');
         dispatch(signIn());
@@ -101,7 +101,7 @@ export const GoogleButton: React.FC<GoogleButtonProps> = (props: GoogleButtonPro
       .catch(() => {
         setLoading(false);
         const errorMessage =
-          'Email-ul sau parola sunt incorecte sau contul este inexistent sau email-ul nu a fost confirmat.';
+          'Email or password are not valid or account was not found or email has not been confirmed!';
         dispatch(toggleSnackbarOpen(SNACKBAR_DANGER, errorMessage));
       });
   };
@@ -128,7 +128,7 @@ export const GoogleButton: React.FC<GoogleButtonProps> = (props: GoogleButtonPro
           <Center>
             <GoogleLogin
               clientId={googleClientId}
-              buttonText={isAuthentication ? 'Conectare prin Google' : 'Înregistrare prin Google'}
+              buttonText={isAuthentication ? 'Login with Google' : 'Register with Google'}
               onSuccess={response => handleSuccessGoogleSignIn(response)}
               onFailure={response => handleFailureGoogleSignIn(response)}
               cookiePolicy={'single_host_origin'}

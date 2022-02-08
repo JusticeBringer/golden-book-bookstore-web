@@ -33,7 +33,7 @@ export const DetailsCd: React.FC<DetailsCdProps> = (props: DetailsCdProps) => {
   return (
     <>
       <Heading as='h3' fontSize={sizeFontHdDet ?? ['20px']}>
-        Detalii
+        Details
       </Heading>
       <Flex flexDir='row' alignItems='center'>
         <RatingStarsCd rating={rating} />
@@ -43,7 +43,7 @@ export const DetailsCd: React.FC<DetailsCdProps> = (props: DetailsCdProps) => {
           </Text>
           {showNrRec && (
             <Text ml={['5px']} fontWeight={[600]}>
-              recenzii
+              reviews
             </Text>
           )}
         </Flex>
@@ -58,7 +58,7 @@ export const DetailsCd: React.FC<DetailsCdProps> = (props: DetailsCdProps) => {
       </Flex>
       <Flex>
         <Text ml={['5px']} fontWeight={[400]}>
-          An apariție:
+          Year of publishing:
         </Text>
         <Text ml={['5px']} fontWeight={[600]}>
           {publishingYear}

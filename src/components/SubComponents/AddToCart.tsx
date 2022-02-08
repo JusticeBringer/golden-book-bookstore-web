@@ -41,7 +41,7 @@ export const AddToCart: React.FC<AddToCartProps> = (props: AddToCartProps) => {
       onClick={() => handleOnClick()}
     >
       <Text display='flex' alignItems='center' fontSize={sizeFontText ?? ['15px']} px={['5px']}>
-        Adaugă
+        Add to cart
       </Text>
       <Flex
         bg={theme.colors.primaryYellow[100]}

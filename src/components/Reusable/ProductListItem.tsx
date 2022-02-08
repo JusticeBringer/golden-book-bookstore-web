@@ -31,7 +31,7 @@ export const ProductListItem: React.FC<ProductListItemProps> = (props: ProductLi
         <Text fontWeight={['bold']}>=</Text>
         <Text>
           {productPrice}
-          {''} lei
+          {''}$
         </Text>
       </Flex>
     </Flex>

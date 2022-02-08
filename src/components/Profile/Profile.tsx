@@ -51,7 +51,7 @@ export const Profile: React.FC = () => {
           {isAuthenticatedStore ? (
             <>
               <Heading fontSize='5vw' color={theme.colors.primaryBlack[800]} mb={['5vh']}>
-                Contul meu
+                My account
               </Heading>
               <Stack
                 flexDir='column'
@@ -78,7 +78,7 @@ export const Profile: React.FC = () => {
                       boxSize={['40px', '45px', '50px', '60px', '70px']}
                       mr={['10px']}
                     />
-                    <Text fontSize={'3vw'}>Comenzile mele</Text>
+                    <Text fontSize={'3vw'}>My orders </Text>
                   </Flex>
                   <ChevronRightIcon
                     boxSize={'40px'}
@@ -87,7 +87,7 @@ export const Profile: React.FC = () => {
                   />
                 </Flex>
 
-                <Button onClick={(event: any) => handleLogout(event)}>Deconectare</Button>
+                <Button onClick={(event: any) => handleLogout(event)}>Log out</Button>
               </Stack>
             </>
           ) : (

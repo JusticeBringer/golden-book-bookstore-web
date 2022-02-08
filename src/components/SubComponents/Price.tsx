@@ -25,7 +25,7 @@ export const Price: React.FC<PriceProps> = (props: PriceProps) => {
       mb={bottomMargin ?? ['0px']}
     >
       {price}
-      &nbsp;lei
+      &nbsp;$
     </Text>
   );
 };

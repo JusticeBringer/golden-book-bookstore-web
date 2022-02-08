@@ -9,7 +9,7 @@ type FooterItem = {
 
 export const FOOTER_ITEMS: Array<FooterItem> = [
   {
-    label: 'Acasă',
+    label: 'Home',
     href: '/',
     icon: FaHome
   },
@@ -24,12 +24,12 @@ export const FOOTER_ITEMS: Array<FooterItem> = [
   //   icon: FaCompactDisc
   // },
   {
-    label: 'Coș',
+    label: 'Cart',
     href: '/cart',
     icon: FaShoppingCart
   },
   {
-    label: 'Contul meu',
+    label: 'My account',
     href: '/profile',
     icon: FaUserCircle
   }

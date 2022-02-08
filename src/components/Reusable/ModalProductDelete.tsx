@@ -34,9 +34,7 @@ export const ModalProductDelete: React.FC<ModalProductDeleteProps> = (
 
   const handleConfirmRemove = () => {
     // modal successful
-    dispatch(
-      toggleSnackbarOpen(SNACKBAR_INFO, 'Produsul a fost eliminat din coșul de cumpărături')
-    );
+    dispatch(toggleSnackbarOpen(SNACKBAR_INFO, 'Item was removed from shopping cart'));
     dispatch(removeFromCart(_id));
   };
 
@@ -51,17 +49,17 @@ export const ModalProductDelete: React.FC<ModalProductDeleteProps> = (
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Ștergere produs</ModalHeader>
+          <ModalHeader>Delete item</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <Text>Sunteți sigur că doriți să eliminați produsul din coșul de cumpărături?</Text>
+            <Text> Are you sure that you want to delete the item from the shopping cart?</Text>
           </ModalBody>
 
           <ModalFooter>
             <Button colorScheme='red' mr={3} onClick={() => handleConfirmRemove()}>
-              Elimină
+              Delete
             </Button>
-            <Button onClick={onClose}>Anulează</Button>
+            <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

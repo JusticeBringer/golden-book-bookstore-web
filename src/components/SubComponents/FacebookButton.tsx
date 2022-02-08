@@ -25,7 +25,7 @@ export const FacebookButton: React.FC<FacebookButtonProps> = (props: FacebookBut
       <FacebookLogin
         appId={facebookAppId}
         autoLoad={false}
-        textButton={'Conectare prin Facebook'}
+        textButton={'Login with Facebook'}
         fields='name,email,picture'
         onClick={() => handleOnClick()}
         callback={response => cbResponse(response)}

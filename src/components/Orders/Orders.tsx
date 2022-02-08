@@ -58,14 +58,14 @@ export const Orders: React.FC<OrderProps> = (props: OrderProps) => {
         size='md'
         onClick={() => nextRedirectPushBrowser('/profile')}
       >
-        Înapoi
+        Back
       </Button>
-      <Heading my={['5vh']}> Comenzile mele </Heading>
+      <Heading my={['5vh']}> My orders </Heading>
 
       <Flex flexDir='column'>
         <Flex flexDir='row' justifyContent='space-between' w={['40vw']}>
           <Heading as='h3' fontSize={['4vw']}>
-            Nr. comandă
+            Order number
           </Heading>
           <Heading as='h3' fontSize={['4vw']}>
             Status
@@ -94,7 +94,7 @@ export const Orders: React.FC<OrderProps> = (props: OrderProps) => {
                     variant='solid'
                     onClick={() => nextRedirectPushBrowser(`orders/${order._id}`)}
                   >
-                    Detalii
+                    Details
                   </Button>
                 </Flex>
               </Flex>

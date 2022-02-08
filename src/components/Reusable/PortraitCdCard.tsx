@@ -52,7 +52,7 @@ export const PortraitCdCard: React.FC<PortraitCdCard> = (props: PortraitCdCard) 
                 pt='20px'
               >
                 {price}
-                &nbsp;lei
+                &nbsp;$
               </Text>
             </Flex>
           </Flex>

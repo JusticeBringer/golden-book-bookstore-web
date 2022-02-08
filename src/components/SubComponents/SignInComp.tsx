@@ -73,7 +73,7 @@ export const SignInComp: React.FC<SignInCompProps> = (props: SignInCompProps) =>
 
   const dispatch = useDispatch();
 
-  const textEmailError = 'Adresa de email este incorectă';
+  const textEmailError = 'Email address is not valid!';
   const emailRef = useRef(null);
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState(false);
@@ -82,10 +82,10 @@ export const SignInComp: React.FC<SignInCompProps> = (props: SignInCompProps) =>
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
 
-  const textMinEightCharactersError = 'Parola trebuie să conțină cel puțin 8 caractere';
+  const textMinEightCharactersError = 'Password must have at least 8 characters!';
   const [minEightCharactersError, setMinEightCharactersError] = useState(false);
 
-  const textMinOneDigitError = 'Parola trebuie să conțină cel puțin o cifră';
+  const textMinOneDigitError = 'Password must contain at least 1 digit!';
   const [minOneDigitError, setMinOneDigitError] = useState(false);
 
   const [loading, setLoading] = useState(false);
@@ -185,7 +185,7 @@ export const SignInComp: React.FC<SignInCompProps> = (props: SignInCompProps) =>
 
         setCookie(UserCookie, { id: resultUserId, jwtToken: resultToken }, 1);
 
-        dispatch(toggleSnackbarOpen(SNACKBAR_INFO, 'Autentificare reușită.'));
+        dispatch(toggleSnackbarOpen(SNACKBAR_INFO, 'Login successful.'));
         setCookie(authenticated, 'true');
 
         dispatch(signIn());
@@ -194,7 +194,7 @@ export const SignInComp: React.FC<SignInCompProps> = (props: SignInCompProps) =>
       .catch(() => {
         setLoading(false);
         const errorMessage =
-          'Email-ul sau parola sunt incorecte sau contul este inexistent sau email-ul nu a fost confirmat.';
+          'Email or password are not valid or account was not found or email has not been confirmed.';
         dispatch(toggleSnackbarOpen(SNACKBAR_DANGER, errorMessage));
       });
   };
@@ -216,7 +216,7 @@ export const SignInComp: React.FC<SignInCompProps> = (props: SignInCompProps) =>
         >
           <Stack px={['6px', '6px', '6px', '24px']}>
             <Stack align={'center'}>
-              <Heading fontSize={['10px', '30px']}>Autentificare</Heading>
+              <Heading fontSize={['10px', '30px']}>Login</Heading>
             </Stack>
             <Box
               rounded={'lg'}
@@ -242,7 +242,7 @@ export const SignInComp: React.FC<SignInCompProps> = (props: SignInCompProps) =>
                   {emailError && <ErrorFormText>{textEmailError}</ErrorFormText>}
                 </FormControl>
                 <FormControl id='password' mr={['10px', '64px']}>
-                  <FormLabel>Parolă</FormLabel>
+                  <FormLabel>Password</FormLabel>
                   <Input
                     ref={passwordRef}
                     type='password'
@@ -282,16 +282,16 @@ export const SignInComp: React.FC<SignInCompProps> = (props: SignInCompProps) =>
                     }}
                     onClick={(event: any) => handleOnClick(event)}
                   >
-                    Autentificare
+                    Login
                   </Button>
                   <Flex
                     justifyContent='space-between'
                     flexDir={['column', 'column', 'column', 'row']}
                   >
-                    <Text>Nu ai deja un cont?</Text>
+                    <Text>You do not have an account?</Text>
                     <NextLink href='/register'>
                       <ChakraLink color={'blue.400'} fontSize={['10px', '16px']}>
-                        Înscrie-te acum
+                        Register now
                       </ChakraLink>
                     </NextLink>
                   </Flex>

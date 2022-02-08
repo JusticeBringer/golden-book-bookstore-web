@@ -7,7 +7,7 @@ export type NavItem = {
 
 export const HEADER_NAV_ITEMS: Array<NavItem> = [
   {
-    label: 'Acasă',
+    label: 'Home',
     href: '/'
   },
   {

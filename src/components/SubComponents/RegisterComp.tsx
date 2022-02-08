@@ -51,30 +51,28 @@ export const RegisterComp: React.FC<RegisterCompProps> = (props: RegisterCompPro
 
   const [loading, setLoading] = useState(false);
 
-  const textEmailError = 'Adresa de email este incorectă';
+  const textEmailError = 'Email address is not valid!';
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState(false);
 
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
 
-  const textRepeatPasswordError = 'Parolele sunt diferite';
+  const textRepeatPasswordError = 'Passwords are different!';
   const [repeatPassword, setRepeatPassword] = useState('');
   const [repeatPasswordError, setRepeatPasswordError] = useState(false);
 
-  const textMinEightCharactersError = 'Parola trebuie să conțină cel puțin 8 caractere';
+  const textMinEightCharactersError = 'Password must have at least 8 characters!';
   const [minEightCharactersError, setMinEightCharactersError] = useState(false);
 
-  const textMinOneDigitError = 'Parola trebuie să conțină cel puțin o cifră';
+  const textMinOneDigitError = 'Password must contain at least 1 digit!';
   const [minOneDigitError, setMinOneDigitError] = useState(false);
 
-  const textTermsAndConditionsError =
-    'Trebuie să fiți de acord cu Termenii și condițiile de utilizare.';
+  const textTermsAndConditionsError = 'You must agree Terms and Conditions of use!';
   const [termsAndConditionsError, setTermsAndConditionsError] = useState('');
   const [termsAndCondsCheck, setTermsAndCondsCheck] = useState(false);
 
-  const textDataPolicyError =
-    'Trebuie să fiți de acord cu Politica de confidențialitate a datelor.';
+  const textDataPolicyError = 'You must agree Data Privacy Policy!';
   const [dataPolicyError, setDataPolicyError] = useState('');
   const [dataPolicyCheck, setDataPolicyCheck] = useState(false);
 
@@ -194,7 +192,7 @@ export const RegisterComp: React.FC<RegisterCompProps> = (props: RegisterCompPro
         setLoading(false);
 
         const result = response.data;
-        dispatch(toggleSnackbarOpen(SNACKBAR_INFO, 'Înregistrare reușită'));
+        dispatch(toggleSnackbarOpen(SNACKBAR_INFO, 'Registration successful'));
 
         // redirect to validation
         nextRedirectPushBrowser('/emailVerify');
@@ -202,7 +200,7 @@ export const RegisterComp: React.FC<RegisterCompProps> = (props: RegisterCompPro
       .catch((error: any) => {
         console.log(error);
         const errorMessage =
-          'Email deja utilizat sau a fost deja trimis un email pentru confirmare. Pentru retrimiterea email-ului de confirmare încercați din nou peste 24 de ore.';
+          'Email is already in use or it has been sent a confirmation email. To resend the confirmation email try again in 24 hours!';
         dispatch(toggleSnackbarOpen(SNACKBAR_DANGER, errorMessage));
         setLoading(false);
       });
@@ -225,7 +223,7 @@ export const RegisterComp: React.FC<RegisterCompProps> = (props: RegisterCompPro
         >
           <Stack px={['6px', '6px', '6px', '24px']}>
             <Stack align={'center'}>
-              <Heading fontSize={['10px', '30px']}>Înregistrare</Heading>
+              <Heading fontSize={['10px', '30px']}>Register</Heading>
             </Stack>
             <Box
               rounded={'lg'}
@@ -250,7 +248,7 @@ export const RegisterComp: React.FC<RegisterCompProps> = (props: RegisterCompPro
                   {emailError && <ErrorFormText>{textEmailError}</ErrorFormText>}
                 </FormControl>
                 <FormControl id='password'>
-                  <FormLabel>Parolă</FormLabel>
+                  <FormLabel>Password</FormLabel>
                   <Input
                     type='password'
                     placeholder='*********'
@@ -268,7 +266,7 @@ export const RegisterComp: React.FC<RegisterCompProps> = (props: RegisterCompPro
                   )}
                 </FormControl>
                 <FormControl id='repeat-password'>
-                  <FormLabel>Repetă parola</FormLabel>
+                  <FormLabel>Repeat password</FormLabel>
                   <Input
                     type='password'
                     placeholder='*********'
@@ -281,10 +279,7 @@ export const RegisterComp: React.FC<RegisterCompProps> = (props: RegisterCompPro
                     <Checkbox
                       onChange={(event: any) => setTermsAndCondsCheck(event.target.checked)}
                     >
-                      Sunt de acord cu{' '}
-                      <ChakraLink color={'blue.400'}>
-                        Termenii și condițiile de utilizare
-                      </ChakraLink>
+                      I agree <ChakraLink color={'blue.400'}>Terms and conditions</ChakraLink>
                     </Checkbox>
                     {!termsAndCondsCheck && (
                       <ErrorFormText>{termsAndConditionsError}</ErrorFormText>
@@ -292,9 +287,9 @@ export const RegisterComp: React.FC<RegisterCompProps> = (props: RegisterCompPro
                   </Flex>
                   <Flex flexDir='column'>
                     <Checkbox onChange={(event: any) => setDataPolicyCheck(event.target.checked)}>
-                      Sunt de acord cu{' '}
+                      I agree{' '}
                       <ChakraLink color={theme.colors.primaryBlue[300]}>
-                        Politica de confidențialitate a datelor
+                        Date privacy policy
                       </ChakraLink>
                     </Checkbox>
                     {!dataPolicyCheck && <ErrorFormText>{dataPolicyError}</ErrorFormText>}
@@ -307,11 +302,11 @@ export const RegisterComp: React.FC<RegisterCompProps> = (props: RegisterCompPro
                     }}
                     onClick={(event: any) => handleRegister(event)}
                   >
-                    Înregistrare
+                    Register
                   </Button>
                   <NextLink href='/signin'>
                     <ChakraLink color={'blue.400'} fontSize={['10px', '16px']}>
-                      Am deja un cont
+                      I already have an account
                     </ChakraLink>
                   </NextLink>
                 </Stack>

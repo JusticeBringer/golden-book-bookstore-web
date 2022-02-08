@@ -21,7 +21,7 @@ export const ButtonDetails: React.FC<ButtonDetailsProps> = (props: ButtonDetails
     >
       <Text color={theme.colors.primaryBlack[900]} fontSize={sizeFontBtDet ?? ['20px']}>
         {' '}
-        Vezi mai mult{' '}
+        See more (not implemented)
       </Text>
     </Button>
   );

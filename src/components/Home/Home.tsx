@@ -78,7 +78,7 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
         gridArea='recBooks'
       >
         <Box>
-          <GenericHeading text='Cărți recomandate' textAs='h1' />
+          <GenericHeading text='Recommended books' textAs='h1' />
           <Grid>
             {loading ? (
               <Loading />
@@ -118,7 +118,7 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
                 onClick={loadMore}
               >
                 <Text mr={['7px']} fontSize={['14px']}>
-                  Încarcă mai multe
+                  Load more
                 </Text>
                 <RepeatIcon />
               </Button>
@@ -131,7 +131,7 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
         <ListenCds cds={cds} />
       </Grid> */}
       <Grid gridArea='favBooks'>
-        <GenericHeading text='Cele mai apreciate' textAs='h1' />
+        <GenericHeading text='Most loved' textAs='h1' />
         {loading ? (
           <Loading />
         ) : (
@@ -146,7 +146,7 @@ export const Home: React.FC<HomePageType> = (props: HomePageType) => {
         )}
       </Grid>
       <Grid gridArea='athBooks'>
-        <GenericHeading text='După autor' textAs='h1' />
+        <GenericHeading text='By author' textAs='h1' />
         <Authors books={books} booksQtys={booksQtysCartState} />
       </Grid>
     </Grid>

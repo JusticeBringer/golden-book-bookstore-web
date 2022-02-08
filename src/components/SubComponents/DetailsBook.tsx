@@ -37,7 +37,7 @@ export const DetailsBook: React.FC<DetailsBookProps> = (props: DetailsBookProps)
   return (
     <>
       <Heading as='h3' fontSize={sizeFontHdDet ?? ['20px']}>
-        Detalii
+        Details
       </Heading>
       <Flex flexDir='row' alignItems='center'>
         <RatingStarsBook rating={rating} />
@@ -47,14 +47,14 @@ export const DetailsBook: React.FC<DetailsBookProps> = (props: DetailsBookProps)
           </Text>
           {showNrRec && (
             <Text ml={['5px']} fontWeight={[600]}>
-              recenzii
+              reviews
             </Text>
           )}
         </Flex>
       </Flex>
       <Flex>
         <Text ml={['5px']} fontWeight={[400]}>
-          Autor:
+          Author:
         </Text>
         <Text ml={['5px']} fontWeight={[600]}>
           {author}
@@ -62,7 +62,7 @@ export const DetailsBook: React.FC<DetailsBookProps> = (props: DetailsBookProps)
       </Flex>
       <Flex>
         <Text ml={['5px']} fontWeight={[400]}>
-          An apariție:
+          Year of publishing:
         </Text>
         <Text ml={['5px']} fontWeight={[600]}>
           {publishingYear}
@@ -71,7 +71,7 @@ export const DetailsBook: React.FC<DetailsBookProps> = (props: DetailsBookProps)
       {pages && (
         <Flex>
           <Text ml={['5px']} fontWeight={[400]}>
-            Nr. pagini:
+            Number of pages:
           </Text>
           <Text ml={['5px']} fontWeight={[600]}>
             {pages}
@@ -80,7 +80,7 @@ export const DetailsBook: React.FC<DetailsBookProps> = (props: DetailsBookProps)
       )}
       <Flex>
         <Text ml={['5px']} fontWeight={[400]}>
-          În stoc:
+          Quantity in stock:
         </Text>
         <Text ml={['5px']} fontWeight={[600]}>
           {quantity}

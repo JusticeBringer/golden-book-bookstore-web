@@ -19,8 +19,8 @@ export const OrderDetails: React.FC<OrderDetailsProps> = (props: OrderDetailsPro
   const { order, books } = props;
 
   const parseStatusDelivery = (status: string) => {
-    if (status === 'In store') {
-      return 'În magazin';
+    if (status === 'inStore') {
+      return 'In store';
     } else {
       return status;
     }
@@ -59,14 +59,14 @@ export const OrderDetails: React.FC<OrderDetailsProps> = (props: OrderDetailsPro
         size='md'
         onClick={() => nextRedirectPushBrowser('/profile/orders')}
       >
-        Înapoi
+        Back
       </Button>
       <Flex flexDir='column'>
-        <Heading my={['5vh']}>Detalii comandă</Heading>
+        <Heading my={['5vh']}>Order details</Heading>
         <Flex flexDir='column'>
           <Flex flexDir='row' justifyContent='space-between' w={['40vw']}>
             <Heading as='h3' fontSize={['4vw']}>
-              Nr. comandă
+              Order number
             </Heading>
             <Heading as='h3' fontSize={['4vw']}>
               Status
@@ -92,9 +92,9 @@ export const OrderDetails: React.FC<OrderDetailsProps> = (props: OrderDetailsPro
           ))}
         </Stack>
         <Stack direction='column' spacing={['5px', '10px']}>
-          {/* <TextListItem mainText={'Cost transport'} secondaryText={'0 lei'} /> */}
-          <TextListItem mainText={'Total '} secondaryText={getTotalPrice().toString() + ' lei'} />
-          <Text opacity={0.7}>{'*fără transport'} </Text>
+          {/* <TextListItem mainText={'Cost transport'} secondaryText={'0$'} /> */}
+          <TextListItem mainText={'Total '} secondaryText={getTotalPrice().toString() + '$'} />
+          <Text opacity={0.7}>{'*without delivery cost'} </Text>
         </Stack>
       </Flex>
     </>

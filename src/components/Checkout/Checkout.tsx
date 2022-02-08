@@ -181,7 +181,7 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
   }, [booksIdsState]);
 
   // state of form
-  const [textForward, setTextForward] = useState('Continuă');
+  const [textForward, setTextForward] = useState('Continue');
 
   // values inside form
   const [formValues, setFormValues] = useState<formValuesType>({
@@ -204,23 +204,23 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
   useEffect(() => {
     switch (formValues.step) {
       case 0:
-        setTextForward('Continuă');
+        setTextForward('Continue');
         break;
       case 1:
-        setTextForward('Spre prețul total al comenzii');
+        setTextForward('Go to order`s total price');
         break;
       case 2:
-        setTextForward('Spre completare date personale');
+        setTextForward('Go to complete personal details');
         break;
       case 3:
-        setTextForward('Spre metoda de plată');
+        setTextForward('Go to payment method');
         break;
       case 4:
-        setTextForward('Spre finalizare comandă');
+        setTextForward('Finalize order');
         break;
 
       default:
-        setTextForward('Continuă');
+        setTextForward('Continue');
         break;
     }
   }, [formValues.step]);
@@ -308,7 +308,7 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
       })
       .catch(() => {
         setLoading(false);
-        const errorMessage = 'Comanda nu a putut fi plasată... Vă rugăm încercați mai târziu.';
+        const errorMessage = 'Order could not be placed... Please try again later!';
         dispatch(toggleSnackbarOpen(SNACKBAR_DANGER, errorMessage));
       });
 
@@ -321,19 +321,19 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
       deliveryOption: formValues.deliveryOption.toLocaleLowerCase()
     };
 
-    console.log('form', form);
+    // console.log('form', form);
 
     await axios
       .post(ordersApiUrl, { form, userId, paymentId })
       .then(() => {
-        dispatch(toggleSnackbarOpen(SNACKBAR_INFO, 'Comandă plasată cu succes'));
+        dispatch(toggleSnackbarOpen(SNACKBAR_INFO, 'The order has been placed with success!'));
         emptyCartFromCookiesAndStore();
         setFormValues({ ...formValues, step: formValues.step + 1 });
         setLoading(false);
       })
       .catch(() => {
         setLoading(false);
-        const errorMessage = 'Comanda nu a putut fi plasată. Vă rugăm încercați mai târziu.';
+        const errorMessage = 'The order has not been placed. Please try again later!';
         dispatch(toggleSnackbarOpen(SNACKBAR_DANGER, errorMessage));
       });
   };
@@ -425,10 +425,10 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
     return (
       <Stack direction='column' spacing={['5px', '10px']}>
         <TextListItem
-          mainText={'Cost transport'}
-          secondaryText={formValues.deliveryPrice.toString() + ' lei'}
+          mainText={'Delivery cost'}
+          secondaryText={formValues.deliveryPrice.toString() + '$'}
         />
-        <TextListItem mainText={'Total'} secondaryText={getTotalPrice().toString() + ' lei'} />
+        <TextListItem mainText={'Total'} secondaryText={getTotalPrice().toString() + '$'} />
       </Stack>
     );
   };
@@ -437,7 +437,7 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
     return (
       <>
         <RenderCostAndTotalPrice />
-        <TextListItem mainText={'Metoda de plată'} secondaryText={formValues.paymentOption} />
+        <TextListItem mainText={'Payment method'} secondaryText={formValues.paymentOption} />
       </>
     );
   };
@@ -453,7 +453,7 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
             size='md'
             onClick={() => handleStepBack()}
           >
-            Înapoi
+            Back
           </Button>
         ) : (
           <> </>
@@ -467,7 +467,7 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
             {formValues.step === 0 && (
               <Flex justifyContent='space-between' alignItems='flex-start' flexDir='column'>
                 <Flex mb={['5vh']}>
-                  <GenericHeading text='Sumar comandă' />
+                  <GenericHeading text='Order summary' />
                 </Flex>
                 {loading ? (
                   <Loading />
@@ -475,13 +475,10 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
                   <Stack spacing={['5px', '10px', '15px']} minWidth={['40vw']}>
                     <RenderBooksProductList />
                     <Flex flexDir='column'>
-                      <TextListItem
-                        mainText={'Cost transport'}
-                        secondaryText={'după pasul următor'}
-                      />
+                      <TextListItem mainText={'Delivery cost'} secondaryText={'after next step'} />
                       <TextListItem
                         mainText={'Total'}
-                        secondaryText={'după alegerea metodei de livrare'}
+                        secondaryText={'after choosing payment method'}
                       />
                     </Flex>
                     <Button
@@ -502,7 +499,7 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
             {formValues.step === 1 && (
               <>
                 <Flex mb={['5vh']}>
-                  <GenericHeading text='Pasul 1: Metoda de livrare' />
+                  <GenericHeading text='Step 1: Delivery method' />
                 </Flex>
                 <Flex>
                   <Formik
@@ -520,26 +517,26 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
                               alignItems='center'
                             >
                               <Radio color={theme.colors.primaryBlue[300]} value='take'>
-                                Ridicare sediu sau filială
+                                Take from store
                               </Radio>
                               <Text borderBottom={[`2px solid ${theme.colors.primaryBlue[300]}`]}>
-                                Gratuit
+                                Free
                               </Text>
                             </Stack>
                             <Flex flexDir='row' justifyContent='space-between' alignItems='center'>
                               <Radio color={theme.colors.primaryBlue[300]} value='post'>
-                                Poșta Română
+                                Post
                               </Radio>
                               <Text borderBottom={[`2px solid ${theme.colors.primaryBlue[300]}`]}>
-                                15 lei
+                                15$
                               </Text>
                             </Flex>
                             <Flex flexDir='row' justifyContent='space-between' alignItems='center'>
                               <Radio color={theme.colors.primaryBlue[300]} value='curier'>
-                                Fan Curier
+                                Courier
                               </Radio>
                               <Text borderBottom={[`2px solid ${theme.colors.primaryBlue[300]}`]}>
-                                20 lei
+                                20$
                               </Text>
                             </Flex>
                           </Stack>
@@ -565,7 +562,7 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
             {formValues.step === 2 && (
               <Flex justifyContent='space-between' alignItems='flex-start' flexDir='column'>
                 <Flex mb={['5vh']}>
-                  <GenericHeading text='Pasul 2: Preț total comandă' />
+                  <GenericHeading text='Step 2: Order`s total price' />
                 </Flex>
                 {loading ? (
                   <Loading />
@@ -592,7 +589,7 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
             {formValues.step === 3 && (
               <>
                 <Flex mb={['5vh']}>
-                  <GenericHeading text='Pasul 3: Date personale' />
+                  <GenericHeading text='Step 3: Personal details' />
                 </Flex>
                 <Flex>
                   <Formik
@@ -603,18 +600,18 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
                     {({ handleSubmit, values, errors }) => (
                       <Box as='form' onSubmit={handleSubmit as any}>
                         <Stack spacing={['5px']} direction='column'>
-                          <InputControl name='familyName' label='Nume de familie' />
-                          <InputControl name='givenName' label='Prenume' />
-                          <InputControl name='phoneNumber' label='Număr de telefon' />
+                          <InputControl name='familyName' label='Family name' />
+                          <InputControl name='givenName' label='Given name' />
+                          <InputControl name='phoneNumber' label='Phone number' />
                         </Stack>
                         <Heading as='h3' fontSize={['16px', '18px', '24px']} my={['1vh']}>
-                          Adresa de livrare
+                          Delivery address
                         </Heading>
                         <Stack spacing={['5px']} direction='column'>
-                          <InputControl name='city' label='Oraș' />
-                          <InputControl name='locality' label='Localitate' />
-                          <InputControl name='street' label='Strada' />
-                          <InputControl name='postalCode' label='Codul Poștal' />
+                          <InputControl name='city' label='City' />
+                          <InputControl name='locality' label='County' />
+                          <InputControl name='street' label='Street' />
+                          <InputControl name='postalCode' label='Postal code' />
                         </Stack>
                         <SubmitButton
                           rightIcon={<ArrowForwardIcon />}
@@ -637,7 +634,7 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
             {formValues.step === 4 && (
               <>
                 <Flex mb={['5vh']}>
-                  <GenericHeading text='Pasul 4: Metoda de plată' />
+                  <GenericHeading text='Step 4: Payment method' />
                 </Flex>
                 <Flex>
                   <Formik
@@ -679,10 +676,10 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
               (formValues.paymentOption === 'ramburs' || formValues.paymentOption === 'post') && (
                 <>
                   <Heading as='h2' fontSize={['16px', '18px']} mb={['5vh']}>
-                    Finalizare comandă
+                    Finalize order
                   </Heading>
                   <Heading as='h3' fontSize={['12px', '14px', '16px', '18px']} mb={['1vh']}>
-                    Detaliile comenzii
+                    Order details
                   </Heading>
                   <RenderBooksProductList />
                   <TopSpacer spacing={'2vh'} />
@@ -699,7 +696,7 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
                       onClick={() => onSubmitStepFiveOffline()}
                       mt={['3vh']}
                     >
-                      Plasează comanda
+                      Place order
                     </Button>
                   )}
                 </>
@@ -709,10 +706,10 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
               (formValues.paymentOption === 'ramburs' || formValues.paymentOption === 'post') && (
                 <>
                   <Heading as='h2' fontSize={['16px', '18px']} mb={['5vh']}>
-                    Comanda a fost plasată
+                    Order has been placed
                   </Heading>
                   <Heading as='h3' fontSize={['12px', '14px', '16px', '18px']} mb={['1vh']}>
-                    Detaliile comenzii
+                    Order details
                   </Heading>
                   <RenderBooksProductList />
                   <TopSpacer spacing={'2vh'} />
@@ -726,7 +723,7 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
                     onClick={() => nextRedirectPushBrowser('/profile')}
                     mt={['3vh']}
                   >
-                    Spre contul meu
+                    To my account
                   </Button>
                 </>
               )}

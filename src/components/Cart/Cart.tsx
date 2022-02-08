@@ -105,7 +105,7 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
   return (
     <Flex flexDirection='column' pr='10vw'>
       <Flex justifyContent='space-between' alignItems='center'>
-        <GenericHeading text='Coșul meu' />
+        <GenericHeading text='My cart' />
         {!loading && booksIdsState !== undefined && booksIdsState?.ids?.length > 0 ? (
           <>
             <Button
@@ -113,16 +113,14 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
               onClick={e => handleCheckoutClick(e)}
               rightIcon={<ArrowForwardIcon />}
             >
-              Spre comandă
+              Go to checkout
             </Button>
             <Modal isOpen={isOpen} onClose={onClose} isCentered>
               <ModalOverlay />
               <ModalContent>
-                <ModalHeader>Autentificare necesară</ModalHeader>
+                <ModalHeader>Account needed</ModalHeader>
                 <ModalCloseButton />
-                <ModalBody>
-                  Pentru a finaliza procesul de plată este necesar să vă înregistrați/autentificați.
-                </ModalBody>
+                <ModalBody>You need to register or login to finalize this process.</ModalBody>
 
                 <ModalFooter>
                   <Button
@@ -130,11 +128,11 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
                     mr={3}
                     onClick={() => nextRedirectPushBrowser('/register')}
                   >
-                    Spre autentificare
+                    To registration
                   </Button>
                   <Button variant='ghost' onClick={onClose}>
                     {' '}
-                    Închide{' '}
+                    Close{' '}
                   </Button>
                 </ModalFooter>
               </ModalContent>
@@ -157,21 +155,21 @@ export const Cart: React.FC<CartProps> = (props: CartProps) => {
               mb={['10px']}
               mt={['20px']}
             >
-              Aveți
+              You have
               {!loading &&
               !booksIdsState &&
               booksIdsState !== undefined &&
               booksIdsState?.ids.length === 0
-                ? ' 0 cărți '
+                ? ' 0 books '
                 : booksIdsState?.ids.length === 1
-                ? ' 1 carte '
-                : ` ${booksIdsState?.ids.length} cărți `}
-              cu o cantitate de{' '}
+                ? ' 1 book '
+                : ` ${booksIdsState?.ids.length} books `}
+              with a quantity of{' '}
               {booksTotalQty === 0
-                ? '0 bucăți'
+                ? '0 pieces'
                 : booksTotalQty === 1
-                ? '1 bucată'
-                : `${booksTotalQty} bucăți`}
+                ? '1 piece'
+                : `${booksTotalQty} pieces`}
             </Text>
             <PortraitProductCartBooks books={booksInCart} booksQtys={booksQtys} />
           </Grid>
