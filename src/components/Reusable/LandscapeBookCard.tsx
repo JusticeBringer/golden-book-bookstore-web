@@ -12,7 +12,7 @@ import { LandscapeImageBook } from '../SubComponents/LandscapeImageBook';
 import { RatingStarsBook } from '../SubComponents/RatingStarsBook';
 import { AddRemoveFromCart } from '../SubComponents/AddRemoveFromCart';
 
-import { useWindowDimensions } from '../../util/helpers';
+import { nextRedirectPushBrowser, useWindowDimensions } from '../../util/helpers';
 import { THEME_BREAKPOINTS } from '../../util/constants/constants.other';
 import { theme } from '../../styles/theme';
 import BookDocument from '../../database/models/book/book.interface';
@@ -20,10 +20,11 @@ import BookDocument from '../../database/models/book/book.interface';
 type LandscapeBookCard = {
   book: BookDocument;
   userQty: number;
+  disableNavigation?: boolean;
 };
 
 export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeBookCard) => {
-  const { userQty } = props;
+  const { userQty, disableNavigation } = props;
   const { title, author, image, description, rating, price, _id, quantity } = props.book;
   const { width } = useWindowDimensions();
 
@@ -52,12 +53,18 @@ export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeB
     return;
   }, [booksIdsStore]);
 
+  const handleOnClickBookCard = () => {
+    nextRedirectPushBrowser(`/catalog/books/${_id}`);
+  };
+
   return (
     <Flex
       p={['20px']}
       maxWidth={['80vw', '80vw', '80vw', '80vw', '80vw', '80vw', '70vw', '40vw']}
-      className='draw-bottom-border-white-blue'
       borderRadius='10px'
+      className={disableNavigation ? '' : 'draw-bottom-border-white-blue'}
+      cursor={disableNavigation ? 'initial' : 'pointer'}
+      onClick={disableNavigation ? null : handleOnClickBookCard}
     >
       <section>
         {width < THEME_BREAKPOINTS.md && (
@@ -77,11 +84,16 @@ export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeB
                     showDescription={false}
                   />
                 </Flex>
-                <ButtonDetails
-                  sizeFontBtDet={['12px']}
-                  bgClr={theme.colors.primaryBlue[100]}
-                  nameCssClass='draw-border-yellow-blue'
-                />
+                {isInCart ? (
+                  <AddRemoveFromCart _id={_id} bookMaxQty={quantity} userQty={userQty} />
+                ) : (
+                  <AddToCart
+                    sizeFontText={['14px']}
+                    bgClr={theme.colors.primaryBlue[100]}
+                    nameCssClass='draw-border-yellow-blue'
+                    _id={_id}
+                  />
+                )}
               </Flex>
             </Flex>
           </Flex>
@@ -100,11 +112,16 @@ export const LandscapeBookCard: React.FC<LandscapeBookCard> = (props: LandscapeB
                 </Flex>
                 <Flex flexDir='column'>
                   <RatingStarsBook rating={rating} />
-                  <ButtonDetails
-                    sizeFontBtDet={['15px']}
-                    bgClr={theme.colors.primaryBlue[100]}
-                    nameCssClass='draw-border-yellow-blue'
-                  />
+                  {isInCart ? (
+                    <AddRemoveFromCart _id={_id} bookMaxQty={quantity} userQty={userQty} />
+                  ) : (
+                    <AddToCart
+                      sizeFontText={['14px']}
+                      bgClr={theme.colors.primaryBlue[100]}
+                      nameCssClass='draw-border-yellow-blue'
+                      _id={_id}
+                    />
+                  )}
                 </Flex>
               </Flex>
             </Flex>

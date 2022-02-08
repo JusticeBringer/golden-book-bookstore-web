@@ -39,7 +39,7 @@ export const LandscapeCdCard: React.FC<LandscapeCdCardProps> = (props: Landscape
                 <Flex flexDir='column'>
                   <MiddleTextCd title={title} artists={artists} showArtists={true} />
                 </Flex>
-                <ButtonDetails sizeFontBtDet={['12px']} />
+                <ButtonDetails sizeFontBtDet={['12px']} bookId={''} />
               </Flex>
             </Flex>
           </Flex>
@@ -56,7 +56,7 @@ export const LandscapeCdCard: React.FC<LandscapeCdCardProps> = (props: Landscape
                 </Flex>
                 <Flex flexDir='column'>
                   <RatingStarsCd rating={rating} />
-                  <ButtonDetails sizeFontBtDet={['15px']} />
+                  <ButtonDetails sizeFontBtDet={['15px']} bookId={''} />
                 </Flex>
               </Flex>
             </Flex>
@@ -77,7 +77,7 @@ export const LandscapeCdCard: React.FC<LandscapeCdCardProps> = (props: Landscape
             </Flex>
             <Flex flexDirection='column' ml='20px' width={['20%']} justifyContent='space-between'>
               <MiddleTextCd title={title} />
-              <AddToCart sizeFontText={['14px']} />
+              <AddToCart sizeFontText={['14px']} _id='' />
             </Flex>
             <Flex maxWidth={['70%']} ml={['10px']} flexDir='column' justifyContent='space-between'>
               <DetailsCd sizeFontBtDet={['15px']} cd={props.cd} rating={rating} showNrRec={false} />
@@ -102,7 +102,7 @@ export const LandscapeCdCard: React.FC<LandscapeCdCardProps> = (props: Landscape
               <Flex flexDir='column'>
                 <MiddleTextCd title={title} description={description} showDescription={true} />
               </Flex>
-              <AddToCart sizeFontText={['14px']} />
+              <AddToCart sizeFontText={['14px']} _id='' />
             </Flex>
             <Flex maxWidth={['45%']} ml={['20px']} flexDir='column' justifyContent='space-between'>
               <DetailsCd sizeFontBtDet={['15px']} cd={props.cd} rating={rating} showNrRec={false} />
@@ -126,7 +126,7 @@ export const LandscapeCdCard: React.FC<LandscapeCdCardProps> = (props: Landscape
               <Flex flexDir='column'>
                 <MiddleTextCd title={title} description={description} showDescription={true} />
               </Flex>
-              <AddToCart sizeFontText={['14px']} />
+              <AddToCart sizeFontText={['14px']} _id='' />
             </Flex>
             <Flex maxWidth={['40%']} ml={['10px']} flexDir='column' justifyContent='space-between'>
               <DetailsCd sizeFontBtDet={['15px']} cd={props.cd} rating={rating} showNrRec={false} />

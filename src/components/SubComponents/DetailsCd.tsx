@@ -82,7 +82,7 @@ export const DetailsCd: React.FC<DetailsCdProps> = (props: DetailsCdProps) => {
           {quantity}
         </Text>
       </Flex>
-      <ButtonDetails sizeFontBtDet={sizeFontBtDet} />
+      <ButtonDetails sizeFontBtDet={sizeFontBtDet} bookId={''} />
     </>
   );
 };

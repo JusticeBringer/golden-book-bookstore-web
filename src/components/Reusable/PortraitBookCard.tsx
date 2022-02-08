@@ -11,14 +11,16 @@ import Price from '../SubComponents/Price';
 import { RootState } from '../../redux/reducers';
 import { useSelector } from 'react-redux';
 import { AddRemoveFromCart } from '../SubComponents/AddRemoveFromCart';
+import { nextRedirectPushBrowser } from '../../util/helpers';
 
 type PortraitBookCard = {
   book: BookDocument;
   userQty: number;
+  disableNavigation?: boolean;
 };
 
 export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBookCard) => {
-  const { userQty } = props;
+  const { userQty, disableNavigation } = props;
   const { title, author, image, rating, price, _id, quantity } = props.book;
 
   // if item qty is >= 1 -> show increment
@@ -45,8 +47,18 @@ export const PortraitBookCard: React.FC<PortraitBookCard> = (props: PortraitBook
     setIsInCart(false);
   }, [booksIdsStore]);
 
+  const handleOnClickBookCard = () => {
+    nextRedirectPushBrowser(`/catalog/books/${_id}`);
+  };
+
   return (
-    <Flex className='draw-bottom-border-white-blue' borderRadius='10px' px={['5px', '5px', '5px']}>
+    <Flex
+      borderRadius='10px'
+      px={['5px', '5px', '5px']}
+      className={disableNavigation ? '' : 'draw-bottom-border-white-blue'}
+      cursor={disableNavigation ? 'initial' : 'pointer'}
+      onClick={disableNavigation ? null : handleOnClickBookCard}
+    >
       <section>
         <Flex
           flexDir='row'
