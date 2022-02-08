@@ -81,7 +81,7 @@ export const getUsers: IUser[] = [
   { email: 'second@gmail.com', isVerifiedEmail: false, password: 'randomHash2' }
 ];
 
-const PR_IOSIF_TRIFA = 'Pr. Iosif Trifa';
+const PR_IOSIF_TRIFA = 'Father Iosif Trifa';
 const TRAIAN_DORZ = 'Traian Dorz';
 const IOAN_MARINI = 'Ioan Marini';
 const PR_VASILE_MIHOC = 'Pr. Vasile Mihoc';
