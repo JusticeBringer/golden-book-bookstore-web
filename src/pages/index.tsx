@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import { Box } from '@chakra-ui/react';
 import { Home } from '../components/Home/Home';
@@ -7,7 +7,7 @@ import { BookDocument } from '../database/models/book/book.interface';
 import { CdType, HomePageType } from '../util/types';
 import { getCds } from '../util/mockedData';
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   // For debugging purposes
   // console.log(process.env);
 

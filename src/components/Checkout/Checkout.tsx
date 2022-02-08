@@ -269,7 +269,6 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
   };
 
   const onSubmitStepFour = (values: any) => {
-    console.log({ values });
     const selectedValue = values.paymentOption;
     setFormValues({
       ...formValues,
@@ -303,7 +302,6 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
     await axios
       .post(paymentsApiUrlOffline, { payment })
       .then((response: any) => {
-        console.log('response', response);
         paymentId = response.data.paymentId;
       })
       .catch(() => {
@@ -313,7 +311,6 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
       });
 
     // then post order
-    console.log('paymentId', paymentId);
 
     const form: formValuesType = {
       ...formValues,
@@ -337,10 +334,6 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
         dispatch(toggleSnackbarOpen(SNACKBAR_DANGER, errorMessage));
       });
   };
-
-  useEffect(() => {
-    console.log(formValues);
-  }, [formValues.step]);
 
   const getDeliveryCost = (deliveryOption: string) => {
     switch (deliveryOption) {

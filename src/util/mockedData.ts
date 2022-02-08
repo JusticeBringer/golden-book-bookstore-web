@@ -59,7 +59,7 @@ export function getCds(): Array<CdType> {
 
 export const authors: AuthorsArrayType = [
   {
-    name: 'Pr. Iosif Trifa',
+    name: 'Father Iosif Trifa',
     photo: '/authors/pr_Iosif_Trifa.jpg'
   },
   {
@@ -71,7 +71,7 @@ export const authors: AuthorsArrayType = [
     photo: '/authors/Ioan_Marini.jpg'
   },
   {
-    name: 'Pr. Vasile Mihoc',
+    name: 'Father Vasile Mihoc',
     photo: '/authors/pr_Vasile_Mihoc.jpg'
   }
 ];

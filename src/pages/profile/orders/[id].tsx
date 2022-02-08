@@ -44,7 +44,6 @@ type DetailsProps = {
   books: BookDocument[];
 };
 
-// Change to getStaticProps on hosting providers that support it
 export const getStaticProps: GetStaticProps = async context => {
   const id = context.params.id;
 

@@ -1,11 +1,11 @@
-import { GetStaticProps } from 'next';
-import { Box, Flex } from '@chakra-ui/react';
+import { GetServerSideProps } from 'next';
+import { Box, Flex, Text } from '@chakra-ui/react';
 
 import Orders from '../../../components/Orders/Orders';
 import { OrderDocument } from '../../../database/models/order/order.interface';
 import axios from 'axios';
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const ordersApiUrl = process.env.DOMAIN_URL_API_ORDERS;
   const headers = {
     authorization: process.env.SECRET_JWT_TOKEN
@@ -39,8 +39,7 @@ export const getStaticProps: GetStaticProps = async () => {
     return {
       props: {
         orders
-      },
-      revalidate: 60 // 60 seconds = 1 minute
+      }
     };
   }
 };
@@ -63,6 +62,9 @@ const Index: React.FC<OrdersProps> = (props: OrdersProps) => {
       >
         <Box>
           <Orders orders={orders} />
+          <Text>
+            Please clear your cookies if you placed any order and do not see it listed here!{' '}
+          </Text>
         </Box>
       </Flex>
     </>

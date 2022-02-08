@@ -21,7 +21,7 @@ export const Authors: React.FC<AuthorsProps> = (props: AuthorsProps) => {
   const { books, sizeFontBtDet, booksQtys } = props;
   const { width } = useWindowDimensions();
 
-  const [activeAuthor, setActiveAuthor] = useState('Pr. Iosif Trifa');
+  const [activeAuthor, setActiveAuthor] = useState('Father Iosif Trifa');
   const [activeBooks, setActiveBooks] = useState(
     books.filter(book => book.author === activeAuthor)
   );
