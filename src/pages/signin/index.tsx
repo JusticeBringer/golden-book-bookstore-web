@@ -5,7 +5,7 @@ import { SignIn } from '../../components/SignIn/SignIn';
 
 export const getStaticProps: GetStaticProps = async () => {
   const googleClientId = process.env.GOOGLE_CLIENT_ID;
-  const signInApiUrl = process.env.DOMAIN_URL_API + '/user/login';
+  const signInApiUrl = process.env.DOMAIN_URL_API + '/user/login/email';
   const googleAuthenticationApiUrl = process.env.DOMAIN_URL_API + '/user/login/google';
 
   if (process.env.NODE_ENV !== 'production') {

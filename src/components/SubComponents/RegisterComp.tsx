@@ -289,7 +289,7 @@ export const RegisterComp: React.FC<RegisterCompProps> = (props: RegisterCompPro
                     <Checkbox onChange={(event: any) => setDataPolicyCheck(event.target.checked)}>
                       I agree{' '}
                       <ChakraLink color={theme.colors.primaryBlue[300]}>
-                        Date privacy policy
+                        Data Privacy Policy
                       </ChakraLink>
                     </Checkbox>
                     {!dataPolicyCheck && <ErrorFormText>{dataPolicyError}</ErrorFormText>}
