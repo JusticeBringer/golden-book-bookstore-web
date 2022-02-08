@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 
 import Orders from '../../../components/Orders/Orders';
 import { OrderDocument } from '../../../database/models/order/order.interface';
@@ -62,9 +62,6 @@ const Index: React.FC<OrdersProps> = (props: OrdersProps) => {
       >
         <Box>
           <Orders orders={orders} />
-          <Text>
-            Please clear your cookies if you placed any order and do not see it listed here!{' '}
-          </Text>
         </Box>
       </Flex>
     </>

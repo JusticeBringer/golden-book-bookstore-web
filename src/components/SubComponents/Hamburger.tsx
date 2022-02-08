@@ -89,7 +89,7 @@ export const Hamburger: React.FC<HamburgerProps> = (props: HamburgerProps) => {
                 </Flex>
               </DrawerHeader>
               <DrawerBody>
-                <MobileNav />
+                <MobileNav onToggle={onToggle} isOpen={isOpen} />
               </DrawerBody>
               <DrawerFooter bg='whiteAlpha.800' justifyContent='space-between' alignItems='center'>
                 <HStack flexDirection='row'>
@@ -130,45 +130,35 @@ export const Hamburger: React.FC<HamburgerProps> = (props: HamburgerProps) => {
   );
 };
 
-const MobileNav = () => {
+interface IMobileNav {
+  onToggle: () => void;
+  isOpen: boolean;
+}
+
+const MobileNav = (props: IMobileNav) => {
+  const { onToggle, isOpen } = props;
+
   return (
     <Stack bg={theme.colors.primaryBlue[100]} p={4} display={['flex', 'flex', 'flex', 'none']}>
       {HEADER_NAV_ITEMS.map(navItem => (
-        <MobileNavItem key={navItem.label} {...navItem} />
+        <MobileNavItem key={navItem.label} {...navItem} onToggle={onToggle} isOpen={isOpen} />
       ))}
     </Stack>
   );
 };
 
 const MobileNavItem = (props: NavItem) => {
-  const { label, children, href } = props;
-  const { isOpen, onToggle } = useDisclosure();
+  const { label, children, href, onToggle, isOpen } = props;
 
   return (
     <Stack spacing={4} onClick={children && onToggle} color={theme.colors.primaryBlue[800]}>
-      <Flex
-        py={2}
-        as={ChakraLink}
-        href={href ?? '#'}
-        justify={'space-between'}
-        align={'center'}
-        _hover={{
-          textDecoration: 'none'
-        }}
-      >
-        <Text fontWeight={600} color={theme.colors.primaryBlue[800]}>
-          {label}
-        </Text>
-        {children && (
-          <Icon
-            as={ChevronDownIcon}
-            transition={'all .25s ease-in-out'}
-            transform={isOpen ? 'rotate(180deg)' : ''}
-            w={6}
-            h={6}
-          />
-        )}
-      </Flex>
+      <Stack onClick={onToggle}>
+        <NextLink key={href} href={href} passHref>
+          <ChakraLink py={2} color={theme.colors.primaryBlue[800]}>
+            {label}
+          </ChakraLink>
+        </NextLink>
+      </Stack>
 
       <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
         <Stack

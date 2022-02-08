@@ -1,5 +1,5 @@
 import NextLink from 'next/link';
-import { Link as ChakraLink, Flex, Icon, Box, Tooltip, WrapItem, Text } from '@chakra-ui/react';
+import { Link as ChakraLink, Flex, Icon, Box, Text } from '@chakra-ui/react';
 
 import { FOOTER_ITEMS } from './FooterItems';
 
@@ -80,18 +80,17 @@ const FooterNav = (props: FooterNavProps) => {
                 color={theme.colors.primaryBlack[800]}
               />
               {navItem.href === '/cart' ? (
-                <WrapItem>
-                  <Tooltip
-                    label={booksNumberFromStore.toString()}
-                    placement='right'
-                    position='fixed'
-                    isOpen
-                    ml={['20px', '25px', '27px']}
-                    fontSize={['12px', '14px', '15px']}
-                  >
-                    <Text></Text>
-                  </Tooltip>
-                </WrapItem>
+                <Box
+                  mt={'-12px'}
+                  ml={['20px', '30px', '36px']}
+                  bg={'black'}
+                  borderRadius={'16px'}
+                  w='50%'
+                >
+                  <Text fontSize={['12px', '14px', '15px']} color={'white'}>
+                    {booksNumberFromStore.toString()}
+                  </Text>
+                </Box>
               ) : (
                 ''
               )}

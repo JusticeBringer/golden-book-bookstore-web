@@ -1,5 +1,5 @@
 import NextLink from 'next/link';
-import { Link as ChakraLink, Flex, Icon, Box, Text, Tooltip, WrapItem } from '@chakra-ui/react';
+import { Link as ChakraLink, Flex, Icon, Box, Text } from '@chakra-ui/react';
 
 import { Logo } from '../SubComponents/Logo';
 
@@ -125,16 +125,15 @@ const DesktopNav = (props: DesktopNavProps) => {
                       h={['', '', '30px', '40px', '50px']}
                     />
                     {navItem.href === '/cart' ? (
-                      <WrapItem>
-                        <Tooltip
-                          label={booksNumberFromStore.toString()}
-                          placement='right'
-                          isOpen
-                          ml={['', '', '', '20px', '25px', '30px', '35px']}
-                        >
-                          <Text></Text>
-                        </Tooltip>
-                      </WrapItem>
+                      <Box
+                        mt={'-12px'}
+                        ml={['', '', '', '36px', '48px', '50px', '50px']}
+                        bg={'black'}
+                        borderRadius={'16px'}
+                        w='40%'
+                      >
+                        <Text color={'white'}>{booksNumberFromStore.toString()}</Text>
+                      </Box>
                     ) : (
                       ''
                     )}

@@ -281,3 +281,17 @@ export const mapIdsToProducts = (
   });
   return booksInCart;
 };
+
+export const getDeliveryCost = (deliveryOption: string) => {
+  switch (deliveryOption) {
+    case 'take':
+      // deliveryPrice is  0
+      return 0;
+    case 'post':
+      return 15;
+    case 'curier':
+      return 20;
+    default:
+      return 0;
+  }
+};

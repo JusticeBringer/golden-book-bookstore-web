@@ -3,7 +3,7 @@ import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 
 import OrderDocument from '../../database/models/order/order.interface';
 import { theme } from '../../styles/theme';
-import { getUserQty, nextRedirectPushBrowser } from '../../util/helpers';
+import { getDeliveryCost, getUserQty, nextRedirectPushBrowser } from '../../util/helpers';
 
 import { TextListItem } from '../Reusable/TextListItem';
 import { ProductListItem } from '../Reusable/ProductListItem';
@@ -17,14 +17,6 @@ type OrderDetailsProps = {
 
 export const OrderDetails: React.FC<OrderDetailsProps> = (props: OrderDetailsProps) => {
   const { order, books } = props;
-
-  const parseStatusDelivery = (status: string) => {
-    if (status === 'inStore') {
-      return 'In store';
-    } else {
-      return status;
-    }
-  };
 
   const [myBooks, setMyBooks] = useState<BookDocument[]>([]);
 
@@ -48,6 +40,14 @@ export const OrderDetails: React.FC<OrderDetailsProps> = (props: OrderDetailsPro
       sum += book.price;
     });
     return sum;
+  };
+
+  const parseStatusDelivery = (status: string) => {
+    if (status === 'inStore') {
+      return 'In store';
+    } else {
+      return status;
+    }
   };
 
   return (
@@ -92,9 +92,16 @@ export const OrderDetails: React.FC<OrderDetailsProps> = (props: OrderDetailsPro
           ))}
         </Stack>
         <Stack direction='column' spacing={['5px', '10px']}>
-          {/* <TextListItem mainText={'Cost transport'} secondaryText={'0$'} /> */}
-          <TextListItem mainText={'Total '} secondaryText={getTotalPrice().toString() + '$'} />
-          <Text opacity={0.7}>{'*without delivery cost'} </Text>
+          <TextListItem
+            mainText={'Delivery cost'}
+            secondaryText={getDeliveryCost(order.deliveryOption) + '$'}
+          />
+          <TextListItem
+            mainText={'Total '}
+            secondaryText={
+              (getTotalPrice() + getDeliveryCost(order.deliveryOption)).toString() + '$'
+            }
+          />
         </Stack>
       </Flex>
     </>

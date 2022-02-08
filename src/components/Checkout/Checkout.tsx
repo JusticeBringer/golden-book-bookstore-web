@@ -22,6 +22,7 @@ import { RootState } from '../../redux/reducers';
 import { BookDocument } from '../../database/models/book/book.interface';
 import { GenericHeading } from '../SubComponents/GenericHeading';
 import {
+  getDeliveryCost,
   getUserQty,
   mapIdsToProducts,
   nextRedirectPushBrowser,
@@ -333,20 +334,6 @@ export const Checkout: React.FC<CheckoutProps> = (props: CheckoutProps) => {
         const errorMessage = 'The order has not been placed. Please try again later!';
         dispatch(toggleSnackbarOpen(SNACKBAR_DANGER, errorMessage));
       });
-  };
-
-  const getDeliveryCost = (deliveryOption: string) => {
-    switch (deliveryOption) {
-      case 'Ridicare sediu sau filială':
-        // deliveryPrice is  0
-        return 0;
-      case 'Poșta Română':
-        return 15;
-      case 'Fan Curier':
-        return 20;
-      default:
-        return 0;
-    }
   };
 
   const emptyCartFromCookiesAndStore = () => {
