@@ -1,14 +1,6 @@
 # „Golden Book” Bookstore - WEB
 
-![Heroku](https://github.com/DenisOH/pyheroku-badge/blob/master/img/deployed.svg)
-\
-[![TypeScript](https://badges.frapsoft.com/typescript/code/typescript.svg?v=101)](https://github.com/ellerbrock/typescript-badges/)
-\
-![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
-\
-![Chakra](https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white)
-\
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+![Heroku](https://github.com/DenisOH/pyheroku-badge/blob/master/img/deployed.svg) [![TypeScript](https://badges.frapsoft.com/typescript/code/typescript.svg?v=101)](https://github.com/ellerbrock/typescript-badges/) ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white) ![Chakra](https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 \
 Bookstore e-commerce focused on functionalities, not on design.
 
@@ -75,7 +67,6 @@ Each user is saved into the database
 
 ![](/screenshots/register-with-email-flow.gif)
 \
-\
 
 If user clicks the activation link again, he will get this message:
 \
@@ -141,7 +132,6 @@ Please note that, as stated above, on 8 June 2022, registration by email and pas
 The web app is hosted on Heroku [here](https://golden-book-bookstore-web.herokuapp.com/)
 \
 API is also hosted on Heroku [here](https://golden-book-bookstore-api.herokuapp.com/)
-\
 
 ## Contributor
 
